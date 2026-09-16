@@ -111,6 +111,27 @@ footer{margin-top:34px;padding-top:15px;border-top:1px solid var(--line);
   font-family:var(--mono);font-size:10.5px;color:var(--text-3);display:flex;flex-wrap:wrap;gap:6px 16px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
+<style>
+.xs{position:sticky;top:0;z-index:50;background:var(--bg,#fff);
+  padding:12px 0 10px;margin-bottom:6px;
+  border-bottom:1px solid var(--border,var(--line,rgba(128,128,128,.28)))}
+.xs-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.xs input{flex:1 1 240px;min-width:0;font:inherit;font-size:14px;padding:9px 12px;
+  color:var(--text,inherit);background:var(--surface,var(--bg,#fff));
+  border:1px solid var(--border,var(--line,rgba(128,128,128,.4)));border-radius:6px}
+.xs input::placeholder{color:var(--text-3,var(--text-dim,rgba(128,128,128,.8)))}
+.xs input:focus{outline:2px solid var(--accent,currentColor);outline-offset:1px}
+.xs button{font:inherit;font-size:12px;padding:8px 12px;cursor:pointer;
+  color:var(--text-2,var(--text-muted,inherit));background:transparent;
+  border:1px solid var(--border,var(--line,rgba(128,128,128,.4)));border-radius:6px}
+.xs-n{font-size:12px;color:var(--text-2,var(--text-muted,inherit));white-space:nowrap}
+.xs-none{display:none;padding:22px 0;text-align:center;font-size:13px;
+  color:var(--text-3,var(--text-dim,inherit))}
+[hidden]{display:none!important}
+.xh mark{background:transparent;color:var(--accent,currentColor);
+  font-weight:700;text-decoration:underline}
+@media print{.xs{display:none}}
+</style>
 
 <div class="wrap">
 <header>
@@ -128,6 +149,15 @@ footer{margin-top:34px;padding-top:15px;border-top:1px solid var(--line);
     <span><i>(앞섬유)</i> 근육의 특정 부분만 해당</span>
   </div>
 </header>
+<div class="xs">
+  <div class="xs-row">
+    <input id="xq" type="search" autocomplete="off" placeholder="부위·근육·동작으로 찾기 — 예: 어깨, 돌림근띠, 폄" aria-label="검색">
+    <button id="xc" type="button">지우기</button>
+    <span class="xs-n" id="xn" role="status"></span>
+  </div>
+</div>
+<p class="xs-none" id="xe">찾는 항목이 없습니다. 다른 이름이나 영문으로 검색해 보세요.</p>
+
 
 <section class="reg hd">
 <div class="reg-head"><h2>머리</h2><span class="ren">Head</span><span class="rc">14근육 · 2관절</span></div>
@@ -633,3 +663,96 @@ footer{margin-top:34px;padding-top:15px;border-top:1px solid var(--line);
   <span>KR 대한해부학회 신용어 · EN Terminologia Anatomica</span>
 </footer>
 </div>
+
+<script>
+(function(){
+ var SEL=".reg, .g, .joint, .row", GSEL="";
+ var q=document.getElementById('xq'),clear=document.getElementById('xc'),
+     out=document.getElementById('xn'),none=document.getElementById('xe'),
+     items=[].slice.call(document.querySelectorAll(SEL)),
+     groups=GSEL?[].slice.call(document.querySelectorAll(GSEL)):[];
+ if(!q||!items.length)return;
+
+ // 묶음제목이 거느리는 범위: 다음 묶음제목을 만나기 전까지의 형제들.
+ groups.forEach(function(g){
+  var m=[],n=g.nextElementSibling;
+  while(n&&!(n.matches&&n.matches(GSEL))){m.push(n);n=n.nextElementSibling}
+  g._mem=m;
+  g._items=m.reduce(function(a,n){
+   if(n.matches&&n.matches(SEL))a.push(n);
+   return a.concat([].slice.call(n.querySelectorAll?n.querySelectorAll(SEL):[]));
+  },[]);
+ });
+ var low=function(s){return (s||'').toLowerCase()};
+
+ // 각 항목의 '자기 텍스트'는 하위 항목을 뺀 부분이다.
+ // 그래야 부모가 자식 때문에 걸리는 것과, 스스로 걸리는 것을 구별할 수 있다.
+ // 묶음제목도 함께 빼야 한다. 빼지 않으면 그 제목을 품은 바깥 상자가
+ // 스스로 걸린 것으로 오인되어 관계없는 가지까지 통째로 펼쳐진다.
+ var OWN=SEL+(GSEL?','+GSEL:'');
+ items.concat(groups).forEach(function(el){
+  var c=el.cloneNode(true);
+  [].slice.call(c.querySelectorAll(OWN)).forEach(function(n){n.parentNode.removeChild(n)});
+  el._own=low(c.textContent); el._all=low(el.textContent);
+ });
+
+ // 강조 표시를 되돌릴 수 있도록, 자기 텍스트에 해당하는 텍스트 노드만 한 번 감싸 둔다.
+ var spans=[];
+ items.concat(groups).forEach(function(el){
+  var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,{acceptNode:function(n){
+   if(!n.nodeValue.trim())return NodeFilter.FILTER_REJECT;
+   for(var p=n.parentNode;p&&p!==el;p=p.parentNode)
+    if(p.matches&&p.matches(OWN))return NodeFilter.FILTER_REJECT;   // 하위 항목의 글자
+   return NodeFilter.FILTER_ACCEPT;
+  }}),t,list=[];
+  while(t=w.nextNode())list.push(t);
+  list.forEach(function(n){
+   var s=document.createElement('span');s.className='xh';s.textContent=n.nodeValue;
+   n.parentNode.replaceChild(s,n);spans.push(s);
+  });
+ });
+ var esc=function(s){return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})};
+ function paint(term){
+  spans.forEach(function(s){
+   var raw=s.textContent, i=term?low(raw).indexOf(term):-1;
+   if(i<0){if(s.firstElementChild)s.textContent=raw;return}
+   s.innerHTML=esc(raw.slice(0,i))+'<mark>'+esc(raw.slice(i,i+term.length))+'</mark>'+esc(raw.slice(i+term.length));
+  });
+ }
+ function run(){
+  var t=low(q.value.trim());
+  if(!t){items.concat(groups).forEach(function(el){el.hidden=false});
+    groups.forEach(function(g){g._mem.forEach(function(n){n.hidden=false})});
+    paint('');out.textContent='';none.style.display='none';return}
+  // 스스로 걸린 항목은 하위까지 통째로 보여 준다 (가지를 잘라 버리면 계통도가 아니게 된다)
+  var keep=[];
+  items.forEach(function(el){
+   if(el._own.indexOf(t)<0)return;
+   keep.push(el);
+   [].slice.call(el.querySelectorAll(SEL)).forEach(function(n){keep.push(n)});
+  });
+  // 묶음제목이 걸리면 그 아래 전체를 보여 준다
+  groups.forEach(function(g){ if(g._own.indexOf(t)>=0) keep=keep.concat(g._items) });
+  var n=0;
+  items.forEach(function(el){
+   var hit=keep.indexOf(el)>=0||el._all.indexOf(t)>=0;
+   el.hidden=!hit;
+   if(hit&&el._own.indexOf(t)>=0)n++;
+  });
+  groups.forEach(function(g){
+   var self=g._own.indexOf(t)>=0,
+       live=self||g._items.some(function(x){return !x.hidden});
+   g.hidden=!live;
+   g._mem.forEach(function(x){ if(!x.matches||!x.matches(SEL)) x.hidden=!live });
+   if(self)n++;
+  });
+  paint(t);
+  out.textContent=n+'건';
+  none.style.display=n?'none':'block';
+ }
+ q.addEventListener('input',run);
+ q.addEventListener('keydown',function(e){if(e.key==='Escape'){q.value='';run()}});
+ clear.addEventListener('click',function(){q.value='';run();q.focus()});
+ run();
+})();
+</script>
