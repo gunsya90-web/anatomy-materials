@@ -1,0 +1,603 @@
+<title>신경별 지배근육 계통도</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#F2F5F4; --surface:#FFFFFF; --surface2:#E9EEEC; --border:#D2DBD8; --border-dim:#E1E8E5;
+  --text:#14201C; --text-muted:#5A6D66; --text-dim:#8B9B94;
+  --cn:#B4522E; --cx:#A8761E; --br:#1F6F5C; --tx:#4A6FA5;
+  --lu:#7A4E9E; --sa:#1C6E8C; --pr:#5E6B4F; --sg:#7D7368;
+  --accent:#1F6F5C; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --sans:'Noto Sans KR',system-ui,sans-serif; --radius:5px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1513; --surface:#141D1A; --surface2:#1A2521; --border:#27352F; --border-dim:#1E2A26;
+  --text:#DEE9E5; --text-muted:#8FA39B; --text-dim:#5F7069;
+  --cn:#E0805C; --cx:#D6A548; --br:#4FBF9F; --tx:#7FA3DC;
+  --lu:#B18BD6; --sa:#4FA8C9; --pr:#95A67F; --sg:#A89C8E; --accent:#4FBF9F;
+}}
+:root[data-theme="dark"]{
+  --bg:#0E1513; --surface:#141D1A; --surface2:#1A2521; --border:#27352F; --border-dim:#1E2A26;
+  --text:#DEE9E5; --text-muted:#8FA39B; --text-dim:#5F7069;
+  --cn:#E0805C; --cx:#D6A548; --br:#4FBF9F; --tx:#7FA3DC;
+  --lu:#B18BD6; --sa:#4FA8C9; --pr:#95A67F; --sg:#A89C8E; --accent:#4FBF9F;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.6}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:40px 70px}
+
+header{margin-bottom:26px}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(23px,4vw,32px);font-weight:700;letter-spacing:-.02em;margin-top:9px;text-wrap:balance}
+.sub{margin-top:8px;font-size:13px;color:var(--text-muted);max-width:66ch}
+.stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:8px 14px;display:flex;align-items:baseline;gap:7px}
+.stat b{font-size:19px;font-variant-numeric:tabular-nums;color:var(--accent)}
+.stat span{font-size:11px;color:var(--text-muted);font-family:var(--mono)}
+
+.cols{columns:2;column-gap:16px;margin-top:8px}
+@media (max-width:860px){.cols{columns:1}}
+.sys{break-inside:avoid-column;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px 15px;margin-bottom:16px;border-top:3px solid var(--c)}
+.sys.cn{--c:var(--cn)} .sys.cx{--c:var(--cx)} .sys.br{--c:var(--br)} .sys.tx{--c:var(--tx)}
+.sys.lu{--c:var(--lu)} .sys.sa{--c:var(--sa)} .sys.pr{--c:var(--pr)} .sys.sg{--c:var(--sg)}
+.sys-head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;
+  padding-bottom:9px;margin-bottom:10px;border-bottom:1px solid var(--border-dim)}
+.sys-head h2{font-size:16px;font-weight:700;color:var(--c)}
+.sys-en{font-family:var(--mono);font-size:10.5px;color:var(--text-dim)}
+.sys-count{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--text-muted);
+  background:var(--surface2);padding:2px 7px;border-radius:3px;white-space:nowrap}
+
+.nerve{margin-bottom:11px;padding-left:11px;border-left:2px solid var(--c)}
+.nerve:last-child{margin-bottom:0}
+.nerve-head{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+.nerve-ko{font-weight:700;font-size:13.5px}
+.nerve-en{font-family:var(--mono);font-size:10px;color:var(--text-dim)}
+.cnt{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--c);
+  border:1px solid var(--border);border-radius:3px;padding:0 5px;font-variant-numeric:tabular-nums}
+.clin{font-size:11px;color:var(--text-muted);margin-top:3px;padding:5px 8px;
+  background:var(--surface2);border-radius:3px;line-height:1.5}
+
+.mus{list-style:none;margin-top:5px;display:flex;flex-direction:column;gap:1px}
+.mus li{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;padding:2px 0;
+  border-bottom:1px solid var(--border-dim)}
+.mus li:last-child{border-bottom:none}
+.mk{font-size:12.5px;font-weight:500}
+.me{font-family:var(--mono);font-size:9.5px;color:var(--text-dim)}
+.mr{margin-left:auto;font-family:var(--mono);font-size:9.5px;color:var(--text-muted);
+  background:var(--surface2);padding:0 5px;border-radius:2px;white-space:nowrap}
+.shared{font-family:var(--mono);font-size:9.5px;color:var(--c);white-space:nowrap}
+
+.idx-title{margin-top:34px;padding-top:22px;border-top:1px solid var(--border);
+  font-size:17px;font-weight:700}
+.idx-sub{font-size:12.5px;color:var(--text-muted);margin-top:5px;margin-bottom:14px;max-width:66ch}
+.idx{columns:2;column-gap:16px}
+@media (max-width:860px){.idx{columns:1}}
+.reg{break-inside:avoid-column;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:11px 13px;margin-bottom:12px}
+.reg-head{display:flex;justify-content:space-between;align-items:baseline;
+  font-weight:700;font-size:13.5px;padding-bottom:7px;margin-bottom:7px;
+  border-bottom:1px solid var(--border-dim);color:var(--accent)}
+.reg-head span{font-family:var(--mono);font-size:10px;color:var(--text-muted);
+  font-variant-numeric:tabular-nums}
+.grp{display:grid;grid-template-columns:118px 1fr;gap:8px;padding:3px 0;font-size:11.5px;align-items:start}
+@media (max-width:580px){.grp{grid-template-columns:1fr;gap:2px}}
+.gname{font-family:var(--mono);font-size:10px;color:var(--text-dim);line-height:1.5}
+.gname em{display:block;font-style:normal;font-size:8.5px;color:var(--text-dim);
+  opacity:.75;line-height:1.3}
+.mr em{display:none}
+.reg-head i{font-style:normal;font-family:var(--mono);font-size:9.5px;
+  font-weight:400;color:var(--text-dim);margin-left:6px;margin-right:auto}
+.gmus{color:var(--text-muted);line-height:1.6}
+
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--border);
+  font-family:var(--mono);font-size:10.5px;color:var(--text-dim);
+  display:flex;flex-wrap:wrap;gap:6px 16px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Peripheral Nerve → Muscle Map</div>
+  <h1>신경별 지배근육 계통도</h1>
+  <p class="sub">근육 149개를 지배신경으로 역색인했습니다. 신경 흐름도의 말단에 근육이 붙는 구조라, 신경·동맥 흐름도와 한 세트로 읽힙니다. 용어는 대한해부학회 신용어를 따릅니다.</p>
+  <div class="stats"><div class="stat"><b>149</b><span>근육</span></div>
+<div class="stat"><b>50</b><span>신경</span></div>
+<div class="stat"><b>8</b><span>계통</span></div>
+<div class="stat"><b>16</b><span>복수지배</span></div></div>
+</header>
+
+<div class="cols">
+<section class="sys cn">
+<div class="sys-head"><h2>뇌신경</h2><span class="sys-en">Cranial Nerves</span><span class="sys-count">8신경 · 22근육</span></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">아래턱신경</span><span class="nerve-en">Mandibular n. (CN V3)</span><span class="cnt">1</span></div>
+<ul class="mus">
+<li><span class="mk">관자근</span><span class="me">Temporalis</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">깨물근신경</span><span class="nerve-en">Masseteric n.</span><span class="cnt">1</span></div>
+<ul class="mus">
+<li><span class="mk">깨물근</span><span class="me">Masseter</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">가쪽날개근신경</span><span class="nerve-en">N. to lateral pterygoid</span><span class="cnt">1</span></div>
+<ul class="mus">
+<li><span class="mk">가쪽날개근</span><span class="me">Lateral pterygoid</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">안쪽날개근신경</span><span class="nerve-en">N. to medial pterygoid</span><span class="cnt">1</span></div>
+<ul class="mus">
+<li><span class="mk">안쪽날개근</span><span class="me">Medial pterygoid</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">턱목뿔근신경</span><span class="nerve-en">Mylohyoid n.</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">턱목뿔근</span><span class="me">Mylohyoid</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+<li><span class="mk">두힘살근</span><span class="me">Digastric</span><span class="mr" title="Neck">목<em>Neck</em></span><span class="shared">+얼굴신경</span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">얼굴신경</span><span class="nerve-en">Facial n. (CN VII)</span><span class="cnt">12</span></div>
+<p class="clin">벨마비 — 이마주름까지 소실되면 말초성</p>
+<ul class="mus">
+<li><span class="mk">이마근(전두근)</span><span class="me">Frontalis (Occipitofrontalis, frontal belly)</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+<li><span class="mk">뒤통수근</span><span class="me">Occipitalis (Occipitofrontalis, occipital belly)</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+<li><span class="mk">눈둘레근</span><span class="me">Orbicularis oculi</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+<li><span class="mk">입둘레근</span><span class="me">Orbicularis oris</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+<li><span class="mk">볼근</span><span class="me">Buccinator</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+<li><span class="mk">큰광대근</span><span class="me">Zygomaticus major</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+<li><span class="mk">작은광대근</span><span class="me">Zygomaticus minor</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+<li><span class="mk">입꼬리내림근</span><span class="me">Depressor anguli oris</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+<li><span class="mk">턱끝근</span><span class="me">Mentalis</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+<li><span class="mk">넓은목근</span><span class="me">Platysma</span><span class="mr" title="Head">머리<em>Head</em></span></li>
+<li><span class="mk">두힘살근</span><span class="me">Digastric</span><span class="mr" title="Neck">목<em>Neck</em></span><span class="shared">+턱목뿔근신경</span></li>
+<li><span class="mk">붓목뿔근</span><span class="me">Stylohyoid</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">더부신경</span><span class="nerve-en">Accessory n. (CN XI)</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">목빗근</span><span class="me">Sternocleidomastoid</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+<li><span class="mk">등세모근</span><span class="me">Trapezius</span><span class="mr" title="Back">등<em>Back</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">혀밑신경</span><span class="nerve-en">Hypoglossal n. (CN XII)</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">턱끝목뿔근</span><span class="me">Geniohyoid</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+<li><span class="mk">갑상목뿔근</span><span class="me">Thyrohyoid</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+</ul></div>
+</section>
+<section class="sys cx">
+<div class="sys-head"><h2>목신경얼기</h2><span class="sys-en">Cervical Plexus</span><span class="sys-count">2신경 · 4근육</span></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">가로막신경</span><span class="nerve-en">Phrenic n.</span><span class="cnt">1</span></div>
+<p class="clin">C3,4,5 keeps the diaphragm alive</p>
+<ul class="mus">
+<li><span class="mk">가로막(횡격막)</span><span class="me">Diaphragm</span><span class="mr" title="Thorax">가슴<em>Thorax</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">목신경고리</span><span class="nerve-en">Ansa cervicalis</span><span class="cnt">3</span></div>
+<ul class="mus">
+<li><span class="mk">어깨목뿔근</span><span class="me">Omohyoid</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+<li><span class="mk">복장목뿔근</span><span class="me">Sternohyoid</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+<li><span class="mk">복장갑상근</span><span class="me">Sternothyroid</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+</ul></div>
+</section>
+<section class="sys br">
+<div class="sys-head"><h2>팔신경얼기</h2><span class="sys-en">Brachial Plexus</span><span class="sys-count">16신경 · 55근육</span></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">어깨등신경</span><span class="nerve-en">Dorsal scapular n.</span><span class="cnt">3</span></div>
+<p class="clin">날개어깨뼈(안쪽형) — 마름근 약화</p>
+<ul class="mus">
+<li><span class="mk">어깨올림근</span><span class="me">Levator scapulae</span><span class="mr" title="Back">등<em>Back</em></span></li>
+<li><span class="mk">큰마름근</span><span class="me">Rhomboid major</span><span class="mr" title="Back">등<em>Back</em></span></li>
+<li><span class="mk">작은마름근</span><span class="me">Rhomboid minor</span><span class="mr" title="Back">등<em>Back</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">긴가슴신경</span><span class="nerve-en">Long thoracic n.</span><span class="cnt">1</span></div>
+<p class="clin">날개어깨뼈(가쪽형) — 앞톱니근 마비</p>
+<ul class="mus">
+<li><span class="mk">앞톱니근</span><span class="me">Serratus anterior</span><span class="mr" title="Thorax">가슴<em>Thorax</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">어깨위신경</span><span class="nerve-en">Suprascapular n.</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">가시위근</span><span class="me">Supraspinatus</span><span class="mr" title="Shoulder">어깨<em>Shoulder</em></span></li>
+<li><span class="mk">가시아래근</span><span class="me">Infraspinatus</span><span class="mr" title="Shoulder">어깨<em>Shoulder</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">빗장밑근신경</span><span class="nerve-en">N. to subclavius</span><span class="cnt">1</span></div>
+<ul class="mus">
+<li><span class="mk">빗장밑근</span><span class="me">Subclavius</span><span class="mr" title="Thorax">가슴<em>Thorax</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">가쪽가슴근신경</span><span class="nerve-en">Lateral pectoral n.</span><span class="cnt">1</span></div>
+<ul class="mus">
+<li><span class="mk">큰가슴근</span><span class="me">Pectoralis major</span><span class="mr" title="Thorax">가슴<em>Thorax</em></span><span class="shared">+안쪽가슴근신경</span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">안쪽가슴근신경</span><span class="nerve-en">Medial pectoral n.</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">큰가슴근</span><span class="me">Pectoralis major</span><span class="mr" title="Thorax">가슴<em>Thorax</em></span><span class="shared">+가쪽가슴근신경</span></li>
+<li><span class="mk">작은가슴근</span><span class="me">Pectoralis minor</span><span class="mr" title="Thorax">가슴<em>Thorax</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">가슴등신경</span><span class="nerve-en">Thoracodorsal n.</span><span class="cnt">1</span></div>
+<ul class="mus">
+<li><span class="mk">넓은등근</span><span class="me">Latissimus dorsi</span><span class="mr" title="Back">등<em>Back</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">위어깨밑신경</span><span class="nerve-en">Upper subscapular n.</span><span class="cnt">1</span></div>
+<ul class="mus">
+<li><span class="mk">어깨밑근</span><span class="me">Subscapularis</span><span class="mr" title="Shoulder">어깨<em>Shoulder</em></span><span class="shared">+아래어깨밑신경</span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">아래어깨밑신경</span><span class="nerve-en">Lower subscapular n.</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">어깨밑근</span><span class="me">Subscapularis</span><span class="mr" title="Shoulder">어깨<em>Shoulder</em></span><span class="shared">+위어깨밑신경</span></li>
+<li><span class="mk">큰원근</span><span class="me">Teres major</span><span class="mr" title="Shoulder">어깨<em>Shoulder</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">겨드랑신경</span><span class="nerve-en">Axillary n.</span><span class="cnt">2</span></div>
+<p class="clin">어깨탈구 합병증 — 어깨세모근 마비, 계급장 부위 감각저하</p>
+<ul class="mus">
+<li><span class="mk">어깨세모근</span><span class="me">Deltoid</span><span class="mr" title="Shoulder">어깨<em>Shoulder</em></span></li>
+<li><span class="mk">작은원근</span><span class="me">Teres minor</span><span class="mr" title="Shoulder">어깨<em>Shoulder</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">근육피부신경</span><span class="nerve-en">Musculocutaneous n.</span><span class="cnt">3</span></div>
+<ul class="mus">
+<li><span class="mk">부리위팔근</span><span class="me">Coracobrachialis</span><span class="mr" title="Shoulder">어깨<em>Shoulder</em></span></li>
+<li><span class="mk">위팔두갈래근</span><span class="me">Biceps brachii</span><span class="mr" title="Arm">위팔<em>Arm</em></span></li>
+<li><span class="mk">위팔근</span><span class="me">Brachialis</span><span class="mr" title="Arm">위팔<em>Arm</em></span><span class="shared">+노신경</span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">정중신경</span><span class="nerve-en">Median n.</span><span class="cnt">8</span></div>
+<p class="clin">손목굴증후군 — 엄지두덩근 위축, 축복손 변형</p>
+<ul class="mus">
+<li><span class="mk">원엎침근</span><span class="me">Pronator teres</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+<li><span class="mk">노쪽손목굽힘근</span><span class="me">Flexor carpi radialis</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+<li><span class="mk">긴손바닥근</span><span class="me">Palmaris longus</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+<li><span class="mk">얕은손가락굽힘근</span><span class="me">Flexor digitorum superficialis</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+<li><span class="mk">짧은엄지벌림근</span><span class="me">Abductor pollicis brevis</span><span class="mr" title="Hand">손<em>Hand</em></span></li>
+<li><span class="mk">짧은엄지굽힘근</span><span class="me">Flexor hallucis brevis</span><span class="mr" title="Foot">발<em>Foot</em></span><span class="shared">+안쪽발바닥신경</span></li>
+<li><span class="mk">엄지맞섬근</span><span class="me">Opponens pollicis</span><span class="mr" title="Hand">손<em>Hand</em></span></li>
+<li><span class="mk">벌레근(4개)</span><span class="me">Lumbricals</span><span class="mr" title="Foot">발<em>Foot</em></span><span class="shared">+가쪽발바닥신경·안쪽발바닥신경</span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">앞뼈사이신경</span><span class="nerve-en">Anterior interosseous n.</span><span class="cnt">3</span></div>
+<ul class="mus">
+<li><span class="mk">깊은손가락굽힘근</span><span class="me">Flexor digitorum profundus</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span><span class="shared">+자신경</span></li>
+<li><span class="mk">긴엄지굽힘근</span><span class="me">Flexor hallucis longus</span><span class="mr" title="Leg">종아리<em>Leg</em></span><span class="shared">+정강신경</span></li>
+<li><span class="mk">네모엎침근</span><span class="me">Pronator quadratus</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">자신경</span><span class="nerve-en">Ulnar n.</span><span class="cnt">11</span></div>
+<p class="clin">손상 시 갈퀴손 — 뼈사이근·벌레근(안쪽2)·엄지모음근 마비, Froment 징후</p>
+<ul class="mus">
+<li><span class="mk">자쪽손목굽힘근</span><span class="me">Flexor carpi ulnaris</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+<li><span class="mk">깊은손가락굽힘근</span><span class="me">Flexor digitorum profundus</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span><span class="shared">+앞뼈사이신경</span></li>
+<li><span class="mk">짧은엄지굽힘근</span><span class="me">Flexor hallucis brevis</span><span class="mr" title="Foot">발<em>Foot</em></span><span class="shared">+안쪽발바닥신경</span></li>
+<li><span class="mk">엄지모음근</span><span class="me">Adductor hallucis</span><span class="mr" title="Foot">발<em>Foot</em></span><span class="shared">+가쪽발바닥신경</span></li>
+<li><span class="mk">짧은손바닥근</span><span class="me">Palmaris brevis</span><span class="mr" title="Hand">손<em>Hand</em></span></li>
+<li><span class="mk">새끼벌림근</span><span class="me">Abductor digiti minimi</span><span class="mr" title="Foot">발<em>Foot</em></span><span class="shared">+가쪽발바닥신경</span></li>
+<li><span class="mk">짧은새끼굽힘근</span><span class="me">Flexor digiti minimi brevis</span><span class="mr" title="Foot">발<em>Foot</em></span><span class="shared">+가쪽발바닥신경</span></li>
+<li><span class="mk">새끼맞섬근</span><span class="me">Opponens digiti minimi</span><span class="mr" title="Hand">손<em>Hand</em></span></li>
+<li><span class="mk">벌레근(4개)</span><span class="me">Lumbricals</span><span class="mr" title="Foot">발<em>Foot</em></span><span class="shared">+가쪽발바닥신경·안쪽발바닥신경</span></li>
+<li><span class="mk">바닥쪽뼈사이근(3개)</span><span class="me">Palmar interossei</span><span class="mr" title="Hand">손<em>Hand</em></span></li>
+<li><span class="mk">등쪽뼈사이근(4개)</span><span class="me">Dorsal interossei</span><span class="mr" title="Hand">손<em>Hand</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">노신경</span><span class="nerve-en">Radial n.</span><span class="cnt">7</span></div>
+<p class="clin">손목처짐(wrist drop) — 위팔뼈 몸통 골절 시 동반</p>
+<ul class="mus">
+<li><span class="mk">위팔근</span><span class="me">Brachialis</span><span class="mr" title="Arm">위팔<em>Arm</em></span><span class="shared">+근육피부신경</span></li>
+<li><span class="mk">위팔세갈래근</span><span class="me">Triceps brachii</span><span class="mr" title="Arm">위팔<em>Arm</em></span></li>
+<li><span class="mk">팔꿈치근</span><span class="me">Anconeus</span><span class="mr" title="Arm">위팔<em>Arm</em></span></li>
+<li><span class="mk">위팔노근</span><span class="me">Brachioradialis</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+<li><span class="mk">긴노쪽손목폄근</span><span class="me">Extensor carpi radialis longus</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+<li><span class="mk">짧은노쪽손목폄근</span><span class="me">Extensor carpi radialis brevis</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+<li><span class="mk">손뒤침근</span><span class="me">Supinator</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">뒤뼈사이신경</span><span class="nerve-en">Posterior interosseous n.</span><span class="cnt">7</span></div>
+<p class="clin">손가락 폄 불가하나 손목처짐은 경미 — 노신경 본간 손상과 감별</p>
+<ul class="mus">
+<li><span class="mk">손가락폄근</span><span class="me">Extensor digitorum</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+<li><span class="mk">새끼폄근</span><span class="me">Extensor digiti minimi</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+<li><span class="mk">자쪽손목폄근</span><span class="me">Extensor carpi ulnaris</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+<li><span class="mk">긴엄지벌림근</span><span class="me">Abductor pollicis longus</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+<li><span class="mk">짧은엄지폄근</span><span class="me">Extensor hallucis brevis</span><span class="mr" title="Foot">발<em>Foot</em></span><span class="shared">+깊은종아리신경</span></li>
+<li><span class="mk">긴엄지폄근</span><span class="me">Extensor hallucis longus</span><span class="mr" title="Leg">종아리<em>Leg</em></span><span class="shared">+깊은종아리신경</span></li>
+<li><span class="mk">집게폄근</span><span class="me">Extensor indicis</span><span class="mr" title="Forearm">아래팔<em>Forearm</em></span></li>
+</ul></div>
+</section>
+<section class="sys tx">
+<div class="sys-head"><h2>가슴신경</h2><span class="sys-en">Thoracic Nerves</span><span class="sys-count">2신경 · 11근육</span></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">갈비사이신경</span><span class="nerve-en">Intercostal nn.</span><span class="cnt">7</span></div>
+<ul class="mus">
+<li><span class="mk">위뒤톱니근</span><span class="me">Serratus posterior superior</span><span class="mr" title="Back">등<em>Back</em></span></li>
+<li><span class="mk">아래뒤톱니근</span><span class="me">Serratus posterior inferior</span><span class="mr" title="Back">등<em>Back</em></span></li>
+<li><span class="mk">바깥갈비사이근</span><span class="me">External intercostal</span><span class="mr" title="Thorax">가슴<em>Thorax</em></span></li>
+<li><span class="mk">속갈비사이근</span><span class="me">Internal intercostal</span><span class="mr" title="Thorax">가슴<em>Thorax</em></span></li>
+<li><span class="mk">최내갈비사이근</span><span class="me">Innermost intercostal</span><span class="mr" title="Thorax">가슴<em>Thorax</em></span></li>
+<li><span class="mk">배곧은근</span><span class="me">Rectus abdominis</span><span class="mr" title="Abdomen">배<em>Abdomen</em></span><span class="shared">+갈비밑신경</span></li>
+<li><span class="mk">배바깥빗근</span><span class="me">External oblique</span><span class="mr" title="Abdomen">배<em>Abdomen</em></span><span class="shared">+갈비밑신경</span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">갈비밑신경</span><span class="nerve-en">Subcostal n.</span><span class="cnt">4</span></div>
+<ul class="mus">
+<li><span class="mk">배곧은근</span><span class="me">Rectus abdominis</span><span class="mr" title="Abdomen">배<em>Abdomen</em></span><span class="shared">+갈비사이신경</span></li>
+<li><span class="mk">배바깥빗근</span><span class="me">External oblique</span><span class="mr" title="Abdomen">배<em>Abdomen</em></span><span class="shared">+갈비사이신경</span></li>
+<li><span class="mk">배속빗근</span><span class="me">Internal oblique</span><span class="mr" title="Abdomen">배<em>Abdomen</em></span><span class="shared">+엉덩샅고랑신경·엉덩아랫배신경</span></li>
+<li><span class="mk">배가로근</span><span class="me">Transversus abdominis</span><span class="mr" title="Abdomen">배<em>Abdomen</em></span><span class="shared">+엉덩샅고랑신경·엉덩아랫배신경</span></li>
+</ul></div>
+</section>
+<section class="sys lu">
+<div class="sys-head"><h2>허리신경얼기</h2><span class="sys-en">Lumbar Plexus</span><span class="sys-count">5신경 · 19근육</span></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">엉덩아랫배신경</span><span class="nerve-en">Iliohypogastric n.</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">배속빗근</span><span class="me">Internal oblique</span><span class="mr" title="Abdomen">배<em>Abdomen</em></span><span class="shared">+갈비밑신경·엉덩샅고랑신경</span></li>
+<li><span class="mk">배가로근</span><span class="me">Transversus abdominis</span><span class="mr" title="Abdomen">배<em>Abdomen</em></span><span class="shared">+갈비밑신경·엉덩샅고랑신경</span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">엉덩샅고랑신경</span><span class="nerve-en">Ilioinguinal n.</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">배속빗근</span><span class="me">Internal oblique</span><span class="mr" title="Abdomen">배<em>Abdomen</em></span><span class="shared">+갈비밑신경·엉덩아랫배신경</span></li>
+<li><span class="mk">배가로근</span><span class="me">Transversus abdominis</span><span class="mr" title="Abdomen">배<em>Abdomen</em></span><span class="shared">+갈비밑신경·엉덩아랫배신경</span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">넙다리신경</span><span class="nerve-en">Femoral n.</span><span class="cnt">7</span></div>
+<ul class="mus">
+<li><span class="mk">엉덩허리근(큰허리근+엉덩근)</span><span class="me">Iliopsoas (Psoas major + Iliacus)</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span><span class="shared">+허리신경얼기 직접가지</span></li>
+<li><span class="mk">넙다리빗근</span><span class="me">Sartorius</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span></li>
+<li><span class="mk">넙다리곧은근</span><span class="me">Rectus femoris</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span></li>
+<li><span class="mk">안쪽넓은근</span><span class="me">Vastus medialis</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span></li>
+<li><span class="mk">가쪽넓은근</span><span class="me">Vastus lateralis</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span></li>
+<li><span class="mk">중간넓은근</span><span class="me">Vastus intermedius</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span></li>
+<li><span class="mk">두덩근</span><span class="me">Pectineus</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span><span class="shared">+폐쇄신경</span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">폐쇄신경</span><span class="nerve-en">Obturator n.</span><span class="cnt">6</span></div>
+<ul class="mus">
+<li><span class="mk">바깥폐쇄근</span><span class="me">Obturator externus</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span></li>
+<li><span class="mk">두덩정강근</span><span class="me">Gracilis</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span></li>
+<li><span class="mk">두덩근</span><span class="me">Pectineus</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span><span class="shared">+넙다리신경</span></li>
+<li><span class="mk">긴모음근</span><span class="me">Adductor longus</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span></li>
+<li><span class="mk">짧은모음근</span><span class="me">Adductor brevis</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span></li>
+<li><span class="mk">큰모음근</span><span class="me">Adductor magnus</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span><span class="shared">+정강신경</span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">허리신경얼기 직접가지</span><span class="nerve-en">Direct branches of lumbar plexus</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">허리네모근</span><span class="me">Quadratus lumborum</span><span class="mr" title="Abdomen">배<em>Abdomen</em></span></li>
+<li><span class="mk">엉덩허리근(큰허리근+엉덩근)</span><span class="me">Iliopsoas (Psoas major + Iliacus)</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span><span class="shared">+넙다리신경</span></li>
+</ul></div>
+</section>
+<section class="sys sa">
+<div class="sys-head"><h2>엉치신경얼기</h2><span class="sys-en">Sacral Plexus</span><span class="sys-count">12신경 · 41근육</span></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">위볼기신경</span><span class="nerve-en">Superior gluteal n.</span><span class="cnt">3</span></div>
+<p class="clin">Trendelenburg 보행 — 중간볼기근 약화</p>
+<ul class="mus">
+<li><span class="mk">중간볼기근</span><span class="me">Gluteus medius</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span></li>
+<li><span class="mk">작은볼기근</span><span class="me">Gluteus minimus</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span></li>
+<li><span class="mk">넙다리근막긴장근</span><span class="me">Tensor fasciae latae</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">아래볼기신경</span><span class="nerve-en">Inferior gluteal n.</span><span class="cnt">1</span></div>
+<ul class="mus">
+<li><span class="mk">큰볼기근</span><span class="me">Gluteus maximus</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">궁둥구멍근신경</span><span class="nerve-en">N. to piriformis</span><span class="cnt">1</span></div>
+<ul class="mus">
+<li><span class="mk">궁둥구멍근</span><span class="me">Piriformis</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">속폐쇄근신경</span><span class="nerve-en">N. to obturator internus</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">위쌍둥이근</span><span class="me">Gemellus superior</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span></li>
+<li><span class="mk">속폐쇄근</span><span class="me">Obturator internus</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">넙다리네모근신경</span><span class="nerve-en">N. to quadratus femoris</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">아래쌍둥이근</span><span class="me">Gemellus inferior</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span></li>
+<li><span class="mk">넙다리네모근</span><span class="me">Quadratus femoris</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">정강신경</span><span class="nerve-en">Tibial n.</span><span class="cnt">11</span></div>
+<ul class="mus">
+<li><span class="mk">큰모음근</span><span class="me">Adductor magnus</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span><span class="shared">+폐쇄신경</span></li>
+<li><span class="mk">넙다리두갈래근</span><span class="me">Biceps femoris</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span><span class="shared">+온종아리신경</span></li>
+<li><span class="mk">반힘줄근</span><span class="me">Semitendinosus</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span></li>
+<li><span class="mk">반막모양근</span><span class="me">Semimembranosus</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span></li>
+<li><span class="mk">장딴지근</span><span class="me">Gastrocnemius</span><span class="mr" title="Leg">종아리<em>Leg</em></span></li>
+<li><span class="mk">가자미근</span><span class="me">Soleus</span><span class="mr" title="Leg">종아리<em>Leg</em></span></li>
+<li><span class="mk">장딴지빗근</span><span class="me">Plantaris</span><span class="mr" title="Leg">종아리<em>Leg</em></span></li>
+<li><span class="mk">오금근</span><span class="me">Popliteus</span><span class="mr" title="Leg">종아리<em>Leg</em></span></li>
+<li><span class="mk">긴발가락굽힘근</span><span class="me">Flexor digitorum longus</span><span class="mr" title="Leg">종아리<em>Leg</em></span></li>
+<li><span class="mk">긴엄지굽힘근</span><span class="me">Flexor hallucis longus</span><span class="mr" title="Leg">종아리<em>Leg</em></span></li>
+<li><span class="mk">뒤정강근</span><span class="me">Tibialis posterior</span><span class="mr" title="Leg">종아리<em>Leg</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">온종아리신경</span><span class="nerve-en">Common fibular n.</span><span class="cnt">1</span></div>
+<ul class="mus">
+<li><span class="mk">넙다리두갈래근</span><span class="me">Biceps femoris</span><span class="mr" title="Thigh">넙다리<em>Thigh</em></span><span class="shared">+정강신경</span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">깊은종아리신경</span><span class="nerve-en">Deep fibular n.</span><span class="cnt">6</span></div>
+<p class="clin">발처짐(foot drop) — 종아리뼈목 압박이 최다</p>
+<ul class="mus">
+<li><span class="mk">앞정강근</span><span class="me">Tibialis anterior</span><span class="mr" title="Leg">종아리<em>Leg</em></span></li>
+<li><span class="mk">긴발가락폄근</span><span class="me">Extensor digitorum longus</span><span class="mr" title="Leg">종아리<em>Leg</em></span></li>
+<li><span class="mk">긴엄지폄근</span><span class="me">Extensor hallucis longus</span><span class="mr" title="Leg">종아리<em>Leg</em></span></li>
+<li><span class="mk">셋째종아리근</span><span class="me">Fibularis tertius (Peroneus tertius)</span><span class="mr" title="Leg">종아리<em>Leg</em></span></li>
+<li><span class="mk">짧은발가락폄근</span><span class="me">Extensor digitorum brevis</span><span class="mr" title="Foot">발<em>Foot</em></span></li>
+<li><span class="mk">짧은엄지폄근</span><span class="me">Extensor hallucis brevis</span><span class="mr" title="Foot">발<em>Foot</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">얕은종아리신경</span><span class="nerve-en">Superficial fibular n.</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">긴종아리근</span><span class="me">Fibularis longus (Peroneus longus)</span><span class="mr" title="Leg">종아리<em>Leg</em></span></li>
+<li><span class="mk">짧은종아리근</span><span class="me">Fibularis brevis (Peroneus brevis)</span><span class="mr" title="Leg">종아리<em>Leg</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">안쪽발바닥신경</span><span class="nerve-en">Medial plantar n.</span><span class="cnt">4</span></div>
+<ul class="mus">
+<li><span class="mk">엄지벌림근</span><span class="me">Abductor hallucis</span><span class="mr" title="Foot">발<em>Foot</em></span></li>
+<li><span class="mk">짧은발가락굽힘근</span><span class="me">Flexor digitorum brevis</span><span class="mr" title="Foot">발<em>Foot</em></span></li>
+<li><span class="mk">벌레근(4개)</span><span class="me">Lumbricals</span><span class="mr" title="Foot">발<em>Foot</em></span><span class="shared">+가쪽발바닥신경</span></li>
+<li><span class="mk">짧은엄지굽힘근</span><span class="me">Flexor hallucis brevis</span><span class="mr" title="Foot">발<em>Foot</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">가쪽발바닥신경</span><span class="nerve-en">Lateral plantar n.</span><span class="cnt">7</span></div>
+<p class="clin">발의 갈퀴발가락 변형과 관련</p>
+<ul class="mus">
+<li><span class="mk">새끼벌림근</span><span class="me">Abductor digiti minimi</span><span class="mr" title="Foot">발<em>Foot</em></span></li>
+<li><span class="mk">발바닥네모근</span><span class="me">Quadratus plantae</span><span class="mr" title="Foot">발<em>Foot</em></span></li>
+<li><span class="mk">벌레근(4개)</span><span class="me">Lumbricals</span><span class="mr" title="Foot">발<em>Foot</em></span><span class="shared">+안쪽발바닥신경</span></li>
+<li><span class="mk">엄지모음근</span><span class="me">Adductor hallucis</span><span class="mr" title="Foot">발<em>Foot</em></span></li>
+<li><span class="mk">짧은새끼굽힘근</span><span class="me">Flexor digiti minimi brevis</span><span class="mr" title="Foot">발<em>Foot</em></span></li>
+<li><span class="mk">발등쪽뼈사이근(4개)</span><span class="me">Dorsal interossei</span><span class="mr" title="Foot">발<em>Foot</em></span></li>
+<li><span class="mk">발바닥쪽뼈사이근(3개)</span><span class="me">Plantar interossei</span><span class="mr" title="Foot">발<em>Foot</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">음부신경</span><span class="nerve-en">Pudendal n.</span><span class="cnt">1</span></div>
+<ul class="mus">
+<li><span class="mk">항문올림근(3부: 두덩곧창자근·두덩꼬리근·엉덩꼬리근)</span><span class="me">Levator ani</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span></li>
+</ul></div>
+</section>
+<section class="sys pr">
+<div class="sys-head"><h2>척수신경 뒤가지</h2><span class="sys-en">Posterior Rami</span><span class="sys-count">3신경 · 9근육</span></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">척수신경 뒤가지</span><span class="nerve-en">Posterior rami</span><span class="cnt">6</span></div>
+<ul class="mus">
+<li><span class="mk">엉덩갈비근</span><span class="me">Iliocostalis</span><span class="mr" title="Back">등<em>Back</em></span></li>
+<li><span class="mk">가장긴근</span><span class="me">Longissimus</span><span class="mr" title="Back">등<em>Back</em></span></li>
+<li><span class="mk">가시근</span><span class="me">Spinalis</span><span class="mr" title="Back">등<em>Back</em></span></li>
+<li><span class="mk">반가시근</span><span class="me">Semispinalis</span><span class="mr" title="Back">등<em>Back</em></span></li>
+<li><span class="mk">뭇갈래근</span><span class="me">Multifidus</span><span class="mr" title="Back">등<em>Back</em></span></li>
+<li><span class="mk">돌림근</span><span class="me">Rotatores</span><span class="mr" title="Back">등<em>Back</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">목신경 뒤가지</span><span class="nerve-en">Posterior rami of cervical nn.</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">머리널판근</span><span class="me">Splenius capitis</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+<li><span class="mk">목널판근</span><span class="me">Splenius cervicis</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">뒤통수밑신경</span><span class="nerve-en">Suboccipital n.</span><span class="cnt">1</span></div>
+<ul class="mus">
+<li><span class="mk">뒤통수밑근(4개: 큰·작은뒤머리곧은근, 위·아래머리빗근)</span><span class="me">Suboccipital muscles</span><span class="mr" title="Back">등<em>Back</em></span></li>
+</ul></div>
+</section>
+<section class="sys sg">
+<div class="sys-head"><h2>분절성 지배</h2><span class="sys-en">Segmental</span><span class="sys-count">2신경 · 6근육</span></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">목신경 앞가지</span><span class="nerve-en">Anterior rami of cervical nn.</span><span class="cnt">2</span></div>
+<ul class="mus">
+<li><span class="mk">긴목근</span><span class="me">Longus colli</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+<li><span class="mk">긴머리근</span><span class="me">Longus capitis</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+</ul></div>
+<div class="nerve">
+<div class="nerve-head"><span class="nerve-ko">척수분절</span><span class="nerve-en">Segmental supply</span><span class="cnt">4</span></div>
+<ul class="mus">
+<li><span class="mk">앞목갈비근</span><span class="me">Scalenus anterior</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+<li><span class="mk">중간목갈비근</span><span class="me">Scalenus medius</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+<li><span class="mk">뒤목갈비근</span><span class="me">Scalenus posterior</span><span class="mr" title="Neck">목<em>Neck</em></span></li>
+<li><span class="mk">꼬리근(꼬리뼈근)</span><span class="me">Coccygeus (Ischiococcygeus)</span><span class="mr" title="Pelvis &amp; Gluteal">골반·볼기<em>Pelvis &amp; Gluteal</em></span></li>
+</ul></div>
+</section>
+</div>
+
+<h2 class="idx-title">부위별 색인</h2>
+<p class="idx-sub">같은 149개를 해부 부위와 근육군으로 묶은 것입니다. 위 계통도가 “이 신경이 무엇을 지배하는가”라면, 이쪽은 “이 부위에 무엇이 있는가”를 봅니다.</p>
+<div class="idx">
+<div class="reg"><div class="reg-head">머리<i>Head</i><span>14</span></div>
+<div class="grp"><span class="gname">표정근<em>Muscles of facial expression</em></span><span class="gmus">이마근(전두근) · 뒤통수근 · 눈둘레근 · 입둘레근 · 볼근 · 큰광대근 · 작은광대근 · 입꼬리내림근 · 턱끝근 · 넓은목근</span></div>
+<div class="grp"><span class="gname">씹기근<em>Muscles of mastication</em></span><span class="gmus">관자근 · 깨물근 · 가쪽날개근 · 안쪽날개근</span></div>
+</div>
+<div class="reg"><div class="reg-head">목<i>Neck</i><span>16</span></div>
+<div class="grp"><span class="gname">얕은목근<em>Superficial cervical</em></span><span class="gmus">목빗근</span></div>
+<div class="grp"><span class="gname">목갈비근<em>Scalene muscles</em></span><span class="gmus">앞목갈비근 · 중간목갈비근 · 뒤목갈비근</span></div>
+<div class="grp"><span class="gname">목뿔위근<em>Suprahyoid</em></span><span class="gmus">턱목뿔근 · 턱끝목뿔근 · 두힘살근 · 붓목뿔근</span></div>
+<div class="grp"><span class="gname">목뿔아래근<em>Infrahyoid</em></span><span class="gmus">어깨목뿔근 · 복장목뿔근 · 복장갑상근 · 갑상목뿔근</span></div>
+<div class="grp"><span class="gname">척추앞근<em>Prevertebral</em></span><span class="gmus">긴목근 · 긴머리근</span></div>
+<div class="grp"><span class="gname">등쪽목근<em>Posterior cervical</em></span><span class="gmus">머리널판근 · 목널판근</span></div>
+</div>
+<div class="reg"><div class="reg-head">등<i>Back</i><span>14</span></div>
+<div class="grp"><span class="gname">표층(사지연결근)<em>Superficial · appendicular</em></span><span class="gmus">등세모근 · 넓은등근 · 어깨올림근 · 큰마름근 · 작은마름근</span></div>
+<div class="grp"><span class="gname">중간층(호흡보조)<em>Intermediate · respiratory</em></span><span class="gmus">위뒤톱니근 · 아래뒤톱니근</span></div>
+<div class="grp"><span class="gname">심층(척추세움근)<em>Deep · erector spinae</em></span><span class="gmus">엉덩갈비근 · 가장긴근 · 가시근</span></div>
+<div class="grp"><span class="gname">심층(가로돌기가시근)<em>Deep · transversospinalis</em></span><span class="gmus">반가시근 · 뭇갈래근 · 돌림근</span></div>
+<div class="grp"><span class="gname">후두하근군<em>Suboccipital group</em></span><span class="gmus">뒤통수밑근(4개: 큰·작은뒤머리곧은근, 위·아래머리빗근)</span></div>
+</div>
+<div class="reg"><div class="reg-head">가슴<i>Thorax</i><span>8</span></div>
+<div class="grp"><span class="gname">얕은가슴근<em>Superficial thoracic</em></span><span class="gmus">큰가슴근 · 작은가슴근 · 앞톱니근 · 빗장밑근</span></div>
+<div class="grp"><span class="gname">고유가슴근<em>Intrinsic thoracic</em></span><span class="gmus">바깥갈비사이근 · 속갈비사이근 · 최내갈비사이근</span></div>
+<div class="grp"><span class="gname">호흡의 주근<em>Principal muscle of respiration</em></span><span class="gmus">가로막(횡격막)</span></div>
+</div>
+<div class="reg"><div class="reg-head">배<i>Abdomen</i><span>5</span></div>
+<div class="grp"><span class="gname">앞배근<em>Anterior abdominal</em></span><span class="gmus">배곧은근</span></div>
+<div class="grp"><span class="gname">가쪽배근(층)<em>Lateral abdominal</em></span><span class="gmus">배바깥빗근 · 배속빗근 · 배가로근</span></div>
+<div class="grp"><span class="gname">뒤배근<em>Posterior abdominal</em></span><span class="gmus">허리네모근</span></div>
+</div>
+<div class="reg"><div class="reg-head">어깨<i>Shoulder</i><span>7</span></div>
+<div class="grp"><span class="gname">어깨관절 주변<em>Periarticular · shoulder</em></span><span class="gmus">어깨세모근</span></div>
+<div class="grp"><span class="gname">돌림근띠(회전근개)<em>Rotator cuff</em></span><span class="gmus">가시위근 · 가시아래근 · 작은원근 · 어깨밑근</span></div>
+<div class="grp"><span class="gname">사지연결근<em>Appendicular</em></span><span class="gmus">큰원근</span></div>
+<div class="grp"><span class="gname">위팔연결근<em>Attaching to humerus</em></span><span class="gmus">부리위팔근</span></div>
+</div>
+<div class="reg"><div class="reg-head">위팔<i>Arm</i><span>4</span></div>
+<div class="grp"><span class="gname">앞칸(굽힘근)<em>Anterior compartment · flexors</em></span><span class="gmus">위팔두갈래근 · 위팔근</span></div>
+<div class="grp"><span class="gname">뒤칸(폄근)<em>Posterior compartment · extensors</em></span><span class="gmus">위팔세갈래근 · 팔꿈치근</span></div>
+</div>
+<div class="reg"><div class="reg-head">아래팔<i>Forearm</i><span>19</span></div>
+<div class="grp"><span class="gname">앞칸 얕은층<em>Anterior · superficial</em></span><span class="gmus">원엎침근 · 노쪽손목굽힘근 · 긴손바닥근 · 자쪽손목굽힘근</span></div>
+<div class="grp"><span class="gname">앞칸 중간층<em>Anterior · intermediate</em></span><span class="gmus">얕은손가락굽힘근</span></div>
+<div class="grp"><span class="gname">앞칸 깊은층<em>Anterior · deep</em></span><span class="gmus">깊은손가락굽힘근 · 긴엄지굽힘근 · 네모엎침근</span></div>
+<div class="grp"><span class="gname">뒤칸 얕은층<em>Posterior · superficial</em></span><span class="gmus">위팔노근 · 긴노쪽손목폄근 · 짧은노쪽손목폄근 · 손가락폄근 · 새끼폄근 · 자쪽손목폄근</span></div>
+<div class="grp"><span class="gname">뒤칸 깊은층<em>Posterior · deep</em></span><span class="gmus">손뒤침근 · 긴엄지벌림근 · 짧은엄지폄근 · 긴엄지폄근 · 집게폄근</span></div>
+</div>
+<div class="reg"><div class="reg-head">손<i>Hand</i><span>11</span></div>
+<div class="grp"><span class="gname">엄지두덩근<em>Thenar</em></span><span class="gmus">짧은엄지벌림근 · 짧은엄지굽힘근 · 엄지맞섬근 · 엄지모음근</span></div>
+<div class="grp"><span class="gname">새끼두덩근<em>Hypothenar</em></span><span class="gmus">짧은손바닥근 · 새끼벌림근 · 짧은새끼굽힘근 · 새끼맞섬근</span></div>
+<div class="grp"><span class="gname">중간근(내재근)<em>Intrinsic · intermediate</em></span><span class="gmus">벌레근(4개) · 바닥쪽뼈사이근(3개) · 등쪽뼈사이근(4개)</span></div>
+</div>
+<div class="reg"><div class="reg-head">골반·볼기<i>Pelvis &amp; Gluteal</i><span>13</span></div>
+<div class="grp"><span class="gname">볼기근<em>Gluteal</em></span><span class="gmus">큰볼기근 · 중간볼기근 · 작은볼기근 · 넙다리근막긴장근</span></div>
+<div class="grp"><span class="gname">깊은가쪽돌림근<em>Deep lateral rotators</em></span><span class="gmus">궁둥구멍근 · 위쌍둥이근 · 아래쌍둥이근 · 속폐쇄근 · 바깥폐쇄근 · 넙다리네모근</span></div>
+<div class="grp"><span class="gname">엉덩허리근<em>Iliopsoas</em></span><span class="gmus">엉덩허리근(큰허리근+엉덩근)</span></div>
+<div class="grp"><span class="gname">골반바닥근<em>Pelvic floor</em></span><span class="gmus">항문올림근(3부: 두덩곧창자근·두덩꼬리근·엉덩꼬리근) · 꼬리근(꼬리뼈근)</span></div>
+</div>
+<div class="reg"><div class="reg-head">넙다리<i>Thigh</i><span>13</span></div>
+<div class="grp"><span class="gname">앞칸<em>Anterior compartment</em></span><span class="gmus">넙다리빗근 · 넙다리곧은근 · 안쪽넓은근 · 가쪽넓은근 · 중간넓은근</span></div>
+<div class="grp"><span class="gname">안쪽칸(모음근군)<em>Medial compartment · adductors</em></span><span class="gmus">두덩정강근 · 두덩근 · 긴모음근 · 짧은모음근 · 큰모음근</span></div>
+<div class="grp"><span class="gname">뒤칸(햄스트링)<em>Posterior compartment · hamstrings</em></span><span class="gmus">넙다리두갈래근 · 반힘줄근 · 반막모양근</span></div>
+</div>
+<div class="reg"><div class="reg-head">종아리<i>Leg</i><span>13</span></div>
+<div class="grp"><span class="gname">앞칸(발등굽힘)<em>Anterior · dorsiflexors</em></span><span class="gmus">앞정강근 · 긴발가락폄근 · 긴엄지폄근 · 셋째종아리근</span></div>
+<div class="grp"><span class="gname">가쪽칸(외번)<em>Lateral · evertors</em></span><span class="gmus">긴종아리근 · 짧은종아리근</span></div>
+<div class="grp"><span class="gname">뒤칸 얕은층<em>Posterior · superficial</em></span><span class="gmus">장딴지근 · 가자미근 · 장딴지빗근</span></div>
+<div class="grp"><span class="gname">뒤칸 깊은층<em>Posterior · deep</em></span><span class="gmus">오금근 · 긴발가락굽힘근 · 긴엄지굽힘근 · 뒤정강근</span></div>
+</div>
+<div class="reg"><div class="reg-head">발<i>Foot</i><span>12</span></div>
+<div class="grp"><span class="gname">발등<em>Dorsum of foot</em></span><span class="gmus">짧은발가락폄근 · 짧은엄지폄근</span></div>
+<div class="grp"><span class="gname">발바닥 1층<em>Plantar · layer 1</em></span><span class="gmus">엄지벌림근 · 짧은발가락굽힘근 · 새끼벌림근</span></div>
+<div class="grp"><span class="gname">발바닥 2층<em>Plantar · layer 2</em></span><span class="gmus">발바닥네모근 · 벌레근(4개)</span></div>
+<div class="grp"><span class="gname">발바닥 3층<em>Plantar · layer 3</em></span><span class="gmus">짧은엄지굽힘근 · 엄지모음근 · 짧은새끼굽힘근</span></div>
+<div class="grp"><span class="gname">발바닥 4층<em>Plantar · layer 4</em></span><span class="gmus">발등쪽뼈사이근(4개) · 발바닥쪽뼈사이근(3개)</span></div>
+</div>
+</div>
+
+<footer>
+  <span>근육 149 · 신경 50 · 계통 8 · 등재 167</span>
+  <span>KR 대한해부학회 신용어 · EN Terminologia Anatomica</span>
+</footer>
+</div>

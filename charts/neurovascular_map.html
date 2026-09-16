@@ -1,0 +1,671 @@
+<title>근육 장기 신경혈관 지도</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#EDEFF3; --surface:#FFFFFF; --sunk:#E2E6EC; --line:#CBD2DB; --line-dim:#DEE3E9;
+  --text:#161A20; --text-2:#555F6C; --text-3:#8892A0;
+  --nv:#8A6110; --nv-bg:#F6EFDF; --ar:#9E2B37; --ar-bg:#F8E8E9;
+  --og:#5B4A86; --og-bg:#EFECF7; --accent:#2B5E79; --warn:#9A5B12;
+  --serif:'Nanum Myeongjo',Georgia,serif;
+  --sans:'Noto Sans KR',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10141A; --surface:#171C24; --sunk:#1F252F; --line:#2B3340; --line-dim:#232A34;
+  --text:#E3E8EE; --text-2:#98A3B1; --text-3:#6A7583;
+  --nv:#D8A94E; --nv-bg:#2A2313; --ar:#E68491; --ar-bg:#2E181B;
+  --og:#A891D8; --og-bg:#221D33; --accent:#6FA8C7; --warn:#D8A94E;
+}}
+:root[data-theme="dark"]{
+  --bg:#10141A; --surface:#171C24; --sunk:#1F252F; --line:#2B3340; --line-dim:#232A34;
+  --text:#E3E8EE; --text-2:#98A3B1; --text-3:#6A7583;
+  --nv:#D8A94E; --nv-bg:#2A2313; --ar:#E68491; --ar-bg:#2E181B;
+  --og:#A891D8; --og-bg:#221D33; --accent:#6FA8C7; --warn:#D8A94E;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.6}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:16px;padding-block:36px 72px}
+
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--serif);font-size:clamp(25px,4.4vw,36px);font-weight:800;
+  letter-spacing:-.01em;margin-top:10px;text-wrap:balance}
+.sub{margin-top:9px;font-size:13px;color:var(--text-2);max-width:68ch}
+.stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  padding:7px 13px;display:flex;align-items:baseline;gap:7px}
+.stat b{font-size:18px;font-variant-numeric:tabular-nums;color:var(--accent)}
+.stat span{font-size:11px;color:var(--text-2);font-family:var(--mono)}
+
+.tools{position:sticky;top:0;z-index:9;background:var(--bg);
+  padding-block:13px 11px;margin-top:8px;border-bottom:1px solid var(--line)}
+.trow{display:flex;flex-wrap:wrap;gap:8px}
+.search{flex:1 1 240px;min-width:0;font-family:var(--sans);font-size:14px;padding:8px 12px;
+  border:1px solid var(--line);border-radius:5px;background:var(--surface);color:var(--text)}
+select{font-family:var(--sans);font-size:12.5px;padding:8px 10px;border:1px solid var(--line);
+  border-radius:5px;background:var(--surface);color:var(--text);max-width:100%}
+select#fn{border-left:3px solid var(--nv)} select#fa{border-left:3px solid var(--ar)}
+.search::placeholder{color:var(--text-3)}
+.search:focus,select:focus,.chip:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.chip{font-family:var(--mono);font-size:10.5px;padding:3px 9px;border-radius:11px;cursor:pointer;
+  border:1px solid var(--line);background:var(--surface);color:var(--text-2)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.hint{margin-top:8px;font-size:11.5px;color:var(--text-3);font-family:var(--mono)}
+#count{color:var(--accent);font-weight:500}
+
+section{background:var(--surface);border:1px solid var(--line);border-radius:6px;
+  margin-top:14px;overflow:hidden}
+.sh{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;padding:11px 14px;
+  background:var(--sunk);border-bottom:1px solid var(--line)}
+.sh h2{font-family:var(--serif);font-size:16px;font-weight:700}
+.sh .en{font-family:var(--mono);font-size:10px;color:var(--text-3)}
+.sh .n{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--text-2);
+  font-variant-numeric:tabular-nums}
+
+.hdr,.m{display:grid;grid-template-columns:1.15fr 1.1fr 1.05fr;gap:12px;
+  padding:9px 14px;border-bottom:1px solid var(--line-dim)}
+.hdr{padding-block:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--text-3);background:var(--surface)}
+.hdr b:nth-child(2){color:var(--nv)} .hdr b:nth-child(3){color:var(--ar)}
+.hdr b{font-weight:500}
+.m:last-child{border-bottom:none}
+.k{font-size:13.5px;font-weight:700;display:block}
+.e{font-family:var(--mono);font-size:9.5px;color:var(--text-3);display:block;line-height:1.4}
+.act{font-size:11px;color:var(--text-2);display:block;margin-top:3px}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.t{font-size:11.5px;font-weight:500;padding:2px 7px;border-radius:3px;line-height:1.35}
+.t em{display:block;font-style:normal;font-family:var(--mono);font-size:9px;opacity:.72;font-weight:400}
+.nv .t{background:var(--nv-bg);color:var(--nv)} .ar .t{background:var(--ar-bg);color:var(--ar)}
+.raw{font-size:10.5px;color:var(--text-3);margin-top:4px;line-height:1.5}
+@media (max-width:760px){
+  .hdr{display:none}
+  .m{grid-template-columns:1fr;gap:7px}
+  .m>div+div{padding-top:6px;border-top:1px dashed var(--line-dim)}
+  .m>div+div::before{font-family:var(--mono);font-size:9px;letter-spacing:.08em;
+    display:block;margin-bottom:3px;text-transform:uppercase}
+  .m>.nv::before{content:'지배신경 / Nerve';color:var(--nv)}
+  .m>.ar::before{content:'영양동맥 / Artery';color:var(--ar)}
+}
+
+.org-lead{margin-top:34px;padding-top:22px;border-top:1px solid var(--line)}
+.org-lead h2{font-family:var(--serif);font-size:19px;font-weight:800}
+.org-lead p{font-size:12.5px;color:var(--text-2);margin-top:6px;max-width:68ch}
+.flag{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:11.5px;
+  font-family:var(--mono);color:var(--warn);background:var(--og-bg);
+  border:1px solid var(--line);border-radius:4px;padding:5px 10px}
+.og-grid{columns:2;column-gap:14px;margin-top:14px}
+@media (max-width:840px){.og-grid{columns:1}}
+.og{break-inside:avoid-column;background:var(--surface);border:1px solid var(--line);
+  border-radius:6px;padding:12px 13px;margin-bottom:14px;border-left:3px solid var(--og)}
+.og-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+  padding-bottom:7px;margin-bottom:8px;border-bottom:1px solid var(--line-dim)}
+.og-h h3{font-size:14px;font-weight:700}
+.og-h .en{font-family:var(--mono);font-size:9.5px;color:var(--text-3)}
+.og-h .rg{margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--og);
+  background:var(--og-bg);padding:1px 6px;border-radius:9px}
+.ln{display:grid;grid-template-columns:52px 1fr;gap:8px;padding:3px 0;font-size:11.5px;align-items:start}
+.ln dt{font-family:var(--mono);font-size:9px;letter-spacing:.05em;padding-top:2px}
+.ln dd{color:var(--text-2);line-height:1.55}
+.ln.s dt{color:var(--nv)} .ln.p dt{color:var(--og)} .ln.a dt{color:var(--ar)}
+.ln.a dd{color:var(--text)}
+.clin{margin-top:8px;padding:6px 9px;background:var(--sunk);border-radius:4px;
+  font-size:11px;color:var(--text-2);line-height:1.5}
+mark{background:transparent;color:var(--accent);font-weight:700;text-decoration:underline}
+[hidden]{display:none!important}
+.empty{margin-top:24px;text-align:center;color:var(--text-3);font-size:13px}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:10.5px;color:var(--text-3);display:flex;flex-wrap:wrap;gap:6px 16px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Muscle &amp; Viscera — Nerve / Artery Reference</div>
+  <h1>근육·장기 신경혈관 지도</h1>
+  <p class="sub">부위별로 근육 149개의 <b>지배신경</b>과 <b>영양동맥</b>을 나란히 놓고, 장기 23개의 자율신경 지배와 영양동맥을 덧붙였습니다. 신경 이름이나 동맥 이름으로 거꾸로 걸러 볼 수도 있습니다. 용어는 대한해부학회 신용어, 영문은 Terminologia Anatomica를 따릅니다.</p>
+  <div class="stats"><div class="stat"><b>149</b><span>근육</span></div>
+<div class="stat"><b>13</b><span>부위</span></div>
+<div class="stat"><b>50</b><span>신경</span></div>
+<div class="stat"><b>76</b><span>동맥</span></div>
+<div class="stat"><b>23</b><span>장기</span></div></div>
+</header>
+
+<div class="tools">
+  <div class="trow">
+    <input id="q" class="search" type="search" placeholder="근육·신경·동맥 이름으로 검색 — 예: 정중신경, 노동맥, 엄지" autocomplete="off">
+    <select id="fn"><option value="">신경 전체</option><option value="얼굴신경">얼굴신경 · Facial n. (CN VII) (12)</option>
+<option value="자신경">자신경 · Ulnar n. (11)</option>
+<option value="정강신경">정강신경 · Tibial n. (11)</option>
+<option value="정중신경">정중신경 · Median n. (8)</option>
+<option value="가쪽발바닥신경">가쪽발바닥신경 · Lateral plantar n. (7)</option>
+<option value="갈비사이신경">갈비사이신경 · Intercostal nn. (T1-T11) (7)</option>
+<option value="넙다리신경">넙다리신경 · Femoral n. (7)</option>
+<option value="노신경">노신경 · Radial n. (7)</option>
+<option value="뒤뼈사이신경">뒤뼈사이신경 · Posterior interosseous n. (7)</option>
+<option value="깊은종아리신경">깊은종아리신경 · Deep fibular n. (6)</option>
+<option value="척수신경 뒤가지">척수신경 뒤가지 · Posterior rami of spinal nn. (6)</option>
+<option value="폐쇄신경">폐쇄신경 · Obturator n. (6)</option>
+<option value="갈비밑신경">갈비밑신경 · Subcostal n. (T12) (4)</option>
+<option value="안쪽발바닥신경">안쪽발바닥신경 · Medial plantar n. (4)</option>
+<option value="척수분절">척수분절 · Segmental spinal nn. (4)</option>
+<option value="근육피부신경">근육피부신경 · Musculocutaneous n. (3)</option>
+<option value="목신경고리">목신경고리 · Ansa cervicalis (3)</option>
+<option value="앞뼈사이신경">앞뼈사이신경 · Anterior interosseous n. (3)</option>
+<option value="어깨등신경">어깨등신경 · Dorsal scapular n. (3)</option>
+<option value="위볼기신경">위볼기신경 · Superior gluteal n. (3)</option>
+<option value="겨드랑신경">겨드랑신경 · Axillary n. (2)</option>
+<option value="넙다리네모근신경">넙다리네모근신경 · N. to quadratus femoris (2)</option>
+<option value="더부신경">더부신경 · Accessory n. (CN XI) (2)</option>
+<option value="목신경 뒤가지">목신경 뒤가지 · Posterior rami of cervical nn. (2)</option>
+<option value="목신경 앞가지">목신경 앞가지 · Anterior rami of cervical nn. (2)</option>
+<option value="속폐쇄근신경">속폐쇄근신경 · N. to obturator internus (2)</option>
+<option value="아래어깨밑신경">아래어깨밑신경 · Lower subscapular n. (2)</option>
+<option value="안쪽가슴근신경">안쪽가슴근신경 · Medial pectoral n. (2)</option>
+<option value="얕은종아리신경">얕은종아리신경 · Superficial fibular n. (2)</option>
+<option value="어깨위신경">어깨위신경 · Suprascapular n. (2)</option>
+<option value="엉덩샅고랑신경">엉덩샅고랑신경 · Ilioinguinal n. (2)</option>
+<option value="엉덩아랫배신경">엉덩아랫배신경 · Iliohypogastric n. (2)</option>
+<option value="턱목뿔근신경">턱목뿔근신경 · Mylohyoid n. (2)</option>
+<option value="허리신경얼기 직접가지">허리신경얼기 직접가지 · Direct branches of lumbar plexus (2)</option>
+<option value="혀밑신경">혀밑신경 · Hypoglossal n. (CN XII) (2)</option>
+<option value="가로막신경">가로막신경 · Phrenic n. (1)</option>
+<option value="가슴등신경">가슴등신경 · Thoracodorsal n. (1)</option>
+<option value="가쪽가슴근신경">가쪽가슴근신경 · Lateral pectoral n. (1)</option>
+<option value="가쪽날개근신경">가쪽날개근신경 · Lateral pterygoid n. (1)</option>
+<option value="궁둥구멍근신경">궁둥구멍근신경 · N. to piriformis (1)</option>
+<option value="긴가슴신경">긴가슴신경 · Long thoracic n. (1)</option>
+<option value="깨물근신경">깨물근신경 · Masseteric n. (1)</option>
+<option value="뒤통수밑신경">뒤통수밑신경 · Suboccipital n. (1)</option>
+<option value="빗장밑근신경">빗장밑근신경 · N. to subclavius (1)</option>
+<option value="아래볼기신경">아래볼기신경 · Inferior gluteal n. (1)</option>
+<option value="아래턱신경">아래턱신경 · Mandibular n. (CN V3) (1)</option>
+<option value="안쪽날개근신경">안쪽날개근신경 · Medial pterygoid n. (1)</option>
+<option value="온종아리신경">온종아리신경 · Common fibular (peroneal) n. (1)</option>
+<option value="위어깨밑신경">위어깨밑신경 · Upper subscapular n. (1)</option>
+<option value="음부신경">음부신경 · Pudendal n. (1)</option></select>
+    <select id="fa"><option value="">동맥 전체</option><option value="갈비사이동맥">갈비사이동맥 · Intercostal a. (8)</option>
+<option value="얼굴동맥">얼굴동맥 · Facial a. (7)</option>
+<option value="아래볼기동맥">아래볼기동맥 · Inferior gluteal a. (6)</option>
+<option value="자동맥">자동맥 · Ulnar a. (6)</option>
+<option value="가쪽발바닥동맥">가쪽발바닥동맥 · Lateral plantar a. (5)</option>
+<option value="노쪽되돌이동맥">노쪽되돌이동맥 · Radial recurrent a. (5)</option>
+<option value="뒤뼈사이동맥">뒤뼈사이동맥 · Posterior interosseous a. (5)</option>
+<option value="뒤통수동맥">뒤통수동맥 · Occipital a. (5)</option>
+<option value="발바닥동맥활">발바닥동맥활 · Plantar arch (5)</option>
+<option value="앞정강동맥">앞정강동맥 · Anterior tibial a. (5)</option>
+<option value="위턱동맥">위턱동맥 · Maxillary a. (5)</option>
+<option value="종아리동맥">종아리동맥 · Fibular (peroneal) a. (5)</option>
+<option value="허리동맥">허리동맥 · Lumbar aa. (5)</option>
+<option value="관통동맥">관통동맥 · Perforating aa. (4)</option>
+<option value="안쪽발바닥동맥">안쪽발바닥동맥 · Medial plantar a. (4)</option>
+<option value="위갑상샘동맥">위갑상샘동맥 · Superior thyroid a. (4)</option>
+<option value="폐쇄동맥">폐쇄동맥 · Obturator a. (4)</option>
+<option value="가쪽넙다리휘돌이동맥">가쪽넙다리휘돌이동맥 · Lateral circumflex femoral a. (3)</option>
+<option value="넙다리동맥">넙다리동맥 · Femoral a. (3)</option>
+<option value="뒤정강동맥">뒤정강동맥 · Posterior tibial a. (3)</option>
+<option value="아래갈비사이동맥">아래갈비사이동맥 · Lower intercostal aa. (3)</option>
+<option value="아래입술동맥">아래입술동맥 · Inferior labial a. (3)</option>
+<option value="안쪽넙다리휘돌이동맥">안쪽넙다리휘돌이동맥 · Medial circumflex femoral a. (3)</option>
+<option value="어깨등동맥">어깨등동맥 · Dorsal scapular a. (3)</option>
+<option value="위볼기동맥">위볼기동맥 · Superior gluteal a. (3)</option>
+<option value="위팔동맥">위팔동맥 · Brachial a. (3)</option>
+<option value="척추동맥">척추동맥 · Vertebral a. (3)</option>
+<option value="가슴봉우리동맥">가슴봉우리동맥 · Thoracoacromial a. (2)</option>
+<option value="가쪽가슴동맥">가쪽가슴동맥 · Lateral thoracic a. (2)</option>
+<option value="깊은넙다리동맥">깊은넙다리동맥 · Deep femoral a. (2)</option>
+<option value="깊은위팔동맥">깊은위팔동맥 · Deep brachial a. (2)</option>
+<option value="노동맥">노동맥 · Radial a. (2)</option>
+<option value="눈동맥">눈동맥 · Ophthalmic a. (2)</option>
+<option value="뒤위팔휘돌이동맥">뒤위팔휘돌이동맥 · Posterior circumflex humeral a. (2)</option>
+<option value="모음근동맥">모음근동맥 · Adductor branches (2)</option>
+<option value="목갈비동맥">목갈비동맥 · Costocervical trunk (2)</option>
+<option value="발등동맥">발등동맥 · Dorsalis pedis a. (2)</option>
+<option value="분절동맥">분절동맥 · Segmental aa. (2)</option>
+<option value="속음부동맥">속음부동맥 · Internal pudendal a. (2)</option>
+<option value="아래갑상샘동맥">아래갑상샘동맥 · Inferior thyroid a. (2)</option>
+<option value="앞뼈사이동맥">앞뼈사이동맥 · Anterior interosseous a. (2)</option>
+<option value="어깨밑동맥">어깨밑동맥 · Subscapular a. (2)</option>
+<option value="어깨위동맥">어깨위동맥 · Suprascapular a. (2)</option>
+<option value="오금동맥">오금동맥 · Popliteal a. (2)</option>
+<option value="오름목동맥">오름목동맥 · Ascending cervical a. (2)</option>
+<option value="턱밑동맥">턱밑동맥 · Submental a. (2)</option>
+<option value="가로목동맥">가로목동맥 · Transverse cervical a. (1)</option>
+<option value="가슴등동맥">가슴등동맥 · Thoracodorsal a. (1)</option>
+<option value="가쪽발등동맥">가쪽발등동맥 · Lateral tarsal a. (1)</option>
+<option value="가쪽엉치동맥">가쪽엉치동맥 · Lateral sacral a. (1)</option>
+<option value="깊은관자동맥">깊은관자동맥 · Deep temporal a. (1)</option>
+<option value="깊은목동맥">깊은목동맥 · Deep cervical a. (1)</option>
+<option value="깊은손바닥동맥활">깊은손바닥동맥활 · Deep palmar arch (1)</option>
+<option value="깊은엉덩휘돌이동맥">깊은엉덩휘돌이동맥 · Deep circumflex iliac a. (1)</option>
+<option value="깨물근동맥">깨물근동맥 · Masseteric a. (1)</option>
+<option value="노쪽곁동맥">노쪽곁동맥 · Radial collateral a. (1)</option>
+<option value="눈확위동맥">눈확위동맥 · Supraorbital a. (1)</option>
+<option value="도르래위동맥">도르래위동맥 · Supratrochlear a. (1)</option>
+<option value="뒤귓바퀴동맥">뒤귓바퀴동맥 · Posterior auricular a. (1)</option>
+<option value="뒤목갈비동맥">뒤목갈비동맥 · Deep cervical a. (1)</option>
+<option value="등쪽어깨동맥">등쪽어깨동맥 · Dorsal scapular a. (1)</option>
+<option value="발등쪽동맥활">발등쪽동맥활 · Dorsal arch of foot (1)</option>
+<option value="손등동맥활">손등동맥활 · Dorsal carpal arch (1)</option>
+<option value="심장막가로막동맥">심장막가로막동맥 · Pericardiacophrenic a. (1)</option>
+<option value="아래가로막동맥">아래가로막동맥 · Inferior phrenic a. (1)</option>
+<option value="아래배벽동맥">아래배벽동맥 · Inferior epigastric a. (1)</option>
+<option value="얕은손바닥동맥활">얕은손바닥동맥활 · Superficial palmar arch (1)</option>
+<option value="어깨뼈위동맥">어깨뼈위동맥 · Suprascapular a. (1)</option>
+<option value="엉덩허리동맥">엉덩허리동맥 · Iliolumbar a. (1)</option>
+<option value="위가로막동맥">위가로막동맥 · Superior phrenic a. (1)</option>
+<option value="위배벽동맥">위배벽동맥 · Superior epigastric a. (1)</option>
+<option value="위입술동맥">위입술동맥 · Superior labial a. (1)</option>
+<option value="장딴지동맥">장딴지동맥 · Sural aa. (1)</option>
+<option value="중간쪽곁동맥">중간쪽곁동맥 · Middle collateral a. (1)</option>
+<option value="혀동맥">혀동맥 · Lingual a. (1)</option>
+<option value="휘돌이어깨동맥">휘돌이어깨동맥 · Circumflex scapular a. (1)</option></select>
+  </div>
+  <div class="chips" id="chips"><button class="chip" type="button" data-r="머리" aria-pressed="false">머리</button>
+<button class="chip" type="button" data-r="목" aria-pressed="false">목</button>
+<button class="chip" type="button" data-r="등" aria-pressed="false">등</button>
+<button class="chip" type="button" data-r="가슴" aria-pressed="false">가슴</button>
+<button class="chip" type="button" data-r="배" aria-pressed="false">배</button>
+<button class="chip" type="button" data-r="어깨" aria-pressed="false">어깨</button>
+<button class="chip" type="button" data-r="위팔" aria-pressed="false">위팔</button>
+<button class="chip" type="button" data-r="아래팔" aria-pressed="false">아래팔</button>
+<button class="chip" type="button" data-r="손" aria-pressed="false">손</button>
+<button class="chip" type="button" data-r="골반·볼기" aria-pressed="false">골반·볼기</button>
+<button class="chip" type="button" data-r="넙다리" aria-pressed="false">넙다리</button>
+<button class="chip" type="button" data-r="종아리" aria-pressed="false">종아리</button>
+<button class="chip" type="button" data-r="발" aria-pressed="false">발</button></div>
+  <div class="hint"><span id="count"></span> · 선택은 겹쳐서 적용됩니다</div>
+</div>
+
+<div id="body">
+<section data-region="머리">
+<div class="sh"><h2>머리</h2><span class="en">Head</span><span class="n">14</span></div>
+<div class="hdr"><b>근육 / Muscle</b><b>지배신경 / Nerve</b><b>영양동맥 / Artery</b></div>
+<div class="m" data-s="이마근(전두근) Frontalis (Occipitofrontalis, frontal belly) 얼굴신경(CN VII) 관자가지 눈확위동맥·도르래위동맥(눈동맥) 머리 얼굴신경 눈확위동맥 도르래위동맥 눈동맥" data-n="얼굴신경" data-a="눈확위동맥|도르래위동맥|눈동맥"><div><span class="k">이마근(전두근)</span><span class="e">Frontalis (Occipitofrontalis, frontal belly)</span><span class="act">눈썹 올림, 이마 주름</span></div><div class="nv"><div class="tags"><span class="t">얼굴신경<em>Facial n. (CN VII)</em></span></div><p class="raw">얼굴신경(CN VII) 관자가지</p></div><div class="ar"><div class="tags"><span class="t">눈확위동맥<em>Supraorbital a.</em></span>
+<span class="t">도르래위동맥<em>Supratrochlear a.</em></span>
+<span class="t">눈동맥<em>Ophthalmic a.</em></span></div></div></div>
+<div class="m" data-s="뒤통수근 Occipitalis (Occipitofrontalis, occipital belly) 얼굴신경 뒤귓바퀴신경 뒤통수동맥 머리 얼굴신경 뒤통수동맥" data-n="얼굴신경" data-a="뒤통수동맥"><div><span class="k">뒤통수근</span><span class="e">Occipitalis (Occipitofrontalis, occipital belly)</span><span class="act">두피를 뒤로 당김</span></div><div class="nv"><div class="tags"><span class="t">얼굴신경<em>Facial n. (CN VII)</em></span></div><p class="raw">얼굴신경 뒤귓바퀴신경</p></div><div class="ar"><div class="tags"><span class="t">뒤통수동맥<em>Occipital a.</em></span></div></div></div>
+<div class="m" data-s="눈둘레근 Orbicularis oculi 얼굴신경 관자·광대가지 눈동맥·얼굴동맥 분지 머리 얼굴신경 눈동맥 얼굴동맥" data-n="얼굴신경" data-a="눈동맥|얼굴동맥"><div><span class="k">눈둘레근</span><span class="e">Orbicularis oculi</span><span class="act">눈 감기(수의적/반사적)</span></div><div class="nv"><div class="tags"><span class="t">얼굴신경<em>Facial n. (CN VII)</em></span></div><p class="raw">얼굴신경 관자·광대가지</p></div><div class="ar"><div class="tags"><span class="t">눈동맥<em>Ophthalmic a.</em></span>
+<span class="t">얼굴동맥<em>Facial a.</em></span></div><p class="raw">눈동맥·얼굴동맥 분지</p></div></div>
+<div class="m" data-s="입둘레근 Orbicularis oris 얼굴신경 볼가지·턱모서리가지 위·아래입술동맥(얼굴동맥) 머리 얼굴신경 위입술동맥 아래입술동맥 얼굴동맥" data-n="얼굴신경" data-a="위입술동맥|아래입술동맥|얼굴동맥"><div><span class="k">입둘레근</span><span class="e">Orbicularis oris</span><span class="act">입술 다물기·오므리기(휘파람)</span></div><div class="nv"><div class="tags"><span class="t">얼굴신경<em>Facial n. (CN VII)</em></span></div><p class="raw">얼굴신경 볼가지·턱모서리가지</p></div><div class="ar"><div class="tags"><span class="t">위입술동맥<em>Superior labial a.</em></span>
+<span class="t">아래입술동맥<em>Inferior labial a.</em></span>
+<span class="t">얼굴동맥<em>Facial a.</em></span></div><p class="raw">위·아래입술동맥(얼굴동맥)</p></div></div>
+<div class="m" data-s="볼근 Buccinator 얼굴신경 볼가지 얼굴동맥·위턱동맥 머리 얼굴신경 얼굴동맥 위턱동맥" data-n="얼굴신경" data-a="얼굴동맥|위턱동맥"><div><span class="k">볼근</span><span class="e">Buccinator</span><span class="act">볼을 치아쪽으로 압박(씹기 보조), 취주악기 연주</span></div><div class="nv"><div class="tags"><span class="t">얼굴신경<em>Facial n. (CN VII)</em></span></div><p class="raw">얼굴신경 볼가지</p></div><div class="ar"><div class="tags"><span class="t">얼굴동맥<em>Facial a.</em></span>
+<span class="t">위턱동맥<em>Maxillary a.</em></span></div></div></div>
+<div class="m" data-s="큰광대근 Zygomaticus major 얼굴신경 광대가지 얼굴동맥 머리 얼굴신경 얼굴동맥" data-n="얼굴신경" data-a="얼굴동맥"><div><span class="k">큰광대근</span><span class="e">Zygomaticus major</span><span class="act">입꼬리를 위가쪽으로(미소)</span></div><div class="nv"><div class="tags"><span class="t">얼굴신경<em>Facial n. (CN VII)</em></span></div><p class="raw">얼굴신경 광대가지</p></div><div class="ar"><div class="tags"><span class="t">얼굴동맥<em>Facial a.</em></span></div></div></div>
+<div class="m" data-s="작은광대근 Zygomaticus minor 얼굴신경 광대가지 얼굴동맥 머리 얼굴신경 얼굴동맥" data-n="얼굴신경" data-a="얼굴동맥"><div><span class="k">작은광대근</span><span class="e">Zygomaticus minor</span><span class="act">윗입술 올림</span></div><div class="nv"><div class="tags"><span class="t">얼굴신경<em>Facial n. (CN VII)</em></span></div><p class="raw">얼굴신경 광대가지</p></div><div class="ar"><div class="tags"><span class="t">얼굴동맥<em>Facial a.</em></span></div></div></div>
+<div class="m" data-s="입꼬리내림근 Depressor anguli oris 얼굴신경 턱모서리가지 아래입술동맥 머리 얼굴신경 아래입술동맥" data-n="얼굴신경" data-a="아래입술동맥"><div><span class="k">입꼬리내림근</span><span class="e">Depressor anguli oris</span><span class="act">입꼬리 아래로 내림(찡그림)</span></div><div class="nv"><div class="tags"><span class="t">얼굴신경<em>Facial n. (CN VII)</em></span></div><p class="raw">얼굴신경 턱모서리가지</p></div><div class="ar"><div class="tags"><span class="t">아래입술동맥<em>Inferior labial a.</em></span></div></div></div>
+<div class="m" data-s="턱끝근 Mentalis 얼굴신경 턱모서리가지 아래입술동맥 머리 얼굴신경 아래입술동맥" data-n="얼굴신경" data-a="아래입술동맥"><div><span class="k">턱끝근</span><span class="e">Mentalis</span><span class="act">턱 피부를 올려 입술을 내밈(뾰로통한 표정)</span></div><div class="nv"><div class="tags"><span class="t">얼굴신경<em>Facial n. (CN VII)</em></span></div><p class="raw">얼굴신경 턱모서리가지</p></div><div class="ar"><div class="tags"><span class="t">아래입술동맥<em>Inferior labial a.</em></span></div></div></div>
+<div class="m" data-s="넓은목근 Platysma 얼굴신경 목가지 얼굴동맥 목가지 머리 얼굴신경 얼굴동맥" data-n="얼굴신경" data-a="얼굴동맥"><div><span class="k">넓은목근</span><span class="e">Platysma</span><span class="act">목 피부를 당기고 입꼬리를 아래로</span></div><div class="nv"><div class="tags"><span class="t">얼굴신경<em>Facial n. (CN VII)</em></span></div><p class="raw">얼굴신경 목가지</p></div><div class="ar"><div class="tags"><span class="t">얼굴동맥<em>Facial a.</em></span></div><p class="raw">얼굴동맥 목가지</p></div></div>
+<div class="m" data-s="관자근 Temporalis 아래턱신경(CN V3)의 깊은관자신경 깊은관자동맥(위턱동맥) 머리 아래턱신경 깊은관자동맥 위턱동맥" data-n="아래턱신경" data-a="깊은관자동맥|위턱동맥"><div><span class="k">관자근</span><span class="e">Temporalis</span><span class="act">입 다물기(턱 올림), 뒷섬유는 아래턱 후퇴</span></div><div class="nv"><div class="tags"><span class="t">아래턱신경<em>Mandibular n. (CN V3)</em></span></div><p class="raw">아래턱신경(CN V3)의 깊은관자신경</p></div><div class="ar"><div class="tags"><span class="t">깊은관자동맥<em>Deep temporal a.</em></span>
+<span class="t">위턱동맥<em>Maxillary a.</em></span></div></div></div>
+<div class="m" data-s="깨물근 Masseter 깨물근신경(아래턱신경) 깨물근동맥(위턱동맥) 머리 깨물근신경 깨물근동맥 위턱동맥" data-n="깨물근신경" data-a="깨물근동맥|위턱동맥"><div><span class="k">깨물근</span><span class="e">Masseter</span><span class="act">입 다물기(강력한 턱닫기)</span></div><div class="nv"><div class="tags"><span class="t">깨물근신경<em>Masseteric n.</em></span></div><p class="raw">깨물근신경(아래턱신경)</p></div><div class="ar"><div class="tags"><span class="t">깨물근동맥<em>Masseteric a.</em></span>
+<span class="t">위턱동맥<em>Maxillary a.</em></span></div></div></div>
+<div class="m" data-s="가쪽날개근 Lateral pterygoid 가쪽날개근신경(아래턱신경) 위턱동맥 머리 가쪽날개근신경 위턱동맥" data-n="가쪽날개근신경" data-a="위턱동맥"><div><span class="k">가쪽날개근</span><span class="e">Lateral pterygoid</span><span class="act">입 벌리기, 아래턱 내밀기, 좌우 씹기운동</span></div><div class="nv"><div class="tags"><span class="t">가쪽날개근신경<em>Lateral pterygoid n.</em></span></div><p class="raw">가쪽날개근신경(아래턱신경)</p></div><div class="ar"><div class="tags"><span class="t">위턱동맥<em>Maxillary a.</em></span></div></div></div>
+<div class="m" data-s="안쪽날개근 Medial pterygoid 안쪽날개근신경(아래턱신경) 위턱동맥 머리 안쪽날개근신경 위턱동맥" data-n="안쪽날개근신경" data-a="위턱동맥"><div><span class="k">안쪽날개근</span><span class="e">Medial pterygoid</span><span class="act">입 다물기, 아래턱 내밀기</span></div><div class="nv"><div class="tags"><span class="t">안쪽날개근신경<em>Medial pterygoid n.</em></span></div><p class="raw">안쪽날개근신경(아래턱신경)</p></div><div class="ar"><div class="tags"><span class="t">위턱동맥<em>Maxillary a.</em></span></div></div></div>
+</section>
+<section data-region="목">
+<div class="sh"><h2>목</h2><span class="en">Neck</span><span class="n">16</span></div>
+<div class="hdr"><b>근육 / Muscle</b><b>지배신경 / Nerve</b><b>영양동맥 / Artery</b></div>
+<div class="m" data-s="목빗근 Sternocleidomastoid 더부신경(CN XI, 운동)+C2-C3(고유감각) 뒤통수동맥·위갑상샘동맥 목빗근가지 목 더부신경 뒤통수동맥 위갑상샘동맥" data-n="더부신경" data-a="뒤통수동맥|위갑상샘동맥"><div><span class="k">목빗근</span><span class="e">Sternocleidomastoid</span><span class="act">한쪽 수축: 반대쪽으로 얼굴 돌림+같은쪽 가쪽굽힘/ 양쪽 수축: 목 굽힘·머리 내밈</span></div><div class="nv"><div class="tags"><span class="t">더부신경<em>Accessory n. (CN XI)</em></span></div><p class="raw">더부신경(CN XI, 운동)+C2-C3(고유감각)</p></div><div class="ar"><div class="tags"><span class="t">뒤통수동맥<em>Occipital a.</em></span>
+<span class="t">위갑상샘동맥<em>Superior thyroid a.</em></span></div><p class="raw">뒤통수동맥·위갑상샘동맥 목빗근가지</p></div></div>
+<div class="m" data-s="앞목갈비근 Scalenus anterior C4-C6 아래갑상샘동맥 목 척수분절 아래갑상샘동맥" data-n="척수분절" data-a="아래갑상샘동맥"><div><span class="k">앞목갈비근</span><span class="e">Scalenus anterior</span><span class="act">목 가쪽굽힘, 흡기 시 1번갈비뼈 올림</span></div><div class="nv"><div class="tags"><span class="t">척수분절<em>Segmental spinal nn.</em></span></div><p class="raw">C4-C6</p></div><div class="ar"><div class="tags"><span class="t">아래갑상샘동맥<em>Inferior thyroid a.</em></span></div></div></div>
+<div class="m" data-s="중간목갈비근 Scalenus medius C3-C8 목갈비동맥 목 척수분절 목갈비동맥" data-n="척수분절" data-a="목갈비동맥"><div><span class="k">중간목갈비근</span><span class="e">Scalenus medius</span><span class="act">목 가쪽굽힘, 1번갈비뼈 올림</span></div><div class="nv"><div class="tags"><span class="t">척수분절<em>Segmental spinal nn.</em></span></div><p class="raw">C3-C8</p></div><div class="ar"><div class="tags"><span class="t">목갈비동맥<em>Costocervical trunk</em></span></div></div></div>
+<div class="m" data-s="뒤목갈비근 Scalenus posterior C6-C8 목갈비동맥 목 척수분절 목갈비동맥" data-n="척수분절" data-a="목갈비동맥"><div><span class="k">뒤목갈비근</span><span class="e">Scalenus posterior</span><span class="act">2번갈비뼈 올림, 목 가쪽굽힘</span></div><div class="nv"><div class="tags"><span class="t">척수분절<em>Segmental spinal nn.</em></span></div><p class="raw">C6-C8</p></div><div class="ar"><div class="tags"><span class="t">목갈비동맥<em>Costocervical trunk</em></span></div></div></div>
+<div class="m" data-s="턱목뿔근 Mylohyoid 아래턱신경의 턱목뿔근신경 턱밑동맥 목 턱목뿔근신경 턱밑동맥" data-n="턱목뿔근신경" data-a="턱밑동맥"><div><span class="k">턱목뿔근</span><span class="e">Mylohyoid</span><span class="act">입바닥(구강저) 올림, 목뿔뼈 올림(삼킴 시)</span></div><div class="nv"><div class="tags"><span class="t">턱목뿔근신경<em>Mylohyoid n.</em></span></div><p class="raw">아래턱신경의 턱목뿔근신경</p></div><div class="ar"><div class="tags"><span class="t">턱밑동맥<em>Submental a.</em></span></div></div></div>
+<div class="m" data-s="턱끝목뿔근 Geniohyoid C1(혀밑신경을 통해 주행) 혀동맥 목 혀밑신경 혀동맥" data-n="혀밑신경" data-a="혀동맥"><div><span class="k">턱끝목뿔근</span><span class="e">Geniohyoid</span><span class="act">목뿔뼈를 앞위쪽으로 당김</span></div><div class="nv"><div class="tags"><span class="t">혀밑신경<em>Hypoglossal n. (CN XII)</em></span></div><p class="raw">C1(혀밑신경을 통해 주행)</p></div><div class="ar"><div class="tags"><span class="t">혀동맥<em>Lingual a.</em></span></div></div></div>
+<div class="m" data-s="두힘살근 Digastric 앞배-턱목뿔근신경(CNV3) / 뒤배-얼굴신경(CNVII) 턱밑동맥·뒤귓바퀴동맥 목 얼굴신경 턱목뿔근신경 턱밑동맥 뒤귓바퀴동맥" data-n="얼굴신경|턱목뿔근신경" data-a="턱밑동맥|뒤귓바퀴동맥"><div><span class="k">두힘살근</span><span class="e">Digastric</span><span class="act">입 벌림, 목뿔뼈 올림(삼킴)</span></div><div class="nv"><div class="tags"><span class="t">얼굴신경<em>Facial n. (CN VII)</em></span>
+<span class="t">턱목뿔근신경<em>Mylohyoid n.</em></span></div><p class="raw">앞배-턱목뿔근신경(CNV3) / 뒤배-얼굴신경(CNVII)</p></div><div class="ar"><div class="tags"><span class="t">턱밑동맥<em>Submental a.</em></span>
+<span class="t">뒤귓바퀴동맥<em>Posterior auricular a.</em></span></div></div></div>
+<div class="m" data-s="붓목뿔근 Stylohyoid 얼굴신경 얼굴동맥 목 얼굴신경 얼굴동맥" data-n="얼굴신경" data-a="얼굴동맥"><div><span class="k">붓목뿔근</span><span class="e">Stylohyoid</span><span class="act">목뿔뼈를 올리고 뒤로 당김</span></div><div class="nv"><div class="tags"><span class="t">얼굴신경<em>Facial n. (CN VII)</em></span></div></div><div class="ar"><div class="tags"><span class="t">얼굴동맥<em>Facial a.</em></span></div></div></div>
+<div class="m" data-s="어깨목뿔근 Omohyoid 목신경고리(ansa cervicalis, C1-C3) 아래갑상샘동맥 목 목신경고리 아래갑상샘동맥" data-n="목신경고리" data-a="아래갑상샘동맥"><div><span class="k">어깨목뿔근</span><span class="e">Omohyoid</span><span class="act">목뿔뼈 내림·고정</span></div><div class="nv"><div class="tags"><span class="t">목신경고리<em>Ansa cervicalis</em></span></div><p class="raw">목신경고리(ansa cervicalis, C1-C3)</p></div><div class="ar"><div class="tags"><span class="t">아래갑상샘동맥<em>Inferior thyroid a.</em></span></div></div></div>
+<div class="m" data-s="복장목뿔근 Sternohyoid 목신경고리(C1-C3) 위갑상샘동맥 목 목신경고리 위갑상샘동맥" data-n="목신경고리" data-a="위갑상샘동맥"><div><span class="k">복장목뿔근</span><span class="e">Sternohyoid</span><span class="act">목뿔뼈 내림</span></div><div class="nv"><div class="tags"><span class="t">목신경고리<em>Ansa cervicalis</em></span></div><p class="raw">목신경고리(C1-C3)</p></div><div class="ar"><div class="tags"><span class="t">위갑상샘동맥<em>Superior thyroid a.</em></span></div></div></div>
+<div class="m" data-s="복장갑상근 Sternothyroid 목신경고리(C2-C3) 위갑상샘동맥 목 목신경고리 위갑상샘동맥" data-n="목신경고리" data-a="위갑상샘동맥"><div><span class="k">복장갑상근</span><span class="e">Sternothyroid</span><span class="act">후두(갑상연골) 내림</span></div><div class="nv"><div class="tags"><span class="t">목신경고리<em>Ansa cervicalis</em></span></div><p class="raw">목신경고리(C2-C3)</p></div><div class="ar"><div class="tags"><span class="t">위갑상샘동맥<em>Superior thyroid a.</em></span></div></div></div>
+<div class="m" data-s="갑상목뿔근 Thyrohyoid C1(혀밑신경을 통해 주행) 위갑상샘동맥 목 혀밑신경 위갑상샘동맥" data-n="혀밑신경" data-a="위갑상샘동맥"><div><span class="k">갑상목뿔근</span><span class="e">Thyrohyoid</span><span class="act">목뿔뼈 내림 또는 후두 올림</span></div><div class="nv"><div class="tags"><span class="t">혀밑신경<em>Hypoglossal n. (CN XII)</em></span></div><p class="raw">C1(혀밑신경을 통해 주행)</p></div><div class="ar"><div class="tags"><span class="t">위갑상샘동맥<em>Superior thyroid a.</em></span></div></div></div>
+<div class="m" data-s="긴목근 Longus colli 목신경 앞가지(C2-C6) 오름목동맥·척추동맥 목 목신경 앞가지 오름목동맥 척추동맥" data-n="목신경 앞가지" data-a="오름목동맥|척추동맥"><div><span class="k">긴목근</span><span class="e">Longus colli</span><span class="act">목뼈 굽힘, 가쪽굽힘·회전 미세조절</span></div><div class="nv"><div class="tags"><span class="t">목신경 앞가지<em>Anterior rami of cervical nn.</em></span></div><p class="raw">목신경 앞가지(C2-C6)</p></div><div class="ar"><div class="tags"><span class="t">오름목동맥<em>Ascending cervical a.</em></span>
+<span class="t">척추동맥<em>Vertebral a.</em></span></div></div></div>
+<div class="m" data-s="긴머리근 Longus capitis 목신경 앞가지(C1-C3) 오름목동맥 목 목신경 앞가지 오름목동맥" data-n="목신경 앞가지" data-a="오름목동맥"><div><span class="k">긴머리근</span><span class="e">Longus capitis</span><span class="act">머리 굽힘</span></div><div class="nv"><div class="tags"><span class="t">목신경 앞가지<em>Anterior rami of cervical nn.</em></span></div><p class="raw">목신경 앞가지(C1-C3)</p></div><div class="ar"><div class="tags"><span class="t">오름목동맥<em>Ascending cervical a.</em></span></div></div></div>
+<div class="m" data-s="머리널판근 Splenius capitis 목신경 뒤가지(C3-C6) 뒤통수동맥 목 목신경 뒤가지 뒤통수동맥" data-n="목신경 뒤가지" data-a="뒤통수동맥"><div><span class="k">머리널판근</span><span class="e">Splenius capitis</span><span class="act">머리 폄, 같은쪽 회전(한쪽수축)</span></div><div class="nv"><div class="tags"><span class="t">목신경 뒤가지<em>Posterior rami of cervical nn.</em></span></div><p class="raw">목신경 뒤가지(C3-C6)</p></div><div class="ar"><div class="tags"><span class="t">뒤통수동맥<em>Occipital a.</em></span></div></div></div>
+<div class="m" data-s="목널판근 Splenius cervicis 목신경 뒤가지 뒤목갈비동맥·뒤통수동맥 목 목신경 뒤가지 뒤목갈비동맥 뒤통수동맥" data-n="목신경 뒤가지" data-a="뒤목갈비동맥|뒤통수동맥"><div><span class="k">목널판근</span><span class="e">Splenius cervicis</span><span class="act">목 폄, 같은쪽 회전</span></div><div class="nv"><div class="tags"><span class="t">목신경 뒤가지<em>Posterior rami of cervical nn.</em></span></div><p class="raw">목신경 뒤가지</p></div><div class="ar"><div class="tags"><span class="t">뒤목갈비동맥<em>Deep cervical a.</em></span>
+<span class="t">뒤통수동맥<em>Occipital a.</em></span></div></div></div>
+</section>
+<section data-region="등">
+<div class="sh"><h2>등</h2><span class="en">Back</span><span class="n">14</span></div>
+<div class="hdr"><b>근육 / Muscle</b><b>지배신경 / Nerve</b><b>영양동맥 / Artery</b></div>
+<div class="m" data-s="등세모근 Trapezius 더부신경(CN XI, 운동)+C3-C4(고유감각) 가로목동맥·등쪽어깨동맥 등 더부신경 가로목동맥 등쪽어깨동맥" data-n="더부신경" data-a="가로목동맥|등쪽어깨동맥"><div><span class="k">등세모근</span><span class="e">Trapezius</span><span class="act">위섬유-어깨뼈 거상, 중간섬유-모음, 아래섬유-하강, 전체-위쪽돌림</span></div><div class="nv"><div class="tags"><span class="t">더부신경<em>Accessory n. (CN XI)</em></span></div><p class="raw">더부신경(CN XI, 운동)+C3-C4(고유감각)</p></div><div class="ar"><div class="tags"><span class="t">가로목동맥<em>Transverse cervical a.</em></span>
+<span class="t">등쪽어깨동맥<em>Dorsal scapular a.</em></span></div></div></div>
+<div class="m" data-s="넓은등근 Latissimus dorsi 가슴등신경(흉배신경, C6-C8) 가슴등동맥 등 가슴등신경 가슴등동맥" data-n="가슴등신경" data-a="가슴등동맥"><div><span class="k">넓은등근</span><span class="e">Latissimus dorsi</span><span class="act">위팔 모음·폄·안쪽돌림(당기기, 턱걸이 동작)</span></div><div class="nv"><div class="tags"><span class="t">가슴등신경<em>Thoracodorsal n.</em></span></div><p class="raw">가슴등신경(흉배신경, C6-C8)</p></div><div class="ar"><div class="tags"><span class="t">가슴등동맥<em>Thoracodorsal a.</em></span></div></div></div>
+<div class="m" data-s="어깨올림근 Levator scapulae 어깨등신경(견갑배신경, C4-C5)+C3-C4 어깨등동맥 등 어깨등신경 어깨등동맥" data-n="어깨등신경" data-a="어깨등동맥"><div><span class="k">어깨올림근</span><span class="e">Levator scapulae</span><span class="act">어깨뼈 거상, 아래쪽돌림</span></div><div class="nv"><div class="tags"><span class="t">어깨등신경<em>Dorsal scapular n.</em></span></div><p class="raw">어깨등신경(견갑배신경, C4-C5)+C3-C4</p></div><div class="ar"><div class="tags"><span class="t">어깨등동맥<em>Dorsal scapular a.</em></span></div></div></div>
+<div class="m" data-s="큰마름근 Rhomboid major 어깨등신경(C4-C5) 어깨등동맥 등 어깨등신경 어깨등동맥" data-n="어깨등신경" data-a="어깨등동맥"><div><span class="k">큰마름근</span><span class="e">Rhomboid major</span><span class="act">어깨뼈 모음·거상·아래쪽돌림</span></div><div class="nv"><div class="tags"><span class="t">어깨등신경<em>Dorsal scapular n.</em></span></div><p class="raw">어깨등신경(C4-C5)</p></div><div class="ar"><div class="tags"><span class="t">어깨등동맥<em>Dorsal scapular a.</em></span></div></div></div>
+<div class="m" data-s="작은마름근 Rhomboid minor 어깨등신경(C4-C5) 어깨등동맥 등 어깨등신경 어깨등동맥" data-n="어깨등신경" data-a="어깨등동맥"><div><span class="k">작은마름근</span><span class="e">Rhomboid minor</span><span class="act">어깨뼈 모음·거상</span></div><div class="nv"><div class="tags"><span class="t">어깨등신경<em>Dorsal scapular n.</em></span></div><p class="raw">어깨등신경(C4-C5)</p></div><div class="ar"><div class="tags"><span class="t">어깨등동맥<em>Dorsal scapular a.</em></span></div></div></div>
+<div class="m" data-s="위뒤톱니근 Serratus posterior superior 갈비사이신경(T2-T5) 갈비사이동맥 등 갈비사이신경 갈비사이동맥" data-n="갈비사이신경" data-a="갈비사이동맥"><div><span class="k">위뒤톱니근</span><span class="e">Serratus posterior superior</span><span class="act">갈비뼈 올림(흡기 보조)</span></div><div class="nv"><div class="tags"><span class="t">갈비사이신경<em>Intercostal nn. (T1-T11)</em></span></div><p class="raw">갈비사이신경(T2-T5)</p></div><div class="ar"><div class="tags"><span class="t">갈비사이동맥<em>Intercostal a.</em></span></div></div></div>
+<div class="m" data-s="아래뒤톱니근 Serratus posterior inferior 갈비사이신경(T9-T12) 갈비사이동맥 등 갈비사이신경 갈비사이동맥" data-n="갈비사이신경" data-a="갈비사이동맥"><div><span class="k">아래뒤톱니근</span><span class="e">Serratus posterior inferior</span><span class="act">갈비뼈 내림(호기 보조)</span></div><div class="nv"><div class="tags"><span class="t">갈비사이신경<em>Intercostal nn. (T1-T11)</em></span></div><p class="raw">갈비사이신경(T9-T12)</p></div><div class="ar"><div class="tags"><span class="t">갈비사이동맥<em>Intercostal a.</em></span></div></div></div>
+<div class="m" data-s="엉덩갈비근 Iliocostalis 척수신경 뒤가지 허리동맥·갈비사이동맥 등 척수신경 뒤가지 허리동맥 갈비사이동맥" data-n="척수신경 뒤가지" data-a="허리동맥|갈비사이동맥"><div><span class="k">엉덩갈비근</span><span class="e">Iliocostalis</span><span class="act">척주 폄(양측), 가쪽굽힘(편측)</span></div><div class="nv"><div class="tags"><span class="t">척수신경 뒤가지<em>Posterior rami of spinal nn.</em></span></div><p class="raw">척수신경 뒤가지</p></div><div class="ar"><div class="tags"><span class="t">허리동맥<em>Lumbar aa.</em></span>
+<span class="t">갈비사이동맥<em>Intercostal a.</em></span></div></div></div>
+<div class="m" data-s="가장긴근 Longissimus 척수신경 뒤가지 허리동맥·갈비사이동맥 등 척수신경 뒤가지 허리동맥 갈비사이동맥" data-n="척수신경 뒤가지" data-a="허리동맥|갈비사이동맥"><div><span class="k">가장긴근</span><span class="e">Longissimus</span><span class="act">척주 폄, 가쪽굽힘</span></div><div class="nv"><div class="tags"><span class="t">척수신경 뒤가지<em>Posterior rami of spinal nn.</em></span></div><p class="raw">척수신경 뒤가지</p></div><div class="ar"><div class="tags"><span class="t">허리동맥<em>Lumbar aa.</em></span>
+<span class="t">갈비사이동맥<em>Intercostal a.</em></span></div></div></div>
+<div class="m" data-s="가시근 Spinalis 척수신경 뒤가지 척추동맥·갈비사이동맥 분지 등 척수신경 뒤가지 척추동맥 갈비사이동맥" data-n="척수신경 뒤가지" data-a="척추동맥|갈비사이동맥"><div><span class="k">가시근</span><span class="e">Spinalis</span><span class="act">척주 폄</span></div><div class="nv"><div class="tags"><span class="t">척수신경 뒤가지<em>Posterior rami of spinal nn.</em></span></div><p class="raw">척수신경 뒤가지</p></div><div class="ar"><div class="tags"><span class="t">척추동맥<em>Vertebral a.</em></span>
+<span class="t">갈비사이동맥<em>Intercostal a.</em></span></div><p class="raw">척추동맥·갈비사이동맥 분지</p></div></div>
+<div class="m" data-s="반가시근 Semispinalis 척수신경 뒤가지 깊은목동맥 등 척수신경 뒤가지 깊은목동맥" data-n="척수신경 뒤가지" data-a="깊은목동맥"><div><span class="k">반가시근</span><span class="e">Semispinalis</span><span class="act">척주 폄, 반대쪽 회전</span></div><div class="nv"><div class="tags"><span class="t">척수신경 뒤가지<em>Posterior rami of spinal nn.</em></span></div><p class="raw">척수신경 뒤가지</p></div><div class="ar"><div class="tags"><span class="t">깊은목동맥<em>Deep cervical a.</em></span></div></div></div>
+<div class="m" data-s="뭇갈래근 Multifidus 척수신경 뒤가지 분절동맥 등 척수신경 뒤가지 분절동맥" data-n="척수신경 뒤가지" data-a="분절동맥"><div><span class="k">뭇갈래근</span><span class="e">Multifidus</span><span class="act">척주 폄·분절간 안정화, 반대쪽 회전</span></div><div class="nv"><div class="tags"><span class="t">척수신경 뒤가지<em>Posterior rami of spinal nn.</em></span></div><p class="raw">척수신경 뒤가지</p></div><div class="ar"><div class="tags"><span class="t">분절동맥<em>Segmental aa.</em></span></div></div></div>
+<div class="m" data-s="돌림근 Rotatores 척수신경 뒤가지 분절동맥 등 척수신경 뒤가지 분절동맥" data-n="척수신경 뒤가지" data-a="분절동맥"><div><span class="k">돌림근</span><span class="e">Rotatores</span><span class="act">척추 미세 회전·분절 안정화(고유수용감각)</span></div><div class="nv"><div class="tags"><span class="t">척수신경 뒤가지<em>Posterior rami of spinal nn.</em></span></div><p class="raw">척수신경 뒤가지</p></div><div class="ar"><div class="tags"><span class="t">분절동맥<em>Segmental aa.</em></span></div></div></div>
+<div class="m" data-s="뒤통수밑근(4개: 큰·작은뒤머리곧은근, 위·아래머리빗근) Suboccipital muscles 뒤통수밑신경(C1 뒤가지) 뒤통수동맥·척추동맥 등 뒤통수밑신경 뒤통수동맥 척추동맥" data-n="뒤통수밑신경" data-a="뒤통수동맥|척추동맥"><div><span class="k">뒤통수밑근(4개: 큰·작은뒤머리곧은근, 위·아래머리빗근)</span><span class="e">Suboccipital muscles</span><span class="act">머리 폄·회전의 정밀 조절(고유수용감각 풍부)</span></div><div class="nv"><div class="tags"><span class="t">뒤통수밑신경<em>Suboccipital n.</em></span></div><p class="raw">뒤통수밑신경(C1 뒤가지)</p></div><div class="ar"><div class="tags"><span class="t">뒤통수동맥<em>Occipital a.</em></span>
+<span class="t">척추동맥<em>Vertebral a.</em></span></div></div></div>
+</section>
+<section data-region="가슴">
+<div class="sh"><h2>가슴</h2><span class="en">Thorax</span><span class="n">8</span></div>
+<div class="hdr"><b>근육 / Muscle</b><b>지배신경 / Nerve</b><b>영양동맥 / Artery</b></div>
+<div class="m" data-s="큰가슴근 Pectoralis major 가쪽·안쪽가슴근신경(C5-T1) 가슴봉우리동맥·가쪽가슴동맥 가슴 가쪽가슴근신경 안쪽가슴근신경 가슴봉우리동맥 가쪽가슴동맥" data-n="가쪽가슴근신경|안쪽가슴근신경" data-a="가슴봉우리동맥|가쪽가슴동맥"><div><span class="k">큰가슴근</span><span class="e">Pectoralis major</span><span class="act">위팔 모음·안쪽돌림·굽힘(빗장갈래)</span></div><div class="nv"><div class="tags"><span class="t">가쪽가슴근신경<em>Lateral pectoral n.</em></span>
+<span class="t">안쪽가슴근신경<em>Medial pectoral n.</em></span></div><p class="raw">가쪽·안쪽가슴근신경(C5-T1)</p></div><div class="ar"><div class="tags"><span class="t">가슴봉우리동맥<em>Thoracoacromial a.</em></span>
+<span class="t">가쪽가슴동맥<em>Lateral thoracic a.</em></span></div></div></div>
+<div class="m" data-s="작은가슴근 Pectoralis minor 안쪽가슴근신경(C8-T1) 가슴봉우리동맥 가슴 안쪽가슴근신경 가슴봉우리동맥" data-n="안쪽가슴근신경" data-a="가슴봉우리동맥"><div><span class="k">작은가슴근</span><span class="e">Pectoralis minor</span><span class="act">어깨뼈 내림·아래쪽돌림·앞당김, 흡기 보조</span></div><div class="nv"><div class="tags"><span class="t">안쪽가슴근신경<em>Medial pectoral n.</em></span></div><p class="raw">안쪽가슴근신경(C8-T1)</p></div><div class="ar"><div class="tags"><span class="t">가슴봉우리동맥<em>Thoracoacromial a.</em></span></div></div></div>
+<div class="m" data-s="앞톱니근 Serratus anterior 긴가슴신경(장흉신경, C5-C7) 가쪽가슴동맥 가슴 긴가슴신경 가쪽가슴동맥" data-n="긴가슴신경" data-a="가쪽가슴동맥"><div><span class="k">앞톱니근</span><span class="e">Serratus anterior</span><span class="act">어깨뼈 앞당김·위쪽돌림, 날개어깨뼈 방지</span></div><div class="nv"><div class="tags"><span class="t">긴가슴신경<em>Long thoracic n.</em></span></div><p class="raw">긴가슴신경(장흉신경, C5-C7)</p></div><div class="ar"><div class="tags"><span class="t">가쪽가슴동맥<em>Lateral thoracic a.</em></span></div></div></div>
+<div class="m" data-s="빗장밑근 Subclavius 빗장밑근신경(C5-C6) 어깨뼈위동맥 가슴 빗장밑근신경 어깨뼈위동맥" data-n="빗장밑근신경" data-a="어깨뼈위동맥"><div><span class="k">빗장밑근</span><span class="e">Subclavius</span><span class="act">빗장뼈를 아래로 고정, 복장빗장관절 안정화</span></div><div class="nv"><div class="tags"><span class="t">빗장밑근신경<em>N. to subclavius</em></span></div><p class="raw">빗장밑근신경(C5-C6)</p></div><div class="ar"><div class="tags"><span class="t">어깨뼈위동맥<em>Suprascapular a.</em></span></div></div></div>
+<div class="m" data-s="바깥갈비사이근 External intercostal 갈비사이신경 갈비사이동맥 가슴 갈비사이신경 갈비사이동맥" data-n="갈비사이신경" data-a="갈비사이동맥"><div><span class="k">바깥갈비사이근</span><span class="e">External intercostal</span><span class="act">갈비뼈를 올림(흡기)</span></div><div class="nv"><div class="tags"><span class="t">갈비사이신경<em>Intercostal nn. (T1-T11)</em></span></div></div><div class="ar"><div class="tags"><span class="t">갈비사이동맥<em>Intercostal a.</em></span></div></div></div>
+<div class="m" data-s="속갈비사이근 Internal intercostal 갈비사이신경 갈비사이동맥 가슴 갈비사이신경 갈비사이동맥" data-n="갈비사이신경" data-a="갈비사이동맥"><div><span class="k">속갈비사이근</span><span class="e">Internal intercostal</span><span class="act">갈비뼈를 내림(강한 호기)</span></div><div class="nv"><div class="tags"><span class="t">갈비사이신경<em>Intercostal nn. (T1-T11)</em></span></div></div><div class="ar"><div class="tags"><span class="t">갈비사이동맥<em>Intercostal a.</em></span></div></div></div>
+<div class="m" data-s="최내갈비사이근 Innermost intercostal 갈비사이신경 갈비사이동맥 가슴 갈비사이신경 갈비사이동맥" data-n="갈비사이신경" data-a="갈비사이동맥"><div><span class="k">최내갈비사이근</span><span class="e">Innermost intercostal</span><span class="act">속갈비사이근 보조(갈비뼈 내림)</span></div><div class="nv"><div class="tags"><span class="t">갈비사이신경<em>Intercostal nn. (T1-T11)</em></span></div></div><div class="ar"><div class="tags"><span class="t">갈비사이동맥<em>Intercostal a.</em></span></div></div></div>
+<div class="m" data-s="가로막(횡격막) Diaphragm 가로막신경(횡격신경, C3-C5) 위·아래가로막동맥, 심장막가로막동맥 가슴 가로막신경 위가로막동맥 아래가로막동맥 심장막가로막동맥" data-n="가로막신경" data-a="위가로막동맥|아래가로막동맥|심장막가로막동맥"><div><span class="k">가로막(횡격막)</span><span class="e">Diaphragm</span><span class="act">주 흡기근(수축 시 편평해지며 흉강 확장)</span></div><div class="nv"><div class="tags"><span class="t">가로막신경<em>Phrenic n.</em></span></div><p class="raw">가로막신경(횡격신경, C3-C5)</p></div><div class="ar"><div class="tags"><span class="t">위가로막동맥<em>Superior phrenic a.</em></span>
+<span class="t">아래가로막동맥<em>Inferior phrenic a.</em></span>
+<span class="t">심장막가로막동맥<em>Pericardiacophrenic a.</em></span></div><p class="raw">위·아래가로막동맥, 심장막가로막동맥</p></div></div>
+</section>
+<section data-region="배">
+<div class="sh"><h2>배</h2><span class="en">Abdomen</span><span class="n">5</span></div>
+<div class="hdr"><b>근육 / Muscle</b><b>지배신경 / Nerve</b><b>영양동맥 / Artery</b></div>
+<div class="m" data-s="배곧은근 Rectus abdominis 갈비사이신경(T7-T11)+갈비밑신경(T12) 위·아래배벽동맥 배 갈비밑신경 갈비사이신경 위배벽동맥 아래배벽동맥" data-n="갈비밑신경|갈비사이신경" data-a="위배벽동맥|아래배벽동맥"><div><span class="k">배곧은근</span><span class="e">Rectus abdominis</span><span class="act">몸통 굽힘, 배안압력 증가(배변·분만·기침)</span></div><div class="nv"><div class="tags"><span class="t">갈비밑신경<em>Subcostal n. (T12)</em></span>
+<span class="t">갈비사이신경<em>Intercostal nn. (T1-T11)</em></span></div><p class="raw">갈비사이신경(T7-T11)+갈비밑신경(T12)</p></div><div class="ar"><div class="tags"><span class="t">위배벽동맥<em>Superior epigastric a.</em></span>
+<span class="t">아래배벽동맥<em>Inferior epigastric a.</em></span></div><p class="raw">위·아래배벽동맥</p></div></div>
+<div class="m" data-s="배바깥빗근 External oblique 갈비사이신경(T7-T11)+갈비밑신경(T12) 아래갈비사이동맥 배 갈비밑신경 갈비사이신경 아래갈비사이동맥" data-n="갈비밑신경|갈비사이신경" data-a="아래갈비사이동맥"><div><span class="k">배바깥빗근</span><span class="e">External oblique</span><span class="act">몸통 굽힘, 반대쪽 회전, 같은쪽 가쪽굽힘</span></div><div class="nv"><div class="tags"><span class="t">갈비밑신경<em>Subcostal n. (T12)</em></span>
+<span class="t">갈비사이신경<em>Intercostal nn. (T1-T11)</em></span></div><p class="raw">갈비사이신경(T7-T11)+갈비밑신경(T12)</p></div><div class="ar"><div class="tags"><span class="t">아래갈비사이동맥<em>Lower intercostal aa.</em></span></div></div></div>
+<div class="m" data-s="배속빗근 Internal oblique T7-T11, 갈비밑신경, 엉덩아랫배신경·엉덩샅굴신경(L1) 아래갈비사이동맥·깊은엉덩휘돌이동맥 배 갈비밑신경 엉덩샅고랑신경 엉덩아랫배신경 아래갈비사이동맥 깊은엉덩휘돌이동맥" data-n="갈비밑신경|엉덩샅고랑신경|엉덩아랫배신경" data-a="아래갈비사이동맥|깊은엉덩휘돌이동맥"><div><span class="k">배속빗근</span><span class="e">Internal oblique</span><span class="act">몸통 굽힘, 같은쪽 회전, 가쪽굽힘</span></div><div class="nv"><div class="tags"><span class="t">갈비밑신경<em>Subcostal n. (T12)</em></span>
+<span class="t">엉덩샅고랑신경<em>Ilioinguinal n.</em></span>
+<span class="t">엉덩아랫배신경<em>Iliohypogastric n.</em></span></div><p class="raw">T7-T11, 갈비밑신경, 엉덩아랫배신경·엉덩샅굴신경(L1)</p></div><div class="ar"><div class="tags"><span class="t">아래갈비사이동맥<em>Lower intercostal aa.</em></span>
+<span class="t">깊은엉덩휘돌이동맥<em>Deep circumflex iliac a.</em></span></div></div></div>
+<div class="m" data-s="배가로근 Transversus abdominis T7-T11, 갈비밑신경, 엉덩아랫배·엉덩샅굴신경 아래갈비사이동맥·허리동맥 배 갈비밑신경 엉덩샅고랑신경 엉덩아랫배신경 아래갈비사이동맥 허리동맥" data-n="갈비밑신경|엉덩샅고랑신경|엉덩아랫배신경" data-a="아래갈비사이동맥|허리동맥"><div><span class="k">배가로근</span><span class="e">Transversus abdominis</span><span class="act">배안 압박(코르셋 기능, 척추 분절안정화 관여)</span></div><div class="nv"><div class="tags"><span class="t">갈비밑신경<em>Subcostal n. (T12)</em></span>
+<span class="t">엉덩샅고랑신경<em>Ilioinguinal n.</em></span>
+<span class="t">엉덩아랫배신경<em>Iliohypogastric n.</em></span></div><p class="raw">T7-T11, 갈비밑신경, 엉덩아랫배·엉덩샅굴신경</p></div><div class="ar"><div class="tags"><span class="t">아래갈비사이동맥<em>Lower intercostal aa.</em></span>
+<span class="t">허리동맥<em>Lumbar aa.</em></span></div></div></div>
+<div class="m" data-s="허리네모근 Quadratus lumborum T12, L1-L3(허리신경얼기) 허리동맥 배 허리신경얼기 직접가지 허리동맥" data-n="허리신경얼기 직접가지" data-a="허리동맥"><div><span class="k">허리네모근</span><span class="e">Quadratus lumborum</span><span class="act">몸통 가쪽굽힘, 12번갈비뼈 고정(호흡보조)</span></div><div class="nv"><div class="tags"><span class="t">허리신경얼기 직접가지<em>Direct branches of lumbar plexus</em></span></div><p class="raw">T12, L1-L3(허리신경얼기)</p></div><div class="ar"><div class="tags"><span class="t">허리동맥<em>Lumbar aa.</em></span></div></div></div>
+</section>
+<section data-region="어깨">
+<div class="sh"><h2>어깨</h2><span class="en">Shoulder</span><span class="n">7</span></div>
+<div class="hdr"><b>근육 / Muscle</b><b>지배신경 / Nerve</b><b>영양동맥 / Artery</b></div>
+<div class="m" data-s="어깨세모근 Deltoid 겨드랑신경(C5-C6) 뒤위팔휘돌이동맥 어깨 겨드랑신경 뒤위팔휘돌이동맥" data-n="겨드랑신경" data-a="뒤위팔휘돌이동맥"><div><span class="k">어깨세모근</span><span class="e">Deltoid</span><span class="act">앞섬유-굽힘·안쪽돌림 / 중간섬유-벌림 / 뒷섬유-폄·가쪽돌림</span></div><div class="nv"><div class="tags"><span class="t">겨드랑신경<em>Axillary n.</em></span></div><p class="raw">겨드랑신경(C5-C6)</p></div><div class="ar"><div class="tags"><span class="t">뒤위팔휘돌이동맥<em>Posterior circumflex humeral a.</em></span></div></div></div>
+<div class="m" data-s="가시위근 Supraspinatus 어깨위신경(견갑상신경, C5-C6) 어깨위동맥 어깨 어깨위신경 어깨위동맥" data-n="어깨위신경" data-a="어깨위동맥"><div><span class="k">가시위근</span><span class="e">Supraspinatus</span><span class="act">벌림 시작(0-15도), 어깨관절 능동적 안정화</span></div><div class="nv"><div class="tags"><span class="t">어깨위신경<em>Suprascapular n.</em></span></div><p class="raw">어깨위신경(견갑상신경, C5-C6)</p></div><div class="ar"><div class="tags"><span class="t">어깨위동맥<em>Suprascapular a.</em></span></div></div></div>
+<div class="m" data-s="가시아래근 Infraspinatus 어깨위신경(C5-C6) 어깨위동맥·휘돌이어깨동맥 어깨 어깨위신경 어깨위동맥 휘돌이어깨동맥" data-n="어깨위신경" data-a="어깨위동맥|휘돌이어깨동맥"><div><span class="k">가시아래근</span><span class="e">Infraspinatus</span><span class="act">위팔 가쪽돌림, 어깨관절 안정화</span></div><div class="nv"><div class="tags"><span class="t">어깨위신경<em>Suprascapular n.</em></span></div><p class="raw">어깨위신경(C5-C6)</p></div><div class="ar"><div class="tags"><span class="t">어깨위동맥<em>Suprascapular a.</em></span>
+<span class="t">휘돌이어깨동맥<em>Circumflex scapular a.</em></span></div></div></div>
+<div class="m" data-s="작은원근 Teres minor 겨드랑신경(C5-C6) 뒤위팔휘돌이동맥 어깨 겨드랑신경 뒤위팔휘돌이동맥" data-n="겨드랑신경" data-a="뒤위팔휘돌이동맥"><div><span class="k">작은원근</span><span class="e">Teres minor</span><span class="act">위팔 가쪽돌림, 어깨관절 안정화</span></div><div class="nv"><div class="tags"><span class="t">겨드랑신경<em>Axillary n.</em></span></div><p class="raw">겨드랑신경(C5-C6)</p></div><div class="ar"><div class="tags"><span class="t">뒤위팔휘돌이동맥<em>Posterior circumflex humeral a.</em></span></div></div></div>
+<div class="m" data-s="어깨밑근 Subscapularis 위·아래어깨밑신경(C5-C6) 어깨밑동맥 어깨 아래어깨밑신경 위어깨밑신경 어깨밑동맥" data-n="아래어깨밑신경|위어깨밑신경" data-a="어깨밑동맥"><div><span class="k">어깨밑근</span><span class="e">Subscapularis</span><span class="act">위팔 안쪽돌림, 어깨관절 안쪽 안정화</span></div><div class="nv"><div class="tags"><span class="t">아래어깨밑신경<em>Lower subscapular n.</em></span>
+<span class="t">위어깨밑신경<em>Upper subscapular n.</em></span></div><p class="raw">위·아래어깨밑신경(C5-C6)</p></div><div class="ar"><div class="tags"><span class="t">어깨밑동맥<em>Subscapular a.</em></span></div></div></div>
+<div class="m" data-s="큰원근 Teres major 아래어깨밑신경(C5-C6) 어깨밑동맥 어깨 아래어깨밑신경 어깨밑동맥" data-n="아래어깨밑신경" data-a="어깨밑동맥"><div><span class="k">큰원근</span><span class="e">Teres major</span><span class="act">위팔 안쪽돌림·모음·폄</span></div><div class="nv"><div class="tags"><span class="t">아래어깨밑신경<em>Lower subscapular n.</em></span></div><p class="raw">아래어깨밑신경(C5-C6)</p></div><div class="ar"><div class="tags"><span class="t">어깨밑동맥<em>Subscapular a.</em></span></div></div></div>
+<div class="m" data-s="부리위팔근 Coracobrachialis 근육피부신경(C5-C7) 위팔동맥 어깨 근육피부신경 위팔동맥" data-n="근육피부신경" data-a="위팔동맥"><div><span class="k">부리위팔근</span><span class="e">Coracobrachialis</span><span class="act">위팔 굽힘·모음(어깨)</span></div><div class="nv"><div class="tags"><span class="t">근육피부신경<em>Musculocutaneous n.</em></span></div><p class="raw">근육피부신경(C5-C7)</p></div><div class="ar"><div class="tags"><span class="t">위팔동맥<em>Brachial a.</em></span></div></div></div>
+</section>
+<section data-region="위팔">
+<div class="sh"><h2>위팔</h2><span class="en">Arm</span><span class="n">4</span></div>
+<div class="hdr"><b>근육 / Muscle</b><b>지배신경 / Nerve</b><b>영양동맥 / Artery</b></div>
+<div class="m" data-s="위팔두갈래근 Biceps brachii 근육피부신경(C5-C6) 위팔동맥 위팔 근육피부신경 위팔동맥" data-n="근육피부신경" data-a="위팔동맥"><div><span class="k">위팔두갈래근</span><span class="e">Biceps brachii</span><span class="act">팔꿈치 굽힘, 아래팔 뒤침(가장 강력), 어깨 약한 굽힘</span></div><div class="nv"><div class="tags"><span class="t">근육피부신경<em>Musculocutaneous n.</em></span></div><p class="raw">근육피부신경(C5-C6)</p></div><div class="ar"><div class="tags"><span class="t">위팔동맥<em>Brachial a.</em></span></div></div></div>
+<div class="m" data-s="위팔근 Brachialis 근육피부신경(C5-C6)+노신경 일부(C7) 위팔동맥·노쪽되돌이동맥 위팔 근육피부신경 노신경 위팔동맥 노쪽되돌이동맥" data-n="근육피부신경|노신경" data-a="위팔동맥|노쪽되돌이동맥"><div><span class="k">위팔근</span><span class="e">Brachialis</span><span class="act">팔꿈치 굽힘(팔꿈치의 &#x27;순수&#x27; 주작용근, 회내외 위치 무관)</span></div><div class="nv"><div class="tags"><span class="t">근육피부신경<em>Musculocutaneous n.</em></span>
+<span class="t">노신경<em>Radial n.</em></span></div><p class="raw">근육피부신경(C5-C6)+노신경 일부(C7)</p></div><div class="ar"><div class="tags"><span class="t">위팔동맥<em>Brachial a.</em></span>
+<span class="t">노쪽되돌이동맥<em>Radial recurrent a.</em></span></div></div></div>
+<div class="m" data-s="위팔세갈래근 Triceps brachii 노신경(C6-C8) 깊은위팔동맥 위팔 노신경 깊은위팔동맥" data-n="노신경" data-a="깊은위팔동맥"><div><span class="k">위팔세갈래근</span><span class="e">Triceps brachii</span><span class="act">팔꿈치 폄(주작용근), 긴갈래는 어깨 폄·모음 보조</span></div><div class="nv"><div class="tags"><span class="t">노신경<em>Radial n.</em></span></div><p class="raw">노신경(C6-C8)</p></div><div class="ar"><div class="tags"><span class="t">깊은위팔동맥<em>Deep brachial a.</em></span></div></div></div>
+<div class="m" data-s="팔꿈치근 Anconeus 노신경(C7-C8, T1) 깊은위팔동맥의 중간쪽곁동맥 위팔 노신경 깊은위팔동맥 중간쪽곁동맥" data-n="노신경" data-a="깊은위팔동맥|중간쪽곁동맥"><div><span class="k">팔꿈치근</span><span class="e">Anconeus</span><span class="act">팔꿈치 폄 보조, 관절주머니 긴장 유지(안정화)</span></div><div class="nv"><div class="tags"><span class="t">노신경<em>Radial n.</em></span></div><p class="raw">노신경(C7-C8, T1)</p></div><div class="ar"><div class="tags"><span class="t">깊은위팔동맥<em>Deep brachial a.</em></span>
+<span class="t">중간쪽곁동맥<em>Middle collateral a.</em></span></div><p class="raw">깊은위팔동맥의 중간쪽곁동맥</p></div></div>
+</section>
+<section data-region="아래팔">
+<div class="sh"><h2>아래팔</h2><span class="en">Forearm</span><span class="n">19</span></div>
+<div class="hdr"><b>근육 / Muscle</b><b>지배신경 / Nerve</b><b>영양동맥 / Artery</b></div>
+<div class="m" data-s="원엎침근 Pronator teres 정중신경(C6-C7) 노쪽되돌이동맥 아래팔 정중신경 노쪽되돌이동맥" data-n="정중신경" data-a="노쪽되돌이동맥"><div><span class="k">원엎침근</span><span class="e">Pronator teres</span><span class="act">아래팔 엎침, 팔꿈치 굽힘 보조</span></div><div class="nv"><div class="tags"><span class="t">정중신경<em>Median n.</em></span></div><p class="raw">정중신경(C6-C7)</p></div><div class="ar"><div class="tags"><span class="t">노쪽되돌이동맥<em>Radial recurrent a.</em></span></div></div></div>
+<div class="m" data-s="노쪽손목굽힘근 Flexor carpi radialis 정중신경(C6-C7) 노동맥 아래팔 정중신경 노동맥" data-n="정중신경" data-a="노동맥"><div><span class="k">노쪽손목굽힘근</span><span class="e">Flexor carpi radialis</span><span class="act">손목 굽힘, 노쪽 치우침(요측편위)</span></div><div class="nv"><div class="tags"><span class="t">정중신경<em>Median n.</em></span></div><p class="raw">정중신경(C6-C7)</p></div><div class="ar"><div class="tags"><span class="t">노동맥<em>Radial a.</em></span></div></div></div>
+<div class="m" data-s="긴손바닥근 Palmaris longus 정중신경(C7-C8, T1) 자동맥 아래팔 정중신경 자동맥" data-n="정중신경" data-a="자동맥"><div><span class="k">긴손바닥근</span><span class="e">Palmaris longus</span><span class="act">손목 굽힘, 손바닥널힘줄 긴장</span></div><div class="nv"><div class="tags"><span class="t">정중신경<em>Median n.</em></span></div><p class="raw">정중신경(C7-C8, T1)</p></div><div class="ar"><div class="tags"><span class="t">자동맥<em>Ulnar a.</em></span></div></div></div>
+<div class="m" data-s="자쪽손목굽힘근 Flexor carpi ulnaris 자신경(C7-C8, T1) 자동맥 아래팔 자신경 자동맥" data-n="자신경" data-a="자동맥"><div><span class="k">자쪽손목굽힘근</span><span class="e">Flexor carpi ulnaris</span><span class="act">손목 굽힘, 자쪽 치우침(척측편위)</span></div><div class="nv"><div class="tags"><span class="t">자신경<em>Ulnar n.</em></span></div><p class="raw">자신경(C7-C8, T1)</p></div><div class="ar"><div class="tags"><span class="t">자동맥<em>Ulnar a.</em></span></div></div></div>
+<div class="m" data-s="얕은손가락굽힘근 Flexor digitorum superficialis 정중신경(C7-T1) 자동맥 아래팔 정중신경 자동맥" data-n="정중신경" data-a="자동맥"><div><span class="k">얕은손가락굽힘근</span><span class="e">Flexor digitorum superficialis</span><span class="act">손허리손가락관절(MCP)·몸쪽손가락뼈사이관절(PIP) 굽힘</span></div><div class="nv"><div class="tags"><span class="t">정중신경<em>Median n.</em></span></div><p class="raw">정중신경(C7-T1)</p></div><div class="ar"><div class="tags"><span class="t">자동맥<em>Ulnar a.</em></span></div></div></div>
+<div class="m" data-s="깊은손가락굽힘근 Flexor digitorum profundus 가쪽(2·3번)-정중신경(뼈사이앞신경) / 안쪽(4·5번)-자신경 자동맥·앞뼈사이동맥 아래팔 앞뼈사이신경 자신경 자동맥 앞뼈사이동맥" data-n="앞뼈사이신경|자신경" data-a="자동맥|앞뼈사이동맥"><div><span class="k">깊은손가락굽힘근</span><span class="e">Flexor digitorum profundus</span><span class="act">먼쪽손가락뼈사이관절(DIP) 굽힘(유일한 근육)</span></div><div class="nv"><div class="tags"><span class="t">앞뼈사이신경<em>Anterior interosseous n.</em></span>
+<span class="t">자신경<em>Ulnar n.</em></span></div><p class="raw">가쪽(2·3번)-정중신경(뼈사이앞신경) / 안쪽(4·5번)-자신경</p></div><div class="ar"><div class="tags"><span class="t">자동맥<em>Ulnar a.</em></span>
+<span class="t">앞뼈사이동맥<em>Anterior interosseous a.</em></span></div></div></div>
+<div class="m" data-s="긴엄지굽힘근 Flexor pollicis longus 정강신경(L5-S2) 종아리동맥 아래팔 앞뼈사이신경 종아리동맥" data-n="앞뼈사이신경" data-a="종아리동맥"><div><span class="k">긴엄지굽힘근</span><span class="e">Flexor pollicis longus</span><span class="act">엄지 모든 관절 굽힘</span></div><div class="nv"><div class="tags"><span class="t">앞뼈사이신경<em>Anterior interosseous n.</em></span></div><p class="raw">정강신경(L5-S2)</p></div><div class="ar"><div class="tags"><span class="t">종아리동맥<em>Fibular (peroneal) a.</em></span></div></div></div>
+<div class="m" data-s="네모엎침근 Pronator quadratus 정중신경(뼈사이앞신경, C8-T1) 앞뼈사이동맥 아래팔 앞뼈사이신경 앞뼈사이동맥" data-n="앞뼈사이신경" data-a="앞뼈사이동맥"><div><span class="k">네모엎침근</span><span class="e">Pronator quadratus</span><span class="act">아래팔 엎침(주작용근)</span></div><div class="nv"><div class="tags"><span class="t">앞뼈사이신경<em>Anterior interosseous n.</em></span></div><p class="raw">정중신경(뼈사이앞신경, C8-T1)</p></div><div class="ar"><div class="tags"><span class="t">앞뼈사이동맥<em>Anterior interosseous a.</em></span></div></div></div>
+<div class="m" data-s="위팔노근 Brachioradialis 노신경(C5-C6) 노쪽곁동맥 아래팔 노신경 노쪽곁동맥" data-n="노신경" data-a="노쪽곁동맥"><div><span class="k">위팔노근</span><span class="e">Brachioradialis</span><span class="act">팔꿈치 굽힘(아래팔 중간위치에서 가장 강력)</span></div><div class="nv"><div class="tags"><span class="t">노신경<em>Radial n.</em></span></div><p class="raw">노신경(C5-C6)</p></div><div class="ar"><div class="tags"><span class="t">노쪽곁동맥<em>Radial collateral a.</em></span></div></div></div>
+<div class="m" data-s="긴노쪽손목폄근 Extensor carpi radialis longus 노신경(C6-C7) 노쪽되돌이동맥 아래팔 노신경 노쪽되돌이동맥" data-n="노신경" data-a="노쪽되돌이동맥"><div><span class="k">긴노쪽손목폄근</span><span class="e">Extensor carpi radialis longus</span><span class="act">손목 폄, 노쪽 치우침</span></div><div class="nv"><div class="tags"><span class="t">노신경<em>Radial n.</em></span></div><p class="raw">노신경(C6-C7)</p></div><div class="ar"><div class="tags"><span class="t">노쪽되돌이동맥<em>Radial recurrent a.</em></span></div></div></div>
+<div class="m" data-s="짧은노쪽손목폄근 Extensor carpi radialis brevis 노신경 깊은가지(C7-C8) 노쪽되돌이동맥 아래팔 노신경 노쪽되돌이동맥" data-n="노신경" data-a="노쪽되돌이동맥"><div><span class="k">짧은노쪽손목폄근</span><span class="e">Extensor carpi radialis brevis</span><span class="act">손목 폄</span></div><div class="nv"><div class="tags"><span class="t">노신경<em>Radial n.</em></span></div><p class="raw">노신경 깊은가지(C7-C8)</p></div><div class="ar"><div class="tags"><span class="t">노쪽되돌이동맥<em>Radial recurrent a.</em></span></div></div></div>
+<div class="m" data-s="손가락폄근 Extensor digitorum 뒤뼈사이신경(후골간신경, 노신경 깊은가지, C7-C8) 뒤뼈사이동맥 아래팔 뒤뼈사이신경 뒤뼈사이동맥" data-n="뒤뼈사이신경" data-a="뒤뼈사이동맥"><div><span class="k">손가락폄근</span><span class="e">Extensor digitorum</span><span class="act">손가락 폄(주로 MCP 관절)</span></div><div class="nv"><div class="tags"><span class="t">뒤뼈사이신경<em>Posterior interosseous n.</em></span></div><p class="raw">뒤뼈사이신경(후골간신경, 노신경 깊은가지, C7-C8)</p></div><div class="ar"><div class="tags"><span class="t">뒤뼈사이동맥<em>Posterior interosseous a.</em></span></div></div></div>
+<div class="m" data-s="새끼폄근 Extensor digiti minimi 뒤뼈사이신경 뒤뼈사이동맥 아래팔 뒤뼈사이신경 뒤뼈사이동맥" data-n="뒤뼈사이신경" data-a="뒤뼈사이동맥"><div><span class="k">새끼폄근</span><span class="e">Extensor digiti minimi</span><span class="act">새끼손가락 폄(단독 폄 가능)</span></div><div class="nv"><div class="tags"><span class="t">뒤뼈사이신경<em>Posterior interosseous n.</em></span></div></div><div class="ar"><div class="tags"><span class="t">뒤뼈사이동맥<em>Posterior interosseous a.</em></span></div></div></div>
+<div class="m" data-s="자쪽손목폄근 Extensor carpi ulnaris 뒤뼈사이신경 뒤뼈사이동맥 아래팔 뒤뼈사이신경 뒤뼈사이동맥" data-n="뒤뼈사이신경" data-a="뒤뼈사이동맥"><div><span class="k">자쪽손목폄근</span><span class="e">Extensor carpi ulnaris</span><span class="act">손목 폄, 자쪽 치우침</span></div><div class="nv"><div class="tags"><span class="t">뒤뼈사이신경<em>Posterior interosseous n.</em></span></div></div><div class="ar"><div class="tags"><span class="t">뒤뼈사이동맥<em>Posterior interosseous a.</em></span></div></div></div>
+<div class="m" data-s="손뒤침근 Supinator 노신경 깊은가지(C5-C6) 노쪽되돌이동맥 아래팔 노신경 노쪽되돌이동맥" data-n="노신경" data-a="노쪽되돌이동맥"><div><span class="k">손뒤침근</span><span class="e">Supinator</span><span class="act">아래팔 뒤침</span></div><div class="nv"><div class="tags"><span class="t">노신경<em>Radial n.</em></span></div><p class="raw">노신경 깊은가지(C5-C6)</p></div><div class="ar"><div class="tags"><span class="t">노쪽되돌이동맥<em>Radial recurrent a.</em></span></div></div></div>
+<div class="m" data-s="긴엄지벌림근 Abductor pollicis longus 뒤뼈사이신경 뒤뼈사이동맥 아래팔 뒤뼈사이신경 뒤뼈사이동맥" data-n="뒤뼈사이신경" data-a="뒤뼈사이동맥"><div><span class="k">긴엄지벌림근</span><span class="e">Abductor pollicis longus</span><span class="act">엄지 벌림, 손목 노쪽편위 보조</span></div><div class="nv"><div class="tags"><span class="t">뒤뼈사이신경<em>Posterior interosseous n.</em></span></div></div><div class="ar"><div class="tags"><span class="t">뒤뼈사이동맥<em>Posterior interosseous a.</em></span></div></div></div>
+<div class="m" data-s="짧은엄지폄근 Extensor pollicis brevis 깊은종아리신경(S1-S2) 발등동맥 아래팔 뒤뼈사이신경 발등동맥" data-n="뒤뼈사이신경" data-a="발등동맥"><div><span class="k">짧은엄지폄근</span><span class="e">Extensor pollicis brevis</span><span class="act">엄지 손허리손가락관절(MCP) 폄</span></div><div class="nv"><div class="tags"><span class="t">뒤뼈사이신경<em>Posterior interosseous n.</em></span></div><p class="raw">깊은종아리신경(S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">발등동맥<em>Dorsalis pedis a.</em></span></div></div></div>
+<div class="m" data-s="긴엄지폄근 Extensor pollicis longus 깊은종아리신경(L5-S1) 앞정강동맥 아래팔 뒤뼈사이신경 앞정강동맥" data-n="뒤뼈사이신경" data-a="앞정강동맥"><div><span class="k">긴엄지폄근</span><span class="e">Extensor pollicis longus</span><span class="act">엄지 모든 관절 폄</span></div><div class="nv"><div class="tags"><span class="t">뒤뼈사이신경<em>Posterior interosseous n.</em></span></div><p class="raw">깊은종아리신경(L5-S1)</p></div><div class="ar"><div class="tags"><span class="t">앞정강동맥<em>Anterior tibial a.</em></span></div></div></div>
+<div class="m" data-s="집게폄근 Extensor indicis 뒤뼈사이신경 뒤뼈사이동맥 아래팔 뒤뼈사이신경 뒤뼈사이동맥" data-n="뒤뼈사이신경" data-a="뒤뼈사이동맥"><div><span class="k">집게폄근</span><span class="e">Extensor indicis</span><span class="act">집게손가락 단독 폄(가리키는 동작)</span></div><div class="nv"><div class="tags"><span class="t">뒤뼈사이신경<em>Posterior interosseous n.</em></span></div></div><div class="ar"><div class="tags"><span class="t">뒤뼈사이동맥<em>Posterior interosseous a.</em></span></div></div></div>
+</section>
+<section data-region="손">
+<div class="sh"><h2>손</h2><span class="en">Hand</span><span class="n">11</span></div>
+<div class="hdr"><b>근육 / Muscle</b><b>지배신경 / Nerve</b><b>영양동맥 / Artery</b></div>
+<div class="m" data-s="짧은엄지벌림근 Abductor pollicis brevis 정중신경(C8-T1) 얕은손바닥동맥활 손 정중신경 얕은손바닥동맥활" data-n="정중신경" data-a="얕은손바닥동맥활"><div><span class="k">짧은엄지벌림근</span><span class="e">Abductor pollicis brevis</span><span class="act">엄지 벌림</span></div><div class="nv"><div class="tags"><span class="t">정중신경<em>Median n.</em></span></div><p class="raw">정중신경(C8-T1)</p></div><div class="ar"><div class="tags"><span class="t">얕은손바닥동맥활<em>Superficial palmar arch</em></span></div></div></div>
+<div class="m" data-s="짧은엄지굽힘근 Flexor pollicis brevis 안쪽발바닥신경(S1-S2) 안쪽발바닥동맥 손 자신경 정중신경 안쪽발바닥동맥" data-n="자신경|정중신경" data-a="안쪽발바닥동맥"><div><span class="k">짧은엄지굽힘근</span><span class="e">Flexor pollicis brevis</span><span class="act">엄지 손허리손가락관절(MCP) 굽힘</span></div><div class="nv"><div class="tags"><span class="t">자신경<em>Ulnar n.</em></span>
+<span class="t">정중신경<em>Median n.</em></span></div><p class="raw">안쪽발바닥신경(S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">안쪽발바닥동맥<em>Medial plantar a.</em></span></div></div></div>
+<div class="m" data-s="엄지맞섬근 Opponens pollicis 정중신경(C8-T1) 노동맥 손바닥쪽분지 손 정중신경 노동맥" data-n="정중신경" data-a="노동맥"><div><span class="k">엄지맞섬근</span><span class="e">Opponens pollicis</span><span class="act">엄지 맞섬운동(대립, 엄지-새끼 맞대기)</span></div><div class="nv"><div class="tags"><span class="t">정중신경<em>Median n.</em></span></div><p class="raw">정중신경(C8-T1)</p></div><div class="ar"><div class="tags"><span class="t">노동맥<em>Radial a.</em></span></div><p class="raw">노동맥 손바닥쪽분지</p></div></div>
+<div class="m" data-s="엄지모음근 Adductor pollicis 가쪽발바닥신경 깊은가지(S2-S3) 발바닥동맥활 손 자신경 발바닥동맥활" data-n="자신경" data-a="발바닥동맥활"><div><span class="k">엄지모음근</span><span class="e">Adductor pollicis</span><span class="act">엄지 모음</span></div><div class="nv"><div class="tags"><span class="t">자신경<em>Ulnar n.</em></span></div><p class="raw">가쪽발바닥신경 깊은가지(S2-S3)</p></div><div class="ar"><div class="tags"><span class="t">발바닥동맥활<em>Plantar arch</em></span></div></div></div>
+<div class="m" data-s="짧은손바닥근 Palmaris brevis 자신경 얕은가지 자동맥 손 자신경 자동맥" data-n="자신경" data-a="자동맥"><div><span class="k">짧은손바닥근</span><span class="e">Palmaris brevis</span><span class="act">손바닥 피부에 주름을 만들어 소구조 보호</span></div><div class="nv"><div class="tags"><span class="t">자신경<em>Ulnar n.</em></span></div><p class="raw">자신경 얕은가지</p></div><div class="ar"><div class="tags"><span class="t">자동맥<em>Ulnar a.</em></span></div></div></div>
+<div class="m" data-s="새끼벌림근 Abductor digiti minimi 가쪽발바닥신경(S1-S2) 가쪽발바닥동맥 손 자신경 가쪽발바닥동맥" data-n="자신경" data-a="가쪽발바닥동맥"><div><span class="k">새끼벌림근</span><span class="e">Abductor digiti minimi</span><span class="act">새끼손가락 벌림</span></div><div class="nv"><div class="tags"><span class="t">자신경<em>Ulnar n.</em></span></div><p class="raw">가쪽발바닥신경(S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">가쪽발바닥동맥<em>Lateral plantar a.</em></span></div></div></div>
+<div class="m" data-s="짧은새끼굽힘근 Flexor digiti minimi brevis 가쪽발바닥신경(S2-S3) 가쪽발바닥동맥 손 자신경 가쪽발바닥동맥" data-n="자신경" data-a="가쪽발바닥동맥"><div><span class="k">짧은새끼굽힘근</span><span class="e">Flexor digiti minimi brevis</span><span class="act">새끼손가락 MCP 굽힘</span></div><div class="nv"><div class="tags"><span class="t">자신경<em>Ulnar n.</em></span></div><p class="raw">가쪽발바닥신경(S2-S3)</p></div><div class="ar"><div class="tags"><span class="t">가쪽발바닥동맥<em>Lateral plantar a.</em></span></div></div></div>
+<div class="m" data-s="새끼맞섬근 Opponens digiti minimi 자신경 깊은가지 자동맥 손 자신경 자동맥" data-n="자신경" data-a="자동맥"><div><span class="k">새끼맞섬근</span><span class="e">Opponens digiti minimi</span><span class="act">새끼손가락 맞섬운동</span></div><div class="nv"><div class="tags"><span class="t">자신경<em>Ulnar n.</em></span></div><p class="raw">자신경 깊은가지</p></div><div class="ar"><div class="tags"><span class="t">자동맥<em>Ulnar a.</em></span></div></div></div>
+<div class="m" data-s="벌레근(4개) Lumbricals 1번-안쪽발바닥신경 / 2-4번-가쪽발바닥신경 발바닥동맥활 손 자신경 정중신경 발바닥동맥활" data-n="자신경|정중신경" data-a="발바닥동맥활"><div><span class="k">벌레근(4개)</span><span class="e">Lumbricals</span><span class="act">MCP 굽힘 + PIP·DIP 폄(손가락을 곧게 펴며 굽히는 동작)</span></div><div class="nv"><div class="tags"><span class="t">자신경<em>Ulnar n.</em></span>
+<span class="t">정중신경<em>Median n.</em></span></div><p class="raw">1번-안쪽발바닥신경 / 2-4번-가쪽발바닥신경</p></div><div class="ar"><div class="tags"><span class="t">발바닥동맥활<em>Plantar arch</em></span></div></div></div>
+<div class="m" data-s="바닥쪽뼈사이근(3개) Palmar interossei 자신경 깊은가지(C8-T1) 깊은손바닥동맥활 손 자신경 깊은손바닥동맥활" data-n="자신경" data-a="깊은손바닥동맥활"><div><span class="k">바닥쪽뼈사이근(3개)</span><span class="e">Palmar interossei</span><span class="act">손가락 모음(내전, 셋째손가락 축 기준 &#x27;PAD&#x27;)</span></div><div class="nv"><div class="tags"><span class="t">자신경<em>Ulnar n.</em></span></div><p class="raw">자신경 깊은가지(C8-T1)</p></div><div class="ar"><div class="tags"><span class="t">깊은손바닥동맥활<em>Deep palmar arch</em></span></div></div></div>
+<div class="m" data-s="등쪽뼈사이근(4개) Dorsal interossei 자신경 깊은가지(C8-T1) 손등동맥활 손 자신경 손등동맥활" data-n="자신경" data-a="손등동맥활"><div><span class="k">등쪽뼈사이근(4개)</span><span class="e">Dorsal interossei</span><span class="act">손가락 벌림(외전, &#x27;DAB&#x27;)</span></div><div class="nv"><div class="tags"><span class="t">자신경<em>Ulnar n.</em></span></div><p class="raw">자신경 깊은가지(C8-T1)</p></div><div class="ar"><div class="tags"><span class="t">손등동맥활<em>Dorsal carpal arch</em></span></div></div></div>
+</section>
+<section data-region="골반·볼기">
+<div class="sh"><h2>골반·볼기</h2><span class="en">Pelvis &amp; Gluteal</span><span class="n">13</span></div>
+<div class="hdr"><b>근육 / Muscle</b><b>지배신경 / Nerve</b><b>영양동맥 / Artery</b></div>
+<div class="m" data-s="큰볼기근 Gluteus maximus 아래볼기신경(하둔신경, L5-S2) 위·아래볼기동맥 골반·볼기 아래볼기신경 위볼기동맥 아래볼기동맥" data-n="아래볼기신경" data-a="위볼기동맥|아래볼기동맥"><div><span class="k">큰볼기근</span><span class="e">Gluteus maximus</span><span class="act">엉덩관절 폄(특히 굽힌자세에서 강력), 가쪽돌림</span></div><div class="nv"><div class="tags"><span class="t">아래볼기신경<em>Inferior gluteal n.</em></span></div><p class="raw">아래볼기신경(하둔신경, L5-S2)</p></div><div class="ar"><div class="tags"><span class="t">위볼기동맥<em>Superior gluteal a.</em></span>
+<span class="t">아래볼기동맥<em>Inferior gluteal a.</em></span></div><p class="raw">위·아래볼기동맥</p></div></div>
+<div class="m" data-s="중간볼기근 Gluteus medius 위볼기신경(상둔신경, L4-S1) 위볼기동맥 골반·볼기 위볼기신경 위볼기동맥" data-n="위볼기신경" data-a="위볼기동맥"><div><span class="k">중간볼기근</span><span class="e">Gluteus medius</span><span class="act">엉덩관절 벌림, 한다리서기 시 골반 수평 유지(안정화)</span></div><div class="nv"><div class="tags"><span class="t">위볼기신경<em>Superior gluteal n.</em></span></div><p class="raw">위볼기신경(상둔신경, L4-S1)</p></div><div class="ar"><div class="tags"><span class="t">위볼기동맥<em>Superior gluteal a.</em></span></div></div></div>
+<div class="m" data-s="작은볼기근 Gluteus minimus 위볼기신경(L4-S1) 위볼기동맥 골반·볼기 위볼기신경 위볼기동맥" data-n="위볼기신경" data-a="위볼기동맥"><div><span class="k">작은볼기근</span><span class="e">Gluteus minimus</span><span class="act">엉덩관절 벌림, 안쪽돌림 보조</span></div><div class="nv"><div class="tags"><span class="t">위볼기신경<em>Superior gluteal n.</em></span></div><p class="raw">위볼기신경(L4-S1)</p></div><div class="ar"><div class="tags"><span class="t">위볼기동맥<em>Superior gluteal a.</em></span></div></div></div>
+<div class="m" data-s="넙다리근막긴장근 Tensor fasciae latae 위볼기신경(L4-S1) 가쪽넙다리휘돌이동맥 오름가지 골반·볼기 위볼기신경 가쪽넙다리휘돌이동맥" data-n="위볼기신경" data-a="가쪽넙다리휘돌이동맥"><div><span class="k">넙다리근막긴장근</span><span class="e">Tensor fasciae latae</span><span class="act">엉덩관절 굽힘·벌림·안쪽돌림, 무릎 가쪽 안정화</span></div><div class="nv"><div class="tags"><span class="t">위볼기신경<em>Superior gluteal n.</em></span></div><p class="raw">위볼기신경(L4-S1)</p></div><div class="ar"><div class="tags"><span class="t">가쪽넙다리휘돌이동맥<em>Lateral circumflex femoral a.</em></span></div><p class="raw">가쪽넙다리휘돌이동맥 오름가지</p></div></div>
+<div class="m" data-s="궁둥구멍근 Piriformis 궁둥구멍근신경(S1-S2) 아래볼기동맥 골반·볼기 궁둥구멍근신경 아래볼기동맥" data-n="궁둥구멍근신경" data-a="아래볼기동맥"><div><span class="k">궁둥구멍근</span><span class="e">Piriformis</span><span class="act">엉덩관절 가쪽돌림(폄 상태), 벌림(90도 굽힘 상태)</span></div><div class="nv"><div class="tags"><span class="t">궁둥구멍근신경<em>N. to piriformis</em></span></div><p class="raw">궁둥구멍근신경(S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">아래볼기동맥<em>Inferior gluteal a.</em></span></div></div></div>
+<div class="m" data-s="위쌍둥이근 Gemellus superior 속폐쇄근신경(L5-S2) 아래볼기동맥 골반·볼기 속폐쇄근신경 아래볼기동맥" data-n="속폐쇄근신경" data-a="아래볼기동맥"><div><span class="k">위쌍둥이근</span><span class="e">Gemellus superior</span><span class="act">가쪽돌림</span></div><div class="nv"><div class="tags"><span class="t">속폐쇄근신경<em>N. to obturator internus</em></span></div><p class="raw">속폐쇄근신경(L5-S2)</p></div><div class="ar"><div class="tags"><span class="t">아래볼기동맥<em>Inferior gluteal a.</em></span></div></div></div>
+<div class="m" data-s="아래쌍둥이근 Gemellus inferior 넙다리네모근신경(L4-S1) 아래볼기동맥 골반·볼기 넙다리네모근신경 아래볼기동맥" data-n="넙다리네모근신경" data-a="아래볼기동맥"><div><span class="k">아래쌍둥이근</span><span class="e">Gemellus inferior</span><span class="act">가쪽돌림</span></div><div class="nv"><div class="tags"><span class="t">넙다리네모근신경<em>N. to quadratus femoris</em></span></div><p class="raw">넙다리네모근신경(L4-S1)</p></div><div class="ar"><div class="tags"><span class="t">아래볼기동맥<em>Inferior gluteal a.</em></span></div></div></div>
+<div class="m" data-s="속폐쇄근 Obturator internus 속폐쇄근신경(L5-S2) 속음부동맥 골반·볼기 속폐쇄근신경 속음부동맥" data-n="속폐쇄근신경" data-a="속음부동맥"><div><span class="k">속폐쇄근</span><span class="e">Obturator internus</span><span class="act">가쪽돌림</span></div><div class="nv"><div class="tags"><span class="t">속폐쇄근신경<em>N. to obturator internus</em></span></div><p class="raw">속폐쇄근신경(L5-S2)</p></div><div class="ar"><div class="tags"><span class="t">속음부동맥<em>Internal pudendal a.</em></span></div></div></div>
+<div class="m" data-s="바깥폐쇄근 Obturator externus 폐쇄신경(L3-L4) 폐쇄동맥 골반·볼기 폐쇄신경 폐쇄동맥" data-n="폐쇄신경" data-a="폐쇄동맥"><div><span class="k">바깥폐쇄근</span><span class="e">Obturator externus</span><span class="act">가쪽돌림</span></div><div class="nv"><div class="tags"><span class="t">폐쇄신경<em>Obturator n.</em></span></div><p class="raw">폐쇄신경(L3-L4)</p></div><div class="ar"><div class="tags"><span class="t">폐쇄동맥<em>Obturator a.</em></span></div></div></div>
+<div class="m" data-s="넙다리네모근 Quadratus femoris 넙다리네모근신경(L4-S1) 안쪽넙다리휘돌이동맥 골반·볼기 넙다리네모근신경 안쪽넙다리휘돌이동맥" data-n="넙다리네모근신경" data-a="안쪽넙다리휘돌이동맥"><div><span class="k">넙다리네모근</span><span class="e">Quadratus femoris</span><span class="act">가쪽돌림</span></div><div class="nv"><div class="tags"><span class="t">넙다리네모근신경<em>N. to quadratus femoris</em></span></div><p class="raw">넙다리네모근신경(L4-S1)</p></div><div class="ar"><div class="tags"><span class="t">안쪽넙다리휘돌이동맥<em>Medial circumflex femoral a.</em></span></div></div></div>
+<div class="m" data-s="엉덩허리근(큰허리근+엉덩근) Iliopsoas (Psoas major + Iliacus) 큰허리근-허리신경얼기(L1-L3) / 엉덩근-넙다리신경(L2-L4) 허리동맥·엉덩허리동맥 골반·볼기 넙다리신경 허리신경얼기 직접가지 허리동맥 엉덩허리동맥" data-n="넙다리신경|허리신경얼기 직접가지" data-a="허리동맥|엉덩허리동맥"><div><span class="k">엉덩허리근(큰허리근+엉덩근)</span><span class="e">Iliopsoas (Psoas major + Iliacus)</span><span class="act">엉덩관절 굽힘(가장 강력한 굽힘근)</span></div><div class="nv"><div class="tags"><span class="t">넙다리신경<em>Femoral n.</em></span>
+<span class="t">허리신경얼기 직접가지<em>Direct branches of lumbar plexus</em></span></div><p class="raw">큰허리근-허리신경얼기(L1-L3) / 엉덩근-넙다리신경(L2-L4)</p></div><div class="ar"><div class="tags"><span class="t">허리동맥<em>Lumbar aa.</em></span>
+<span class="t">엉덩허리동맥<em>Iliolumbar a.</em></span></div></div></div>
+<div class="m" data-s="항문올림근(3부: 두덩곧창자근·두덩꼬리근·엉덩꼬리근) Levator ani 음부신경(S2-S4)+S3-S4 직접가지 속음부동맥·아래볼기동맥 골반·볼기 음부신경 속음부동맥 아래볼기동맥" data-n="음부신경" data-a="속음부동맥|아래볼기동맥"><div><span class="k">항문올림근(3부: 두덩곧창자근·두덩꼬리근·엉덩꼬리근)</span><span class="e">Levator ani</span><span class="act">골반장기 지지, 배변·배뇨 조절(두덩곧창자근이 항문직장각 유지)</span></div><div class="nv"><div class="tags"><span class="t">음부신경<em>Pudendal n.</em></span></div><p class="raw">음부신경(S2-S4)+S3-S4 직접가지</p></div><div class="ar"><div class="tags"><span class="t">속음부동맥<em>Internal pudendal a.</em></span>
+<span class="t">아래볼기동맥<em>Inferior gluteal a.</em></span></div></div></div>
+<div class="m" data-s="꼬리근(꼬리뼈근) Coccygeus (Ischiococcygeus) S4-S5 앞가지 아래볼기동맥·가쪽엉치동맥 골반·볼기 척수분절 아래볼기동맥 가쪽엉치동맥" data-n="척수분절" data-a="아래볼기동맥|가쪽엉치동맥"><div><span class="k">꼬리근(꼬리뼈근)</span><span class="e">Coccygeus (Ischiococcygeus)</span><span class="act">골반바닥 뒤부분 지지, 꼬리뼈를 앞으로 당김</span></div><div class="nv"><div class="tags"><span class="t">척수분절<em>Segmental spinal nn.</em></span></div><p class="raw">S4-S5 앞가지</p></div><div class="ar"><div class="tags"><span class="t">아래볼기동맥<em>Inferior gluteal a.</em></span>
+<span class="t">가쪽엉치동맥<em>Lateral sacral a.</em></span></div></div></div>
+</section>
+<section data-region="넙다리">
+<div class="sh"><h2>넙다리</h2><span class="en">Thigh</span><span class="n">13</span></div>
+<div class="hdr"><b>근육 / Muscle</b><b>지배신경 / Nerve</b><b>영양동맥 / Artery</b></div>
+<div class="m" data-s="넙다리빗근 Sartorius 넙다리신경(L2-L3) 넙다리동맥 분지 넙다리 넙다리신경 넙다리동맥" data-n="넙다리신경" data-a="넙다리동맥"><div><span class="k">넙다리빗근</span><span class="e">Sartorius</span><span class="act">엉덩관절 굽힘·벌림·가쪽돌림 + 무릎 굽힘(다리꼬는 자세)</span></div><div class="nv"><div class="tags"><span class="t">넙다리신경<em>Femoral n.</em></span></div><p class="raw">넙다리신경(L2-L3)</p></div><div class="ar"><div class="tags"><span class="t">넙다리동맥<em>Femoral a.</em></span></div><p class="raw">넙다리동맥 분지</p></div></div>
+<div class="m" data-s="넙다리곧은근 Rectus femoris 넙다리신경(L2-L4) 가쪽넙다리휘돌이동맥 넙다리 넙다리신경 가쪽넙다리휘돌이동맥" data-n="넙다리신경" data-a="가쪽넙다리휘돌이동맥"><div><span class="k">넙다리곧은근</span><span class="e">Rectus femoris</span><span class="act">무릎 폄 + 엉덩관절 굽힘(이관절근, 두 관절 동시작용)</span></div><div class="nv"><div class="tags"><span class="t">넙다리신경<em>Femoral n.</em></span></div><p class="raw">넙다리신경(L2-L4)</p></div><div class="ar"><div class="tags"><span class="t">가쪽넙다리휘돌이동맥<em>Lateral circumflex femoral a.</em></span></div></div></div>
+<div class="m" data-s="안쪽넓은근 Vastus medialis 넙다리신경(L2-L4) 넙다리동맥 넙다리 넙다리신경 넙다리동맥" data-n="넙다리신경" data-a="넙다리동맥"><div><span class="k">안쪽넓은근</span><span class="e">Vastus medialis</span><span class="act">무릎 폄, 무릎뼈 안정화(가쪽탈구 방지)</span></div><div class="nv"><div class="tags"><span class="t">넙다리신경<em>Femoral n.</em></span></div><p class="raw">넙다리신경(L2-L4)</p></div><div class="ar"><div class="tags"><span class="t">넙다리동맥<em>Femoral a.</em></span></div></div></div>
+<div class="m" data-s="가쪽넓은근 Vastus lateralis 넙다리신경(L2-L4) 가쪽넙다리휘돌이동맥 넙다리 넙다리신경 가쪽넙다리휘돌이동맥" data-n="넙다리신경" data-a="가쪽넙다리휘돌이동맥"><div><span class="k">가쪽넓은근</span><span class="e">Vastus lateralis</span><span class="act">무릎 폄</span></div><div class="nv"><div class="tags"><span class="t">넙다리신경<em>Femoral n.</em></span></div><p class="raw">넙다리신경(L2-L4)</p></div><div class="ar"><div class="tags"><span class="t">가쪽넙다리휘돌이동맥<em>Lateral circumflex femoral a.</em></span></div></div></div>
+<div class="m" data-s="중간넓은근 Vastus intermedius 넙다리신경(L2-L4) 넙다리동맥 넙다리 넙다리신경 넙다리동맥" data-n="넙다리신경" data-a="넙다리동맥"><div><span class="k">중간넓은근</span><span class="e">Vastus intermedius</span><span class="act">무릎 폄</span></div><div class="nv"><div class="tags"><span class="t">넙다리신경<em>Femoral n.</em></span></div><p class="raw">넙다리신경(L2-L4)</p></div><div class="ar"><div class="tags"><span class="t">넙다리동맥<em>Femoral a.</em></span></div></div></div>
+<div class="m" data-s="두덩정강근 Gracilis 폐쇄신경(L2-L3) 폐쇄동맥 넙다리 폐쇄신경 폐쇄동맥" data-n="폐쇄신경" data-a="폐쇄동맥"><div><span class="k">두덩정강근</span><span class="e">Gracilis</span><span class="act">엉덩관절 모음 + 무릎 굽힘(이관절근)</span></div><div class="nv"><div class="tags"><span class="t">폐쇄신경<em>Obturator n.</em></span></div><p class="raw">폐쇄신경(L2-L3)</p></div><div class="ar"><div class="tags"><span class="t">폐쇄동맥<em>Obturator a.</em></span></div></div></div>
+<div class="m" data-s="두덩근 Pectineus 넙다리신경(±폐쇄신경, L2-L3) 폐쇄동맥·안쪽넙다리휘돌이동맥 넙다리 넙다리신경 폐쇄신경 폐쇄동맥 안쪽넙다리휘돌이동맥" data-n="넙다리신경|폐쇄신경" data-a="폐쇄동맥|안쪽넙다리휘돌이동맥"><div><span class="k">두덩근</span><span class="e">Pectineus</span><span class="act">엉덩관절 모음 + 굽힘</span></div><div class="nv"><div class="tags"><span class="t">넙다리신경<em>Femoral n.</em></span>
+<span class="t">폐쇄신경<em>Obturator n.</em></span></div><p class="raw">넙다리신경(±폐쇄신경, L2-L3)</p></div><div class="ar"><div class="tags"><span class="t">폐쇄동맥<em>Obturator a.</em></span>
+<span class="t">안쪽넙다리휘돌이동맥<em>Medial circumflex femoral a.</em></span></div></div></div>
+<div class="m" data-s="긴모음근 Adductor longus 폐쇄신경 앞가지(L2-L4) 안쪽넙다리휘돌이동맥·모음근동맥 넙다리 폐쇄신경 안쪽넙다리휘돌이동맥 모음근동맥" data-n="폐쇄신경" data-a="안쪽넙다리휘돌이동맥|모음근동맥"><div><span class="k">긴모음근</span><span class="e">Adductor longus</span><span class="act">엉덩관절 모음</span></div><div class="nv"><div class="tags"><span class="t">폐쇄신경<em>Obturator n.</em></span></div><p class="raw">폐쇄신경 앞가지(L2-L4)</p></div><div class="ar"><div class="tags"><span class="t">안쪽넙다리휘돌이동맥<em>Medial circumflex femoral a.</em></span>
+<span class="t">모음근동맥<em>Adductor branches</em></span></div></div></div>
+<div class="m" data-s="짧은모음근 Adductor brevis 폐쇄신경(L2-L4) 폐쇄동맥 넙다리 폐쇄신경 폐쇄동맥" data-n="폐쇄신경" data-a="폐쇄동맥"><div><span class="k">짧은모음근</span><span class="e">Adductor brevis</span><span class="act">엉덩관절 모음</span></div><div class="nv"><div class="tags"><span class="t">폐쇄신경<em>Obturator n.</em></span></div><p class="raw">폐쇄신경(L2-L4)</p></div><div class="ar"><div class="tags"><span class="t">폐쇄동맥<em>Obturator a.</em></span></div></div></div>
+<div class="m" data-s="큰모음근 Adductor magnus 모음근부분-폐쇄신경 / 뒤넙다리근부분-정강신경(좌골신경, L2-S3) 모음근동맥·깊은넙다리동맥 관통동맥 넙다리 정강신경 폐쇄신경 모음근동맥 깊은넙다리동맥 관통동맥" data-n="정강신경|폐쇄신경" data-a="모음근동맥|깊은넙다리동맥|관통동맥"><div><span class="k">큰모음근</span><span class="e">Adductor magnus</span><span class="act">모음(전체), 폄(뒤넙다리근부분)</span></div><div class="nv"><div class="tags"><span class="t">정강신경<em>Tibial n.</em></span>
+<span class="t">폐쇄신경<em>Obturator n.</em></span></div><p class="raw">모음근부분-폐쇄신경 / 뒤넙다리근부분-정강신경(좌골신경, L2-S3)</p></div><div class="ar"><div class="tags"><span class="t">모음근동맥<em>Adductor branches</em></span>
+<span class="t">깊은넙다리동맥<em>Deep femoral a.</em></span>
+<span class="t">관통동맥<em>Perforating aa.</em></span></div></div></div>
+<div class="m" data-s="넙다리두갈래근 Biceps femoris 긴갈래-정강신경 / 짧은갈래-온종아리신경(둘다 좌골신경, L5-S2) 깊은넙다리동맥의 관통동맥 넙다리 온종아리신경 정강신경 깊은넙다리동맥 관통동맥" data-n="온종아리신경|정강신경" data-a="깊은넙다리동맥|관통동맥"><div><span class="k">넙다리두갈래근</span><span class="e">Biceps femoris</span><span class="act">무릎 굽힘 + 가쪽돌림, 엉덩관절 폄(긴갈래)</span></div><div class="nv"><div class="tags"><span class="t">온종아리신경<em>Common fibular (peroneal) n.</em></span>
+<span class="t">정강신경<em>Tibial n.</em></span></div><p class="raw">긴갈래-정강신경 / 짧은갈래-온종아리신경(둘다 좌골신경, L5-S2)</p></div><div class="ar"><div class="tags"><span class="t">깊은넙다리동맥<em>Deep femoral a.</em></span>
+<span class="t">관통동맥<em>Perforating aa.</em></span></div><p class="raw">깊은넙다리동맥의 관통동맥</p></div></div>
+<div class="m" data-s="반힘줄근 Semitendinosus 정강신경(좌골신경, L5-S2) 관통동맥 넙다리 정강신경 관통동맥" data-n="정강신경" data-a="관통동맥"><div><span class="k">반힘줄근</span><span class="e">Semitendinosus</span><span class="act">무릎 굽힘 + 안쪽돌림, 엉덩관절 폄</span></div><div class="nv"><div class="tags"><span class="t">정강신경<em>Tibial n.</em></span></div><p class="raw">정강신경(좌골신경, L5-S2)</p></div><div class="ar"><div class="tags"><span class="t">관통동맥<em>Perforating aa.</em></span></div></div></div>
+<div class="m" data-s="반막모양근 Semimembranosus 정강신경(좌골신경, L5-S2) 관통동맥 넙다리 정강신경 관통동맥" data-n="정강신경" data-a="관통동맥"><div><span class="k">반막모양근</span><span class="e">Semimembranosus</span><span class="act">무릎 굽힘 + 안쪽돌림, 엉덩관절 폄</span></div><div class="nv"><div class="tags"><span class="t">정강신경<em>Tibial n.</em></span></div><p class="raw">정강신경(좌골신경, L5-S2)</p></div><div class="ar"><div class="tags"><span class="t">관통동맥<em>Perforating aa.</em></span></div></div></div>
+</section>
+<section data-region="종아리">
+<div class="sh"><h2>종아리</h2><span class="en">Leg</span><span class="n">13</span></div>
+<div class="hdr"><b>근육 / Muscle</b><b>지배신경 / Nerve</b><b>영양동맥 / Artery</b></div>
+<div class="m" data-s="앞정강근 Tibialis anterior 깊은종아리신경(L4-L5) 앞정강동맥 종아리 깊은종아리신경 앞정강동맥" data-n="깊은종아리신경" data-a="앞정강동맥"><div><span class="k">앞정강근</span><span class="e">Tibialis anterior</span><span class="act">발등굽힘 + 안쪽번짐(내번)</span></div><div class="nv"><div class="tags"><span class="t">깊은종아리신경<em>Deep fibular n.</em></span></div><p class="raw">깊은종아리신경(L4-L5)</p></div><div class="ar"><div class="tags"><span class="t">앞정강동맥<em>Anterior tibial a.</em></span></div></div></div>
+<div class="m" data-s="긴발가락폄근 Extensor digitorum longus 깊은종아리신경(L5-S1) 앞정강동맥 종아리 깊은종아리신경 앞정강동맥" data-n="깊은종아리신경" data-a="앞정강동맥"><div><span class="k">긴발가락폄근</span><span class="e">Extensor digitorum longus</span><span class="act">발가락 폄 + 발등굽힘</span></div><div class="nv"><div class="tags"><span class="t">깊은종아리신경<em>Deep fibular n.</em></span></div><p class="raw">깊은종아리신경(L5-S1)</p></div><div class="ar"><div class="tags"><span class="t">앞정강동맥<em>Anterior tibial a.</em></span></div></div></div>
+<div class="m" data-s="긴엄지폄근 Extensor hallucis longus 깊은종아리신경(L5-S1) 앞정강동맥 종아리 깊은종아리신경 앞정강동맥" data-n="깊은종아리신경" data-a="앞정강동맥"><div><span class="k">긴엄지폄근</span><span class="e">Extensor hallucis longus</span><span class="act">엄지 폄 + 발등굽힘</span></div><div class="nv"><div class="tags"><span class="t">깊은종아리신경<em>Deep fibular n.</em></span></div><p class="raw">깊은종아리신경(L5-S1)</p></div><div class="ar"><div class="tags"><span class="t">앞정강동맥<em>Anterior tibial a.</em></span></div></div></div>
+<div class="m" data-s="셋째종아리근 Fibularis tertius (Peroneus tertius) 깊은종아리신경(L5-S1) 앞정강동맥 종아리 깊은종아리신경 앞정강동맥" data-n="깊은종아리신경" data-a="앞정강동맥"><div><span class="k">셋째종아리근</span><span class="e">Fibularis tertius (Peroneus tertius)</span><span class="act">발등굽힘 + 가쪽번짐(외번)</span></div><div class="nv"><div class="tags"><span class="t">깊은종아리신경<em>Deep fibular n.</em></span></div><p class="raw">깊은종아리신경(L5-S1)</p></div><div class="ar"><div class="tags"><span class="t">앞정강동맥<em>Anterior tibial a.</em></span></div></div></div>
+<div class="m" data-s="긴종아리근 Fibularis longus (Peroneus longus) 얕은종아리신경(L5-S1) 종아리동맥 종아리 얕은종아리신경 종아리동맥" data-n="얕은종아리신경" data-a="종아리동맥"><div><span class="k">긴종아리근</span><span class="e">Fibularis longus (Peroneus longus)</span><span class="act">가쪽번짐 + 발바닥쪽굽힘 보조, 가로활 지지</span></div><div class="nv"><div class="tags"><span class="t">얕은종아리신경<em>Superficial fibular n.</em></span></div><p class="raw">얕은종아리신경(L5-S1)</p></div><div class="ar"><div class="tags"><span class="t">종아리동맥<em>Fibular (peroneal) a.</em></span></div></div></div>
+<div class="m" data-s="짧은종아리근 Fibularis brevis (Peroneus brevis) 얕은종아리신경(L5-S1) 종아리동맥 종아리 얕은종아리신경 종아리동맥" data-n="얕은종아리신경" data-a="종아리동맥"><div><span class="k">짧은종아리근</span><span class="e">Fibularis brevis (Peroneus brevis)</span><span class="act">가쪽번짐</span></div><div class="nv"><div class="tags"><span class="t">얕은종아리신경<em>Superficial fibular n.</em></span></div><p class="raw">얕은종아리신경(L5-S1)</p></div><div class="ar"><div class="tags"><span class="t">종아리동맥<em>Fibular (peroneal) a.</em></span></div></div></div>
+<div class="m" data-s="장딴지근 Gastrocnemius 정강신경(S1-S2) 장딴지동맥 종아리 정강신경 장딴지동맥" data-n="정강신경" data-a="장딴지동맥"><div><span class="k">장딴지근</span><span class="e">Gastrocnemius</span><span class="act">발바닥쪽굽힘(강력) + 무릎 굽힘 보조</span></div><div class="nv"><div class="tags"><span class="t">정강신경<em>Tibial n.</em></span></div><p class="raw">정강신경(S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">장딴지동맥<em>Sural aa.</em></span></div></div></div>
+<div class="m" data-s="가자미근 Soleus 정강신경(S1-S2) 뒤정강동맥·종아리동맥 종아리 정강신경 뒤정강동맥 종아리동맥" data-n="정강신경" data-a="뒤정강동맥|종아리동맥"><div><span class="k">가자미근</span><span class="e">Soleus</span><span class="act">발바닥쪽굽힘(직립자세 유지의 주근)</span></div><div class="nv"><div class="tags"><span class="t">정강신경<em>Tibial n.</em></span></div><p class="raw">정강신경(S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">뒤정강동맥<em>Posterior tibial a.</em></span>
+<span class="t">종아리동맥<em>Fibular (peroneal) a.</em></span></div></div></div>
+<div class="m" data-s="장딴지빗근 Plantaris 정강신경(S1-S2) 오금동맥 종아리 정강신경 오금동맥" data-n="정강신경" data-a="오금동맥"><div><span class="k">장딴지빗근</span><span class="e">Plantaris</span><span class="act">발바닥쪽굽힘 보조(미약, 힘줄이 가늘고 김)</span></div><div class="nv"><div class="tags"><span class="t">정강신경<em>Tibial n.</em></span></div><p class="raw">정강신경(S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">오금동맥<em>Popliteal a.</em></span></div></div></div>
+<div class="m" data-s="오금근 Popliteus 정강신경(L4-S1) 오금동맥 종아리 정강신경 오금동맥" data-n="정강신경" data-a="오금동맥"><div><span class="k">오금근</span><span class="e">Popliteus</span><span class="act">무릎 굽힘 개시(&#x27;unlock&#x27;), 가쪽반달연골을 뒤로 당김</span></div><div class="nv"><div class="tags"><span class="t">정강신경<em>Tibial n.</em></span></div><p class="raw">정강신경(L4-S1)</p></div><div class="ar"><div class="tags"><span class="t">오금동맥<em>Popliteal a.</em></span></div></div></div>
+<div class="m" data-s="긴발가락굽힘근 Flexor digitorum longus 정강신경(L5-S2) 뒤정강동맥 종아리 정강신경 뒤정강동맥" data-n="정강신경" data-a="뒤정강동맥"><div><span class="k">긴발가락굽힘근</span><span class="e">Flexor digitorum longus</span><span class="act">발가락 굽힘, 발바닥쪽굽힘 보조</span></div><div class="nv"><div class="tags"><span class="t">정강신경<em>Tibial n.</em></span></div><p class="raw">정강신경(L5-S2)</p></div><div class="ar"><div class="tags"><span class="t">뒤정강동맥<em>Posterior tibial a.</em></span></div></div></div>
+<div class="m" data-s="긴엄지굽힘근 Flexor hallucis longus 정강신경(L5-S2) 종아리동맥 종아리 정강신경 종아리동맥" data-n="정강신경" data-a="종아리동맥"><div><span class="k">긴엄지굽힘근</span><span class="e">Flexor hallucis longus</span><span class="act">엄지 굽힘, 발바닥쪽굽힘 보조(&#x27;푸시오프&#x27;에 중요)</span></div><div class="nv"><div class="tags"><span class="t">정강신경<em>Tibial n.</em></span></div><p class="raw">정강신경(L5-S2)</p></div><div class="ar"><div class="tags"><span class="t">종아리동맥<em>Fibular (peroneal) a.</em></span></div></div></div>
+<div class="m" data-s="뒤정강근 Tibialis posterior 정강신경(L4-L5) 뒤정강동맥 종아리 정강신경 뒤정강동맥" data-n="정강신경" data-a="뒤정강동맥"><div><span class="k">뒤정강근</span><span class="e">Tibialis posterior</span><span class="act">발바닥쪽굽힘 + 안쪽번짐, 안쪽세로활 지지(주근)</span></div><div class="nv"><div class="tags"><span class="t">정강신경<em>Tibial n.</em></span></div><p class="raw">정강신경(L4-L5)</p></div><div class="ar"><div class="tags"><span class="t">뒤정강동맥<em>Posterior tibial a.</em></span></div></div></div>
+</section>
+<section data-region="발">
+<div class="sh"><h2>발</h2><span class="en">Foot</span><span class="n">12</span></div>
+<div class="hdr"><b>근육 / Muscle</b><b>지배신경 / Nerve</b><b>영양동맥 / Artery</b></div>
+<div class="m" data-s="짧은발가락폄근 Extensor digitorum brevis 깊은종아리신경(S1-S2) 가쪽발등동맥 발 깊은종아리신경 가쪽발등동맥" data-n="깊은종아리신경" data-a="가쪽발등동맥"><div><span class="k">짧은발가락폄근</span><span class="e">Extensor digitorum brevis</span><span class="act">2-4번 발가락 폄 보조</span></div><div class="nv"><div class="tags"><span class="t">깊은종아리신경<em>Deep fibular n.</em></span></div><p class="raw">깊은종아리신경(S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">가쪽발등동맥<em>Lateral tarsal a.</em></span></div></div></div>
+<div class="m" data-s="짧은엄지폄근 Extensor hallucis brevis 깊은종아리신경(S1-S2) 발등동맥 발 깊은종아리신경 발등동맥" data-n="깊은종아리신경" data-a="발등동맥"><div><span class="k">짧은엄지폄근</span><span class="e">Extensor hallucis brevis</span><span class="act">엄지 폄 보조</span></div><div class="nv"><div class="tags"><span class="t">깊은종아리신경<em>Deep fibular n.</em></span></div><p class="raw">깊은종아리신경(S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">발등동맥<em>Dorsalis pedis a.</em></span></div></div></div>
+<div class="m" data-s="엄지벌림근 Abductor hallucis 안쪽발바닥신경(정강신경 분지, S1-S2) 안쪽발바닥동맥 발 안쪽발바닥신경 안쪽발바닥동맥" data-n="안쪽발바닥신경" data-a="안쪽발바닥동맥"><div><span class="k">엄지벌림근</span><span class="e">Abductor hallucis</span><span class="act">엄지 벌림, 안쪽세로활 지지</span></div><div class="nv"><div class="tags"><span class="t">안쪽발바닥신경<em>Medial plantar n.</em></span></div><p class="raw">안쪽발바닥신경(정강신경 분지, S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">안쪽발바닥동맥<em>Medial plantar a.</em></span></div></div></div>
+<div class="m" data-s="짧은발가락굽힘근 Flexor digitorum brevis 안쪽발바닥신경(S1-S2) 안쪽발바닥동맥 발 안쪽발바닥신경 안쪽발바닥동맥" data-n="안쪽발바닥신경" data-a="안쪽발바닥동맥"><div><span class="k">짧은발가락굽힘근</span><span class="e">Flexor digitorum brevis</span><span class="act">발가락 굽힘(PIP)</span></div><div class="nv"><div class="tags"><span class="t">안쪽발바닥신경<em>Medial plantar n.</em></span></div><p class="raw">안쪽발바닥신경(S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">안쪽발바닥동맥<em>Medial plantar a.</em></span></div></div></div>
+<div class="m" data-s="새끼벌림근 Abductor digiti minimi 가쪽발바닥신경(S1-S2) 가쪽발바닥동맥 발 가쪽발바닥신경 가쪽발바닥동맥" data-n="가쪽발바닥신경" data-a="가쪽발바닥동맥"><div><span class="k">새끼벌림근</span><span class="e">Abductor digiti minimi</span><span class="act">새끼발가락 벌림, 가쪽세로활 지지</span></div><div class="nv"><div class="tags"><span class="t">가쪽발바닥신경<em>Lateral plantar n.</em></span></div><p class="raw">가쪽발바닥신경(S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">가쪽발바닥동맥<em>Lateral plantar a.</em></span></div></div></div>
+<div class="m" data-s="발바닥네모근 Quadratus plantae 가쪽발바닥신경(S1-S2) 가쪽발바닥동맥 발 가쪽발바닥신경 가쪽발바닥동맥" data-n="가쪽발바닥신경" data-a="가쪽발바닥동맥"><div><span class="k">발바닥네모근</span><span class="e">Quadratus plantae</span><span class="act">긴발가락굽힘근의 당김 방향을 교정(부착 보조근)</span></div><div class="nv"><div class="tags"><span class="t">가쪽발바닥신경<em>Lateral plantar n.</em></span></div><p class="raw">가쪽발바닥신경(S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">가쪽발바닥동맥<em>Lateral plantar a.</em></span></div></div></div>
+<div class="m" data-s="벌레근(4개) Lumbricals 1번-안쪽발바닥신경 / 2-4번-가쪽발바닥신경 발바닥동맥활 발 가쪽발바닥신경 안쪽발바닥신경 발바닥동맥활" data-n="가쪽발바닥신경|안쪽발바닥신경" data-a="발바닥동맥활"><div><span class="k">벌레근(4개)</span><span class="e">Lumbricals</span><span class="act">발허리발가락관절(MTP) 굽힘 + 발가락뼈사이관절(IP) 폄</span></div><div class="nv"><div class="tags"><span class="t">가쪽발바닥신경<em>Lateral plantar n.</em></span>
+<span class="t">안쪽발바닥신경<em>Medial plantar n.</em></span></div><p class="raw">1번-안쪽발바닥신경 / 2-4번-가쪽발바닥신경</p></div><div class="ar"><div class="tags"><span class="t">발바닥동맥활<em>Plantar arch</em></span></div></div></div>
+<div class="m" data-s="짧은엄지굽힘근 Flexor hallucis brevis 안쪽발바닥신경(S1-S2) 안쪽발바닥동맥 발 안쪽발바닥신경 안쪽발바닥동맥" data-n="안쪽발바닥신경" data-a="안쪽발바닥동맥"><div><span class="k">짧은엄지굽힘근</span><span class="e">Flexor hallucis brevis</span><span class="act">엄지 발허리발가락관절(MTP) 굽힘</span></div><div class="nv"><div class="tags"><span class="t">안쪽발바닥신경<em>Medial plantar n.</em></span></div><p class="raw">안쪽발바닥신경(S1-S2)</p></div><div class="ar"><div class="tags"><span class="t">안쪽발바닥동맥<em>Medial plantar a.</em></span></div></div></div>
+<div class="m" data-s="엄지모음근 Adductor hallucis 가쪽발바닥신경 깊은가지(S2-S3) 발바닥동맥활 발 가쪽발바닥신경 발바닥동맥활" data-n="가쪽발바닥신경" data-a="발바닥동맥활"><div><span class="k">엄지모음근</span><span class="e">Adductor hallucis</span><span class="act">엄지 모음, 발 가로활 지지</span></div><div class="nv"><div class="tags"><span class="t">가쪽발바닥신경<em>Lateral plantar n.</em></span></div><p class="raw">가쪽발바닥신경 깊은가지(S2-S3)</p></div><div class="ar"><div class="tags"><span class="t">발바닥동맥활<em>Plantar arch</em></span></div></div></div>
+<div class="m" data-s="짧은새끼굽힘근 Flexor digiti minimi brevis 가쪽발바닥신경(S2-S3) 가쪽발바닥동맥 발 가쪽발바닥신경 가쪽발바닥동맥" data-n="가쪽발바닥신경" data-a="가쪽발바닥동맥"><div><span class="k">짧은새끼굽힘근</span><span class="e">Flexor digiti minimi brevis</span><span class="act">새끼발가락 MTP 굽힘</span></div><div class="nv"><div class="tags"><span class="t">가쪽발바닥신경<em>Lateral plantar n.</em></span></div><p class="raw">가쪽발바닥신경(S2-S3)</p></div><div class="ar"><div class="tags"><span class="t">가쪽발바닥동맥<em>Lateral plantar a.</em></span></div></div></div>
+<div class="m" data-s="발등쪽뼈사이근(4개) Dorsal interossei 가쪽발바닥신경(S2-S3) 발등쪽동맥활 발 가쪽발바닥신경 발등쪽동맥활" data-n="가쪽발바닥신경" data-a="발등쪽동맥활"><div><span class="k">발등쪽뼈사이근(4개)</span><span class="e">Dorsal interossei</span><span class="act">발가락 벌림(둘째발가락 축 기준 외전)</span></div><div class="nv"><div class="tags"><span class="t">가쪽발바닥신경<em>Lateral plantar n.</em></span></div><p class="raw">가쪽발바닥신경(S2-S3)</p></div><div class="ar"><div class="tags"><span class="t">발등쪽동맥활<em>Dorsal arch of foot</em></span></div></div></div>
+<div class="m" data-s="발바닥쪽뼈사이근(3개) Plantar interossei 가쪽발바닥신경(S2-S3) 발바닥동맥활 발 가쪽발바닥신경 발바닥동맥활" data-n="가쪽발바닥신경" data-a="발바닥동맥활"><div><span class="k">발바닥쪽뼈사이근(3개)</span><span class="e">Plantar interossei</span><span class="act">발가락 모음(둘째발가락 축 기준 내전)</span></div><div class="nv"><div class="tags"><span class="t">가쪽발바닥신경<em>Lateral plantar n.</em></span></div><p class="raw">가쪽발바닥신경(S2-S3)</p></div><div class="ar"><div class="tags"><span class="t">발바닥동맥활<em>Plantar arch</em></span></div></div></div>
+</section>
+</div>
+<p class="empty" id="empty" hidden>조건에 맞는 근육이 없습니다. 필터를 하나 풀어 보세요.</p>
+
+<div class="org-lead" id="organs">
+  <h2>장기의 자율신경과 영양동맥</h2>
+  <p>내장은 뼈대근육과 달리 교감·부교감 두 계통이 함께 지배합니다. 교감신경의 척수분절은 그 장기의 연관통이 나타나는 자리와 같아서, 함께 외워 두면 통증 부위로 장기를 역추적할 수 있습니다.</p>
+  <div class="flag">⚠ 영양동맥은 동맥 자료(62개)의 공급부위에서 역색인한 검증된 값이고, 자율신경 지배는 이 자료집에 원래 없던 항목이라 별도로 작성한 <b>검증 필요</b> 상태입니다.</div>
+  <div class="og-grid"><article class="og"><div class="og-h"><h3>눈알</h3><span class="en">Eyeball</span><span class="rg">머리·목</span></div><dl><div class="ln s"><dt>교감</dt><dd>위목신경절 → 속목동맥신경얼기 · 동공확대근, 위눈꺼풀올림근 민무늬부분</dd></div><div class="ln p"><dt>부교감</dt><dd>눈돌림신경(CN III) → 섬모체신경절 · 동공조임근, 섬모체근</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">속목동맥<em>Internal carotid a.</em></span>
+<span class="t">눈동맥<em>Ophthalmic a.</em></span></div></dd></div></dl><p class="clin">목교감로 손상 시 호르너증후군(동공축소·눈꺼풀처짐·땀없음)</p></article>
+<article class="og"><div class="og-h"><h3>눈물샘</h3><span class="en">Lacrimal gland</span><span class="rg">머리·목</span></div><dl><div class="ln s"><dt>교감</dt><dd>위목신경절(혈관 경유)</dd></div><div class="ln p"><dt>부교감</dt><dd>얼굴신경(CN VII) 큰바위신경 → 날개입천장신경절</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">눈동맥<em>Ophthalmic a.</em></span>
+<span class="t">눈물샘동맥<em>Lacrimal a.</em></span></div></dd></div></dl><p class="clin">악어눈물증후군 — 얼굴신경 재생 오류</p></article>
+<article class="og"><div class="og-h"><h3>귀밑샘</h3><span class="en">Parotid gland</span><span class="rg">머리·목</span></div><dl><div class="ln s"><dt>교감</dt><dd>위목신경절</dd></div><div class="ln p"><dt>부교감</dt><dd>혀인두신경(CN IX) 작은바위신경 → 귀신경절</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">얕은관자동맥<em>Superficial temporal a.</em></span></div></dd></div></dl><p class="clin">귀밑샘 수술 시 얼굴신경 가지 손상 주의</p></article>
+<article class="og"><div class="og-h"><h3>턱밑샘·혀밑샘</h3><span class="en">Submandibular &amp; sublingual glands</span><span class="rg">머리·목</span></div><dl><div class="ln s"><dt>교감</dt><dd>위목신경절</dd></div><div class="ln p"><dt>부교감</dt><dd>얼굴신경(CN VII) 고실끈신경 → 턱밑신경절</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">얼굴동맥<em>Facial a.</em></span>
+<span class="t">혀동맥<em>Lingual a.</em></span></div></dd></div></dl><p class="clin">고실끈신경은 혀 앞 2/3 미각도 함께 전달</p></article>
+<article class="og"><div class="og-h"><h3>갑상샘</h3><span class="en">Thyroid gland</span><span class="rg">머리·목</span></div><dl><div class="ln s"><dt>교감</dt><dd>위·중간·아래목신경절 (혈관운동)</dd></div><div class="ln p"><dt>부교감</dt><dd>없음 — 분비는 뇌하수체 TSH가 조절</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">위갑상샘동맥<em>Superior thyroid a.</em></span>
+<span class="t">아래갑상샘동맥<em>Inferior thyroid a.</em></span></div></dd></div></dl><p class="clin">갑상샘 수술 시 되돌이후두신경 손상 → 목쉼</p></article>
+<article class="og"><div class="og-h"><h3>뇌</h3><span class="en">Brain</span><span class="rg">머리·목</span></div><dl><div class="ln s"><dt>교감</dt><dd>위목신경절 → 혈관벽 신경얼기 (혈관운동만)</dd></div><div class="ln p"><dt>부교감</dt><dd>없음 — 뇌실질에는 자율신경 종말이 없음</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">온목동맥<em>Common carotid a.</em></span>
+<span class="t">속목동맥<em>Internal carotid a.</em></span>
+<span class="t">바깥목동맥<em>External carotid a.</em></span>
+<span class="t">척추동맥<em>Vertebral a.</em></span>
+<span class="t">뇌바닥동맥<em>Basilar a.</em></span>
+<span class="t">대뇌동맥고리 구성동맥<em>Circle of Willis (ACA/MCA/PCA/AComm/PComm)</em></span>
+<span class="t">빗장밑동맥<em>Subclavian a.</em></span></div></dd></div></dl><p class="clin">대뇌동맥고리(윌리스고리)가 곁순환을 담당</p></article>
+<article class="og"><div class="og-h"><h3>심장</h3><span class="en">Heart</span><span class="rg">가슴</span></div><dl><div class="ln s"><dt>교감</dt><dd>T1–T5 → 목·가슴심장신경 · 심박수↑ 수축력↑</dd></div><div class="ln p"><dt>부교감</dt><dd>미주신경(CN X) 심장가지 → 굴심방·방실결절 · 심박수↓</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">오른심장동맥<em>Right coronary a. (RCA)</em></span>
+<span class="t">왼심장동맥<em>Left coronary a. (Left main)</em></span>
+<span class="t">앞심실사이가지<em>Anterior interventricular a. (LAD)</em></span>
+<span class="t">휘돌이가지<em>Circumflex branch</em></span>
+<span class="t">오름대동맥<em>Ascending aorta</em></span>
+<span class="t">가슴대동맥<em>Thoracic aorta (descending)</em></span></div></dd></div></dl><p class="clin">심장 연관통 T1–T4 — 왼팔 안쪽·턱으로 방사</p></article>
+<article class="og"><div class="og-h"><h3>허파·기관지</h3><span class="en">Lungs &amp; bronchi</span><span class="rg">가슴</span></div><dl><div class="ln s"><dt>교감</dt><dd>T2–T5 · 기관지확장, 분비↓</dd></div><div class="ln p"><dt>부교감</dt><dd>미주신경 · 기관지수축, 분비↑</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">허파동맥줄기<em>Pulmonary trunk</em></span>
+<span class="t">오른허파동맥<em>Right pulmonary a.</em></span>
+<span class="t">왼허파동맥<em>Left pulmonary a.</em></span>
+<span class="t">가슴대동맥<em>Thoracic aorta (descending)</em></span>
+<span class="t">기관지동맥<em>Bronchial aa.</em></span></div></dd></div></dl><p class="clin">천식의 기관지수축은 미주신경 매개 — 항콜린제가 듣는 이유</p></article>
+<article class="og"><div class="og-h"><h3>식도</h3><span class="en">Esophagus</span><span class="rg">가슴</span></div><dl><div class="ln s"><dt>교감</dt><dd>가슴 교감신경줄기</dd></div><div class="ln p"><dt>부교감</dt><dd>미주신경 · 연동운동</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">가슴대동맥<em>Thoracic aorta (descending)</em></span>
+<span class="t">식도동맥<em>Esophageal aa.</em></span>
+<span class="t">왼위동맥<em>Left gastric a.</em></span></div></dd></div></dl><p class="clin">아래식도조임근 이완불능(아칼라지아)은 근육층신경얼기 소실</p></article>
+<article class="og"><div class="og-h"><h3>위</h3><span class="en">Stomach</span><span class="rg">배</span></div><dl><div class="ln s"><dt>교감</dt><dd>큰내장신경 T5–T9 → 복강신경절</dd></div><div class="ln p"><dt>부교감</dt><dd>앞·뒤미주신경줄기 · 위산분비↑, 연동↑</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">복강동맥<em>Celiac trunk</em></span>
+<span class="t">온간동맥<em>Common hepatic a.</em></span>
+<span class="t">지라동맥<em>Splenic a.</em></span>
+<span class="t">왼위동맥<em>Left gastric a.</em></span>
+<span class="t">오른위동맥<em>Right gastric a.</em></span>
+<span class="t">위그물막동맥<em>Gastro-omental a.</em></span></div></dd></div></dl><p class="clin">위궤양 연관통 T5–T9 — 명치</p></article>
+<article class="og"><div class="og-h"><h3>간·쓸개</h3><span class="en">Liver &amp; gallbladder</span><span class="rg">배</span></div><dl><div class="ln s"><dt>교감</dt><dd>큰내장신경 T7–T9 → 복강신경얼기</dd></div><div class="ln p"><dt>부교감</dt><dd>미주신경 앞줄기</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">복강동맥<em>Celiac trunk</em></span>
+<span class="t">온간동맥<em>Common hepatic a.</em></span>
+<span class="t">고유간동맥<em>Proper hepatic a.</em></span>
+<span class="t">쓸개동맥<em>Cystic a.</em></span></div></dd></div></dl><p class="clin">쓸개 연관통 — 오른어깨(가로막신경 C3–C5 공유)</p></article>
+<article class="og"><div class="og-h"><h3>이자</h3><span class="en">Pancreas</span><span class="rg">배</span></div><dl><div class="ln s"><dt>교감</dt><dd>큰·작은내장신경 T6–T10</dd></div><div class="ln p"><dt>부교감</dt><dd>미주신경 · 외분비↑</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">복강동맥<em>Celiac trunk</em></span>
+<span class="t">온간동맥<em>Common hepatic a.</em></span>
+<span class="t">지라동맥<em>Splenic a.</em></span></div></dd></div></dl><p class="clin">이자염 통증이 등으로 뻗는 것은 뒤배벽 위치 때문</p></article>
+<article class="og"><div class="og-h"><h3>지라</h3><span class="en">Spleen</span><span class="rg">배</span></div><dl><div class="ln s"><dt>교감</dt><dd>복강신경얼기 (혈관운동)</dd></div><div class="ln p"><dt>부교감</dt><dd>없음</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">복강동맥<em>Celiac trunk</em></span>
+<span class="t">지라동맥<em>Splenic a.</em></span></div></dd></div></dl><p class="clin">지라파열 시 왼어깨 통증(케어징후) — 가로막 자극</p></article>
+<article class="og"><div class="og-h"><h3>작은창자</h3><span class="en">Small intestine</span><span class="rg">배</span></div><dl><div class="ln s"><dt>교감</dt><dd>큰·작은내장신경 T9–T12 → 위창자간막신경절</dd></div><div class="ln p"><dt>부교감</dt><dd>미주신경</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">복강동맥<em>Celiac trunk</em></span>
+<span class="t">온간동맥<em>Common hepatic a.</em></span>
+<span class="t">위창자간막동맥<em>Superior mesenteric a. (SMA)</em></span></div></dd></div></dl><p class="clin">작은창자 연관통 T9–T10 — 배꼽주위</p></article>
+<article class="og"><div class="og-h"><h3>큰창자</h3><span class="en">Large intestine</span><span class="rg">배</span></div><dl><div class="ln s"><dt>교감</dt><dd>작은·가장아래내장신경 T10–L2</dd></div><div class="ln p"><dt>부교감</dt><dd>오른쪽(막창자~가로잘록창자 2/3)은 미주신경 / 왼쪽부터는 골반내장신경 S2–S4</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">위창자간막동맥<em>Superior mesenteric a. (SMA)</em></span>
+<span class="t">아래창자간막동맥<em>Inferior mesenteric a. (IMA)</em></span></div></dd></div></dl><p class="clin">중간창자–뒤창자 경계에서 신경·혈관 지배가 함께 바뀜</p></article>
+<article class="og"><div class="og-h"><h3>콩팥</h3><span class="en">Kidney</span><span class="rg">배</span></div><dl><div class="ln s"><dt>교감</dt><dd>작은·가장아래내장신경 T10–L1 → 콩팥신경얼기</dd></div><div class="ln p"><dt>부교감</dt><dd>미주신경 (기여 미미)</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">콩팥동맥<em>Renal a.</em></span></div></dd></div></dl><p class="clin">요관결석 연관통 T11–L2 — 옆구리에서 사타구니로</p></article>
+<article class="og"><div class="og-h"><h3>부신</h3><span class="en">Adrenal gland</span><span class="rg">배</span></div><dl><div class="ln s"><dt>교감</dt><dd>T10–L1 절전섬유가 신경절 없이 속질에 직접 연접</dd></div><div class="ln p"><dt>부교감</dt><dd>없음</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">아래가로막동맥<em>Inferior phrenic a.</em></span></div></dd></div></dl><p class="clin">부신속질은 변형된 교감신경절 — 아드레날린을 직접 분비</p></article>
+<article class="og"><div class="og-h"><h3>방광</h3><span class="en">Urinary bladder</span><span class="rg">골반</span></div><dl><div class="ln s"><dt>교감</dt><dd>L1–L2 → 아랫배신경얼기 · 저장(속조임근 수축)</dd></div><div class="ln p"><dt>부교감</dt><dd>골반내장신경 S2–S4 · 배뇨(배뇨근 수축)</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">속엉덩동맥<em>Internal iliac a.</em></span></div></dd></div></dl><p class="clin">바깥조임근은 음부신경(S2–S4) 지배 — 수의조절</p></article>
+<article class="og"><div class="og-h"><h3>곧창자·항문</h3><span class="en">Rectum &amp; anus</span><span class="rg">골반</span></div><dl><div class="ln s"><dt>교감</dt><dd>L1–L2 아랫배신경얼기</dd></div><div class="ln p"><dt>부교감</dt><dd>골반내장신경 S2–S4 · 배변</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">아래창자간막동맥<em>Inferior mesenteric a. (IMA)</em></span>
+<span class="t">속엉덩동맥<em>Internal iliac a.</em></span>
+<span class="t">속음부동맥<em>Internal pudendal a.</em></span>
+<span class="t">중간곧창자동맥<em>Middle rectal a.</em></span></div></dd></div></dl><p class="clin">바깥항문조임근은 음부신경 — 수의조절</p></article>
+<article class="og"><div class="og-h"><h3>자궁</h3><span class="en">Uterus</span><span class="rg">골반</span></div><dl><div class="ln s"><dt>교감</dt><dd>T12–L2 → 자궁질신경얼기</dd></div><div class="ln p"><dt>부교감</dt><dd>골반내장신경 S2–S4</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">생식샘동맥<em>Testicular / Ovarian a.</em></span>
+<span class="t">자궁동맥<em>Uterine a.</em></span></div></dd></div></dl><p class="clin">분만 1기 통증 T10–L1, 2기는 음부신경 S2–S4</p></article>
+<article class="og"><div class="og-h"><h3>난소</h3><span class="en">Ovary</span><span class="rg">골반</span></div><dl><div class="ln s"><dt>교감</dt><dd>T10–T11 → 난소신경얼기 (동맥을 따라 하행)</dd></div><div class="ln p"><dt>부교감</dt><dd>미주신경</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">생식샘동맥<em>Testicular / Ovarian a.</em></span>
+<span class="t">자궁동맥<em>Uterine a.</em></span></div></dd></div></dl><p class="clin">난소 통증은 배꼽주위로 연관 — 발생학적 원위치 때문</p></article>
+<article class="og"><div class="og-h"><h3>고환</h3><span class="en">Testis</span><span class="rg">골반</span></div><dl><div class="ln s"><dt>교감</dt><dd>T10–T11 → 고환신경얼기</dd></div><div class="ln p"><dt>부교감</dt><dd>미주신경</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">생식샘동맥<em>Testicular / Ovarian a.</em></span></div></dd></div></dl><p class="clin">고환꼬임 통증이 배로 연관되는 이유도 T10 지배</p></article>
+<article class="og"><div class="og-h"><h3>전립샘·정낭</h3><span class="en">Prostate &amp; seminal vesicle</span><span class="rg">골반</span></div><dl><div class="ln s"><dt>교감</dt><dd>L1–L2 · 사정(정관·정낭 수축)</dd></div><div class="ln p"><dt>부교감</dt><dd>골반내장신경 S2–S4 · 발기</dd></div><div class="ln a"><dt>동맥</dt><dd class="ar"><div class="tags"><span class="t">중간곧창자동맥<em>Middle rectal a.</em></span></div></dd></div></dl><p class="clin">발기는 부교감, 사정은 교감 — “Point and Shoot”</p></article></div>
+</div>
+
+<footer>
+  <span>근육 149 · 신경 50 · 동맥 76 · 장기 23</span>
+  <span>KR 대한해부학회 신용어 · EN Terminologia Anatomica</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  var q=document.getElementById('q'), fn=document.getElementById('fn'), fa=document.getElementById('fa'),
+      chips=[].slice.call(document.querySelectorAll('.chip')),
+      secs=[].slice.call(document.querySelectorAll('#body section')),
+      rows=[].slice.call(document.querySelectorAll('.m')),
+      empty=document.getElementById('empty'), count=document.getElementById('count'),
+      total=rows.length, region='';
+  rows.forEach(function(r){
+    r._s=r.getAttribute('data-s');
+    r._n=r.getAttribute('data-n').split('|');
+    r._a=r.getAttribute('data-a').split('|');
+    r._k=r.querySelector('.k'); r._kt=r._k.textContent;
+  });
+  function mark(el,text,term){
+    if(!term){el.textContent=text;return;}
+    var i=text.indexOf(term);
+    if(i<0){el.textContent=text;return;}
+    el.textContent='';
+    el.appendChild(document.createTextNode(text.slice(0,i)));
+    var m=document.createElement('mark'); m.textContent=text.slice(i,i+term.length);
+    el.appendChild(m); el.appendChild(document.createTextNode(text.slice(i+term.length)));
+  }
+  function run(){
+    var t=q.value.trim(), n=fn.value, a=fa.value, c=0;
+    rows.forEach(function(r){
+      var ok = (!t || r._s.indexOf(t)>=0)
+            && (!n || r._n.indexOf(n)>=0)
+            && (!a || r._a.indexOf(a)>=0);
+      r.hidden=!ok; if(ok){c++; mark(r._k,r._kt,t);}
+    });
+    secs.forEach(function(s){
+      var vis=s.querySelectorAll('.m:not([hidden])').length,
+          on = vis>0 && (!region || s.getAttribute('data-region')===region);
+      s.hidden=!on;
+      if(on) s.querySelector('.n').textContent=vis+(vis===s._t?'':' / '+s._t);
+    });
+    if(region) c=secs.filter(function(s){return !s.hidden;})
+                     .reduce(function(x,s){return x+s.querySelectorAll('.m:not([hidden])').length;},0);
+    empty.hidden=c>0;
+    count.textContent=(t||n||a||region)?c+'개 근육':total+'개 근육 · 13부위';
+  }
+  secs.forEach(function(s){ s._t=s.querySelectorAll('.m').length; });
+  chips.forEach(function(ch){
+    ch.addEventListener('click',function(){
+      var v=ch.getAttribute('data-r');
+      region = (region===v)?'':v;
+      chips.forEach(function(x){x.setAttribute('aria-pressed', x.getAttribute('data-r')===region?'true':'false');});
+      run();
+    });
+  });
+  q.addEventListener('input',run); fn.addEventListener('change',run); fa.addEventListener('change',run);
+  run();
+})();
+</script>

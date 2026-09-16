@@ -1,0 +1,897 @@
+<title>구용어 신용어 대조표</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#F4F4F6; --surface:#FFFFFF; --sunk:#EAEAEF; --line:#D8D8E0; --line-dim:#E6E6EC;
+  --text:#191922; --text-2:#5A5A68; --text-3:#8D8D9C;
+  --old:#8A5340; --new:#2F5D8C; --accent:#2F5D8C;
+  --nv:#2F5D8C; --vs:#9A3B4A; --ms:#4A6B3C; --br:#7A5A96;
+  --bn:#6B6250; --og:#2F6B6B; --et:#6E6E7C;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --sans:'Noto Sans KR',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#131319; --surface:#1A1A22; --sunk:#22222B; --line:#2E2E3A; --line-dim:#25252F;
+  --text:#E5E5EC; --text-2:#9E9EAE; --text-3:#6E6E7E;
+  --old:#D89878; --new:#7FAEDC; --accent:#7FAEDC;
+  --nv:#7FAEDC; --vs:#DB8090; --ms:#9CC182; --br:#B79ED6;
+  --bn:#BCB094; --og:#6FBDBD; --et:#A6A6B6;
+}}
+:root[data-theme="dark"]{
+  --bg:#131319; --surface:#1A1A22; --sunk:#22222B; --line:#2E2E3A; --line-dim:#25252F;
+  --text:#E5E5EC; --text-2:#9E9EAE; --text-3:#6E6E7E;
+  --old:#D89878; --new:#7FAEDC; --accent:#7FAEDC;
+  --nv:#7FAEDC; --vs:#DB8090; --ms:#9CC182; --br:#B79ED6;
+  --bn:#BCB094; --og:#6FBDBD; --et:#A6A6B6;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.6}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px;padding-block:38px 70px}
+
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(23px,4vw,31px);font-weight:700;letter-spacing:-.02em;margin-top:9px;text-wrap:balance}
+.sub{margin-top:8px;font-size:13px;color:var(--text-2);max-width:66ch}
+.stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  padding:7px 13px;display:flex;align-items:baseline;gap:7px}
+.stat b{font-size:18px;font-variant-numeric:tabular-nums;color:var(--accent)}
+.stat span{font-size:11px;color:var(--text-2);font-family:var(--mono)}
+
+.tools{position:sticky;top:0;z-index:5;background:var(--bg);
+  padding-block:14px 12px;margin-top:6px;border-bottom:1px solid var(--line)}
+.search{width:100%;max-width:420px;font-family:var(--sans);font-size:14px;
+  padding:9px 13px;border:1px solid var(--line);border-radius:5px;
+  background:var(--surface);color:var(--text)}
+.search::placeholder{color:var(--text-3)}
+.search:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.hint{margin-top:7px;font-size:11.5px;color:var(--text-3);font-family:var(--mono)}
+#count{color:var(--accent);font-weight:500}
+
+.grid{columns:2;column-gap:16px;margin-top:18px}
+@media (max-width:840px){.grid{columns:1}}
+.cat{break-inside:avoid-column;background:var(--surface);border:1px solid var(--line);
+  border-radius:5px;padding:13px 14px;margin-bottom:14px;border-left:3px solid var(--c)}
+.nv{--c:var(--nv)} .vs{--c:var(--vs)} .ms{--c:var(--ms)} .br{--c:var(--br)}
+.bn{--c:var(--bn)} .og{--c:var(--og)} .et{--c:var(--et)}
+.cat-head{display:flex;align-items:baseline;gap:8px;padding-bottom:8px;
+  margin-bottom:8px;border-bottom:1px solid var(--line-dim)}
+.cat-head h2{font-size:15px;font-weight:700;color:var(--c)}
+.cen{font-family:var(--mono);font-size:10px;color:var(--text-3)}
+.cc{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--text-2);
+  background:var(--sunk);padding:1px 7px;border-radius:3px;font-variant-numeric:tabular-nums}
+
+.rows{display:flex;flex-direction:column}
+.r{display:grid;grid-template-columns:1fr 18px 1fr;gap:6px;align-items:baseline;
+  padding:4px 2px;border-bottom:1px solid var(--line-dim)}
+.r:last-child{border-bottom:none}
+.o{font-size:12.5px;color:var(--old);text-align:right}
+.ar{font-family:var(--mono);font-size:10px;color:var(--text-3);text-align:center}
+.n{font-size:12.5px;font-weight:500}
+mark{background:transparent;color:var(--accent);font-weight:700;text-decoration:underline}
+.cat[hidden],.r[hidden]{display:none}
+.empty{margin-top:26px;text-align:center;color:var(--text-3);font-size:13px}
+
+footer{margin-top:34px;padding-top:15px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:10.5px;color:var(--text-3);display:flex;flex-wrap:wrap;gap:6px 16px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Old → New Korean Anatomical Terms</div>
+  <h1>구용어 · 신용어 대조표</h1>
+  <p class="sub">옛 한자어 해부 용어를 대한해부학회 신용어로 옮긴 대조표입니다. 구용어로 쓰인 교재를 볼 때 찾아 쓰도록 만들었습니다. 이 세션에서 신경·동맥 흐름도를 신용어로 전환하며 실제로 사용한 대응만 모았습니다.</p>
+  <div class="stats"><div class="stat"><b>724</b><span>대조쌍</span></div>
+<div class="stat"><b>7</b><span>계통</span></div></div>
+</header>
+
+<div class="tools">
+  <input id="q" class="search" type="search" placeholder="구용어 또는 신용어로 검색 — 예: 액와, 겨드랑, 좌골" autocomplete="off">
+  <div class="hint"><span id="count"></span> · 양쪽 모두 검색됩니다</div>
+</div>
+
+<div class="grid" id="grid">
+<section class="cat nv" data-cat="신경">
+<div class="cat-head"><h2>신경</h2><span class="cen">Nerves</span><span class="cc">139</span></div>
+<div class="rows">
+<div class="r" data-s="견갑하신경 어깨밑신경"><span class="o">견갑하신경</span><span class="ar">→</span><span class="n">어깨밑신경</span></div>
+<div class="r" data-s="경골신경 정강신경"><span class="o">경골신경</span><span class="ar">→</span><span class="n">정강신경</span></div>
+<div class="r" data-s="경신경고리 목신경고리"><span class="o">경신경고리</span><span class="ar">→</span><span class="n">목신경고리</span></div>
+<div class="r" data-s="경신경총 목신경얼기"><span class="o">경신경총</span><span class="ar">→</span><span class="n">목신경얼기</span></div>
+<div class="r" data-s="경추고리 목신경고리"><span class="o">경추고리</span><span class="ar">→</span><span class="n">목신경고리</span></div>
+<div class="r" data-s="경횡신경 목가로신경"><span class="o">경횡신경</span><span class="ar">→</span><span class="n">목가로신경</span></div>
+<div class="r" data-s="고삭신경 고실끈신경"><span class="o">고삭신경</span><span class="ar">→</span><span class="n">고실끈신경</span></div>
+<div class="r" data-s="고실총 고실신경얼기"><span class="o">고실총</span><span class="ar">→</span><span class="n">고실신경얼기</span></div>
+<div class="r" data-s="고유손바닥가지신경 고유바닥쪽손가락신경"><span class="o">고유손바닥가지신경</span><span class="ar">→</span><span class="n">고유바닥쪽손가락신경</span></div>
+<div class="r" data-s="고유족저지신경 고유발바닥쪽발가락신경"><span class="o">고유족저지신경</span><span class="ar">→</span><span class="n">고유발바닥쪽발가락신경</span></div>
+<div class="r" data-s="관통피신경 관통피부신경"><span class="o">관통피신경</span><span class="ar">→</span><span class="n">관통피부신경</span></div>
+<div class="r" data-s="교근신경 깨물근신경"><span class="o">교근신경</span><span class="ar">→</span><span class="n">깨물근신경</span></div>
+<div class="r" data-s="귀측두신경 귓바퀴관자신경"><span class="o">귀측두신경</span><span class="ar">→</span><span class="n">귓바퀴관자신경</span></div>
+<div class="r" data-s="극돌기신경 가시구멍신경"><span class="o">극돌기신경</span><span class="ar">→</span><span class="n">가시구멍신경</span></div>
+<div class="r" data-s="근피신경 근육피부신경"><span class="o">근피신경</span><span class="ar">→</span><span class="n">근육피부신경</span></div>
+<div class="r" data-s="내이신경 속귀신경"><span class="o">내이신경</span><span class="ar">→</span><span class="n">속귀신경</span></div>
+<div class="r" data-s="내측등쪽피부신경 안쪽등쪽피부신경"><span class="o">내측등쪽피부신경</span><span class="ar">→</span><span class="n">안쪽등쪽피부신경</span></div>
+<div class="r" data-s="내측비복신경 안쪽장딴지신경"><span class="o">내측비복신경</span><span class="ar">→</span><span class="n">안쪽장딴지신경</span></div>
+<div class="r" data-s="내측상완피신경 안쪽위팔피부신경"><span class="o">내측상완피신경</span><span class="ar">→</span><span class="n">안쪽위팔피부신경</span></div>
+<div class="r" data-s="내측슬와피신경 안쪽장딴지피부신경"><span class="o">내측슬와피신경</span><span class="ar">→</span><span class="n">안쪽장딴지피부신경</span></div>
+<div class="r" data-s="내측전완피신경 안쪽아래팔피부신경"><span class="o">내측전완피신경</span><span class="ar">→</span><span class="n">안쪽아래팔피부신경</span></div>
+<div class="r" data-s="내측족저신경 안쪽발바닥신경"><span class="o">내측족저신경</span><span class="ar">→</span><span class="n">안쪽발바닥신경</span></div>
+<div class="r" data-s="내측종피신경 안쪽발꿈치피부신경"><span class="o">내측종피신경</span><span class="ar">→</span><span class="n">안쪽발꿈치피부신경</span></div>
+<div class="r" data-s="내측흉근신경 안쪽가슴근신경"><span class="o">내측흉근신경</span><span class="ar">→</span><span class="n">안쪽가슴근신경</span></div>
+<div class="r" data-s="내후두신경 속후두신경"><span class="o">내후두신경</span><span class="ar">→</span><span class="n">속후두신경</span></div>
+<div class="r" data-s="누액신경 눈물샘신경"><span class="o">누액신경</span><span class="ar">→</span><span class="n">눈물샘신경</span></div>
+<div class="r" data-s="늑간상완피신경 갈비사이위팔신경"><span class="o">늑간상완피신경</span><span class="ar">→</span><span class="n">갈비사이위팔신경</span></div>
+<div class="r" data-s="늑간신경 갈비사이신경"><span class="o">늑간신경</span><span class="ar">→</span><span class="n">갈비사이신경</span></div>
+<div class="r" data-s="늑하신경 갈비밑신경"><span class="o">늑하신경</span><span class="ar">→</span><span class="n">갈비밑신경</span></div>
+<div class="r" data-s="단섬모체신경 짧은섬모체신경"><span class="o">단섬모체신경</span><span class="ar">→</span><span class="n">짧은섬모체신경</span></div>
+<div class="r" data-s="대·소구개신경 큰·작은입천장신경"><span class="o">대·소구개신경</span><span class="ar">→</span><span class="n">큰·작은입천장신경</span></div>
+<div class="r" data-s="대구개신경 큰입천장신경"><span class="o">대구개신경</span><span class="ar">→</span><span class="n">큰입천장신경</span></div>
+<div class="r" data-s="대이개신경 큰귓바퀴신경"><span class="o">대이개신경</span><span class="ar">→</span><span class="n">큰귓바퀴신경</span></div>
+<div class="r" data-s="대추체신경 큰바위신경"><span class="o">대추체신경</span><span class="ar">→</span><span class="n">큰바위신경</span></div>
+<div class="r" data-s="대퇴신경 넙다리신경"><span class="o">대퇴신경</span><span class="ar">→</span><span class="n">넙다리신경</span></div>
+<div class="r" data-s="동굴반회신경 되돌이수막신경"><span class="o">동굴반회신경</span><span class="ar">→</span><span class="n">되돌이수막신경</span></div>
+<div class="r" data-s="동안신경 눈돌림신경"><span class="o">동안신경</span><span class="ar">→</span><span class="n">눈돌림신경</span></div>
+<div class="r" data-s="등견갑신경 어깨등신경"><span class="o">등견갑신경</span><span class="ar">→</span><span class="n">어깨등신경</span></div>
+<div class="r" data-s="등골근신경 등자근신경"><span class="o">등골근신경</span><span class="ar">→</span><span class="n">등자근신경</span></div>
+<div class="r" data-s="등쪽어깨신경 어깨등신경"><span class="o">등쪽어깨신경</span><span class="ar">→</span><span class="n">어깨등신경</span></div>
+<div class="r" data-s="미골신경총 꼬리신경얼기"><span class="o">미골신경총</span><span class="ar">→</span><span class="n">꼬리신경얼기</span></div>
+<div class="r" data-s="반회후두신경 되돌이후두신경"><span class="o">반회후두신경</span><span class="ar">→</span><span class="n">되돌이후두신경</span></div>
+<div class="r" data-s="배측피신경 등쪽피부신경"><span class="o">배측피신경</span><span class="ar">→</span><span class="n">등쪽피부신경</span></div>
+<div class="r" data-s="복재신경 두렁신경"><span class="o">복재신경</span><span class="ar">→</span><span class="n">두렁신경</span></div>
+<div class="r" data-s="부신경 더부신경"><span class="o">부신경</span><span class="ar">→</span><span class="n">더부신경</span></div>
+<div class="r" data-s="비복신경 장딴지신경"><span class="o">비복신경</span><span class="ar">→</span><span class="n">장딴지신경</span></div>
+<div class="r" data-s="비섬모체신경 코섬모체신경"><span class="o">비섬모체신경</span><span class="ar">→</span><span class="n">코섬모체신경</span></div>
+<div class="r" data-s="상견갑신경 어깨위신경"><span class="o">상견갑신경</span><span class="ar">→</span><span class="n">어깨위신경</span></div>
+<div class="r" data-s="상견갑하신경 위어깨밑신경"><span class="o">상견갑하신경</span><span class="ar">→</span><span class="n">위어깨밑신경</span></div>
+<div class="r" data-s="상둔신경 위볼기신경"><span class="o">상둔신경</span><span class="ar">→</span><span class="n">위볼기신경</span></div>
+<div class="r" data-s="상악신경 위턱신경"><span class="o">상악신경</span><span class="ar">→</span><span class="n">위턱신경</span></div>
+<div class="r" data-s="상완신경총 팔신경얼기"><span class="o">상완신경총</span><span class="ar">→</span><span class="n">팔신경얼기</span></div>
+<div class="r" data-s="상전정신경 위안뜰신경"><span class="o">상전정신경</span><span class="ar">→</span><span class="n">위안뜰신경</span></div>
+<div class="r" data-s="상치조신경 위이틀신경"><span class="o">상치조신경</span><span class="ar">→</span><span class="n">위이틀신경</span></div>
+<div class="r" data-s="상후두신경 위후두신경"><span class="o">상후두신경</span><span class="ar">→</span><span class="n">위후두신경</span></div>
+<div class="r" data-s="설신경 혀신경"><span class="o">설신경</span><span class="ar">→</span><span class="n">혀신경</span></div>
+<div class="r" data-s="설인신경 혀인두신경"><span class="o">설인신경</span><span class="ar">→</span><span class="n">혀인두신경</span></div>
+<div class="r" data-s="설하신경 혀밑신경"><span class="o">설하신경</span><span class="ar">→</span><span class="n">혀밑신경</span></div>
+<div class="r" data-s="소구개신경 작은입천장신경"><span class="o">소구개신경</span><span class="ar">→</span><span class="n">작은입천장신경</span></div>
+<div class="r" data-s="소추체신경 작은바위신경"><span class="o">소추체신경</span><span class="ar">→</span><span class="n">작은바위신경</span></div>
+<div class="r" data-s="소후두신경 작은뒤통수신경"><span class="o">소후두신경</span><span class="ar">→</span><span class="n">작은뒤통수신경</span></div>
+<div class="r" data-s="쇄골상신경 빗장위신경"><span class="o">쇄골상신경</span><span class="ar">→</span><span class="n">빗장위신경</span></div>
+<div class="r" data-s="쇄골하신경 빗장밑근신경"><span class="o">쇄골하신경</span><span class="ar">→</span><span class="n">빗장밑근신경</span></div>
+<div class="r" data-s="시신경 시각신경"><span class="o">시신경</span><span class="ar">→</span><span class="n">시각신경</span></div>
+<div class="r" data-s="식도총 식도신경얼기"><span class="o">식도총</span><span class="ar">→</span><span class="n">식도신경얼기</span></div>
+<div class="r" data-s="심비골신경 깊은종아리신경"><span class="o">심비골신경</span><span class="ar">→</span><span class="n">깊은종아리신경</span></div>
+<div class="r" data-s="심장총 심장신경얼기"><span class="o">심장총</span><span class="ar">→</span><span class="n">심장신경얼기</span></div>
+<div class="r" data-s="심측두신경 깊은관자신경"><span class="o">심측두신경</span><span class="ar">→</span><span class="n">깊은관자신경</span></div>
+<div class="r" data-s="악설골근신경 턱목뿔근신경"><span class="o">악설골근신경</span><span class="ar">→</span><span class="n">턱목뿔근신경</span></div>
+<div class="r" data-s="악하신경절 턱밑신경절"><span class="o">악하신경절</span><span class="ar">→</span><span class="n">턱밑신경절</span></div>
+<div class="r" data-s="안면신경 얼굴신경"><span class="o">안면신경</span><span class="ar">→</span><span class="n">얼굴신경</span></div>
+<div class="r" data-s="안신경 눈신경"><span class="o">안신경</span><span class="ar">→</span><span class="n">눈신경</span></div>
+<div class="r" data-s="안와상신경 눈확위신경"><span class="o">안와상신경</span><span class="ar">→</span><span class="n">눈확위신경</span></div>
+<div class="r" data-s="안와하신경 눈확아래신경"><span class="o">안와하신경</span><span class="ar">→</span><span class="n">눈확아래신경</span></div>
+<div class="r" data-s="액와신경 겨드랑신경"><span class="o">액와신경</span><span class="ar">→</span><span class="n">겨드랑신경</span></div>
+<div class="r" data-s="와우신경 달팽이신경"><span class="o">와우신경</span><span class="ar">→</span><span class="n">달팽이신경</span></div>
+<div class="r" data-s="외전신경 갓돌림신경"><span class="o">외전신경</span><span class="ar">→</span><span class="n">갓돌림신경</span></div>
+<div class="r" data-s="외측대퇴피신경 가쪽넙다리피부신경"><span class="o">외측대퇴피신경</span><span class="ar">→</span><span class="n">가쪽넙다리피부신경</span></div>
+<div class="r" data-s="외측비복신경 가쪽장딴지신경"><span class="o">외측비복신경</span><span class="ar">→</span><span class="n">가쪽장딴지신경</span></div>
+<div class="r" data-s="외측상완피신경 가쪽위팔피부신경"><span class="o">외측상완피신경</span><span class="ar">→</span><span class="n">가쪽위팔피부신경</span></div>
+<div class="r" data-s="외측슬와피신경 가쪽장딴지피부신경"><span class="o">외측슬와피신경</span><span class="ar">→</span><span class="n">가쪽장딴지피부신경</span></div>
+<div class="r" data-s="외측전완피신경 가쪽아래팔피부신경"><span class="o">외측전완피신경</span><span class="ar">→</span><span class="n">가쪽아래팔피부신경</span></div>
+<div class="r" data-s="외측족저신경 가쪽발바닥신경"><span class="o">외측족저신경</span><span class="ar">→</span><span class="n">가쪽발바닥신경</span></div>
+<div class="r" data-s="외측흉근신경 가쪽가슴근신경"><span class="o">외측흉근신경</span><span class="ar">→</span><span class="n">가쪽가슴근신경</span></div>
+<div class="r" data-s="외후두신경 바깥후두신경"><span class="o">외후두신경</span><span class="ar">→</span><span class="n">바깥후두신경</span></div>
+<div class="r" data-s="요골신경 노신경"><span class="o">요골신경</span><span class="ar">→</span><span class="n">노신경</span></div>
+<div class="r" data-s="요신경총 허리신경얼기"><span class="o">요신경총</span><span class="ar">→</span><span class="n">허리신경얼기</span></div>
+<div class="r" data-s="음더부신경 음부신경"><span class="o">음더부신경</span><span class="ar">→</span><span class="n">음부신경</span></div>
+<div class="r" data-s="음더부신경총 음부신경얼기"><span class="o">음더부신경총</span><span class="ar">→</span><span class="n">음부신경얼기</span></div>
+<div class="r" data-s="음부대퇴신경 생식넙다리신경"><span class="o">음부대퇴신경</span><span class="ar">→</span><span class="n">생식넙다리신경</span></div>
+<div class="r" data-s="이개측두신경 귓바퀴관자신경"><span class="o">이개측두신경</span><span class="ar">→</span><span class="n">귓바퀴관자신경</span></div>
+<div class="r" data-s="이신경절 귀신경절"><span class="o">이신경절</span><span class="ar">→</span><span class="n">귀신경절</span></div>
+<div class="r" data-s="익구개신경 날개입천장신경"><span class="o">익구개신경</span><span class="ar">→</span><span class="n">날개입천장신경</span></div>
+<div class="r" data-s="익구개신경절 날개입천장신경절"><span class="o">익구개신경절</span><span class="ar">→</span><span class="n">날개입천장신경절</span></div>
+<div class="r" data-s="인두신경총 인두신경얼기"><span class="o">인두신경총</span><span class="ar">→</span><span class="n">인두신경얼기</span></div>
+<div class="r" data-s="인두총 인두신경얼기"><span class="o">인두총</span><span class="ar">→</span><span class="n">인두신경얼기</span></div>
+<div class="r" data-s="장골서혜신경 엉덩샅고랑신경"><span class="o">장골서혜신경</span><span class="ar">→</span><span class="n">엉덩샅고랑신경</span></div>
+<div class="r" data-s="장골하복신경 엉덩아랫배신경"><span class="o">장골하복신경</span><span class="ar">→</span><span class="n">엉덩아랫배신경</span></div>
+<div class="r" data-s="장배신경 긴가슴신경"><span class="o">장배신경</span><span class="ar">→</span><span class="n">긴가슴신경</span></div>
+<div class="r" data-s="장섬모체신경 긴섬모체신경"><span class="o">장섬모체신경</span><span class="ar">→</span><span class="n">긴섬모체신경</span></div>
+<div class="r" data-s="장흉신경 긴가슴신경"><span class="o">장흉신경</span><span class="ar">→</span><span class="n">긴가슴신경</span></div>
+<div class="r" data-s="전골간신경 앞뼈사이신경"><span class="o">전골간신경</span><span class="ar">→</span><span class="n">앞뼈사이신경</span></div>
+<div class="r" data-s="전두신경 이마신경"><span class="o">전두신경</span><span class="ar">→</span><span class="n">이마신경</span></div>
+<div class="r" data-s="전정신경 안뜰신경"><span class="o">전정신경</span><span class="ar">→</span><span class="n">안뜰신경</span></div>
+<div class="r" data-s="전정와우신경 속귀신경"><span class="o">전정와우신경</span><span class="ar">→</span><span class="n">속귀신경</span></div>
+<div class="r" data-s="절치신경 앞니신경"><span class="o">절치신경</span><span class="ar">→</span><span class="n">앞니신경</span></div>
+<div class="r" data-s="좌골신경 궁둥신경"><span class="o">좌골신경</span><span class="ar">→</span><span class="n">궁둥신경</span></div>
+<div class="r" data-s="척골신경 자신경"><span class="o">척골신경</span><span class="ar">→</span><span class="n">자신경</span></div>
+<div class="r" data-s="천골신경총 엉치신경얼기"><span class="o">천골신경총</span><span class="ar">→</span><span class="n">엉치신경얼기</span></div>
+<div class="r" data-s="천비골신경 얕은종아리신경"><span class="o">천비골신경</span><span class="ar">→</span><span class="n">얕은종아리신경</span></div>
+<div class="r" data-s="총비골신경 온종아리신경"><span class="o">총비골신경</span><span class="ar">→</span><span class="n">온종아리신경</span></div>
+<div class="r" data-s="총손바닥가지신경 온바닥쪽손가락신경"><span class="o">총손바닥가지신경</span><span class="ar">→</span><span class="n">온바닥쪽손가락신경</span></div>
+<div class="r" data-s="폐총 허파신경얼기"><span class="o">폐총</span><span class="ar">→</span><span class="n">허파신경얼기</span></div>
+<div class="r" data-s="표재비골신경 얕은종아리신경"><span class="o">표재비골신경</span><span class="ar">→</span><span class="n">얕은종아리신경</span></div>
+<div class="r" data-s="하견갑하신경 아래어깨밑신경"><span class="o">하견갑하신경</span><span class="ar">→</span><span class="n">아래어깨밑신경</span></div>
+<div class="r" data-s="하둔신경 아래볼기신경"><span class="o">하둔신경</span><span class="ar">→</span><span class="n">아래볼기신경</span></div>
+<div class="r" data-s="하복신경총 아래아랫배신경얼기"><span class="o">하복신경총</span><span class="ar">→</span><span class="n">아래아랫배신경얼기</span></div>
+<div class="r" data-s="하악신경 아래턱신경"><span class="o">하악신경</span><span class="ar">→</span><span class="n">아래턱신경</span></div>
+<div class="r" data-s="하외측상완피신경 아래가쪽위팔피부신경"><span class="o">하외측상완피신경</span><span class="ar">→</span><span class="n">아래가쪽위팔피부신경</span></div>
+<div class="r" data-s="하전정신경 아래안뜰신경"><span class="o">하전정신경</span><span class="ar">→</span><span class="n">아래안뜰신경</span></div>
+<div class="r" data-s="하직장신경 아래곧창자신경"><span class="o">하직장신경</span><span class="ar">→</span><span class="n">아래곧창자신경</span></div>
+<div class="r" data-s="하치조신경 아래이틀신경"><span class="o">하치조신경</span><span class="ar">→</span><span class="n">아래이틀신경</span></div>
+<div class="r" data-s="하후두신경 아래후두신경"><span class="o">하후두신경</span><span class="ar">→</span><span class="n">아래후두신경</span></div>
+<div class="r" data-s="항문미골신경 항문꼬리신경"><span class="o">항문미골신경</span><span class="ar">→</span><span class="n">항문꼬리신경</span></div>
+<div class="r" data-s="협골신경 광대신경"><span class="o">협골신경</span><span class="ar">→</span><span class="n">광대신경</span></div>
+<div class="r" data-s="협골안면신경 광대얼굴신경"><span class="o">협골안면신경</span><span class="ar">→</span><span class="n">광대얼굴신경</span></div>
+<div class="r" data-s="협골측두신경 광대관자신경"><span class="o">협골측두신경</span><span class="ar">→</span><span class="n">광대관자신경</span></div>
+<div class="r" data-s="협신경 볼신경"><span class="o">협신경</span><span class="ar">→</span><span class="n">볼신경</span></div>
+<div class="r" data-s="활차상신경 도르래위신경"><span class="o">활차상신경</span><span class="ar">→</span><span class="n">도르래위신경</span></div>
+<div class="r" data-s="활차신경 도르래신경"><span class="o">활차신경</span><span class="ar">→</span><span class="n">도르래신경</span></div>
+<div class="r" data-s="활차하신경 도르래아래신경"><span class="o">활차하신경</span><span class="ar">→</span><span class="n">도르래아래신경</span></div>
+<div class="r" data-s="횡격신경 가로막신경"><span class="o">횡격신경</span><span class="ar">→</span><span class="n">가로막신경</span></div>
+<div class="r" data-s="후골간신경 뒤뼈사이신경"><span class="o">후골간신경</span><span class="ar">→</span><span class="n">뒤뼈사이신경</span></div>
+<div class="r" data-s="후대퇴피신경 뒤넙다리피부신경"><span class="o">후대퇴피신경</span><span class="ar">→</span><span class="n">뒤넙다리피부신경</span></div>
+<div class="r" data-s="후상완피신경 뒤위팔피부신경"><span class="o">후상완피신경</span><span class="ar">→</span><span class="n">뒤위팔피부신경</span></div>
+<div class="r" data-s="후이개신경 뒤귓바퀴신경"><span class="o">후이개신경</span><span class="ar">→</span><span class="n">뒤귓바퀴신경</span></div>
+<div class="r" data-s="후전완피신경 뒤아래팔피부신경"><span class="o">후전완피신경</span><span class="ar">→</span><span class="n">뒤아래팔피부신경</span></div>
+<div class="r" data-s="흉배신경 가슴등신경"><span class="o">흉배신경</span><span class="ar">→</span><span class="n">가슴등신경</span></div>
+<div class="r" data-s="흉신경 가슴신경"><span class="o">흉신경</span><span class="ar">→</span><span class="n">가슴신경</span></div>
+</div></section>
+<section class="cat vs" data-cat="혈관">
+<div class="cat-head"><h2>혈관</h2><span class="cen">Vessels</span><span class="cc">213</span></div>
+<div class="rows">
+<div class="r" data-s="갑상경동맥간 갑상목동맥"><span class="o">갑상경동맥간</span><span class="ar">→</span><span class="n">갑상목동맥</span></div>
+<div class="r" data-s="견갑상동맥 어깨위동맥"><span class="o">견갑상동맥</span><span class="ar">→</span><span class="n">어깨위동맥</span></div>
+<div class="r" data-s="견갑하동맥 어깨밑동맥"><span class="o">견갑하동맥</span><span class="ar">→</span><span class="n">어깨밑동맥</span></div>
+<div class="r" data-s="견갑회선동맥 어깨휘돌이동맥"><span class="o">견갑회선동맥</span><span class="ar">→</span><span class="n">어깨휘돌이동맥</span></div>
+<div class="r" data-s="고유수장지 고유바닥쪽손가락동맥"><span class="o">고유수장지</span><span class="ar">→</span><span class="n">고유바닥쪽손가락동맥</span></div>
+<div class="r" data-s="고유족저지동맥 고유발바닥쪽발가락동맥"><span class="o">고유족저지동맥</span><span class="ar">→</span><span class="n">고유발바닥쪽발가락동맥</span></div>
+<div class="r" data-s="골간동맥 뼈사이동맥"><span class="o">골간동맥</span><span class="ar">→</span><span class="n">뼈사이동맥</span></div>
+<div class="r" data-s="공장동맥 빈창자동맥"><span class="o">공장동맥</span><span class="ar">→</span><span class="n">빈창자동맥</span></div>
+<div class="r" data-s="관상동맥 심장동맥"><span class="o">관상동맥</span><span class="ar">→</span><span class="n">심장동맥</span></div>
+<div class="r" data-s="관주위모세혈관 세뇨관주위모세혈관"><span class="o">관주위모세혈관</span><span class="ar">→</span><span class="n">세뇨관주위모세혈관</span></div>
+<div class="r" data-s="교근동맥 깨물근동맥"><span class="o">교근동맥</span><span class="ar">→</span><span class="n">깨물근동맥</span></div>
+<div class="r" data-s="교동맥 다리뇌동맥"><span class="o">교동맥</span><span class="ar">→</span><span class="n">다리뇌동맥</span></div>
+<div class="r" data-s="궁상동맥 활꼴동맥"><span class="o">궁상동맥</span><span class="ar">→</span><span class="n">활꼴동맥</span></div>
+<div class="r" data-s="근횡격막동맥 근육가로막동맥"><span class="o">근횡격막동맥</span><span class="ar">→</span><span class="n">근육가로막동맥</span></div>
+<div class="r" data-s="기저동맥 뇌바닥동맥"><span class="o">기저동맥</span><span class="ar">→</span><span class="n">뇌바닥동맥</span></div>
+<div class="r" data-s="내경동맥 속목동맥"><span class="o">내경동맥</span><span class="ar">→</span><span class="n">속목동맥</span></div>
+<div class="r" data-s="내음부동맥 속음부동맥"><span class="o">내음부동맥</span><span class="ar">→</span><span class="n">속음부동맥</span></div>
+<div class="r" data-s="내이동맥 미로동맥"><span class="o">내이동맥</span><span class="ar">→</span><span class="n">미로동맥</span></div>
+<div class="r" data-s="내장골동맥 속엉덩동맥"><span class="o">내장골동맥</span><span class="ar">→</span><span class="n">속엉덩동맥</span></div>
+<div class="r" data-s="내측대퇴선회동맥 안쪽넙다리휘돌이동맥"><span class="o">내측대퇴선회동맥</span><span class="ar">→</span><span class="n">안쪽넙다리휘돌이동맥</span></div>
+<div class="r" data-s="내측안검동맥 안쪽눈꺼풀동맥"><span class="o">내측안검동맥</span><span class="ar">→</span><span class="n">안쪽눈꺼풀동맥</span></div>
+<div class="r" data-s="내측족저동맥 안쪽발바닥동맥"><span class="o">내측족저동맥</span><span class="ar">→</span><span class="n">안쪽발바닥동맥</span></div>
+<div class="r" data-s="내측측부 안쪽곁동맥"><span class="o">내측측부</span><span class="ar">→</span><span class="n">안쪽곁동맥</span></div>
+<div class="r" data-s="내측팔꿈치동맥망 안쪽팔꿈치동맥그물"><span class="o">내측팔꿈치동맥망</span><span class="ar">→</span><span class="n">안쪽팔꿈치동맥그물</span></div>
+<div class="r" data-s="내흉동맥 속가슴동맥"><span class="o">내흉동맥</span><span class="ar">→</span><span class="n">속가슴동맥</span></div>
+<div class="r" data-s="누선동맥 눈물샘동맥"><span class="o">누선동맥</span><span class="ar">→</span><span class="n">눈물샘동맥</span></div>
+<div class="r" data-s="늑경동맥간 갈비목동맥"><span class="o">늑경동맥간</span><span class="ar">→</span><span class="n">갈비목동맥</span></div>
+<div class="r" data-s="늑하동맥 갈비밑동맥"><span class="o">늑하동맥</span><span class="ar">→</span><span class="n">갈비밑동맥</span></div>
+<div class="r" data-s="단위동맥 짧은위동맥"><span class="o">단위동맥</span><span class="ar">→</span><span class="n">짧은위동맥</span></div>
+<div class="r" data-s="담낭동맥 쓸개동맥"><span class="o">담낭동맥</span><span class="ar">→</span><span class="n">쓸개동맥</span></div>
+<div class="r" data-s="대구개동맥 큰입천장동맥"><span class="o">대구개동맥</span><span class="ar">→</span><span class="n">큰입천장동맥</span></div>
+<div class="r" data-s="대동맥궁 대동맥활"><span class="o">대동맥궁</span><span class="ar">→</span><span class="n">대동맥활</span></div>
+<div class="r" data-s="대췌동맥 큰이자동맥"><span class="o">대췌동맥</span><span class="ar">→</span><span class="n">큰이자동맥</span></div>
+<div class="r" data-s="대퇴동맥 넙다리동맥"><span class="o">대퇴동맥</span><span class="ar">→</span><span class="n">넙다리동맥</span></div>
+<div class="r" data-s="대퇴심동맥 깊넙다리동맥"><span class="o">대퇴심동맥</span><span class="ar">→</span><span class="n">깊넙다리동맥</span></div>
+<div class="r" data-s="맹장동맥 막창자동맥"><span class="o">맹장동맥</span><span class="ar">→</span><span class="n">막창자동맥</span></div>
+<div class="r" data-s="무명동맥 팔머리동맥"><span class="o">무명동맥</span><span class="ar">→</span><span class="n">팔머리동맥</span></div>
+<div class="r" data-s="무지주동맥 엄지동맥"><span class="o">무지주동맥</span><span class="ar">→</span><span class="n">엄지동맥</span></div>
+<div class="r" data-s="배비동맥 등쪽코동맥"><span class="o">배비동맥</span><span class="ar">→</span><span class="n">등쪽코동맥</span></div>
+<div class="r" data-s="배측손목망 등쪽손목동맥그물"><span class="o">배측손목망</span><span class="ar">→</span><span class="n">등쪽손목동맥그물</span></div>
+<div class="r" data-s="복강동맥간 복강동맥"><span class="o">복강동맥간</span><span class="ar">→</span><span class="n">복강동맥</span></div>
+<div class="r" data-s="복대동맥 배대동맥"><span class="o">복대동맥</span><span class="ar">→</span><span class="n">배대동맥</span></div>
+<div class="r" data-s="복부대동맥 배대동맥"><span class="o">복부대동맥</span><span class="ar">→</span><span class="n">배대동맥</span></div>
+<div class="r" data-s="부속수막동맥 덧뇌막동맥"><span class="o">부속수막동맥</span><span class="ar">→</span><span class="n">덧뇌막동맥</span></div>
+<div class="r" data-s="부신동맥 콩팥위샘동맥"><span class="o">부신동맥</span><span class="ar">→</span><span class="n">콩팥위샘동맥</span></div>
+<div class="r" data-s="비골동맥 종아리동맥"><span class="o">비골동맥</span><span class="ar">→</span><span class="n">종아리동맥</span></div>
+<div class="r" data-s="비복동맥 장딴지동맥"><span class="o">비복동맥</span><span class="ar">→</span><span class="n">장딴지동맥</span></div>
+<div class="r" data-s="비순동맥 코가쪽동맥"><span class="o">비순동맥</span><span class="ar">→</span><span class="n">코가쪽동맥</span></div>
+<div class="r" data-s="비장동맥 지라동맥"><span class="o">비장동맥</span><span class="ar">→</span><span class="n">지라동맥</span></div>
+<div class="r" data-s="상갑상동맥 위갑상샘동맥"><span class="o">상갑상동맥</span><span class="ar">→</span><span class="n">위갑상샘동맥</span></div>
+<div class="r" data-s="상구순동맥 윗입술동맥"><span class="o">상구순동맥</span><span class="ar">→</span><span class="n">윗입술동맥</span></div>
+<div class="r" data-s="상둔동맥 위볼기동맥"><span class="o">상둔동맥</span><span class="ar">→</span><span class="n">위볼기동맥</span></div>
+<div class="r" data-s="상방광동맥 위방광동맥"><span class="o">상방광동맥</span><span class="ar">→</span><span class="n">위방광동맥</span></div>
+<div class="r" data-s="상복벽동맥 위배벽동맥"><span class="o">상복벽동맥</span><span class="ar">→</span><span class="n">위배벽동맥</span></div>
+<div class="r" data-s="상부신동맥 위콩팥위샘동맥"><span class="o">상부신동맥</span><span class="ar">→</span><span class="n">위콩팥위샘동맥</span></div>
+<div class="r" data-s="상소뇌동맥 위소뇌동맥"><span class="o">상소뇌동맥</span><span class="ar">→</span><span class="n">위소뇌동맥</span></div>
+<div class="r" data-s="상슬동맥 위무릎동맥"><span class="o">상슬동맥</span><span class="ar">→</span><span class="n">위무릎동맥</span></div>
+<div class="r" data-s="상악동맥 위턱동맥"><span class="o">상악동맥</span><span class="ar">→</span><span class="n">위턱동맥</span></div>
+<div class="r" data-s="상완동맥 위팔동맥"><span class="o">상완동맥</span><span class="ar">→</span><span class="n">위팔동맥</span></div>
+<div class="r" data-s="상완심동맥 위팔깊은동맥"><span class="o">상완심동맥</span><span class="ar">→</span><span class="n">위팔깊은동맥</span></div>
+<div class="r" data-s="상완회선동맥 위팔휘돌이동맥"><span class="o">상완회선동맥</span><span class="ar">→</span><span class="n">위팔휘돌이동맥</span></div>
+<div class="r" data-s="상인두동맥 인두오름동맥"><span class="o">상인두동맥</span><span class="ar">→</span><span class="n">인두오름동맥</span></div>
+<div class="r" data-s="상장간막동맥 위창자간막동맥"><span class="o">상장간막동맥</span><span class="ar">→</span><span class="n">위창자간막동맥</span></div>
+<div class="r" data-s="상직장동맥 위곧창자동맥"><span class="o">상직장동맥</span><span class="ar">→</span><span class="n">위곧창자동맥</span></div>
+<div class="r" data-s="상췌십이지장동맥 위이자샘창자동맥"><span class="o">상췌십이지장동맥</span><span class="ar">→</span><span class="n">위이자샘창자동맥</span></div>
+<div class="r" data-s="상행경동맥 오름목동맥"><span class="o">상행경동맥</span><span class="ar">→</span><span class="n">오름목동맥</span></div>
+<div class="r" data-s="상횡격동맥 위가로막동맥"><span class="o">상횡격동맥</span><span class="ar">→</span><span class="n">위가로막동맥</span></div>
+<div class="r" data-s="상후두동맥 위후두동맥"><span class="o">상후두동맥</span><span class="ar">→</span><span class="n">위후두동맥</span></div>
+<div class="r" data-s="생식선동맥 생식샘동맥"><span class="o">생식선동맥</span><span class="ar">→</span><span class="n">생식샘동맥</span></div>
+<div class="r" data-s="설동맥 혀동맥"><span class="o">설동맥</span><span class="ar">→</span><span class="n">혀동맥</span></div>
+<div class="r" data-s="설심동맥 혀깊은동맥"><span class="o">설심동맥</span><span class="ar">→</span><span class="n">혀깊은동맥</span></div>
+<div class="r" data-s="설하동맥 혀밑동맥"><span class="o">설하동맥</span><span class="ar">→</span><span class="n">혀밑동맥</span></div>
+<div class="r" data-s="소구개동맥 작은입천장동맥"><span class="o">소구개동맥</span><span class="ar">→</span><span class="n">작은입천장동맥</span></div>
+<div class="r" data-s="소엽간동맥 소엽사이동맥"><span class="o">소엽간동맥</span><span class="ar">→</span><span class="n">소엽사이동맥</span></div>
+<div class="r" data-s="쇄골하동맥 빗장밑동맥"><span class="o">쇄골하동맥</span><span class="ar">→</span><span class="n">빗장밑동맥</span></div>
+<div class="r" data-s="수입세동맥 들세동맥"><span class="o">수입세동맥</span><span class="ar">→</span><span class="n">들세동맥</span></div>
+<div class="r" data-s="수장궁 손바닥동맥활"><span class="o">수장궁</span><span class="ar">→</span><span class="n">손바닥동맥활</span></div>
+<div class="r" data-s="수출세동맥 날세동맥"><span class="o">수출세동맥</span><span class="ar">→</span><span class="n">날세동맥</span></div>
+<div class="r" data-s="슬와동맥 오금동맥"><span class="o">슬와동맥</span><span class="ar">→</span><span class="n">오금동맥</span></div>
+<div class="r" data-s="슬하강동맥 내림무릎동맥"><span class="o">슬하강동맥</span><span class="ar">→</span><span class="n">내림무릎동맥</span></div>
+<div class="r" data-s="시상슬상체동맥 시상무릎체동맥"><span class="o">시상슬상체동맥</span><span class="ar">→</span><span class="n">시상무릎체동맥</span></div>
+<div class="r" data-s="시상천공동맥 시상관통동맥"><span class="o">시상천공동맥</span><span class="ar">→</span><span class="n">시상관통동맥</span></div>
+<div class="r" data-s="신동맥 콩팥동맥"><span class="o">신동맥</span><span class="ar">→</span><span class="n">콩팥동맥</span></div>
+<div class="r" data-s="심경동맥 깊은목동맥"><span class="o">심경동맥</span><span class="ar">→</span><span class="n">깊은목동맥</span></div>
+<div class="r" data-s="심낭횡격막동맥 심장막가로막동맥"><span class="o">심낭횡격막동맥</span><span class="ar">→</span><span class="n">심장막가로막동맥</span></div>
+<div class="r" data-s="심대퇴동맥 깊넙다리동맥"><span class="o">심대퇴동맥</span><span class="ar">→</span><span class="n">깊넙다리동맥</span></div>
+<div class="r" data-s="심상완동맥 위팔깊은동맥"><span class="o">심상완동맥</span><span class="ar">→</span><span class="n">위팔깊은동맥</span></div>
+<div class="r" data-s="심수장궁 깊은손바닥동맥활"><span class="o">심수장궁</span><span class="ar">→</span><span class="n">깊은손바닥동맥활</span></div>
+<div class="r" data-s="심이개동맥 깊은귀동맥"><span class="o">심이개동맥</span><span class="ar">→</span><span class="n">깊은귀동맥</span></div>
+<div class="r" data-s="심장골선회동맥 깊은엉덩휘돌이동맥"><span class="o">심장골선회동맥</span><span class="ar">→</span><span class="n">깊은엉덩휘돌이동맥</span></div>
+<div class="r" data-s="심족저동맥 깊은발바닥동맥"><span class="o">심족저동맥</span><span class="ar">→</span><span class="n">깊은발바닥동맥</span></div>
+<div class="r" data-s="심족저동맥궁 깊은발바닥동맥활"><span class="o">심족저동맥궁</span><span class="ar">→</span><span class="n">깊은발바닥동맥활</span></div>
+<div class="r" data-s="악동맥 위턱동맥"><span class="o">악동맥</span><span class="ar">→</span><span class="n">위턱동맥</span></div>
+<div class="r" data-s="안동맥 눈동맥"><span class="o">안동맥</span><span class="ar">→</span><span class="n">눈동맥</span></div>
+<div class="r" data-s="안면동맥 얼굴동맥"><span class="o">안면동맥</span><span class="ar">→</span><span class="n">얼굴동맥</span></div>
+<div class="r" data-s="안와상동맥 눈확위동맥"><span class="o">안와상동맥</span><span class="ar">→</span><span class="n">눈확위동맥</span></div>
+<div class="r" data-s="액와동맥 겨드랑동맥"><span class="o">액와동맥</span><span class="ar">→</span><span class="n">겨드랑동맥</span></div>
+<div class="r" data-s="엽간동맥 엽사이동맥"><span class="o">엽간동맥</span><span class="ar">→</span><span class="n">엽사이동맥</span></div>
+<div class="r" data-s="완두동맥간 팔머리동맥"><span class="o">완두동맥간</span><span class="ar">→</span><span class="n">팔머리동맥</span></div>
+<div class="r" data-s="외경동맥 바깥목동맥"><span class="o">외경동맥</span><span class="ar">→</span><span class="n">바깥목동맥</span></div>
+<div class="r" data-s="외음부동맥 바깥음부동맥"><span class="o">외음부동맥</span><span class="ar">→</span><span class="n">바깥음부동맥</span></div>
+<div class="r" data-s="외장골동맥 바깥엉덩동맥"><span class="o">외장골동맥</span><span class="ar">→</span><span class="n">바깥엉덩동맥</span></div>
+<div class="r" data-s="외측대퇴선회동맥 가쪽넙다리휘돌이동맥"><span class="o">외측대퇴선회동맥</span><span class="ar">→</span><span class="n">가쪽넙다리휘돌이동맥</span></div>
+<div class="r" data-s="외측선조동맥 가쪽줄무늬체동맥"><span class="o">외측선조동맥</span><span class="ar">→</span><span class="n">가쪽줄무늬체동맥</span></div>
+<div class="r" data-s="외측족저동맥 가쪽발바닥동맥"><span class="o">외측족저동맥</span><span class="ar">→</span><span class="n">가쪽발바닥동맥</span></div>
+<div class="r" data-s="외측천골동맥 가쪽엉치동맥"><span class="o">외측천골동맥</span><span class="ar">→</span><span class="n">가쪽엉치동맥</span></div>
+<div class="r" data-s="외측팔꿈치동맥망 가쪽팔꿈치동맥그물"><span class="o">외측팔꿈치동맥망</span><span class="ar">→</span><span class="n">가쪽팔꿈치동맥그물</span></div>
+<div class="r" data-s="외측흉동맥 가쪽가슴동맥"><span class="o">외측흉동맥</span><span class="ar">→</span><span class="n">가쪽가슴동맥</span></div>
+<div class="r" data-s="왼주간부 왼심장동맥"><span class="o">왼주간부</span><span class="ar">→</span><span class="n">왼심장동맥</span></div>
+<div class="r" data-s="요골동맥 노동맥"><span class="o">요골동맥</span><span class="ar">→</span><span class="n">노동맥</span></div>
+<div class="r" data-s="요골되돌이동맥 노쪽되돌이동맥"><span class="o">요골되돌이동맥</span><span class="ar">→</span><span class="n">노쪽되돌이동맥</span></div>
+<div class="r" data-s="요골반회동맥 노쪽되돌이동맥"><span class="o">요골반회동맥</span><span class="ar">→</span><span class="n">노쪽되돌이동맥</span></div>
+<div class="r" data-s="요골측부동맥 노쪽곁동맥"><span class="o">요골측부동맥</span><span class="ar">→</span><span class="n">노쪽곁동맥</span></div>
+<div class="r" data-s="요동맥 허리동맥"><span class="o">요동맥</span><span class="ar">→</span><span class="n">허리동맥</span></div>
+<div class="r" data-s="우간동맥 오른간동맥"><span class="o">우간동맥</span><span class="ar">→</span><span class="n">오른간동맥</span></div>
+<div class="r" data-s="우결장동맥 오른결장동맥"><span class="o">우결장동맥</span><span class="ar">→</span><span class="n">오른결장동맥</span></div>
+<div class="r" data-s="우관상동맥 오른심장동맥"><span class="o">우관상동맥</span><span class="ar">→</span><span class="n">오른심장동맥</span></div>
+<div class="r" data-s="우위대망동맥 오른위대망동맥"><span class="o">우위대망동맥</span><span class="ar">→</span><span class="n">오른위대망동맥</span></div>
+<div class="r" data-s="우위동맥 오른위동맥"><span class="o">우위동맥</span><span class="ar">→</span><span class="n">오른위동맥</span></div>
+<div class="r" data-s="우폐동맥 오른허파동맥"><span class="o">우폐동맥</span><span class="ar">→</span><span class="n">오른허파동맥</span></div>
+<div class="r" data-s="위십이지장동맥 위샘창자동맥"><span class="o">위십이지장동맥</span><span class="ar">→</span><span class="n">위샘창자동맥</span></div>
+<div class="r" data-s="이하선동맥 턱밑동맥"><span class="o">이하선동맥</span><span class="ar">→</span><span class="n">턱밑동맥</span></div>
+<div class="r" data-s="장요동맥 엉덩허리동맥"><span class="o">장요동맥</span><span class="ar">→</span><span class="n">엉덩허리동맥</span></div>
+<div class="r" data-s="전경골동맥 앞정강동맥"><span class="o">전경골동맥</span><span class="ar">→</span><span class="n">앞정강동맥</span></div>
+<div class="r" data-s="전경골반회동맥 앞정강되돌이동맥"><span class="o">전경골반회동맥</span><span class="ar">→</span><span class="n">앞정강되돌이동맥</span></div>
+<div class="r" data-s="전고실동맥 앞고실동맥"><span class="o">전고실동맥</span><span class="ar">→</span><span class="n">앞고실동맥</span></div>
+<div class="r" data-s="전골간반회동맥 앞뼈사이되돌이동맥"><span class="o">전골간반회동맥</span><span class="ar">→</span><span class="n">앞뼈사이되돌이동맥</span></div>
+<div class="r" data-s="전교통동맥 앞교통동맥"><span class="o">전교통동맥</span><span class="ar">→</span><span class="n">앞교통동맥</span></div>
+<div class="r" data-s="전대뇌동맥 앞대뇌동맥"><span class="o">전대뇌동맥</span><span class="ar">→</span><span class="n">앞대뇌동맥</span></div>
+<div class="r" data-s="전맥락막동맥 앞맥락얼기동맥"><span class="o">전맥락막동맥</span><span class="ar">→</span><span class="n">앞맥락얼기동맥</span></div>
+<div class="r" data-s="전발목동맥 앞복사동맥"><span class="o">전발목동맥</span><span class="ar">→</span><span class="n">앞복사동맥</span></div>
+<div class="r" data-s="전사상동맥 앞벌집동맥"><span class="o">전사상동맥</span><span class="ar">→</span><span class="n">앞벌집동맥</span></div>
+<div class="r" data-s="전상치조동맥 앞위이틀동맥"><span class="o">전상치조동맥</span><span class="ar">→</span><span class="n">앞위이틀동맥</span></div>
+<div class="r" data-s="전척추동맥 앞척수동맥"><span class="o">전척추동맥</span><span class="ar">→</span><span class="n">앞척수동맥</span></div>
+<div class="r" data-s="전하소뇌동맥 앞아래소뇌동맥"><span class="o">전하소뇌동맥</span><span class="ar">→</span><span class="n">앞아래소뇌동맥</span></div>
+<div class="r" data-s="접형구개동맥 나비입천장동맥"><span class="o">접형구개동맥</span><span class="ar">→</span><span class="n">나비입천장동맥</span></div>
+<div class="r" data-s="정중천골동맥 정중엉치동맥"><span class="o">정중천골동맥</span><span class="ar">→</span><span class="n">정중엉치동맥</span></div>
+<div class="r" data-s="족배동맥 발등동맥"><span class="o">족배동맥</span><span class="ar">→</span><span class="n">발등동맥</span></div>
+<div class="r" data-s="좌간동맥 왼간동맥"><span class="o">좌간동맥</span><span class="ar">→</span><span class="n">왼간동맥</span></div>
+<div class="r" data-s="좌결장동맥 왼결장동맥"><span class="o">좌결장동맥</span><span class="ar">→</span><span class="n">왼결장동맥</span></div>
+<div class="r" data-s="좌관상동맥 왼심장동맥"><span class="o">좌관상동맥</span><span class="ar">→</span><span class="n">왼심장동맥</span></div>
+<div class="r" data-s="좌위대망동맥 왼위대망동맥"><span class="o">좌위대망동맥</span><span class="ar">→</span><span class="n">왼위대망동맥</span></div>
+<div class="r" data-s="좌위동맥 왼위동맥"><span class="o">좌위동맥</span><span class="ar">→</span><span class="n">왼위동맥</span></div>
+<div class="r" data-s="좌주관상동맥 왼심장동맥"><span class="o">좌주관상동맥</span><span class="ar">→</span><span class="n">왼심장동맥</span></div>
+<div class="r" data-s="좌폐동맥 왼허파동맥"><span class="o">좌폐동맥</span><span class="ar">→</span><span class="n">왼허파동맥</span></div>
+<div class="r" data-s="중·하직장동맥 중간·아래곧창자동맥"><span class="o">중·하직장동맥</span><span class="ar">→</span><span class="n">중간·아래곧창자동맥</span></div>
+<div class="r" data-s="중간동맥 중간간동맥"><span class="o">중간동맥</span><span class="ar">→</span><span class="n">중간간동맥</span></div>
+<div class="r" data-s="중결장동맥 중간결장동맥"><span class="o">중결장동맥</span><span class="ar">→</span><span class="n">중간결장동맥</span></div>
+<div class="r" data-s="중경막동맥 중간뇌막동맥"><span class="o">중경막동맥</span><span class="ar">→</span><span class="n">중간뇌막동맥</span></div>
+<div class="r" data-s="중뇌막동맥 중간뇌막동맥"><span class="o">중뇌막동맥</span><span class="ar">→</span><span class="n">중간뇌막동맥</span></div>
+<div class="r" data-s="중대뇌동맥 중간대뇌동맥"><span class="o">중대뇌동맥</span><span class="ar">→</span><span class="n">중간대뇌동맥</span></div>
+<div class="r" data-s="중부신동맥 중간콩팥위샘동맥"><span class="o">중부신동맥</span><span class="ar">→</span><span class="n">중간콩팥위샘동맥</span></div>
+<div class="r" data-s="중슬동맥 중간무릎동맥"><span class="o">중슬동맥</span><span class="ar">→</span><span class="n">중간무릎동맥</span></div>
+<div class="r" data-s="중심망막동맥 망막중심동맥"><span class="o">중심망막동맥</span><span class="ar">→</span><span class="n">망막중심동맥</span></div>
+<div class="r" data-s="중직장동맥 중간곧창자동맥"><span class="o">중직장동맥</span><span class="ar">→</span><span class="n">중간곧창자동맥</span></div>
+<div class="r" data-s="지배동맥 발등발가락동맥"><span class="o">지배동맥</span><span class="ar">→</span><span class="n">발등발가락동맥</span></div>
+<div class="r" data-s="직소동맥 곧은세동맥"><span class="o">직소동맥</span><span class="ar">→</span><span class="n">곧은세동맥</span></div>
+<div class="r" data-s="직혈관 곧은혈관"><span class="o">직혈관</span><span class="ar">→</span><span class="n">곧은혈관</span></div>
+<div class="r" data-s="척골동맥 자동맥"><span class="o">척골동맥</span><span class="ar">→</span><span class="n">자동맥</span></div>
+<div class="r" data-s="척골되돌이동맥 자쪽되돌이동맥"><span class="o">척골되돌이동맥</span><span class="ar">→</span><span class="n">자쪽되돌이동맥</span></div>
+<div class="r" data-s="척골반회동맥 자쪽되돌이동맥"><span class="o">척골반회동맥</span><span class="ar">→</span><span class="n">자쪽되돌이동맥</span></div>
+<div class="r" data-s="척골측부동맥 자쪽곁동맥"><span class="o">척골측부동맥</span><span class="ar">→</span><span class="n">자쪽곁동맥</span></div>
+<div class="r" data-s="천복벽동맥 얕은배벽동맥"><span class="o">천복벽동맥</span><span class="ar">→</span><span class="n">얕은배벽동맥</span></div>
+<div class="r" data-s="천수장궁 얕은손바닥동맥활"><span class="o">천수장궁</span><span class="ar">→</span><span class="n">얕은손바닥동맥활</span></div>
+<div class="r" data-s="천장골선회동맥 얕은엉덩휘돌이동맥"><span class="o">천장골선회동맥</span><span class="ar">→</span><span class="n">얕은엉덩휘돌이동맥</span></div>
+<div class="r" data-s="천측두동맥 얕은관자동맥"><span class="o">천측두동맥</span><span class="ar">→</span><span class="n">얕은관자동맥</span></div>
+<div class="r" data-s="총간동맥 온간동맥"><span class="o">총간동맥</span><span class="ar">→</span><span class="n">온간동맥</span></div>
+<div class="r" data-s="총경동맥 온목동맥"><span class="o">총경동맥</span><span class="ar">→</span><span class="n">온목동맥</span></div>
+<div class="r" data-s="총골간동맥 온뼈사이동맥"><span class="o">총골간동맥</span><span class="ar">→</span><span class="n">온뼈사이동맥</span></div>
+<div class="r" data-s="총수장지 온바닥쪽손가락동맥"><span class="o">총수장지</span><span class="ar">→</span><span class="n">온바닥쪽손가락동맥</span></div>
+<div class="r" data-s="총장골동맥 온엉덩동맥"><span class="o">총장골동맥</span><span class="ar">→</span><span class="n">온엉덩동맥</span></div>
+<div class="r" data-s="총족저지동맥 온발바닥쪽발가락동맥"><span class="o">총족저지동맥</span><span class="ar">→</span><span class="n">온발바닥쪽발가락동맥</span></div>
+<div class="r" data-s="최상늑간동맥 최위갈비사이동맥"><span class="o">최상늑간동맥</span><span class="ar">→</span><span class="n">최위갈비사이동맥</span></div>
+<div class="r" data-s="최상흉동맥 최상가슴동맥"><span class="o">최상흉동맥</span><span class="ar">→</span><span class="n">최상가슴동맥</span></div>
+<div class="r" data-s="추골동맥 척추동맥"><span class="o">추골동맥</span><span class="ar">→</span><span class="n">척추동맥</span></div>
+<div class="r" data-s="충수동맥 막창자꼬리동맥"><span class="o">충수동맥</span><span class="ar">→</span><span class="n">막창자꼬리동맥</span></div>
+<div class="r" data-s="폐쇄공동맥 폐쇄동맥"><span class="o">폐쇄공동맥</span><span class="ar">→</span><span class="n">폐쇄동맥</span></div>
+<div class="r" data-s="하갑상동맥 아래갑상샘동맥"><span class="o">하갑상동맥</span><span class="ar">→</span><span class="n">아래갑상샘동맥</span></div>
+<div class="r" data-s="하구순동맥 아랫입술동맥"><span class="o">하구순동맥</span><span class="ar">→</span><span class="n">아랫입술동맥</span></div>
+<div class="r" data-s="하둔동맥 아래볼기동맥"><span class="o">하둔동맥</span><span class="ar">→</span><span class="n">아래볼기동맥</span></div>
+<div class="r" data-s="하방광동맥 아래방광동맥"><span class="o">하방광동맥</span><span class="ar">→</span><span class="n">아래방광동맥</span></div>
+<div class="r" data-s="하복벽동맥 아래배벽동맥"><span class="o">하복벽동맥</span><span class="ar">→</span><span class="n">아래배벽동맥</span></div>
+<div class="r" data-s="하부신동맥 아래콩팥위샘동맥"><span class="o">하부신동맥</span><span class="ar">→</span><span class="n">아래콩팥위샘동맥</span></div>
+<div class="r" data-s="하슬동맥 아래무릎동맥"><span class="o">하슬동맥</span><span class="ar">→</span><span class="n">아래무릎동맥</span></div>
+<div class="r" data-s="하안와동맥 눈확아래동맥"><span class="o">하안와동맥</span><span class="ar">→</span><span class="n">눈확아래동맥</span></div>
+<div class="r" data-s="하장간막동맥 아래창자간막동맥"><span class="o">하장간막동맥</span><span class="ar">→</span><span class="n">아래창자간막동맥</span></div>
+<div class="r" data-s="하췌십이지장동맥 아래이자샘창자동맥"><span class="o">하췌십이지장동맥</span><span class="ar">→</span><span class="n">아래이자샘창자동맥</span></div>
+<div class="r" data-s="하치조동맥 아래이틀동맥"><span class="o">하치조동맥</span><span class="ar">→</span><span class="n">아래이틀동맥</span></div>
+<div class="r" data-s="하행대동맥 내림대동맥"><span class="o">하행대동맥</span><span class="ar">→</span><span class="n">내림대동맥</span></div>
+<div class="r" data-s="하횡격동맥 아래가로막동맥"><span class="o">하횡격동맥</span><span class="ar">→</span><span class="n">아래가로막동맥</span></div>
+<div class="r" data-s="하횡격막동맥 아래가로막동맥"><span class="o">하횡격막동맥</span><span class="ar">→</span><span class="n">아래가로막동맥</span></div>
+<div class="r" data-s="협골안와동맥 광대눈확동맥"><span class="o">협골안와동맥</span><span class="ar">→</span><span class="n">광대눈확동맥</span></div>
+<div class="r" data-s="협측동맥 볼동맥"><span class="o">협측동맥</span><span class="ar">→</span><span class="n">볼동맥</span></div>
+<div class="r" data-s="활차상동맥 도르래위동맥"><span class="o">활차상동맥</span><span class="ar">→</span><span class="n">도르래위동맥</span></div>
+<div class="r" data-s="회결장동맥 돌창자결장동맥"><span class="o">회결장동맥</span><span class="ar">→</span><span class="n">돌창자결장동맥</span></div>
+<div class="r" data-s="회장동맥 돌창자동맥"><span class="o">회장동맥</span><span class="ar">→</span><span class="n">돌창자동맥</span></div>
+<div class="r" data-s="횡경부동맥 목가로동맥"><span class="o">횡경부동맥</span><span class="ar">→</span><span class="n">목가로동맥</span></div>
+<div class="r" data-s="횡안면동맥 가로얼굴동맥"><span class="o">횡안면동맥</span><span class="ar">→</span><span class="n">가로얼굴동맥</span></div>
+<div class="r" data-s="후경골동맥 뒤정강동맥"><span class="o">후경골동맥</span><span class="ar">→</span><span class="n">뒤정강동맥</span></div>
+<div class="r" data-s="후교통동맥 뒤교통동맥"><span class="o">후교통동맥</span><span class="ar">→</span><span class="n">뒤교통동맥</span></div>
+<div class="r" data-s="후늑간동맥 뒤갈비사이동맥"><span class="o">후늑간동맥</span><span class="ar">→</span><span class="n">뒤갈비사이동맥</span></div>
+<div class="r" data-s="후대뇌동맥 뒤대뇌동맥"><span class="o">후대뇌동맥</span><span class="ar">→</span><span class="n">뒤대뇌동맥</span></div>
+<div class="r" data-s="후두동맥 뒤통수동맥"><span class="o">후두동맥</span><span class="ar">→</span><span class="n">뒤통수동맥</span></div>
+<div class="r" data-s="후맥락막동맥 뒤맥락얼기동맥"><span class="o">후맥락막동맥</span><span class="ar">→</span><span class="n">뒤맥락얼기동맥</span></div>
+<div class="r" data-s="후사상동맥 뒤벌집동맥"><span class="o">후사상동맥</span><span class="ar">→</span><span class="n">뒤벌집동맥</span></div>
+<div class="r" data-s="후상치조동맥 뒤위이틀동맥"><span class="o">후상치조동맥</span><span class="ar">→</span><span class="n">뒤위이틀동맥</span></div>
+<div class="r" data-s="후이개동맥 뒤귀동맥"><span class="o">후이개동맥</span><span class="ar">→</span><span class="n">뒤귀동맥</span></div>
+<div class="r" data-s="후척추동맥 뒤척수동맥"><span class="o">후척추동맥</span><span class="ar">→</span><span class="n">뒤척수동맥</span></div>
+<div class="r" data-s="후하소뇌동맥 뒤아래소뇌동맥"><span class="o">후하소뇌동맥</span><span class="ar">→</span><span class="n">뒤아래소뇌동맥</span></div>
+<div class="r" data-s="흉견봉동맥 가슴봉우리동맥"><span class="o">흉견봉동맥</span><span class="ar">→</span><span class="n">가슴봉우리동맥</span></div>
+<div class="r" data-s="흉대동맥 가슴대동맥"><span class="o">흉대동맥</span><span class="ar">→</span><span class="n">가슴대동맥</span></div>
+<div class="r" data-s="흉배동맥 가슴등동맥"><span class="o">흉배동맥</span><span class="ar">→</span><span class="n">가슴등동맥</span></div>
+<div class="r" data-s="흉부하행대동맥 가슴대동맥"><span class="o">흉부하행대동맥</span><span class="ar">→</span><span class="n">가슴대동맥</span></div>
+</div></section>
+<section class="cat ms" data-cat="근육">
+<div class="cat-head"><h2>근육</h2><span class="cen">Muscles</span><span class="cc">143</span></div>
+<div class="rows">
+<div class="r" data-s="갑상설골근 방패목뿔근"><span class="o">갑상설골근</span><span class="ar">→</span><span class="n">방패목뿔근</span></div>
+<div class="r" data-s="견갑거근 어깨올림근"><span class="o">견갑거근</span><span class="ar">→</span><span class="n">어깨올림근</span></div>
+<div class="r" data-s="견갑설골근 어깨목뿔근"><span class="o">견갑설골근</span><span class="ar">→</span><span class="n">어깨목뿔근</span></div>
+<div class="r" data-s="견갑하근 어깨밑근"><span class="o">견갑하근</span><span class="ar">→</span><span class="n">어깨밑근</span></div>
+<div class="r" data-s="경돌설골근 붓목뿔근"><span class="o">경돌설골근</span><span class="ar">→</span><span class="n">붓목뿔근</span></div>
+<div class="r" data-s="경돌설근 붓혀근"><span class="o">경돌설근</span><span class="ar">→</span><span class="n">붓혀근</span></div>
+<div class="r" data-s="경돌인두근 붓인두근"><span class="o">경돌인두근</span><span class="ar">→</span><span class="n">붓인두근</span></div>
+<div class="r" data-s="고막장근 고막긴장근"><span class="o">고막장근</span><span class="ar">→</span><span class="n">고막긴장근</span></div>
+<div class="r" data-s="고환거근 고환올림근"><span class="o">고환거근</span><span class="ar">→</span><span class="n">고환올림근</span></div>
+<div class="r" data-s="골간근 뼈사이근"><span class="o">골간근</span><span class="ar">→</span><span class="n">뼈사이근</span></div>
+<div class="r" data-s="광경근 넓은목근"><span class="o">광경근</span><span class="ar">→</span><span class="n">넓은목근</span></div>
+<div class="r" data-s="광배근 넓은등근"><span class="o">광배근</span><span class="ar">→</span><span class="n">넓은등근</span></div>
+<div class="r" data-s="교근 깨물근"><span class="o">교근</span><span class="ar">→</span><span class="n">깨물근</span></div>
+<div class="r" data-s="구개거근 입천장올림근"><span class="o">구개거근</span><span class="ar">→</span><span class="n">입천장올림근</span></div>
+<div class="r" data-s="구개범장근 입천장긴장근"><span class="o">구개범장근</span><span class="ar">→</span><span class="n">입천장긴장근</span></div>
+<div class="r" data-s="구륜근 입둘레근"><span class="o">구륜근</span><span class="ar">→</span><span class="n">입둘레근</span></div>
+<div class="r" data-s="구해면체근 망울해면체근"><span class="o">구해면체근</span><span class="ar">→</span><span class="n">망울해면체근</span></div>
+<div class="r" data-s="극상근 가시위근"><span class="o">극상근</span><span class="ar">→</span><span class="n">가시위근</span></div>
+<div class="r" data-s="극하근 가시아래근"><span class="o">극하근</span><span class="ar">→</span><span class="n">가시아래근</span></div>
+<div class="r" data-s="꼬리뼈근 꼬리근"><span class="o">꼬리뼈근</span><span class="ar">→</span><span class="n">꼬리근</span></div>
+<div class="r" data-s="내복사근 배속빗근"><span class="o">내복사근</span><span class="ar">→</span><span class="n">배속빗근</span></div>
+<div class="r" data-s="내직근 안쪽곧은근"><span class="o">내직근</span><span class="ar">→</span><span class="n">안쪽곧은근</span></div>
+<div class="r" data-s="내측익돌근 안쪽날개근"><span class="o">내측익돌근</span><span class="ar">→</span><span class="n">안쪽날개근</span></div>
+<div class="r" data-s="내폐쇄근 속폐쇄근"><span class="o">내폐쇄근</span><span class="ar">→</span><span class="n">속폐쇄근</span></div>
+<div class="r" data-s="늑간내근 속갈비사이근"><span class="o">늑간내근</span><span class="ar">→</span><span class="n">속갈비사이근</span></div>
+<div class="r" data-s="늑간외근 바깥갈비사이근"><span class="o">늑간외근</span><span class="ar">→</span><span class="n">바깥갈비사이근</span></div>
+<div class="r" data-s="늑하근 갈비밑근"><span class="o">늑하근</span><span class="ar">→</span><span class="n">갈비밑근</span></div>
+<div class="r" data-s="능형근 마름근"><span class="o">능형근</span><span class="ar">→</span><span class="n">마름근</span></div>
+<div class="r" data-s="단내전근 짧은모음근"><span class="o">단내전근</span><span class="ar">→</span><span class="n">짧은모음근</span></div>
+<div class="r" data-s="단무지굴근 짧은엄지굽힘근"><span class="o">단무지굴근</span><span class="ar">→</span><span class="n">짧은엄지굽힘근</span></div>
+<div class="r" data-s="단무지신근 짧은엄지폄근"><span class="o">단무지신근</span><span class="ar">→</span><span class="n">짧은엄지폄근</span></div>
+<div class="r" data-s="단무지외전근 짧은엄지벌림근"><span class="o">단무지외전근</span><span class="ar">→</span><span class="n">짧은엄지벌림근</span></div>
+<div class="r" data-s="단비골근 짧은종아리근"><span class="o">단비골근</span><span class="ar">→</span><span class="n">짧은종아리근</span></div>
+<div class="r" data-s="단요측수근신근 짧은노쪽손목폄근"><span class="o">단요측수근신근</span><span class="ar">→</span><span class="n">짧은노쪽손목폄근</span></div>
+<div class="r" data-s="단지굴근 짧은발가락굽힘근"><span class="o">단지굴근</span><span class="ar">→</span><span class="n">짧은발가락굽힘근</span></div>
+<div class="r" data-s="단지신근 짧은발가락폄근"><span class="o">단지신근</span><span class="ar">→</span><span class="n">짧은발가락폄근</span></div>
+<div class="r" data-s="대내전근 큰모음근"><span class="o">대내전근</span><span class="ar">→</span><span class="n">큰모음근</span></div>
+<div class="r" data-s="대능형근 큰마름근"><span class="o">대능형근</span><span class="ar">→</span><span class="n">큰마름근</span></div>
+<div class="r" data-s="대둔근 큰볼기근"><span class="o">대둔근</span><span class="ar">→</span><span class="n">큰볼기근</span></div>
+<div class="r" data-s="대원근 큰원근"><span class="o">대원근</span><span class="ar">→</span><span class="n">큰원근</span></div>
+<div class="r" data-s="대퇴근막장근 넙다리근막긴장근"><span class="o">대퇴근막장근</span><span class="ar">→</span><span class="n">넙다리근막긴장근</span></div>
+<div class="r" data-s="대퇴방형근 넙다리네모근"><span class="o">대퇴방형근</span><span class="ar">→</span><span class="n">넙다리네모근</span></div>
+<div class="r" data-s="대퇴사두근 넙다리네갈래근"><span class="o">대퇴사두근</span><span class="ar">→</span><span class="n">넙다리네갈래근</span></div>
+<div class="r" data-s="대퇴이두근 넙다리두갈래근"><span class="o">대퇴이두근</span><span class="ar">→</span><span class="n">넙다리두갈래근</span></div>
+<div class="r" data-s="대흉근 큰가슴근"><span class="o">대흉근</span><span class="ar">→</span><span class="n">큰가슴근</span></div>
+<div class="r" data-s="동공괄약근 동공조임근"><span class="o">동공괄약근</span><span class="ar">→</span><span class="n">동공조임근</span></div>
+<div class="r" data-s="등골근 등자근"><span class="o">등골근</span><span class="ar">→</span><span class="n">등자근</span></div>
+<div class="r" data-s="무지내전근 엄지모음근"><span class="o">무지내전근</span><span class="ar">→</span><span class="n">엄지모음근</span></div>
+<div class="r" data-s="무지대립근 엄지맞섬근"><span class="o">무지대립근</span><span class="ar">→</span><span class="n">엄지맞섬근</span></div>
+<div class="r" data-s="무지외전근 엄지벌림근"><span class="o">무지외전근</span><span class="ar">→</span><span class="n">엄지벌림근</span></div>
+<div class="r" data-s="박근 두덩정강근"><span class="o">박근</span><span class="ar">→</span><span class="n">두덩정강근</span></div>
+<div class="r" data-s="반건양근 반힘줄근"><span class="o">반건양근</span><span class="ar">→</span><span class="n">반힘줄근</span></div>
+<div class="r" data-s="반막양근 반막근"><span class="o">반막양근</span><span class="ar">→</span><span class="n">반막근</span></div>
+<div class="r" data-s="방형회내근 네모엎침근"><span class="o">방형회내근</span><span class="ar">→</span><span class="n">네모엎침근</span></div>
+<div class="r" data-s="복직근 배곧은근"><span class="o">복직근</span><span class="ar">→</span><span class="n">배곧은근</span></div>
+<div class="r" data-s="복횡근 배가로근"><span class="o">복횡근</span><span class="ar">→</span><span class="n">배가로근</span></div>
+<div class="r" data-s="봉공근 넙다리빗근"><span class="o">봉공근</span><span class="ar">→</span><span class="n">넙다리빗근</span></div>
+<div class="r" data-s="비근 코근"><span class="o">비근</span><span class="ar">→</span><span class="n">코근</span></div>
+<div class="r" data-s="비복근 장딴지근"><span class="o">비복근</span><span class="ar">→</span><span class="n">장딴지근</span></div>
+<div class="r" data-s="삼각근 어깨세모근"><span class="o">삼각근</span><span class="ar">→</span><span class="n">어깨세모근</span></div>
+<div class="r" data-s="상사근 위빗근"><span class="o">상사근</span><span class="ar">→</span><span class="n">위빗근</span></div>
+<div class="r" data-s="상쌍자근 위쌍둥이근"><span class="o">상쌍자근</span><span class="ar">→</span><span class="n">위쌍둥이근</span></div>
+<div class="r" data-s="상안검거근 위눈꺼풀올림근"><span class="o">상안검거근</span><span class="ar">→</span><span class="n">위눈꺼풀올림근</span></div>
+<div class="r" data-s="상완근 위팔근"><span class="o">상완근</span><span class="ar">→</span><span class="n">위팔근</span></div>
+<div class="r" data-s="상완삼두근 위팔세갈래근"><span class="o">상완삼두근</span><span class="ar">→</span><span class="n">위팔세갈래근</span></div>
+<div class="r" data-s="상완이두근 위팔두갈래근"><span class="o">상완이두근</span><span class="ar">→</span><span class="n">위팔두갈래근</span></div>
+<div class="r" data-s="상직근 위곧은근"><span class="o">상직근</span><span class="ar">→</span><span class="n">위곧은근</span></div>
+<div class="r" data-s="설골설근 목뿔혀근"><span class="o">설골설근</span><span class="ar">→</span><span class="n">목뿔혀근</span></div>
+<div class="r" data-s="소관골근 작은광대근"><span class="o">소관골근</span><span class="ar">→</span><span class="n">작은광대근</span></div>
+<div class="r" data-s="소능형근 작은마름근"><span class="o">소능형근</span><span class="ar">→</span><span class="n">작은마름근</span></div>
+<div class="r" data-s="소둔근 작은볼기근"><span class="o">소둔근</span><span class="ar">→</span><span class="n">작은볼기근</span></div>
+<div class="r" data-s="소원근 작은원근"><span class="o">소원근</span><span class="ar">→</span><span class="n">작은원근</span></div>
+<div class="r" data-s="소지구근 새끼두덩근"><span class="o">소지구근</span><span class="ar">→</span><span class="n">새끼두덩근</span></div>
+<div class="r" data-s="소지단굴근 짧은새끼굽힘근"><span class="o">소지단굴근</span><span class="ar">→</span><span class="n">짧은새끼굽힘근</span></div>
+<div class="r" data-s="소지신근 새끼폄근"><span class="o">소지신근</span><span class="ar">→</span><span class="n">새끼폄근</span></div>
+<div class="r" data-s="소지외전근 새끼벌림근"><span class="o">소지외전근</span><span class="ar">→</span><span class="n">새끼벌림근</span></div>
+<div class="r" data-s="소흉근 작은가슴근"><span class="o">소흉근</span><span class="ar">→</span><span class="n">작은가슴근</span></div>
+<div class="r" data-s="쇄골하근 빗장밑근"><span class="o">쇄골하근</span><span class="ar">→</span><span class="n">빗장밑근</span></div>
+<div class="r" data-s="슬와근 오금근"><span class="o">슬와근</span><span class="ar">→</span><span class="n">오금근</span></div>
+<div class="r" data-s="승모근 등세모근"><span class="o">승모근</span><span class="ar">→</span><span class="n">등세모근</span></div>
+<div class="r" data-s="시지신근 집게폄근"><span class="o">시지신근</span><span class="ar">→</span><span class="n">집게폄근</span></div>
+<div class="r" data-s="심지굴근 깊은손가락굽힘근"><span class="o">심지굴근</span><span class="ar">→</span><span class="n">깊은손가락굽힘근</span></div>
+<div class="r" data-s="악설골근 턱목뿔근"><span class="o">악설골근</span><span class="ar">→</span><span class="n">턱목뿔근</span></div>
+<div class="r" data-s="안륜근 눈둘레근"><span class="o">안륜근</span><span class="ar">→</span><span class="n">눈둘레근</span></div>
+<div class="r" data-s="오훼완근 부리위팔근"><span class="o">오훼완근</span><span class="ar">→</span><span class="n">부리위팔근</span></div>
+<div class="r" data-s="외복사근 배바깥빗근"><span class="o">외복사근</span><span class="ar">→</span><span class="n">배바깥빗근</span></div>
+<div class="r" data-s="외요도괄약근 바깥요도조임근"><span class="o">외요도괄약근</span><span class="ar">→</span><span class="n">바깥요도조임근</span></div>
+<div class="r" data-s="외직근 가쪽곧은근"><span class="o">외직근</span><span class="ar">→</span><span class="n">가쪽곧은근</span></div>
+<div class="r" data-s="외측익돌근 가쪽날개근"><span class="o">외측익돌근</span><span class="ar">→</span><span class="n">가쪽날개근</span></div>
+<div class="r" data-s="외폐쇄근 바깥폐쇄근"><span class="o">외폐쇄근</span><span class="ar">→</span><span class="n">바깥폐쇄근</span></div>
+<div class="r" data-s="요방형근 허리네모근"><span class="o">요방형근</span><span class="ar">→</span><span class="n">허리네모근</span></div>
+<div class="r" data-s="요측수근굴근 노쪽손목굽힘근"><span class="o">요측수근굴근</span><span class="ar">→</span><span class="n">노쪽손목굽힘근</span></div>
+<div class="r" data-s="원내회근 원엎침근"><span class="o">원내회근</span><span class="ar">→</span><span class="n">원엎침근</span></div>
+<div class="r" data-s="원회내근 원엎침근"><span class="o">원회내근</span><span class="ar">→</span><span class="n">원엎침근</span></div>
+<div class="r" data-s="윤상갑상근 반지방패근"><span class="o">윤상갑상근</span><span class="ar">→</span><span class="n">반지방패근</span></div>
+<div class="r" data-s="이복근 두힘살근"><span class="o">이복근</span><span class="ar">→</span><span class="n">두힘살근</span></div>
+<div class="r" data-s="이상근 궁둥구멍근"><span class="o">이상근</span><span class="ar">→</span><span class="n">궁둥구멍근</span></div>
+<div class="r" data-s="이설골근 턱끝목뿔근"><span class="o">이설골근</span><span class="ar">→</span><span class="n">턱끝목뿔근</span></div>
+<div class="r" data-s="이설근 턱끝혀근"><span class="o">이설근</span><span class="ar">→</span><span class="n">턱끝혀근</span></div>
+<div class="r" data-s="장내전근 긴모음근"><span class="o">장내전근</span><span class="ar">→</span><span class="n">긴모음근</span></div>
+<div class="r" data-s="장무지굴근 긴엄지굽힘근"><span class="o">장무지굴근</span><span class="ar">→</span><span class="n">긴엄지굽힘근</span></div>
+<div class="r" data-s="장무지신근 긴엄지폄근"><span class="o">장무지신근</span><span class="ar">→</span><span class="n">긴엄지폄근</span></div>
+<div class="r" data-s="장비골근 긴종아리근"><span class="o">장비골근</span><span class="ar">→</span><span class="n">긴종아리근</span></div>
+<div class="r" data-s="장엄지벌림근 긴엄지벌림근"><span class="o">장엄지벌림근</span><span class="ar">→</span><span class="n">긴엄지벌림근</span></div>
+<div class="r" data-s="장요근 엉덩허리근"><span class="o">장요근</span><span class="ar">→</span><span class="n">엉덩허리근</span></div>
+<div class="r" data-s="장요측수근신근 긴노쪽손목폄근"><span class="o">장요측수근신근</span><span class="ar">→</span><span class="n">긴노쪽손목폄근</span></div>
+<div class="r" data-s="장장근 긴손바닥근"><span class="o">장장근</span><span class="ar">→</span><span class="n">긴손바닥근</span></div>
+<div class="r" data-s="장지굴근 긴발가락굽힘근"><span class="o">장지굴근</span><span class="ar">→</span><span class="n">긴발가락굽힘근</span></div>
+<div class="r" data-s="장지신근 긴발가락폄근"><span class="o">장지신근</span><span class="ar">→</span><span class="n">긴발가락폄근</span></div>
+<div class="r" data-s="전거근 앞톱니근"><span class="o">전거근</span><span class="ar">→</span><span class="n">앞톱니근</span></div>
+<div class="r" data-s="전경골근 앞정강근"><span class="o">전경골근</span><span class="ar">→</span><span class="n">앞정강근</span></div>
+<div class="r" data-s="전두근 이마근"><span class="o">전두근</span><span class="ar">→</span><span class="n">이마근</span></div>
+<div class="r" data-s="전이개근 앞귓바퀴근"><span class="o">전이개근</span><span class="ar">→</span><span class="n">앞귓바퀴근</span></div>
+<div class="r" data-s="족저근 장딴지빗근"><span class="o">족저근</span><span class="ar">→</span><span class="n">장딴지빗근</span></div>
+<div class="r" data-s="족저방형근 발바닥네모근"><span class="o">족저방형근</span><span class="ar">→</span><span class="n">발바닥네모근</span></div>
+<div class="r" data-s="좌골해면체근 궁둥해면체근"><span class="o">좌골해면체근</span><span class="ar">→</span><span class="n">궁둥해면체근</span></div>
+<div class="r" data-s="주근 팔꿈치근"><span class="o">주근</span><span class="ar">→</span><span class="n">팔꿈치근</span></div>
+<div class="r" data-s="중둔근 중간볼기근"><span class="o">중둔근</span><span class="ar">→</span><span class="n">중간볼기근</span></div>
+<div class="r" data-s="척추기립근 척주세움근"><span class="o">척추기립근</span><span class="ar">→</span><span class="n">척주세움근</span></div>
+<div class="r" data-s="척추주변근 척주주위근"><span class="o">척추주변근</span><span class="ar">→</span><span class="n">척주주위근</span></div>
+<div class="r" data-s="척측수근굴근 자쪽손목굽힘근"><span class="o">척측수근굴근</span><span class="ar">→</span><span class="n">자쪽손목굽힘근</span></div>
+<div class="r" data-s="척측수근신근 자쪽손목폄근"><span class="o">척측수근신근</span><span class="ar">→</span><span class="n">자쪽손목폄근</span></div>
+<div class="r" data-s="천지굴근 얕은손가락굽힘근"><span class="o">천지굴근</span><span class="ar">→</span><span class="n">얕은손가락굽힘근</span></div>
+<div class="r" data-s="총지신근 손가락폄근"><span class="o">총지신근</span><span class="ar">→</span><span class="n">손가락폄근</span></div>
+<div class="r" data-s="최내늑간근 맨속갈비사이근"><span class="o">최내늑간근</span><span class="ar">→</span><span class="n">맨속갈비사이근</span></div>
+<div class="r" data-s="충양근 벌레근"><span class="o">충양근</span><span class="ar">→</span><span class="n">벌레근</span></div>
+<div class="r" data-s="측두근 관자근"><span class="o">측두근</span><span class="ar">→</span><span class="n">관자근</span></div>
+<div class="r" data-s="치골근 두덩근"><span class="o">치골근</span><span class="ar">→</span><span class="n">두덩근</span></div>
+<div class="r" data-s="하사근 아래빗근"><span class="o">하사근</span><span class="ar">→</span><span class="n">아래빗근</span></div>
+<div class="r" data-s="하순하강근 아랫입술내림근"><span class="o">하순하강근</span><span class="ar">→</span><span class="n">아랫입술내림근</span></div>
+<div class="r" data-s="하쌍자근 아래쌍둥이근"><span class="o">하쌍자근</span><span class="ar">→</span><span class="n">아래쌍둥이근</span></div>
+<div class="r" data-s="하직근 아래곧은근"><span class="o">하직근</span><span class="ar">→</span><span class="n">아래곧은근</span></div>
+<div class="r" data-s="항문거근 항문올림근"><span class="o">항문거근</span><span class="ar">→</span><span class="n">항문올림근</span></div>
+<div class="r" data-s="항문외괄약근 바깥항문조임근"><span class="o">항문외괄약근</span><span class="ar">→</span><span class="n">바깥항문조임근</span></div>
+<div class="r" data-s="회외근 손뒤침근"><span class="o">회외근</span><span class="ar">→</span><span class="n">손뒤침근</span></div>
+<div class="r" data-s="횡흉근 가슴가로근"><span class="o">횡흉근</span><span class="ar">→</span><span class="n">가슴가로근</span></div>
+<div class="r" data-s="후경골근 뒤정강근"><span class="o">후경골근</span><span class="ar">→</span><span class="n">뒤정강근</span></div>
+<div class="r" data-s="후두근 후두근육"><span class="o">후두근</span><span class="ar">→</span><span class="n">후두근육</span></div>
+<div class="r" data-s="후이개근 뒤귓바퀴근"><span class="o">후이개근</span><span class="ar">→</span><span class="n">뒤귓바퀴근</span></div>
+<div class="r" data-s="흉골갑상근 복장방패근"><span class="o">흉골갑상근</span><span class="ar">→</span><span class="n">복장방패근</span></div>
+<div class="r" data-s="흉골설골근 복장목뿔근"><span class="o">흉골설골근</span><span class="ar">→</span><span class="n">복장목뿔근</span></div>
+<div class="r" data-s="흉근 가슴근"><span class="o">흉근</span><span class="ar">→</span><span class="n">가슴근</span></div>
+<div class="r" data-s="흉쇄유돌근 목빗근"><span class="o">흉쇄유돌근</span><span class="ar">→</span><span class="n">목빗근</span></div>
+</div></section>
+<section class="cat br" data-cat="가지·구조">
+<div class="cat-head"><h2>가지·구조</h2><span class="cen">Branches</span><span class="cc">102</span></div>
+<div class="rows">
+<div class="r" data-s="각이랑지 모이랑가지"><span class="o">각이랑지</span><span class="ar">→</span><span class="n">모이랑가지</span></div>
+<div class="r" data-s="간지 간가지"><span class="o">간지</span><span class="ar">→</span><span class="n">간가지</span></div>
+<div class="r" data-s="경부 심장가지 목 심장가지"><span class="o">경부 심장가지</span><span class="ar">→</span><span class="n">목 심장가지</span></div>
+<div class="r" data-s="경유돌공지 붓꼭지구멍가지"><span class="o">경유돌공지</span><span class="ar">→</span><span class="n">붓꼭지구멍가지</span></div>
+<div class="r" data-s="골간반회지 뼈사이되돌이가지"><span class="o">골간반회지</span><span class="ar">→</span><span class="n">뼈사이되돌이가지</span></div>
+<div class="r" data-s="관골구지 절구가지"><span class="o">관골구지</span><span class="ar">→</span><span class="n">절구가지</span></div>
+<div class="r" data-s="관골지 광대가지"><span class="o">관골지</span><span class="ar">→</span><span class="n">광대가지</span></div>
+<div class="r" data-s="관자앞·중·후지 관자앞·중간·뒤가지"><span class="o">관자앞·중·후지</span><span class="ar">→</span><span class="n">관자앞·중간·뒤가지</span></div>
+<div class="r" data-s="관통지 관통가지"><span class="o">관통지</span><span class="ar">→</span><span class="n">관통가지</span></div>
+<div class="r" data-s="교통지 교통가지"><span class="o">교통지</span><span class="ar">→</span><span class="n">교통가지</span></div>
+<div class="r" data-s="내측발목동맥 안쪽복사가지"><span class="o">내측발목동맥</span><span class="ar">→</span><span class="n">안쪽복사가지</span></div>
+<div class="r" data-s="뇌량변연지 뇌들보가장자리가지"><span class="o">뇌량변연지</span><span class="ar">→</span><span class="n">뇌들보가장자리가지</span></div>
+<div class="r" data-s="뇌량주위지 뇌들보둘레가지"><span class="o">뇌량주위지</span><span class="ar">→</span><span class="n">뇌들보둘레가지</span></div>
+<div class="r" data-s="담도지 쓸개가지"><span class="o">담도지</span><span class="ar">→</span><span class="n">쓸개가지</span></div>
+<div class="r" data-s="대각지 대각가지"><span class="o">대각지</span><span class="ar">→</span><span class="n">대각가지</span></div>
+<div class="r" data-s="두개근 머리뿌리"><span class="o">두개근</span><span class="ar">→</span><span class="n">머리뿌리</span></div>
+<div class="r" data-s="두정지 마루가지"><span class="o">두정지</span><span class="ar">→</span><span class="n">마루가지</span></div>
+<div class="r" data-s="두정후두지 마루뒤통수가지"><span class="o">두정후두지</span><span class="ar">→</span><span class="n">마루뒤통수가지</span></div>
+<div class="r" data-s="두정후지 마루뒤가지"><span class="o">두정후지</span><span class="ar">→</span><span class="n">마루뒤가지</span></div>
+<div class="r" data-s="둔각변연지 둔각모서리가지"><span class="o">둔각변연지</span><span class="ar">→</span><span class="n">둔각모서리가지</span></div>
+<div class="r" data-s="등지 등쪽가지"><span class="o">등지</span><span class="ar">→</span><span class="n">등쪽가지</span></div>
+<div class="r" data-s="렌즈핵선조체지 렌즈핵줄무늬체가지"><span class="o">렌즈핵선조체지</span><span class="ar">→</span><span class="n">렌즈핵줄무늬체가지</span></div>
+<div class="r" data-s="배측손목지 등쪽손목가지"><span class="o">배측손목지</span><span class="ar">→</span><span class="n">등쪽손목가지</span></div>
+<div class="r" data-s="배측지 등쪽가지"><span class="o">배측지</span><span class="ar">→</span><span class="n">등쪽가지</span></div>
+<div class="r" data-s="백교통지 흰교통가지"><span class="o">백교통지</span><span class="ar">→</span><span class="n">흰교통가지</span></div>
+<div class="r" data-s="복강지 복강가지"><span class="o">복강지</span><span class="ar">→</span><span class="n">복강가지</span></div>
+<div class="r" data-s="부신지 콩팥위샘가지"><span class="o">부신지</span><span class="ar">→</span><span class="n">콩팥위샘가지</span></div>
+<div class="r" data-s="비장지 지라가지"><span class="o">비장지</span><span class="ar">→</span><span class="n">지라가지</span></div>
+<div class="r" data-s="설배지 혀등가지"><span class="o">설배지</span><span class="ar">→</span><span class="n">혀등가지</span></div>
+<div class="r" data-s="설지 혀가지"><span class="o">설지</span><span class="ar">→</span><span class="n">혀가지</span></div>
+<div class="r" data-s="쇄골지 빗장가지"><span class="o">쇄골지</span><span class="ar">→</span><span class="n">빗장가지</span></div>
+<div class="r" data-s="수막지 수막가지"><span class="o">수막지</span><span class="ar">→</span><span class="n">수막가지</span></div>
+<div class="r" data-s="수장지 손바닥가지"><span class="o">수장지</span><span class="ar">→</span><span class="n">손바닥가지</span></div>
+<div class="r" data-s="신장지 콩팥가지"><span class="o">신장지</span><span class="ar">→</span><span class="n">콩팥가지</span></div>
+<div class="r" data-s="심낭동맥 심장막가지"><span class="o">심낭동맥</span><span class="ar">→</span><span class="n">심장막가지</span></div>
+<div class="r" data-s="안와전두지 눈확이마가지"><span class="o">안와전두지</span><span class="ar">→</span><span class="n">눈확이마가지</span></div>
+<div class="r" data-s="외측피지 가쪽피부가지"><span class="o">외측피지</span><span class="ar">→</span><span class="n">가쪽피부가지</span></div>
+<div class="r" data-s="요천골간 허리엉치신경줄기"><span class="o">요천골간</span><span class="ar">→</span><span class="n">허리엉치신경줄기</span></div>
+<div class="r" data-s="우변연지 예각모서리가지"><span class="o">우변연지</span><span class="ar">→</span><span class="n">예각모서리가지</span></div>
+<div class="r" data-s="우원추 동맥 오른동맥원뿔가지"><span class="o">우원추 동맥</span><span class="ar">→</span><span class="n">오른동맥원뿔가지</span></div>
+<div class="r" data-s="이개지 귓바퀴가지"><span class="o">이개지</span><span class="ar">→</span><span class="n">귓바퀴가지</span></div>
+<div class="r" data-s="전·후지 앞·뒤가지"><span class="o">전·후지</span><span class="ar">→</span><span class="n">앞·뒤가지</span></div>
+<div class="r" data-s="전·후회결장지 앞·뒤돌창자결장가지"><span class="o">전·후회결장지</span><span class="ar">→</span><span class="n">앞·뒤돌창자결장가지</span></div>
+<div class="r" data-s="전늑간지 앞갈비사이가지"><span class="o">전늑간지</span><span class="ar">→</span><span class="n">앞갈비사이가지</span></div>
+<div class="r" data-s="전두극지 이마극가지"><span class="o">전두극지</span><span class="ar">→</span><span class="n">이마극가지</span></div>
+<div class="r" data-s="전두지 이마가지"><span class="o">전두지</span><span class="ar">→</span><span class="n">이마가지</span></div>
+<div class="r" data-s="전미주신경간 앞미주신경줄기"><span class="o">전미주신경간</span><span class="ar">→</span><span class="n">앞미주신경줄기</span></div>
+<div class="r" data-s="전방천공지 앞관통가지"><span class="o">전방천공지</span><span class="ar">→</span><span class="n">앞관통가지</span></div>
+<div class="r" data-s="전상췌십이지장지 앞위이자샘창자가지"><span class="o">전상췌십이지장지</span><span class="ar">→</span><span class="n">앞위이자샘창자가지</span></div>
+<div class="r" data-s="전외측발목지 앞가쪽복사가지"><span class="o">전외측발목지</span><span class="ar">→</span><span class="n">앞가쪽복사가지</span></div>
+<div class="r" data-s="전위지 앞위가지"><span class="o">전위지</span><span class="ar">→</span><span class="n">앞위가지</span></div>
+<div class="r" data-s="전이개지 앞귓바퀴가지"><span class="o">전이개지</span><span class="ar">→</span><span class="n">앞귓바퀴가지</span></div>
+<div class="r" data-s="전중격지 앞심실사이막가지"><span class="o">전중격지</span><span class="ar">→</span><span class="n">앞심실사이막가지</span></div>
+<div class="r" data-s="절치지 앞니가지"><span class="o">절치지</span><span class="ar">→</span><span class="n">앞니가지</span></div>
+<div class="r" data-s="정낭동맥 정낭가지"><span class="o">정낭동맥</span><span class="ar">→</span><span class="n">정낭가지</span></div>
+<div class="r" data-s="정중신경 내측두 정중신경 안쪽뿌리"><span class="o">정중신경 내측두</span><span class="ar">→</span><span class="n">정중신경 안쪽뿌리</span></div>
+<div class="r" data-s="정중신경 외측두 정중신경 가쪽뿌리"><span class="o">정중신경 외측두</span><span class="ar">→</span><span class="n">정중신경 가쪽뿌리</span></div>
+<div class="r" data-s="족배 근지 발등 근육가지"><span class="o">족배 근지</span><span class="ar">→</span><span class="n">발등 근육가지</span></div>
+<div class="r" data-s="종격동맥 세로칸가지"><span class="o">종격동맥</span><span class="ar">→</span><span class="n">세로칸가지</span></div>
+<div class="r" data-s="종골지 발꿈치가지"><span class="o">종골지</span><span class="ar">→</span><span class="n">발꿈치가지</span></div>
+<div class="r" data-s="좌원추 동맥 왼동맥원뿔가지"><span class="o">좌원추 동맥</span><span class="ar">→</span><span class="n">왼동맥원뿔가지</span></div>
+<div class="r" data-s="좌전하행지 앞심실사이가지"><span class="o">좌전하행지</span><span class="ar">→</span><span class="n">앞심실사이가지</span></div>
+<div class="r" data-s="좌회선지 휘돌이가지"><span class="o">좌회선지</span><span class="ar">→</span><span class="n">휘돌이가지</span></div>
+<div class="r" data-s="중간지 중간가지"><span class="o">중간지</span><span class="ar">→</span><span class="n">중간가지</span></div>
+<div class="r" data-s="중격지 심실사이막가지"><span class="o">중격지</span><span class="ar">→</span><span class="n">심실사이막가지</span></div>
+<div class="r" data-s="중심구지 중심고랑가지"><span class="o">중심구지</span><span class="ar">→</span><span class="n">중심고랑가지</span></div>
+<div class="r" data-s="중심방선지 증심옆가지"><span class="o">중심방선지</span><span class="ar">→</span><span class="n">증심옆가지</span></div>
+<div class="r" data-s="중심전구지 중심앞고랑가지"><span class="o">중심전구지</span><span class="ar">→</span><span class="n">중심앞고랑가지</span></div>
+<div class="r" data-s="중심후구지 중심뒤고랑가지"><span class="o">중심후구지</span><span class="ar">→</span><span class="n">중심뒤고랑가지</span></div>
+<div class="r" data-s="직장하지 아래곧창자가지"><span class="o">직장하지</span><span class="ar">→</span><span class="n">아래곧창자가지</span></div>
+<div class="r" data-s="직장후지 곧창자뒤가지"><span class="o">직장후지</span><span class="ar">→</span><span class="n">곧창자뒤가지</span></div>
+<div class="r" data-s="창자골지 두덩가지"><span class="o">창자골지</span><span class="ar">→</span><span class="n">두덩가지</span></div>
+<div class="r" data-s="척수근 척수뿌리"><span class="o">척수근</span><span class="ar">→</span><span class="n">척수뿌리</span></div>
+<div class="r" data-s="천공지 관통가지"><span class="o">천공지</span><span class="ar">→</span><span class="n">관통가지</span></div>
+<div class="r" data-s="천장지 얕은손바닥가지"><span class="o">천장지</span><span class="ar">→</span><span class="n">얕은손바닥가지</span></div>
+<div class="r" data-s="췌장지 이자가지"><span class="o">췌장지</span><span class="ar">→</span><span class="n">이자가지</span></div>
+<div class="r" data-s="측두심지 깊은관자가지"><span class="o">측두심지</span><span class="ar">→</span><span class="n">깊은관자가지</span></div>
+<div class="r" data-s="측두지 관자가지"><span class="o">측두지</span><span class="ar">→</span><span class="n">관자가지</span></div>
+<div class="r" data-s="측두피지 관자피부가지"><span class="o">측두피지</span><span class="ar">→</span><span class="n">관자피부가지</span></div>
+<div class="r" data-s="측두후지 관자뒤가지"><span class="o">측두후지</span><span class="ar">→</span><span class="n">관자뒤가지</span></div>
+<div class="r" data-s="측부지 곁가지"><span class="o">측부지</span><span class="ar">→</span><span class="n">곁가지</span></div>
+<div class="r" data-s="편도지 편도가지"><span class="o">편도지</span><span class="ar">→</span><span class="n">편도가지</span></div>
+<div class="r" data-s="폐동맥간 허파동맥줄기"><span class="o">폐동맥간</span><span class="ar">→</span><span class="n">허파동맥줄기</span></div>
+<div class="r" data-s="피부지 피부가지"><span class="o">피부지</span><span class="ar">→</span><span class="n">피부가지</span></div>
+<div class="r" data-s="하악연지 턱모서리가지"><span class="o">하악연지</span><span class="ar">→</span><span class="n">턱모서리가지</span></div>
+<div class="r" data-s="하치조 치아지 아래이틀 치아가지"><span class="o">하치조 치아지</span><span class="ar">→</span><span class="n">아래이틀 치아가지</span></div>
+<div class="r" data-s="하행지 내림가지"><span class="o">하행지</span><span class="ar">→</span><span class="n">내림가지</span></div>
+<div class="r" data-s="협근지 볼가지"><span class="o">협근지</span><span class="ar">→</span><span class="n">볼가지</span></div>
+<div class="r" data-s="회색교통지 회색교통가지"><span class="o">회색교통지</span><span class="ar">→</span><span class="n">회색교통가지</span></div>
+<div class="r" data-s="후두극지 뒤통수극가지"><span class="o">후두극지</span><span class="ar">→</span><span class="n">뒤통수극가지</span></div>
+<div class="r" data-s="후두측두지 뒤통수관자가지"><span class="o">후두측두지</span><span class="ar">→</span><span class="n">뒤통수관자가지</span></div>
+<div class="r" data-s="후미주신경간 뒤미주신경줄기"><span class="o">후미주신경간</span><span class="ar">→</span><span class="n">뒤미주신경줄기</span></div>
+<div class="r" data-s="후상췌십이지장지 뒤위이자샘창자가지"><span class="o">후상췌십이지장지</span><span class="ar">→</span><span class="n">뒤위이자샘창자가지</span></div>
+<div class="r" data-s="후외측비지 뒤가쪽코가지"><span class="o">후외측비지</span><span class="ar">→</span><span class="n">뒤가쪽코가지</span></div>
+<div class="r" data-s="후외측지 뒤가쪽가지"><span class="o">후외측지</span><span class="ar">→</span><span class="n">뒤가쪽가지</span></div>
+<div class="r" data-s="후위지 뒤위가지"><span class="o">후위지</span><span class="ar">→</span><span class="n">뒤위가지</span></div>
+<div class="r" data-s="후중격비지 뒤코중격가지"><span class="o">후중격비지</span><span class="ar">→</span><span class="n">뒤코중격가지</span></div>
+<div class="r" data-s="후중격지 뒤심실사이막가지"><span class="o">후중격지</span><span class="ar">→</span><span class="n">뒤심실사이막가지</span></div>
+<div class="r" data-s="후하행지 뒤심실사이가지"><span class="o">후하행지</span><span class="ar">→</span><span class="n">뒤심실사이가지</span></div>
+<div class="r" data-s="흉관지 가슴관가지"><span class="o">흉관지</span><span class="ar">→</span><span class="n">가슴관가지</span></div>
+<div class="r" data-s="흉선동맥 가슴샘가지"><span class="o">흉선동맥</span><span class="ar">→</span><span class="n">가슴샘가지</span></div>
+<div class="r" data-s="흉쇄유돌지 목빗근가지"><span class="o">흉쇄유돌지</span><span class="ar">→</span><span class="n">목빗근가지</span></div>
+</div></section>
+<section class="cat bn" data-cat="뼈·관절">
+<div class="cat-head"><h2>뼈·관절</h2><span class="cen">Bones &amp; Joints</span><span class="cc">16</span></div>
+<div class="rows">
+<div class="r" data-s="경막 경질막"><span class="o">경막</span><span class="ar">→</span><span class="n">경질막</span></div>
+<div class="r" data-s="경정맥공 목정맥구멍"><span class="o">경정맥공</span><span class="ar">→</span><span class="n">목정맥구멍</span></div>
+<div class="r" data-s="구협 목구멍"><span class="o">구협</span><span class="ar">→</span><span class="n">목구멍</span></div>
+<div class="r" data-s="내포 속섬유막"><span class="o">내포</span><span class="ar">→</span><span class="n">속섬유막</span></div>
+<div class="r" data-s="동방결절 굴심방결절"><span class="o">동방결절</span><span class="ar">→</span><span class="n">굴심방결절</span></div>
+<div class="r" data-s="성문아래 점막 성대문아래 점막"><span class="o">성문아래 점막</span><span class="ar">→</span><span class="n">성대문아래 점막</span></div>
+<div class="r" data-s="성문위 점막 성대문위 점막"><span class="o">성문위 점막</span><span class="ar">→</span><span class="n">성대문위 점막</span></div>
+<div class="r" data-s="슬관절 무릎관절"><span class="o">슬관절</span><span class="ar">→</span><span class="n">무릎관절</span></div>
+<div class="r" data-s="식도열공 식도구멍"><span class="o">식도열공</span><span class="ar">→</span><span class="n">식도구멍</span></div>
+<div class="r" data-s="심낭 심장막"><span class="o">심낭</span><span class="ar">→</span><span class="n">심장막</span></div>
+<div class="r" data-s="측두골 관자뼈"><span class="o">측두골</span><span class="ar">→</span><span class="n">관자뼈</span></div>
+<div class="r" data-s="환추 고리뼈"><span class="o">환추</span><span class="ar">→</span><span class="n">고리뼈</span></div>
+<div class="r" data-s="횡격막 가로막"><span class="o">횡격막</span><span class="ar">→</span><span class="n">가로막</span></div>
+<div class="r" data-s="후십자인대 뒤십자인대"><span class="o">후십자인대</span><span class="ar">→</span><span class="n">뒤십자인대</span></div>
+<div class="r" data-s="후종인대 뒤세로인대"><span class="o">후종인대</span><span class="ar">→</span><span class="n">뒤세로인대</span></div>
+<div class="r" data-s="흉추 등뼈"><span class="o">흉추</span><span class="ar">→</span><span class="n">등뼈</span></div>
+</div></section>
+<section class="cat og" data-cat="장기">
+<div class="cat-head"><h2>장기</h2><span class="cen">Organs</span><span class="cc">16</span></div>
+<div class="rows">
+<div class="r" data-s="갑상선 갑상샘"><span class="o">갑상선</span><span class="ar">→</span><span class="n">갑상샘</span></div>
+<div class="r" data-s="공장 빈창자"><span class="o">공장</span><span class="ar">→</span><span class="n">빈창자</span></div>
+<div class="r" data-s="누선 눈물샘"><span class="o">누선</span><span class="ar">→</span><span class="n">눈물샘</span></div>
+<div class="r" data-s="대장 큰창자"><span class="o">대장</span><span class="ar">→</span><span class="n">큰창자</span></div>
+<div class="r" data-s="부신 콩팥위샘"><span class="o">부신</span><span class="ar">→</span><span class="n">콩팥위샘</span></div>
+<div class="r" data-s="비강선 코샘"><span class="o">비강선</span><span class="ar">→</span><span class="n">코샘</span></div>
+<div class="r" data-s="비장 지라"><span class="o">비장</span><span class="ar">→</span><span class="n">지라</span></div>
+<div class="r" data-s="설하선 혀밑샘"><span class="o">설하선</span><span class="ar">→</span><span class="n">혀밑샘</span></div>
+<div class="r" data-s="소장 작은창자"><span class="o">소장</span><span class="ar">→</span><span class="n">작은창자</span></div>
+<div class="r" data-s="십이지장 샘창자"><span class="o">십이지장</span><span class="ar">→</span><span class="n">샘창자</span></div>
+<div class="r" data-s="악하선 턱밑샘"><span class="o">악하선</span><span class="ar">→</span><span class="n">턱밑샘</span></div>
+<div class="r" data-s="이하선 귀밑샘"><span class="o">이하선</span><span class="ar">→</span><span class="n">귀밑샘</span></div>
+<div class="r" data-s="직장 곧창자"><span class="o">직장</span><span class="ar">→</span><span class="n">곧창자</span></div>
+<div class="r" data-s="췌장 이자"><span class="o">췌장</span><span class="ar">→</span><span class="n">이자</span></div>
+<div class="r" data-s="코르티기관 나선기관"><span class="o">코르티기관</span><span class="ar">→</span><span class="n">나선기관</span></div>
+<div class="r" data-s="회장 돌창자"><span class="o">회장</span><span class="ar">→</span><span class="n">돌창자</span></div>
+</div></section>
+<section class="cat et" data-cat="부위·기타">
+<div class="cat-head"><h2>부위·기타</h2><span class="cen">Regions &amp; Others</span><span class="cc">95</span></div>
+<div class="rows">
+<div class="r" data-s="거고근반사 고환올림근반사"><span class="o">거고근반사</span><span class="ar">→</span><span class="n">고환올림근반사</span></div>
+<div class="r" data-s="견봉 어깨봉우리"><span class="o">견봉</span><span class="ar">→</span><span class="n">어깨봉우리</span></div>
+<div class="r" data-s="경구개 단단입천장"><span class="o">경구개</span><span class="ar">→</span><span class="n">단단입천장</span></div>
+<div class="r" data-s="경동맥동 목동맥팽대"><span class="o">경동맥동</span><span class="ar">→</span><span class="n">목동맥팽대</span></div>
+<div class="r" data-s="경동맥체 목동맥토리"><span class="o">경동맥체</span><span class="ar">→</span><span class="n">목동맥토리</span></div>
+<div class="r" data-s="구개편도 입천장편도"><span class="o">구개편도</span><span class="ar">→</span><span class="n">입천장편도</span></div>
+<div class="r" data-s="구형낭 둥근주머니"><span class="o">구형낭</span><span class="ar">→</span><span class="n">둥근주머니</span></div>
+<div class="r" data-s="기저분절 바닥분절"><span class="o">기저분절</span><span class="ar">→</span><span class="n">바닥분절</span></div>
+<div class="r" data-s="내안각 안쪽눈구석"><span class="o">내안각</span><span class="ar">→</span><span class="n">안쪽눈구석</span></div>
+<div class="r" data-s="내측분절 안쪽분절"><span class="o">내측분절</span><span class="ar">→</span><span class="n">안쪽분절</span></div>
+<div class="r" data-s="내측속 안쪽다발"><span class="o">내측속</span><span class="ar">→</span><span class="n">안쪽다발</span></div>
+<div class="r" data-s="내후두근 전체 속후두근육 전체"><span class="o">내후두근 전체</span><span class="ar">→</span><span class="n">속후두근육 전체</span></div>
+<div class="r" data-s="누낭 눈물주머니"><span class="o">누낭</span><span class="ar">→</span><span class="n">눈물주머니</span></div>
+<div class="r" data-s="대퇴삼각 넙다리삼각"><span class="o">대퇴삼각</span><span class="ar">→</span><span class="n">넙다리삼각</span></div>
+<div class="r" data-s="대퇴후방 넙다리 뒤쪽"><span class="o">대퇴후방</span><span class="ar">→</span><span class="n">넙다리 뒤쪽</span></div>
+<div class="r" data-s="두개골 내면 머리뼈 속면"><span class="o">두개골 내면</span><span class="ar">→</span><span class="n">머리뼈 속면</span></div>
+<div class="r" data-s="두정 마루"><span class="o">두정</span><span class="ar">→</span><span class="n">마루</span></div>
+<div class="r" data-s="무지구 엄지두덩"><span class="o">무지구</span><span class="ar">→</span><span class="n">엄지두덩</span></div>
+<div class="r" data-s="반월판 반달연골"><span class="o">반월판</span><span class="ar">→</span><span class="n">반달연골</span></div>
+<div class="r" data-s="배측 손바닥 등쪽 손"><span class="o">배측 손바닥</span><span class="ar">→</span><span class="n">등쪽 손</span></div>
+<div class="r" data-s="비강 코안"><span class="o">비강</span><span class="ar">→</span><span class="n">코안</span></div>
+<div class="r" data-s="비골두 종아리뼈머리"><span class="o">비골두</span><span class="ar">→</span><span class="n">종아리뼈머리</span></div>
+<div class="r" data-s="비익 코날개"><span class="o">비익</span><span class="ar">→</span><span class="n">코날개</span></div>
+<div class="r" data-s="비인두 코인두"><span class="o">비인두</span><span class="ar">→</span><span class="n">코인두</span></div>
+<div class="r" data-s="비중격 코중격"><span class="o">비중격</span><span class="ar">→</span><span class="n">코중격</span></div>
+<div class="r" data-s="비측 섬유 코쪽 섬유"><span class="o">비측 섬유</span><span class="ar">→</span><span class="n">코쪽 섬유</span></div>
+<div class="r" data-s="사구체 토리"><span class="o">사구체</span><span class="ar">→</span><span class="n">토리</span></div>
+<div class="r" data-s="사상판 체판"><span class="o">사상판</span><span class="ar">→</span><span class="n">체판</span></div>
+<div class="r" data-s="상구순 윗입술"><span class="o">상구순</span><span class="ar">→</span><span class="n">윗입술</span></div>
+<div class="r" data-s="상분절 위분절"><span class="o">상분절</span><span class="ar">→</span><span class="n">위분절</span></div>
+<div class="r" data-s="상설분절 위혀분절"><span class="o">상설분절</span><span class="ar">→</span><span class="n">위혀분절</span></div>
+<div class="r" data-s="상악 대구치 위턱 큰어금니"><span class="o">상악 대구치</span><span class="ar">→</span><span class="n">위턱 큰어금니</span></div>
+<div class="r" data-s="상악 소구치 위턱 작은어금니"><span class="o">상악 소구치</span><span class="ar">→</span><span class="n">위턱 작은어금니</span></div>
+<div class="r" data-s="설엽 혀엽"><span class="o">설엽</span><span class="ar">→</span><span class="n">혀엽</span></div>
+<div class="r" data-s="성문상 성대문위"><span class="o">성문상</span><span class="ar">→</span><span class="n">성대문위</span></div>
+<div class="r" data-s="소뇌봉합체 소뇌벌레"><span class="o">소뇌봉합체</span><span class="ar">→</span><span class="n">소뇌벌레</span></div>
+<div class="r" data-s="소뇌하면 소뇌아래면"><span class="o">소뇌하면</span><span class="ar">→</span><span class="n">소뇌아래면</span></div>
+<div class="r" data-s="소지구 새끼두덩"><span class="o">소지구</span><span class="ar">→</span><span class="n">새끼두덩</span></div>
+<div class="r" data-s="쇄골상 피부 빗장위 피부"><span class="o">쇄골상 피부</span><span class="ar">→</span><span class="n">빗장위 피부</span></div>
+<div class="r" data-s="수근관 손목굴"><span class="o">수근관</span><span class="ar">→</span><span class="n">손목굴</span></div>
+<div class="r" data-s="수막반회지 천막가지(되돌이수막가지)"><span class="o">수막반회지</span><span class="ar">→</span><span class="n">천막가지(되돌이수막가지)</span></div>
+<div class="r" data-s="숨뇌외측 숨뇌가쪽"><span class="o">숨뇌외측</span><span class="ar">→</span><span class="n">숨뇌가쪽</span></div>
+<div class="r" data-s="시각피질 시각겉질"><span class="o">시각피질</span><span class="ar">→</span><span class="n">시각겉질</span></div>
+<div class="r" data-s="시교차 시각교차"><span class="o">시교차</span><span class="ar">→</span><span class="n">시각교차</span></div>
+<div class="r" data-s="시방선 시각부챗살"><span class="o">시방선</span><span class="ar">→</span><span class="n">시각부챗살</span></div>
+<div class="r" data-s="시삭 시각로"><span class="o">시삭</span><span class="ar">→</span><span class="n">시각로</span></div>
+<div class="r" data-s="신경총 미형성 신경얼기 미형성"><span class="o">신경총 미형성</span><span class="ar">→</span><span class="n">신경얼기 미형성</span></div>
+<div class="r" data-s="안와 눈확"><span class="o">안와</span><span class="ar">→</span><span class="n">눈확</span></div>
+<div class="r" data-s="안와위 눈확위"><span class="o">안와위</span><span class="ar">→</span><span class="n">눈확위</span></div>
+<div class="r" data-s="연구개 물렁입천장"><span class="o">연구개</span><span class="ar">→</span><span class="n">물렁입천장</span></div>
+<div class="r" data-s="연수 숨뇌"><span class="o">연수</span><span class="ar">→</span><span class="n">숨뇌</span></div>
+<div class="r" data-s="외측분절 가쪽분절"><span class="o">외측분절</span><span class="ar">→</span><span class="n">가쪽분절</span></div>
+<div class="r" data-s="외측속 가쪽다발"><span class="o">외측속</span><span class="ar">→</span><span class="n">가쪽다발</span></div>
+<div class="r" data-s="외측슬상체 가쪽무릎체"><span class="o">외측슬상체</span><span class="ar">→</span><span class="n">가쪽무릎체</span></div>
+<div class="r" data-s="외측안각 가쪽눈구석"><span class="o">외측안각</span><span class="ar">→</span><span class="n">가쪽눈구석</span></div>
+<div class="r" data-s="요골신경동반 노신경 동반"><span class="o">요골신경동반</span><span class="ar">→</span><span class="n">노신경 동반</span></div>
+<div class="r" data-s="우상엽 오른위엽"><span class="o">우상엽</span><span class="ar">→</span><span class="n">오른위엽</span></div>
+<div class="r" data-s="우중엽 오른중간엽"><span class="o">우중엽</span><span class="ar">→</span><span class="n">오른중간엽</span></div>
+<div class="r" data-s="우하엽 오른아래엽"><span class="o">우하엽</span><span class="ar">→</span><span class="n">오른아래엽</span></div>
+<div class="r" data-s="유모세포 털세포"><span class="o">유모세포</span><span class="ar">→</span><span class="n">털세포</span></div>
+<div class="r" data-s="전골간 앞뼈사이"><span class="o">전골간</span><span class="ar">→</span><span class="n">앞뼈사이</span></div>
+<div class="r" data-s="전복 앞힘살"><span class="o">전복</span><span class="ar">→</span><span class="n">앞힘살</span></div>
+<div class="r" data-s="전분절 앞분절"><span class="o">전분절</span><span class="ar">→</span><span class="n">앞분절</span></div>
+<div class="r" data-s="전치 치수 앞니 치아속질"><span class="o">전치 치수</span><span class="ar">→</span><span class="n">앞니 치아속질</span></div>
+<div class="r" data-s="족내측 발 안쪽"><span class="o">족내측</span><span class="ar">→</span><span class="n">발 안쪽</span></div>
+<div class="r" data-s="족저 발바닥"><span class="o">족저</span><span class="ar">→</span><span class="n">발바닥</span></div>
+<div class="r" data-s="종격 세로칸"><span class="o">종격</span><span class="ar">→</span><span class="n">세로칸</span></div>
+<div class="r" data-s="좌상엽 왼위엽"><span class="o">좌상엽</span><span class="ar">→</span><span class="n">왼위엽</span></div>
+<div class="r" data-s="좌쇄골 왼빗장"><span class="o">좌쇄골</span><span class="ar">→</span><span class="n">왼빗장</span></div>
+<div class="r" data-s="좌측결장굴곡 왼결장굽이"><span class="o">좌측결장굴곡</span><span class="ar">→</span><span class="n">왼결장굽이</span></div>
+<div class="r" data-s="좌하엽 왼아래엽"><span class="o">좌하엽</span><span class="ar">→</span><span class="n">왼아래엽</span></div>
+<div class="r" data-s="중부 중간곁"><span class="o">중부</span><span class="ar">→</span><span class="n">중간곁</span></div>
+<div class="r" data-s="짧은엄지굽힘근 천두 짧은엄지굽힘근 얕은갈래"><span class="o">짧은엄지굽힘근 천두</span><span class="ar">→</span><span class="n">짧은엄지굽힘근 얕은갈래</span></div>
+<div class="r" data-s="천비골 얕은종아리"><span class="o">천비골</span><span class="ar">→</span><span class="n">얕은종아리</span></div>
+<div class="r" data-s="천추체 엉치뼈몸통"><span class="o">천추체</span><span class="ar">→</span><span class="n">엉치뼈몸통</span></div>
+<div class="r" data-s="첨분절 꼭대기분절"><span class="o">첨분절</span><span class="ar">→</span><span class="n">꼭대기분절</span></div>
+<div class="r" data-s="첨후분절 꼭대기뒤분절"><span class="o">첨후분절</span><span class="ar">→</span><span class="n">꼭대기뒤분절</span></div>
+<div class="r" data-s="청각피질 청각겉질"><span class="o">청각피질</span><span class="ar">→</span><span class="n">청각겉질</span></div>
+<div class="r" data-s="추간판 척추사이원반"><span class="o">추간판</span><span class="ar">→</span><span class="n">척추사이원반</span></div>
+<div class="r" data-s="추체 척추뼈몸통"><span class="o">추체</span><span class="ar">→</span><span class="n">척추뼈몸통</span></div>
+<div class="r" data-s="측두부 관자부위"><span class="o">측두부</span><span class="ar">→</span><span class="n">관자부위</span></div>
+<div class="r" data-s="측두전 관자앞"><span class="o">측두전</span><span class="ar">→</span><span class="n">관자앞</span></div>
+<div class="r" data-s="타원낭 타원주머니"><span class="o">타원낭</span><span class="ar">→</span><span class="n">타원주머니</span></div>
+<div class="r" data-s="팽대부 팽대"><span class="o">팽대부</span><span class="ar">→</span><span class="n">팽대</span></div>
+<div class="r" data-s="하설분절 아래혀분절"><span class="o">하설분절</span><span class="ar">→</span><span class="n">아래혀분절</span></div>
+<div class="r" data-s="하안검 아래눈꺼풀"><span class="o">하안검</span><span class="ar">→</span><span class="n">아래눈꺼풀</span></div>
+<div class="r" data-s="후각피질 후각겉질"><span class="o">후각피질</span><span class="ar">→</span><span class="n">후각겉질</span></div>
+<div class="r" data-s="후골간 뒤뼈사이"><span class="o">후골간</span><span class="ar">→</span><span class="n">뒤뼈사이</span></div>
+<div class="r" data-s="후내측·후외측 뒤안쪽·뒤가쪽"><span class="o">후내측·후외측</span><span class="ar">→</span><span class="n">뒤안쪽·뒤가쪽</span></div>
+<div class="r" data-s="후두개와 뒤머리뼈우묵"><span class="o">후두개와</span><span class="ar">→</span><span class="n">뒤머리뼈우묵</span></div>
+<div class="r" data-s="후복 뒤힘살"><span class="o">후복</span><span class="ar">→</span><span class="n">뒤힘살</span></div>
+<div class="r" data-s="후분절 뒤분절"><span class="o">후분절</span><span class="ar">→</span><span class="n">뒤분절</span></div>
+<div class="r" data-s="후속 뒤다발"><span class="o">후속</span><span class="ar">→</span><span class="n">뒤다발</span></div>
+<div class="r" data-s="흉전벽·복전벽 가슴앞벽·배앞벽"><span class="o">흉전벽·복전벽</span><span class="ar">→</span><span class="n">가슴앞벽·배앞벽</span></div>
+<div class="r" data-s="흉측벽 가슴가쪽벽"><span class="o">흉측벽</span><span class="ar">→</span><span class="n">가슴가쪽벽</span></div>
+</div></section>
+</div>
+<p class="empty" id="empty" hidden>찾는 용어가 없습니다. 다른 표기로 검색해 보세요.</p>
+
+<footer>
+  <span>KR 대한해부학회 해부학용어 기준</span>
+  <span>이 세션의 흐름도 전환에서 수집</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  var q=document.getElementById('q'), grid=document.getElementById('grid'),
+      empty=document.getElementById('empty'), count=document.getElementById('count'),
+      cats=[].slice.call(grid.querySelectorAll('.cat')),
+      rows=[].slice.call(grid.querySelectorAll('.r')),
+      total=rows.length;
+  rows.forEach(function(r){
+    r._s=r.getAttribute('data-s');
+    r._o=r.querySelector('.o'); r._n=r.querySelector('.n');
+    r._ot=r._o.textContent; r._nt=r._n.textContent;
+  });
+  function mark(el, text, term){
+    if(!term){ el.textContent=text; return; }
+    var i=text.indexOf(term);
+    if(i<0){ el.textContent=text; return; }
+    el.textContent='';
+    el.appendChild(document.createTextNode(text.slice(0,i)));
+    var m=document.createElement('mark'); m.textContent=text.slice(i,i+term.length);
+    el.appendChild(m);
+    el.appendChild(document.createTextNode(text.slice(i+term.length)));
+  }
+  function run(){
+    var t=q.value.trim(), n=0;
+    rows.forEach(function(r){
+      var hit = !t || r._s.indexOf(t)>=0;
+      r.hidden=!hit;
+      if(hit){ n++; mark(r._o,r._ot,t); mark(r._n,r._nt,t); }
+    });
+    cats.forEach(function(c){
+      c.hidden = !c.querySelector('.r:not([hidden])');
+    });
+    empty.hidden = n>0;
+    count.textContent = t ? n+'건' : total+'쌍';
+  }
+  q.addEventListener('input', run);
+  run();
+})();
+</script>

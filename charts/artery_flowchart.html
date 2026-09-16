@@ -1,0 +1,1278 @@
+<title>동맥 분류 흐름도</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+:root {
+  --bg: #0D0A0E;
+  --surface: #160F18;
+  --surface2: #1E1522;
+  --border: #2D2233;
+  --text: #EDE8F2;
+  --text-muted: #9A8FA8;
+  --text-dim: #5C5268;
+
+  --art-color: #E8435A;
+  --pul-color: #6496F5;
+  --cor-color: #F77F5A;
+  --neck-color: #F5C518;
+  --limb-color: #C084FC;
+  --vis-color: #3DD68C;
+  --int-color: #F5A623;
+
+  --dot-l1: #E8435A;
+  --dot-l2: #F77F5A;
+  --dot-l3: #F5C518;
+  --dot-l4: #C084FC;
+
+  --tag-sys: #E8435A;
+  --tag-pul: #6496F5;
+  --tag-cor: #F77F5A;
+
+  --radius: 10px;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'Noto Sans KR', sans-serif;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #FAF5FF;
+    --surface: #FFFFFF;
+    --surface2: #F3EBF9;
+    --border: #DDD0E8;
+    --text: #1A0F22;
+    --text-muted: #6B5880;
+    --text-dim: #9E8FB0;
+    --art-color: #C51E35;
+    --pul-color: #1D4ED8;
+    --cor-color: #C05820;
+    --neck-color: #B45309;
+    --limb-color: #7C3AED;
+    --vis-color: #15803D;
+    --int-color: #C2410C;
+    --dot-l1: #C51E35;
+    --dot-l2: #C05820;
+    --dot-l3: #B45309;
+    --dot-l4: #7C3AED;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0D0A0E;
+  --surface: #160F18;
+  --surface2: #1E1522;
+  --border: #2D2233;
+  --text: #EDE8F2;
+  --text-muted: #9A8FA8;
+  --text-dim: #5C5268;
+  --art-color: #E8435A;
+  --pul-color: #6496F5;
+  --cor-color: #F77F5A;
+  --neck-color: #F5C518;
+  --limb-color: #C084FC;
+  --vis-color: #3DD68C;
+  --int-color: #F5A623;
+  --dot-l1: #E8435A;
+  --dot-l2: #F77F5A;
+  --dot-l3: #F5C518;
+  --dot-l4: #C084FC;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 24px 20px;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.page-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.page-eyebrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--art-color);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.page-title {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-wrap: balance;
+}
+.page-subtitle {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ── Legend ── */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.legend-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Two-column grid ── */
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .chart-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Section card ── */
+.section-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+.section-icon {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.section-title-group { flex: 1; }
+.section-title-kr {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+.section-title-en {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+}
+.section-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.badge-sys { background: rgba(232,67,90,.18); color: var(--art-color); }
+.badge-pul { background: rgba(100,150,245,.18); color: var(--pul-color); }
+.badge-cor { background: rgba(247,127,90,.18); color: var(--cor-color); }
+
+.section-body { padding: 10px 12px; }
+
+/* ── Artery entry ── */
+.artery-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+
+.artery-entry {
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.artery-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--surface2);
+  border-radius: 7px;
+  cursor: default;
+}
+
+.artery-code {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--art-color);
+  min-width: 52px;
+  white-space: nowrap;
+}
+.artery-code.pul { color: var(--pul-color); }
+.artery-code.cor { color: var(--cor-color); }
+.artery-code.neck { color: var(--neck-color); }
+.artery-code.limb { color: var(--limb-color); }
+.artery-code.vis { color: var(--vis-color); }
+.artery-code.int { color: var(--int-color); }
+
+.artery-name-group { flex: 1; }
+.artery-kr { font-size: 13px; font-weight: 500; color: var(--text); }
+.artery-en { font-family: var(--mono); font-size: 10px; color: var(--text-dim); display: block; }
+
+.func-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.tag-sys { background: rgba(232,67,90,.16); color: var(--art-color); }
+.tag-pul { background: rgba(100,150,245,.16); color: var(--pul-color); }
+.tag-cor { background: rgba(247,127,90,.16); color: var(--cor-color); }
+.tag-vis { background: rgba(61,214,140,.16); color: var(--vis-color); }
+
+/* ── Branch tree ── */
+.branches { padding: 4px 8px 4px 18px; }
+
+.branch-list {
+  list-style: none;
+  border-left: 1.5px solid var(--border);
+  padding-left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 3px;
+}
+.branch-list.l2 { margin-top: 2px; }
+.branch-list.l3 { margin-top: 2px; }
+.branch-list.l4 { margin-top: 2px; }
+
+.branch-item { position: relative; }
+
+.branch-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 1.5px 0;
+}
+
+.branch-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.dot-l1 { background: var(--dot-l1); }
+.dot-l2 { background: var(--dot-l2); }
+.dot-l3 { background: var(--dot-l3); }
+.dot-l4 { background: var(--dot-l4); }
+.dot-pul { background: var(--pul-color); }
+.dot-vis { background: var(--vis-color); }
+.dot-limb { background: var(--limb-color); }
+
+.branch-text { flex: 1; }
+.branch-kr { font-size: 12px; color: var(--text); }
+.branch-en { font-family: var(--mono); font-size: 10px; color: var(--text-dim); margin-left: 4px; }
+.branch-note { font-size: 10px; color: var(--text-muted); margin-left: 4px; }
+
+/* ── Divider within section ── */
+.sub-divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 6px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.sub-divider::before, .sub-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Willis ring callout ── */
+.callout {
+  background: rgba(100,150,245,.08);
+  border: 1px solid rgba(100,150,245,.22);
+  border-radius: 7px;
+  padding: 7px 10px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.callout-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--pul-color);
+  margin-bottom: 4px;
+  letter-spacing: 0.08em;
+}
+
+/* ── Footer ── */
+.page-footer {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--text-dim);
+  font-family: var(--mono);
+}
+</style>
+
+<div class="page-header">
+  <div class="page-eyebrow">Human Anatomy Reference</div>
+  <h1 class="page-title">동맥계 분류 흐름도</h1>
+  <p class="page-subtitle">대동맥 → 말초 동맥 전체 분지 계통 · 해부학 신용어(KR) + Terminologia Anatomica(EN)</p>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--art-color)"></div>체순환 동맥</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--pul-color)"></div>허파순환 동맥</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--cor-color)"></div>심장동맥</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--neck-color)"></div>머리·목 동맥</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--limb-color)"></div>사지 동맥</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--vis-color)"></div>내장 동맥</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--int-color)"></div>장간막·골반 동맥</div>
+</div>
+
+<div class="chart-grid">
+<!-- ═════════════ LEFT COLUMN ═════════════ -->
+<div style="display:flex;flex-direction:column;gap:16px;">
+
+<!-- 허파순환 -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(100,150,245,.15)">🫁</div>
+    <div class="section-title-group">
+      <div class="section-title-kr">허파순환 동맥</div>
+      <div class="section-title-en">Pulmonary Circulation</div>
+    </div>
+    <span class="section-badge badge-pul">PUL</span>
+  </div>
+  <div class="section-body">
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code pul">PA trunk</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">허파동맥줄기</span>
+            <span class="artery-en">Pulmonary Trunk</span>
+          </div>
+          <span class="func-tag tag-pul">탈산소</span>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item">
+              <div class="branch-row"><div class="branch-dot dot-pul"></div>
+                <div class="branch-text"><span class="branch-kr">오른허파동맥 (Right PA)</span></div>
+              </div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">오른위엽 동맥</span><span class="branch-en">Right upper lobe A.</span></div></div>
+                  <ul class="branch-list l3">
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">꼭대기분절·뒤분절·앞분절지 (B1·B2·B3)</span></div></div></li>
+                  </ul>
+                </li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">오른중간엽 동맥</span><span class="branch-en">Right middle lobe A.</span></div></div>
+                  <ul class="branch-list l3">
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">가쪽분절·안쪽분절지 (B4·B5)</span></div></div></li>
+                  </ul>
+                </li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">오른아래엽 동맥</span><span class="branch-en">Right lower lobe A.</span></div></div>
+                  <ul class="branch-list l3">
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">위분절·안쪽·전·가쪽·후바닥분절 (B6–B10)</span></div></div></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="branch-item">
+              <div class="branch-row"><div class="branch-dot dot-pul"></div>
+                <div class="branch-text"><span class="branch-kr">왼허파동맥 (Left PA)</span></div>
+              </div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">왼위엽 동맥</span></div></div>
+                  <ul class="branch-list l3">
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">꼭대기뒤분절·앞분절지 (B1+2·B3)</span></div></div></li>
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">혀엽 동맥 → 상·아래혀분절 (B4·B5)</span></div></div></li>
+                  </ul>
+                </li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">왼아래엽 동맥 → 상·바닥분절지 (B6–B10)</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 심장동맥 -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(247,127,90,.15)">❤️</div>
+    <div class="section-title-group">
+      <div class="section-title-kr">심장동맥</div>
+      <div class="section-title-en">Coronary Arteries</div>
+    </div>
+    <span class="section-badge badge-cor">COR</span>
+  </div>
+  <div class="section-body">
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code cor">RCA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">오른심장동맥</span>
+            <span class="artery-en">Right Coronary A.</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">굴심방결절 동맥</span><span class="branch-en">SA node A.</span><span class="branch-note">(~60% RCA 기원)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">오른동맥원뿔가지</span><span class="branch-en">Right conus A.</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">예각모서리가지</span><span class="branch-en">Acute marginal branches</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">뒤심실사이가지 (PDA)</span><span class="branch-en">Posterior descending A.</span><span class="branch-note">오른우세형</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">뒤심실사이막가지 (Posterior septal branches)</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">방실결절 동맥</span><span class="branch-en">AV node A.</span><span class="branch-note">(~90% RCA 기원)</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code cor">LCA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">왼심장동맥</span>
+            <span class="artery-en">Left Main Coronary A.</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item">
+              <div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">앞심실사이가지 (LAD)</span><span class="branch-en">Left Anterior Descending</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">대각가지 (Diagonal branches) D1, D2…</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">앞심실사이막가지 (Septal perforators)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">왼동맥원뿔가지 (Left conus A.)</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item">
+              <div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">휘돌이가지 (LCX)</span><span class="branch-en">Left Circumflex A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">둔각모서리가지 (Obtuse marginal) OM1, OM2</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">굴심방결절 동맥 (~40% LCX 기원)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">뒤가쪽가지 (Posterolateral branches)</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">중간가지 (Ramus intermedius)</span><span class="branch-note">존재 시</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 대동맥궁·머리·목 -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(245,197,24,.15)">🧠</div>
+    <div class="section-title-group">
+      <div class="section-title-kr">대동맥활·머리·목 동맥</div>
+      <div class="section-title-en">Aortic Arch &amp; Head/Neck</div>
+    </div>
+    <span class="section-badge badge-sys">SYS</span>
+  </div>
+  <div class="section-body">
+    <div class="sub-divider">대동맥 본줄기</div>
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code neck">오름</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">오름대동맥</span>
+            <span class="artery-en">Ascending Aorta</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">오른·왼심장동맥 (대동맥굴에서 기시)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">대동맥활로 이행</span><span class="branch-note">대동맥박리 호발부위 (Stanford A형)</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+    <div class="sub-divider">대동맥활 직접 분지</div>
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code neck">완두</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">팔머리동맥</span>
+            <span class="artery-en">Brachiocephalic Trunk</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">오른온목동맥 (R. Common Carotid A.)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">오른빗장밑동맥 (R. Subclavian A.)</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code neck">왼온목</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">왼온목동맥</span>
+            <span class="artery-en">L. Common Carotid A.</span>
+          </div>
+        </div>
+      </li>
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code neck">왼빗장</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">왼빗장밑동맥</span>
+            <span class="artery-en">L. Subclavian A.</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="sub-divider">바깥목동맥 External Carotid A.</div>
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code neck">ECA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">바깥목동맥 8대 분지</span>
+            <span class="artery-en">External Carotid A.</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">위갑상샘동맥</span><span class="branch-en">Superior thyroid A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">위후두동맥·갑상샘 앞·뒤가지</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">인두오름동맥</span><span class="branch-en">Ascending pharyngeal A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">인두지·뇌막지·고실하동맥</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">혀동맥</span><span class="branch-en">Lingual A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">혀밑동맥·혀깊은동맥·혀등가지</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">얼굴동맥</span><span class="branch-en">Facial A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">턱밑동맥</span><span class="branch-en">Submental A.</span><span class="branch-note">이하선·악하선 공급</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">상·아랫입술동맥·코가쪽동맥·이마지·편도가지</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">뒤통수동맥</span><span class="branch-en">Occipital A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">목빗근가지·관자가지·뇌막지·내림가지</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">뒤귀동맥</span><span class="branch-en">Posterior auricular A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">귓바퀴가지·후두지·붓꼭지구멍가지</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">얕은관자동맥</span><span class="branch-en">Superficial temporal A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">앞귓바퀴가지·관자놀이지·이마가지·마루가지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">눈확위·광대눈확동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">가로얼굴동맥</span><span class="branch-en">Transverse facial A.</span><span class="branch-note">이하선·교근 전방 공급</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">위턱동맥</span><span class="branch-en">Maxillary A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">깊은귀동맥</span><span class="branch-en">Deep auricular A.</span><span class="branch-note">외이도·고막 공급</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">앞고실동맥</span><span class="branch-en">Anterior tympanic A.</span><span class="branch-note">고실점막 공급</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">아래이틀동맥 → 이·앞니가지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">중간뇌막동맥 → 앞·뒤가지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">덧뇌막동맥·깊은관자가지·깨물근동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">볼동맥·뒤위이틀동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">눈확아래동맥·앞위이틀동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">큰입천장동맥·작은입천장동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">나비입천장동맥 → 뒤가쪽·뒤코중격가지</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+    <div class="sub-divider">속목동맥 Internal Carotid A.</div>
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code neck">ICA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">속목동맥 (해면정맥동부)</span>
+            <span class="artery-en">Internal Carotid A.</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">눈동맥</span><span class="branch-en">Ophthalmic A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">망막중심동맥·섬모체동맥·눈물샘동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">전·뒤벌집동맥·안쪽눈꺼풀동맥·눈확위동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">도르래위동맥·등쪽코동맥·전두동맥</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">뒤교통동맥</span><span class="branch-en">Posterior communicating A. (PComm)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">시상하부·시상·속섬유막 관통가지</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">앞맥락얼기동맥</span><span class="branch-en">Anterior choroidal A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">속섬유막(후각)·시삭·측뇌실맥락총</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">앞대뇌동맥</span><span class="branch-en">ACA (A1·A2·A3)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">앞교통동맥 (AComm)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">Heubner 반회귀동맥 (속섬유막 전각)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">눈확이마가지·이마극가지·뇌들보둘레가지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">뇌들보가장자리가지·부·증심옆가지</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">중간대뇌동맥</span><span class="branch-en">MCA (M1·M2·M3·M4)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">가쪽줄무늬체동맥 (렌즈핵줄무늬체가지, 속섬유막)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">눈확이마가지·전두개지·중심앞고랑가지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">중심고랑가지·중심뒤고랑가지·마루뒤가지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">모이랑가지·뒤통수관자가지·관자앞·중간·뒤가지</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">대뇌동맥고리 Circle of Willis</div>
+      AComm — ACA(A1) × 2 — ICA × 2 — PComm × 2 — PCA(P1) × 2 → 뇌기저를 환상으로 연결; 측부순환의 핵심 경로
+    </div>
+
+    <div class="sub-divider">척추-뇌바닥동맥계 Vertebrobasilar</div>
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code neck">VA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">척추동맥</span>
+            <span class="artery-en">Vertebral A. (V1–V4)</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">전·뒤척수동맥</span><span class="branch-en">Anterior / Posterior spinal A.</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">뒤아래소뇌동맥 (PICA)</span><span class="branch-en">Posterior inferior cerebellar A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">숨뇌가쪽·소뇌편도·소뇌아래면 분포</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">뇌막 분지, 관통가지</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code neck">BA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">뇌바닥동맥</span>
+            <span class="artery-en">Basilar A.</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">앞아래소뇌동맥 (AICA)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">미로동맥 (미로동맥)·소뇌전아래면</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">다리뇌동맥 (Pontine branches)</span><span class="branch-note">방정중·단선회·장선회</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">위소뇌동맥 (SCA)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">소뇌위면·소뇌벌레·소뇌핵</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">뒤대뇌동맥 (PCA)</span><span class="branch-en">P1·P2·P3</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">시상관통동맥·시상무릎체동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">뒤맥락얼기동맥 (뒤안쪽·뒤가쪽)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">마루뒤통수가지·관자뒤가지·뒤통수극가지</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 쇄골하·팔 -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(192,132,252,.15)">💪</div>
+    <div class="section-title-group">
+      <div class="section-title-kr">빗장밑동맥·팔 동맥</div>
+      <div class="section-title-en">Subclavian → Upper Limb</div>
+    </div>
+    <span class="section-badge badge-sys">SYS</span>
+  </div>
+  <div class="section-body">
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code limb">SCA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">빗장밑동맥</span>
+            <span class="artery-en">Subclavian A.</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">척추동맥 (위 참조)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">속가슴동맥</span><span class="branch-en">Internal thoracic A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">앞갈비사이가지·가슴샘가지·심장막가로막동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">근육가로막동맥·위배벽동맥</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">갑상목동맥</span><span class="branch-en">Thyrocervical trunk</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">아래갑상샘동맥·어깨위동맥·목가로동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">오름목동맥</span><span class="branch-en">Ascending cervical A.</span><span class="branch-note">경부 심근육·척추·척수 공급</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">갈비목동맥</span><span class="branch-en">Costocervical trunk</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">최위갈비사이동맥·깊은목동맥</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code limb">Ax</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">겨드랑동맥</span>
+            <span class="artery-en">Axillary A. (1·2·3부)</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">최상가슴동맥 (1부)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">가슴봉우리동맥·가쪽가슴동맥 (2부)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">어깨봉우리·어깨세모근·가슴근·빗장가지</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">어깨밑동맥 (3부)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">가슴등동맥·어깨휘돌이동맥</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">전·후위팔휘돌이동맥 (3부)</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code limb">BA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">위팔동맥</span>
+            <span class="artery-en">Brachial A.</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">위팔깊은동맥 (노신경 동반)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">중간곁·노쪽곁동맥</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">상·하자쪽곁동맥</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">노동맥 (Radial A.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">노쪽되돌이동맥</span><span class="branch-en">Radial recurrent A.</span><span class="branch-note">가쪽팔꿈치동맥그물 구성</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">노쪽곁동맥·얕은손바닥가지·등쪽손목가지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">깊은손바닥가지 → 깊은손바닥동맥활·엄지동맥</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">자동맥 (Ulnar A.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">자쪽되돌이동맥</span><span class="branch-en">Ulnar recurrent A.</span><span class="branch-note">앞·뒤가지, 안쪽팔꿈치동맥그물</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">온뼈사이동맥 → 앞·뒤뼈사이동맥</span><span class="branch-en">Common interosseous A.</span></div></div>
+                  <ul class="branch-list l3">
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">앞뼈사이 → 앞관통가지·정중동맥</span></div></div></li>
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">뒤뼈사이 → 안쪽곁동맥·뼈사이되돌이가지</span></div></div></li>
+                  </ul>
+                </li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">얕은손바닥동맥활 → 온바닥쪽손가락동맥 → 고유바닥쪽손가락동맥 (손가락)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">등쪽손목가지 → 등쪽손목동맥그물</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- end left column -->
+
+<!-- ═════════════ RIGHT COLUMN ═════════════ -->
+<div style="display:flex;flex-direction:column;gap:16px;">
+
+<!-- 가슴대동맥 -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(232,67,90,.15)">🫀</div>
+    <div class="section-title-group">
+      <div class="section-title-kr">가슴대동맥</div>
+      <div class="section-title-en">Descending Thoracic Aorta</div>
+    </div>
+    <span class="section-badge badge-sys">SYS</span>
+  </div>
+  <div class="section-body">
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code">Th Ao</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">가슴대동맥 분지</span>
+            <span class="artery-en">T5–T12 level</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">뒤갈비사이동맥 (3~11번, 쌍)</span><span class="branch-en">Posterior intercostal AA.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">등쪽가지·척추·곁가지·피부가지</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">갈비밑동맥 (12번 갈비사이)</span><span class="branch-en">Subcostal A.</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">기관지동맥</span><span class="branch-en">Bronchial AA.</span><span class="branch-note">(좌 2개, 우 1개 일반)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">식도동맥</span><span class="branch-en">Esophageal branches</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">위가로막동맥 (쌍)</span><span class="branch-en">Superior phrenic AA.</span><span class="branch-note">횡격막 위면 공급</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">심장막가지·세로칸가지·가슴관가지</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 복강동맥 -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(61,214,140,.15)">🫃</div>
+    <div class="section-title-group">
+      <div class="section-title-kr">복강동맥</div>
+      <div class="section-title-en">Celiac Trunk (T12)</div>
+    </div>
+    <span class="section-badge badge-sys">SYS</span>
+  </div>
+  <div class="section-body">
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code vis">CT</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">복강동맥 3대 분지</span>
+            <span class="artery-en">Celiac Trunk</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-vis"></div><div class="branch-text"><span class="branch-kr">왼위동맥</span><span class="branch-en">Left gastric A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">식도지·위체작은굽이지</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-vis"></div><div class="branch-text"><span class="branch-kr">온간동맥</span><span class="branch-en">Common hepatic A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">고유간동맥</span></div></div>
+                  <ul class="branch-list l3">
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">오른간동맥 → 쓸개동맥</span></div></div></li>
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">왼간동맥·중간간동맥</span></div></div></li>
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">오른위동맥 (작은굽이)</span></div></div></li>
+                  </ul>
+                </li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">위샘창자동맥</span></div></div>
+                  <ul class="branch-list l3">
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">오른위대망동맥·위이자샘창자동맥</span></div></div></li>
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">앞위이자샘창자가지·뒤위이자샘창자가지</span></div></div></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-vis"></div><div class="branch-text"><span class="branch-kr">지라동맥</span><span class="branch-en">Splenic A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">이자가지 (등·꼬리·큰이자동맥)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">왼위대망동맥·짧은위동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">지라분지 (상·하극지)</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 위창자간막동맥 -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(245,166,35,.15)">🧬</div>
+    <div class="section-title-group">
+      <div class="section-title-kr">위창자간막동맥</div>
+      <div class="section-title-en">Superior Mesenteric A. (L1)</div>
+    </div>
+    <span class="section-badge badge-sys">SYS</span>
+  </div>
+  <div class="section-body">
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code int">SMA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">위창자간막동맥 분지</span>
+            <span class="artery-en">Superior Mesenteric A.</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">아래이자샘창자동맥</span><span class="branch-en">Inferior pancreaticoduodenal A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">앞·뒤아래이자샘창자가지</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">빈창자동맥·돌창자동맥</span><span class="branch-en">Jejunal &amp; Ileal AA. (12–15개)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">장간막 내 혈관궁 형성 → 곧은혈관 (Vasa recta)</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">돌창자결장동맥</span><span class="branch-en">Ileocolic A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">막창자꼬리동맥·막창자동맥·앞·뒤돌창자결장가지</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">오른결장동맥</span><span class="branch-en">Right colic A.</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">중간결장동맥</span><span class="branch-en">Middle colic A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">Riolan 동맥궁 (SMA-IMA 문합)</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 콩팥동맥 + 콩팥위샘·생식선 -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(61,214,140,.12)">🫘</div>
+    <div class="section-title-group">
+      <div class="section-title-kr">콩팥동맥·콩팥위샘·생식샘동맥</div>
+      <div class="section-title-en">Renal / Adrenal / Gonadal A.</div>
+    </div>
+    <span class="section-badge badge-sys">SYS</span>
+  </div>
+  <div class="section-body">
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code vis">RA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">콩팥동맥</span>
+            <span class="artery-en">Renal A. (L1–L2)</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-vis"></div><div class="branch-text"><span class="branch-kr">아래콩팥위샘동맥</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-vis"></div><div class="branch-text"><span class="branch-kr">분절동맥 (상전·하전·상·하·후)</span><span class="branch-en">Segmental branches</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">엽사이동맥 → 활꼴동맥 → 소엽사이동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">들세동맥 → 토리모세혈관망 → 날세동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">세뇨관주위모세혈관·곧은세동맥 (vasa recta)</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code vis">Ad</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">콩팥위샘동맥</span>
+            <span class="artery-en">Suprarenal AA.</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">위콩팥위샘동맥 (아래가로막동맥 기원)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">중간콩팥위샘동맥 (배대동맥 직접)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">아래콩팥위샘동맥 (콩팥동맥 기원)</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code vis">Go</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">생식샘동맥</span>
+            <span class="artery-en">Gonadal A. (L2)</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">남: 고환동맥 → 정관동맥 문합</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">여: 난소동맥 → 자궁동맥 문합</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code vis">Ph</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">아래가로막동맥·허리동맥·정중엉치동맥</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">아래가로막동맥 (쌍) — 횡격막 아래면·위콩팥위샘동맥</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">허리동맥 (L1–L4, 쌍) — 척추·허리네모근·배근</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">정중엉치동맥 — 엉치뼈몸통·곧창자뒤가지</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 아래창자간막동맥 -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(245,166,35,.12)">🫁</div>
+    <div class="section-title-group">
+      <div class="section-title-kr">아래창자간막동맥</div>
+      <div class="section-title-en">Inferior Mesenteric A. (L3)</div>
+    </div>
+    <span class="section-badge badge-sys">SYS</span>
+  </div>
+  <div class="section-body">
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code int">IMA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">아래창자간막동맥 분지</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">왼결장동맥</span><span class="branch-en">Left colic A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">상행지 (SMA 문합) · 내림가지</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">구불결장동맥 (2~4개)</span><span class="branch-en">Sigmoid AA.</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">위곧창자동맥</span><span class="branch-en">Superior rectal A.</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">중간·아래곧창자동맥과 문합</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 장골동맥·골반 -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(232,67,90,.12)">🦴</div>
+    <div class="section-title-group">
+      <div class="section-title-kr">엉덩동맥·골반 동맥</div>
+      <div class="section-title-en">Iliac &amp; Pelvic Arteries</div>
+    </div>
+    <span class="section-badge badge-sys">SYS</span>
+  </div>
+  <div class="section-body">
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code">공통</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">온엉덩동맥 → 내·바깥엉덩동맥</span>
+            <span class="artery-en">Common Iliac → Internal / External</span>
+          </div>
+        </div>
+      </li>
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code int">IIA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">속엉덩동맥</span>
+            <span class="artery-en">Internal Iliac A. (Hypogastric)</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">앞가지 (Anterior division)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">배꼽동맥 → 위방광동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">아래방광동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">중간곧창자동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">여: 자궁동맥 (난소지·질지·관지)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">남: 하방광·정낭가지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">폐쇄동맥 → 앞·뒤가지·절구가지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">속음부동맥 → 회음·음경(음핵)·아래곧창자가지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">아래볼기동맥</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">뒤가지 (Posterior division)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">엉덩허리동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">가쪽엉치동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">위볼기동맥 → 천·심지</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 외장골·다리 -->
+<div class="section-card">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(192,132,252,.15)">🦵</div>
+    <div class="section-title-group">
+      <div class="section-title-kr">바깥엉덩동맥·다리 동맥</div>
+      <div class="section-title-en">External Iliac → Lower Limb</div>
+    </div>
+    <span class="section-badge badge-sys">SYS</span>
+  </div>
+  <div class="section-body">
+    <ul class="artery-list">
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code limb">EIA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">바깥엉덩동맥</span>
+            <span class="artery-en">External Iliac A.</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">아래배벽동맥 → 음부지·두덩가지</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">깊은엉덩휘돌이동맥</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code limb">FA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">넙다리동맥</span>
+            <span class="artery-en">Femoral A. (넙다리삼각)</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">얕은배벽동맥·얕은엉덩휘돌이동맥·바깥음부동맥</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">깊넙다리동맥</span><span class="branch-en">Deep femoral (Profunda femoris)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">안쪽넙다리휘돌이동맥 → 전·후·깊은·천지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">가쪽넙다리휘돌이동맥 → 상행·횡·내림가지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">관통동맥 (1·2·3번) — 넙다리 뒤쪽</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">내림무릎동맥</span><span class="branch-en">Descending genicular A.</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+      <li class="artery-entry">
+        <div class="artery-label">
+          <span class="artery-code limb">PA</span>
+          <div class="artery-name-group">
+            <span class="artery-kr">오금동맥</span>
+            <span class="artery-en">Popliteal A.</span>
+          </div>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">안쪽·가쪽위무릎동맥</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">중간무릎동맥 (뒤십자인대·반달연골)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">안쪽·가쪽아래무릎동맥</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">장딴지동맥 (안쪽·가쪽)</span><span class="branch-en">Sural AA.</span><span class="branch-note">비복근·가자미근 공급</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">앞정강동맥 (Anterior tibial A.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">앞정강되돌이동맥·앞뼈사이되돌이동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">안쪽·가쪽앞복사동맥</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">발등동맥 → 깊은발바닥동맥·발등발가락동맥</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-limb"></div><div class="branch-text"><span class="branch-kr">뒤정강동맥 (Posterior tibial A.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">종아리동맥 → 얕은종아리·관통가지·앞가쪽복사가지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">안쪽복사가지·발꿈치가지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">안쪽발바닥동맥 → 천·심지</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">가쪽발바닥동맥 → 깊은발바닥동맥활</span></div></div>
+                  <ul class="branch-list l3">
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">온발바닥쪽발가락동맥 → 고유발바닥쪽발가락동맥</span></div></div></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- end right column -->
+</div><!-- end chart-grid -->
+
+<div class="page-footer">
+  <p>동맥기준 전신 흐름도 · 개인 학습용 참고자료</p>
+  <p style="margin-top:4px">Heart → Aorta → Head/Neck · Upper Limb · Thorax · Abdomen · Pelvis · Lower Limb</p>
+</div>

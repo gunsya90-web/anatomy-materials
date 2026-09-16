@@ -1,0 +1,1154 @@
+<title>뇌신경·척수신경 분류</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --bg: #0A0F1E;
+    --surface: #101828;
+    --surface2: #162032;
+    --border: #1E2D45;
+    --border-dim: #131F30;
+
+    --cn-color: #5B9CF6;
+    --cn-dim: rgba(91,156,246,.15);
+    --sn-color: #3DD68C;
+    --sn-dim: rgba(61,214,140,.15);
+    --sub1: #A78BFA;
+    --sub1-dim: rgba(167,139,250,.12);
+    --sub2: #F59E42;
+    --sub2-dim: rgba(245,158,66,.10);
+    --sub3: #67E8F9;
+    --sub3-dim: rgba(103,232,249,.10);
+
+    --text: #D8E4F4;
+    --text-muted: #607592;
+    --text-dim: #3D5070;
+
+    --code-bg: rgba(255,255,255,.05);
+    --radius: 4px;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #F0F4FB;
+      --surface: #FFFFFF;
+      --surface2: #EBF0FA;
+      --border: #C8D8EF;
+      --border-dim: #D8E4F0;
+      --cn-color: #2563EB;
+      --cn-dim: rgba(37,99,235,.08);
+      --sn-color: #16A34A;
+      --sn-dim: rgba(22,163,74,.08);
+      --sub1: #7C3AED;
+      --sub1-dim: rgba(124,58,237,.08);
+      --sub2: #D97706;
+      --sub2-dim: rgba(217,119,6,.08);
+      --sub3: #0891B2;
+      --sub3-dim: rgba(8,145,178,.08);
+      --text: #1A2A40;
+      --text-muted: #4A6080;
+      --text-dim: #8AA0BC;
+      --code-bg: rgba(0,0,0,.06);
+    }
+  }
+
+  :root[data-theme="light"] {
+    --bg: #F0F4FB;
+    --surface: #FFFFFF;
+    --surface2: #EBF0FA;
+    --border: #C8D8EF;
+    --border-dim: #D8E4F0;
+    --cn-color: #2563EB;
+    --cn-dim: rgba(37,99,235,.08);
+    --sn-color: #16A34A;
+    --sn-dim: rgba(22,163,74,.08);
+    --sub1: #7C3AED;
+    --sub1-dim: rgba(124,58,237,.08);
+    --sub2: #D97706;
+    --sub2-dim: rgba(217,119,6,.08);
+    --sub3: #0891B2;
+    --sub3-dim: rgba(8,145,178,.08);
+    --text: #1A2A40;
+    --text-muted: #4A6080;
+    --text-dim: #8AA0BC;
+    --code-bg: rgba(0,0,0,.06);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 32px 20px 60px;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .page-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .page-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .page-title {
+    font-size: clamp(20px, 4vw, 30px);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: var(--text);
+    text-wrap: balance;
+    line-height: 1.2;
+  }
+  .page-title span.cn { color: var(--cn-color); }
+  .page-title span.sn { color: var(--sn-color); }
+  .page-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Two-column main ── */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  @media (max-width: 900px) {
+    .main-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Column header ── */
+  .col-header {
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .col-header.cn-header { background: var(--cn-dim); border: 1px solid var(--cn-color); }
+  .col-header.sn-header { background: var(--sn-dim); border: 1px solid var(--sn-color); }
+  .col-header-code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .12em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .cn-header .col-header-code { background: var(--cn-color); color: #fff; }
+  .sn-header .col-header-code { background: var(--sn-color); color: #000; }
+  .col-header-title { font-weight: 700; font-size: 15px; }
+  .col-header-sub { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .cn-header .col-header-title { color: var(--cn-color); }
+  .sn-header .col-header-title { color: var(--sn-color); }
+
+  /* ── Tree structure ── */
+  .tree-root { list-style: none; }
+
+  /* Level 0: nerve entry (CN I, CN II...) */
+  .nerve-entry {
+    margin-bottom: 6px;
+    border: 1px solid var(--border-dim);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .nerve-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 14px;
+    cursor: default;
+    background: var(--surface);
+  }
+  .nerve-label:hover { background: var(--surface2); }
+
+  .nerve-code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    padding: 2px 7px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .cn-entry .nerve-code { background: var(--cn-dim); color: var(--cn-color); border: 1px solid var(--cn-color); }
+  .sn-entry .nerve-code { background: var(--sn-dim); color: var(--sn-color); border: 1px solid var(--sn-color); }
+
+  .nerve-name-group { flex: 1; min-width: 0; }
+  .nerve-name-kr { font-weight: 500; font-size: 13px; line-height: 1.4; }
+  .nerve-name-en { font-size: 10px; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
+  .nerve-func-tag {
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .tag-s { background: rgba(103,232,249,.15); color: var(--sub3); }
+  .tag-m { background: rgba(245,158,66,.12); color: var(--sub2); }
+  .tag-sm { background: rgba(167,139,250,.12); color: var(--sub1); }
+  .tag-p { background: rgba(61,214,140,.12); color: var(--sn-color); }
+
+  /* Branches container */
+  .branches {
+    background: var(--surface2);
+    border-top: 1px solid var(--border-dim);
+    padding: 8px 10px 8px 24px;
+  }
+
+  /* Branch levels */
+  .branch-list {
+    list-style: none;
+    border-left: 1px solid var(--border);
+    padding-left: 12px;
+    margin-top: 4px;
+  }
+
+  .branch-item {
+    position: relative;
+    padding: 3px 0;
+  }
+  .branch-item::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 12px;
+    width: 8px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .branch-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 4px 8px;
+    border-radius: 3px;
+  }
+  .branch-row:hover { background: rgba(255,255,255,.03); }
+
+  .branch-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .dot-l1 { background: var(--sub1); }
+  .dot-l2 { background: var(--sub2); }
+  .dot-l3 { background: var(--sub3); }
+  .dot-cn { background: var(--cn-color); }
+  .dot-sn { background: var(--sn-color); }
+
+  .branch-text {
+    flex: 1;
+    min-width: 0;
+  }
+  .branch-kr { font-size: 12px; font-weight: 400; line-height: 1.4; }
+  .branch-en { font-size: 10px; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; display: block; }
+  .branch-note { font-size: 10px; color: var(--text-dim); font-style: italic; display: block; }
+  .branch-target {
+    font-size: 10px;
+    color: var(--sub2);
+    background: var(--sub2-dim);
+    padding: 1px 5px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    white-space: nowrap;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* Plexus section header inside spinal */
+  .plexus-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    background: var(--surface);
+    border-radius: 4px;
+    margin-bottom: 6px;
+    border-left: 3px solid var(--sn-color);
+  }
+  .plexus-code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    background: var(--sn-dim);
+    color: var(--sn-color);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .plexus-name { font-weight: 600; font-size: 13px; }
+  .plexus-seg { font-size: 10px; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
+
+  /* Spinal region block */
+  .sn-region {
+    margin-bottom: 10px;
+    border: 1px solid var(--border-dim);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .sn-region-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--surface);
+  }
+  .sn-region-code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: var(--sn-dim);
+    color: var(--sn-color);
+    border: 1px solid var(--sn-color);
+  }
+  .sn-region-title { font-weight: 600; font-size: 13px; }
+  .sn-region-count { font-size: 10px; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
+  .sn-region-body { background: var(--surface2); border-top: 1px solid var(--border-dim); padding: 10px 14px; }
+
+  /* Divider */
+  .section-divider {
+    text-align: center;
+    padding: 10px 0 6px;
+    font-size: 10px;
+    letter-spacing: .12em;
+    color: var(--text-dim);
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+  }
+
+  /* Root info bar */
+  .root-info {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .root-chip {
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    padding: 2px 7px;
+    border-radius: 3px;
+    background: var(--code-bg);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  /* Deep nested tree */
+  .branch-list.l2 { border-left-color: var(--sub1); opacity: .9; }
+  .branch-list.l3 { border-left-color: var(--sub2); opacity: .85; }
+  .branch-list.l4 { border-left-color: var(--sub3); opacity: .8; }
+
+  .indent { padding-left: 10px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+
+<header class="page-header">
+  <div class="page-eyebrow">말초신경계 · Peripheral Nervous System</div>
+  <h1 class="page-title"><span class="cn">뇌신경</span> · <span class="sn">척수신경</span> 분류 체계</h1>
+  <p class="page-subtitle">12쌍 뇌신경 + 31쌍 척수신경 — 기시·주행·주요 가지 전체 · 해부학 신용어(KR) + Terminologia Anatomica(EN)</p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--cn-color)"></div>뇌신경 (Cranial N.)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--sn-color)"></div>척수신경 (Spinal N.)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--sub1)"></div>1차 분지</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--sub2)"></div>2차 분지</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--sub3)"></div>말단 분지</div>
+    <div class="legend-item"><span class="nerve-func-tag tag-s">S</span>감각</div>
+    <div class="legend-item"><span class="nerve-func-tag tag-m">M</span>운동</div>
+    <div class="legend-item"><span class="nerve-func-tag tag-sm">SM</span>혼합</div>
+    <div class="legend-item"><span class="nerve-func-tag tag-p">P</span>부교감</div>
+  </div>
+</header>
+
+<div class="main-grid">
+
+  <!-- ══════════════════ 뇌신경 컬럼 ══════════════════ -->
+  <div class="cn-col">
+    <div class="col-header cn-header">
+      <div>
+        <div class="col-header-code">CN · 뇌신경</div>
+        <div class="col-header-title">뇌신경 Cranial Nerves</div>
+        <div class="col-header-sub">뇌간·대뇌에서 기시, 12쌍</div>
+      </div>
+    </div>
+
+    <ul class="tree-root">
+
+      <!-- CN I -->
+      <li class="nerve-entry cn-entry">
+        <div class="nerve-label">
+          <span class="nerve-code">CN I</span>
+          <div class="nerve-name-group">
+            <div class="nerve-name-kr">후각신경 <span class="nerve-name-en">Olfactory N.</span></div>
+          </div>
+          <span class="nerve-func-tag tag-s">S</span>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item">
+              <div class="branch-row">
+                <div class="branch-dot dot-l1"></div>
+                <div class="branch-text">
+                  <span class="branch-kr">후각세포 중추돌기 (체판 통과)</span>
+                  <span class="branch-en">Fila olfactoria → cribriform plate</span>
+                  <span class="branch-target">→ 후각망울 (Olfactory bulb)</span>
+                </div>
+              </div>
+            </li>
+            <li class="branch-item">
+              <div class="branch-row">
+                <div class="branch-dot dot-l1"></div>
+                <div class="branch-text">
+                  <span class="branch-kr">후각로 → 후각겉질</span>
+                  <span class="branch-en">Olfactory tract → primary olfactory cortex</span>
+                  <span class="branch-note">뇌간을 거치지 않는 유일한 뇌신경</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- CN II -->
+      <li class="nerve-entry cn-entry">
+        <div class="nerve-label">
+          <span class="nerve-code">CN II</span>
+          <div class="nerve-name-group">
+            <div class="nerve-name-kr">시각신경 <span class="nerve-name-en">Optic N.</span></div>
+          </div>
+          <span class="nerve-func-tag tag-s">S</span>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item">
+              <div class="branch-row">
+                <div class="branch-dot dot-l1"></div>
+                <div class="branch-text">
+                  <span class="branch-kr">망막 신경절세포 축삭</span>
+                  <span class="branch-en">Retinal ganglion cell axons</span>
+                </div>
+              </div>
+              <ul class="branch-list l2">
+                <li class="branch-item">
+                  <div class="branch-row"><div class="branch-dot dot-l2"></div>
+                    <div class="branch-text"><span class="branch-kr">시각신경 교차부 (시각교차)</span><span class="branch-en">Optic chiasm — 코쪽 섬유 교차</span></div>
+                  </div>
+                </li>
+                <li class="branch-item">
+                  <div class="branch-row"><div class="branch-dot dot-l2"></div>
+                    <div class="branch-text"><span class="branch-kr">시각로 → 가쪽무릎체 → 시각부챗살 → 시각겉질</span><span class="branch-en">Optic tract → LGN → optic radiation → V1</span></div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- CN III -->
+      <li class="nerve-entry cn-entry">
+        <div class="nerve-label">
+          <span class="nerve-code">CN III</span>
+          <div class="nerve-name-group">
+            <div class="nerve-name-kr">눈돌림신경 <span class="nerve-name-en">Oculomotor N.</span></div>
+          </div>
+          <span class="nerve-func-tag tag-sm">SM</span>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item">
+              <div class="branch-row"><div class="branch-dot dot-l1"></div>
+                <div class="branch-text"><span class="branch-kr">위가지 (Superior division)</span></div>
+              </div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">위곧은근 (Superior rectus)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">위눈꺼풀올림근 (Levator palpebrae superioris)</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item">
+              <div class="branch-row"><div class="branch-dot dot-l1"></div>
+                <div class="branch-text"><span class="branch-kr">아래가지 (Inferior division)</span></div>
+              </div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">안쪽곧은근 (Medial rectus)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">아래곧은근 (Inferior rectus)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">아래빗근 (Inferior oblique)</span></div></div></li>
+                <li class="branch-item">
+                  <div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">섬모체신경절 가지 (부교감)</span><span class="branch-en">Branch to ciliary ganglion</span></div></div>
+                  <ul class="branch-list l3">
+                    <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">짧은섬모체신경 → 동공조임근, 섬모체근</span><span class="branch-en">Short ciliary nn. → sphincter pupillae, ciliary m.</span></div></div></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- CN IV -->
+      <li class="nerve-entry cn-entry">
+        <div class="nerve-label">
+          <span class="nerve-code">CN IV</span>
+          <div class="nerve-name-group">
+            <div class="nerve-name-kr">도르래신경 <span class="nerve-name-en">Trochlear N.</span></div>
+            <div class="nerve-name-en">유일하게 뇌 후면에서 출현</div>
+          </div>
+          <span class="nerve-func-tag tag-m">M</span>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">위빗근 (Superior oblique)</span><span class="branch-note">눈확 위안쪽벽 도르래 경유</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- CN V -->
+      <li class="nerve-entry cn-entry">
+        <div class="nerve-label">
+          <span class="nerve-code">CN V</span>
+          <div class="nerve-name-group">
+            <div class="nerve-name-kr">삼차신경 <span class="nerve-name-en">Trigeminal N.</span></div>
+          </div>
+          <span class="nerve-func-tag tag-sm">SM</span>
+        </div>
+        <div class="branches">
+          <!-- V1 -->
+          <div class="section-divider">V1 — 눈신경 Ophthalmic</div>
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">천막가지(되돌이수막가지) (Tentorial/Recurrent meningeal br.)</span><span class="branch-en">→ 소뇌천막, 대뇌낫 경질막 감각</span></div></div></li>
+            <li class="branch-item">
+              <div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">이마신경 (Frontal N.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">눈확위신경 (Supraorbital N.) → 이마·마루 피부</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">도르래위신경 (Supratrochlear N.) → 안쪽눈구석·코뿌리 피부</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item">
+              <div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">눈물샘신경 (Lacrimal N.) → 눈물샘, 가쪽눈구석 피부</span></div></div>
+            </li>
+            <li class="branch-item">
+              <div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">코섬모체신경 (Nasociliary N.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">긴섬모체신경 → 각막, 홍채 감각</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">앞벌집신경 → 코안 전부</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">뒤벌집신경 → 벌집굴, 나비굴</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">도르래아래신경 → 안쪽눈구석·눈물주머니 피부</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+          <!-- V2 -->
+          <div class="section-divider">V2 — 위턱신경 Maxillary</div>
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">광대신경 (Zygomatic N.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">광대얼굴신경 → 광대뼈·볼부위 피부</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">광대관자신경 → 관자부위 피부</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">날개입천장신경 (Pterygopalatine branches)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">큰·작은입천장신경 → 단단입천장, 물렁입천장</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">코안신경 → 코안 측벽, 코중격</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">인두신경 → 코인두</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">위이틀신경 (Superior alveolar N.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">후위이틀신경 → 위턱 큰어금니</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">중위이틀신경 → 위턱 작은어금니</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">전위이틀신경 → 위턱 앞니·송곳니</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">눈확아래신경 (Infraorbital N.) → 아래눈꺼풀·코날개·윗입술 피부</span></div></div></li>
+          </ul>
+          <!-- V3 -->
+          <div class="section-divider">V3 — 아래턱신경 Mandibular (운동+감각)</div>
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">가시구멍신경 (Nervus spinosus)</span><span class="branch-en">수막가지 — 중경질막동맥과 동행, 경질막·머리뼈 속면 감각</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">씹기근신경 (운동지)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">깨물근신경 → 깨물근</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">깊은관자신경 (전·후) → 관자근</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">가쪽날개근신경 → 가쪽날개근</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">안쪽날개근신경 → 안쪽날개근, 입천장긴장근, 고막긴장근</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">귓바퀴관자신경 (Auriculotemporal N.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">귓바퀴가지 → 귓바퀴 앞면 피부</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">귀밑샘지 (귀밑샘 부교감 중계 — 혀인두신경·귀신경절 경유)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">관자피부가지 → 관자부위 피부</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">아래이틀신경 (Inferior alveolar N.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">턱목뿔근신경 → 턱목뿔근, 두힘살근 앞힘살</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">아래이틀 치아가지 → 아래턱 전체 치아, 치주</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">턱끝신경 (Mental N.) → 턱끝부위·아랫입술 피부</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">앞니신경 → 앞니 치아속질</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">혀신경 (Lingual N.) → 전 2/3 혀 촉각·온도 감각</span><span class="branch-note">고실끈신경(CN VII) 합류 → 전 2/3 미각, 악하·혀밑샘 부교감</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">볼신경 (Buccal N.) → 볼부위·아랫입술 피부 및 입안점막</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- CN VI -->
+      <li class="nerve-entry cn-entry">
+        <div class="nerve-label">
+          <span class="nerve-code">CN VI</span>
+          <div class="nerve-name-group">
+            <div class="nerve-name-kr">갓돌림신경 <span class="nerve-name-en">Abducens N.</span></div>
+          </div>
+          <span class="nerve-func-tag tag-m">M</span>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">가쪽곧은근 (Lateral rectus) — 안구 가쪽돌림</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- CN VII -->
+      <li class="nerve-entry cn-entry">
+        <div class="nerve-label">
+          <span class="nerve-code">CN VII</span>
+          <div class="nerve-name-group">
+            <div class="nerve-name-kr">얼굴신경 <span class="nerve-name-en">Facial N.</span></div>
+          </div>
+          <span class="nerve-func-tag tag-sm">SM</span>
+        </div>
+        <div class="branches">
+          <div class="section-divider">관자뼈 내 가지</div>
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">큰바위신경 (Greater petrosal N.)</span><span class="branch-en">→ 날개입천장신경절 → 눈물샘·코안선 부교감</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">고실끈신경 (Chorda tympani)</span><span class="branch-en">→ 혀신경(V3)과 합류</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">턱밑신경절 → 턱밑샘·혀밑샘 부교감</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">전 2/3 혀 미각</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">등자근신경 (Stapedius N.) → 등자근</span></div></div></li>
+          </ul>
+          <div class="section-divider">귀밑샘 통과 후 얕은 가지 (운동)</div>
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">관자가지 (Temporal branches)</span><span class="branch-target">→ 이마근, 눈둘레근(상), 앞귓바퀴근</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">광대가지 (Zygomatic branches)</span><span class="branch-target">→ 눈둘레근(하), 작은광대근</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">볼가지 (Buccal branches)</span><span class="branch-target">→ 협근, 입둘레근, 코근</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">턱모서리가지 (Marginal mandibular branch)</span><span class="branch-target">→ 두힘살근, 아랫입술내림근</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">경지 (Cervical branch)</span><span class="branch-target">→ 넓은목근</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">뒤귓바퀴신경 (Posterior auricular N.)</span><span class="branch-target">→ 뒤귓바퀴근, 후두근육육</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">두힘살근지 (두힘살근 뒤힘살), 붓목뿔근지</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- CN VIII -->
+      <li class="nerve-entry cn-entry">
+        <div class="nerve-label">
+          <span class="nerve-code">CN VIII</span>
+          <div class="nerve-name-group">
+            <div class="nerve-name-kr">속귀신경 <span class="nerve-name-en">Vestibulocochlear N.</span></div>
+          </div>
+          <span class="nerve-func-tag tag-s">S</span>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">안뜰신경 (Vestibular N.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">위안뜰신경 → 타원주머니, 반고리관 전·수평부 팽대</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">아래안뜰신경 → 둥근주머니, 반고리관 뒤부분 팽대</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">달팽이신경 (Cochlear N.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">나선신경절 → 나선기관 털세포 → 청각겉질</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- CN IX -->
+      <li class="nerve-entry cn-entry">
+        <div class="nerve-label">
+          <span class="nerve-code">CN IX</span>
+          <div class="nerve-name-group">
+            <div class="nerve-name-kr">혀인두신경 <span class="nerve-name-en">Glossopharyngeal N.</span></div>
+          </div>
+          <span class="nerve-func-tag tag-sm">SM</span>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">고실신경 (Tympanic N.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">고실신경얼기 → 작은바위신경 → 귀신경절 → 귀밑샘 부교감</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">목동맥팽대지 → 목동맥팽대·목동맥토리 (혈압·산소 감수)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">인두지 → 인두신경얼기 → 인두 위부분 감각·운동</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">편도지 → 입천장편도·목구멍 점막</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">혀가지 → 후 1/3 혀 미각·일반 감각</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">붓인두근지 (운동) → 붓인두근</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- CN X -->
+      <li class="nerve-entry cn-entry">
+        <div class="nerve-label">
+          <span class="nerve-code">CN X</span>
+          <div class="nerve-name-group">
+            <div class="nerve-name-kr">미주신경 <span class="nerve-name-en">Vagus N.</span></div>
+            <div class="nerve-name-en">목정맥구멍 → 목→가슴→배</div>
+          </div>
+          <span class="nerve-func-tag tag-sm">SM</span>
+        </div>
+        <div class="branches">
+          <div class="section-divider">두개 내 가지</div>
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">귓바퀴가지 → 바깥귀길·귓바퀴 피부 (Arnold's nerve)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">수막가지 → 뒤머리뼈우묵 경질막</span></div></div></li>
+          </ul>
+          <div class="section-divider">목부위 가지</div>
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">인두지 → 인두신경얼기 → 인두 근육군</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">위후두신경 (Superior laryngeal N.)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">속후두신경 (감각) → 성대문위 점막</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">바깥후두신경 (운동) → 반지방패근</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">목부위 심장지 (상·하) → 심장신경얼기</span></div></div></li>
+          </ul>
+          <div class="section-divider">흉부 가지</div>
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">되돌이후두신경 (Recurrent laryngeal N.)</span><span class="branch-note">우: 빗장밑동맥 뒤쪽에서 U턴 / 좌: 대동맥활 뒤쪽에서 U턴</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">아래후두신경 → 성대문아래 점막, 내후두근육육 전체 (반지방패근 제외)</span></div></div></li>
+              </ul>
+            </li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">흉부 심장지 → 심장신경얼기</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">허파가지 → 허파신경얼기 → 기관지 부교감·감각</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">기관가지 (Tracheal branches) → 기관 점막·평활근 부교감</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">식도지 → 식도신경얼기</span></div></div></li>
+          </ul>
+          <div class="section-divider">복부 가지 (식도구멍 통과 후)</div>
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">앞미주신경줄기 (앞위가지) → 위 전면, 간가지, 쓸개가지</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">뒤미주신경줄기 (뒤위가지) → 위 후면, 복강가지</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">복강가지 → 작은창자, 큰창자 (Treitz 인대→왼결장굽이까지)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">이자가지, 지라가지, 콩팥가지, 콩팥위샘가지</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- CN XI -->
+      <li class="nerve-entry cn-entry">
+        <div class="nerve-label">
+          <span class="nerve-code">CN XI</span>
+          <div class="nerve-name-group">
+            <div class="nerve-name-kr">더부신경 <span class="nerve-name-en">Accessory N.</span></div>
+          </div>
+          <span class="nerve-func-tag tag-m">M</span>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">머리뿌리 (Cranial root)</span><span class="branch-en">→ 미주신경과 합류 → 인두·후두근육육</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">척수뿌리 (Spinal root, C1–C5)</span></div></div>
+              <ul class="branch-list l2">
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">목빗근 (Sternocleidomastoid)</span></div></div></li>
+                <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">등세모근 (Trapezius)</span></div></div></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- CN XII -->
+      <li class="nerve-entry cn-entry">
+        <div class="nerve-label">
+          <span class="nerve-code">CN XII</span>
+          <div class="nerve-name-group">
+            <div class="nerve-name-kr">혀밑신경 <span class="nerve-name-en">Hypoglossal N.</span></div>
+          </div>
+          <span class="nerve-func-tag tag-m">M</span>
+        </div>
+        <div class="branches">
+          <ul class="branch-list">
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">혀 속근육 전체</span><span class="branch-en">위세로근·아래세로근·가로근·수직근</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">턱끝혀근 (Genioglossus)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">목뿔혀근 (Hyoglossus)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">붓혀근 (Styloglossus)</span></div></div></li>
+            <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">C1 합류 → 목신경고리 (Ansa cervicalis)</span><span class="branch-note">→ 복장목뿔근, 복장방패근, 방패목뿔근, 어깨목뿔근</span></div></div></li>
+          </ul>
+        </div>
+      </li>
+
+    </ul>
+  </div><!-- /cn-col -->
+
+  <!-- ══════════════════ 척수신경 컬럼 ══════════════════ -->
+  <div class="sn-col">
+    <div class="col-header sn-header">
+      <div>
+        <div class="col-header-code">SN · 척수신경</div>
+        <div class="col-header-title">척수신경 Spinal Nerves</div>
+        <div class="col-header-sub">31쌍 — 목(8)·가슴(12)·허리(5)·엉치(5)·꼬리(1)</div>
+      </div>
+    </div>
+
+    <!-- 공통 구조 안내 -->
+    <div style="background:var(--surface);border:1px solid var(--border-dim);border-radius:6px;padding:12px 16px;margin-bottom:14px;">
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:6px;font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;">모든 척수신경의 공통 구성</div>
+      <div class="root-info">
+        <span class="root-chip">뒤뿌리(Dorsal root) — 감각</span>
+        <span class="root-chip">앞뿌리(Ventral root) — 운동</span>
+        <span class="root-chip">뒤뿌리신경절(DRG)</span>
+        <span class="root-chip">앞가지(Anterior ramus)</span>
+        <span class="root-chip">뒤가지(Posterior ramus) → 척주주위근·등 피부</span>
+        <span class="root-chip">회색교통가지 → 교감신경절</span>
+        <span class="root-chip">흰교통가지(T1–L2/3) → 교감신경 원심성</span>
+        <span class="root-chip">되돌이수막신경 → 경질막·뒤세로인대·척추사이원반 뒤부분</span>
+      </div>
+    </div>
+
+    <!-- 경신경 -->
+    <div class="sn-region">
+      <div class="sn-region-header">
+        <span class="sn-region-code">C1–C8</span>
+        <div>
+          <div class="sn-region-title">목신경 Cervical Nerves</div>
+          <div class="sn-region-count">8쌍 (C1: 고리뼈 위, C2–C8: 해당 바위 아래)</div>
+        </div>
+      </div>
+      <div class="sn-region-body">
+
+        <!-- 목신경얼기 -->
+        <div class="plexus-header">
+          <span class="plexus-code">목신경얼기</span>
+          <span class="plexus-name">Cervical Plexus</span>
+          <span class="plexus-seg">C1–C4 앞가지</span>
+        </div>
+        <ul class="branch-list">
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">작은뒤통수신경 (Lesser occipital N.)</span><span class="branch-en">C2 — 뒤통수부위·귓바퀴 뒤면 피부</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">큰귓바퀴신경 (Great auricular N.)</span><span class="branch-en">C2, C3 — 귀밑샘·귓바퀴 피부</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">목가로신경 (Transverse cervical N.)</span><span class="branch-en">C2, C3 — 목 앞면 피부</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">빗장위신경 (Supraclavicular N.)</span><span class="branch-en">C3, C4 — 내·중·가쪽으로 분기, 빗장위 피부</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">목신경고리 (Ansa cervicalis)</span><span class="branch-en">C1–C3</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">복장목뿔근, 복장방패근, 어깨목뿔근 (하복)</span></div></div></li>
+            </ul>
+          </li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">가로막신경 (Phrenic N.)</span><span class="branch-en">C3, C4, C5 — "C3,4,5 keeps the diaphragm alive"</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">가로막 (운동+감각)</span><span class="branch-note">심장막·세로칸 흉막·가로막 복막 감각 포함</span></div></div></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- 팔신경얼기 -->
+        <div class="plexus-header" style="margin-top:14px;">
+          <span class="plexus-code">팔신경얼기</span>
+          <span class="plexus-name">Brachial Plexus</span>
+          <span class="plexus-seg">C5–T1 앞가지</span>
+        </div>
+        <div style="font-size:10px;color:var(--text-muted);margin-bottom:8px;font-family:'IBM Plex Mono',monospace;padding-left:4px;">Root → Trunk → Division → Cord → Terminal branch</div>
+        <div class="section-divider">신경얼기 직접 분지 (Roots/Trunks)</div>
+        <ul class="branch-list">
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">어깨등신경 (Dorsal scapular N.)</span><span class="branch-en">C4, C5 (roots 직접) → 큰마름근, 작은마름근, 어깨올림근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">긴가슴신경 (Long thoracic N.)</span><span class="branch-en">C5, C6, C7 → 앞톱니근 (serratus anterior)</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">어깨위신경 (Suprascapular N.)</span><span class="branch-en">C5, C6 → 가시위근, 가시아래근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">빗장밑근신경 (Subclavius N.)</span><span class="branch-en">C5, C6 → 빗장밑근</span></div></div></li>
+        </ul>
+        <div class="section-divider">안쪽다발 (Medial Cord, C8–T1)</div>
+        <ul class="branch-list">
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">안쪽가슴근신경 → 작은가슴근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">안쪽위팔피부신경, 안쪽아래팔피부신경</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">자신경 (Ulnar N., C7–T1)</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">손바닥가지 (아래팔 안쪽 피부)</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">등쪽가지 → 등쪽 손(안쪽 1½ 손가락)</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">천지 → 새끼두덩근, 4·5번 손가락 촉각</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">깊은가지 → 뼈사이근 전체(3·4번 공간 포함), 안쪽 2개 벌레근, 엄지모음근</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">아래팔 내 : 자쪽손목굽힘근, 깊은손가락굽힘근 안쪽 1/2</span></div></div></li>
+            </ul>
+          </li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">정중신경 안쪽뿌리 (→ 가쪽두와 합류)</span></div></div></li>
+        </ul>
+        <div class="section-divider">가쪽다발 (Lateral Cord, C5–C7)</div>
+        <ul class="branch-list">
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">가쪽가슴근신경 → 큰가슴근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">근육피부신경 (Musculocutaneous N., C5–C7)</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">근지 → 부리위팔근, 위팔두갈래근, 위팔근</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">가쪽아래팔피부신경 → 아래팔 가쪽 피부</span></div></div></li>
+            </ul>
+          </li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">정중신경 가쪽뿌리 (→ 안쪽두와 합류)</span></div></div></li>
+        </ul>
+        <div class="section-divider">정중신경 (Median N., C5–T1) — 가쪽+안쪽다발 합류</div>
+        <ul class="branch-list">
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">아래팔 근지 → 원엎침근, 노쪽손목굽힘근, 긴손바닥근, 얕은손가락굽힘근, 깊은손가락굽힘근 가쪽, 긴엄지굽힘근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">앞뼈사이신경 (Anterior interosseous N.) → 깊은손가락굽힘근 가쪽 1/2, 긴엄지굽힘근, 네모엎침근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">손목굴 통과 후</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">되돌이가지 (엄지두덩가지) → 짧은엄지벌림근, 짧은엄지굽힘근 얕은갈래, 엄지맞섬근</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">온바닥쪽손가락신경 (1·2·3번 공간) → 고유바닥쪽손가락신경 → 노쪽 3½ 손가락 감각, 가쪽 2개 벌레근</span></div></div></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="section-divider">뒤다발 (Posterior Cord, C5–T1)</div>
+        <ul class="branch-list">
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">위어깨밑신경 → 어깨밑근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">가슴등신경 (Thoracodorsal N.) → 넓은등근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">아래어깨밑신경 → 어깨밑근 (아래부분), 큰원근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">겨드랑신경 (Axillary N., C5–C6)</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">앞가지 → 어깨세모근 전·중부</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">뒤가지 → 어깨세모근 뒤부분, 작은원근, 가쪽위팔피부신경</span></div></div></li>
+            </ul>
+          </li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">노신경 (Radial N., C5–T1)</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">위팔세갈래근지 (위팔 내 분지)</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">뒤위팔피부신경, 아래가쪽위팔피부신경, 뒤아래팔피부신경</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">얕은가지 (Superficial br.) → 등쪽 손·노쪽 3½ 손가락 피부</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">심지 (뒤뼈사이신경)</span></div></div>
+                <ul class="branch-list l3">
+                  <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">긴노쪽손목폄근, 짧은노쪽손목폄근 (또는 노신경 직접)</span></div></div></li>
+                  <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">손뒤침근</span></div></div></li>
+                  <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">손가락폄근, 새끼폄근, 자쪽손목폄근, 긴엄지벌림근, 짧은엄지폄근, 긴엄지폄근, 집게폄근</span></div></div></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 가슴신경 -->
+    <div class="sn-region">
+      <div class="sn-region-header">
+        <span class="sn-region-code">T1–T12</span>
+        <div>
+          <div class="sn-region-title">가슴신경 Thoracic Nerves</div>
+          <div class="sn-region-count">12쌍 — 신경얼기 미형성, 각각 독립 주행</div>
+        </div>
+      </div>
+      <div class="sn-region-body">
+        <ul class="branch-list">
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">T1 앞가지 → 팔신경얼기 참여 + 제1갈비사이신경</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">T2–T11 갈비사이신경 (Intercostal N.)</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">근지 → 속갈비사이근·외근, 맨속갈비사이근, 갈비밑근, 가슴가로근</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">가쪽피부가지 → 가슴가쪽벽 피부 (T2: 갈비사이위팔신경 — 위팔 안쪽 피부)</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">전피부가지 → 가슴앞벽·배앞벽 피부</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">T7–T11 → 복부근육 (배바깥빗근, 배속빗근, 배가로근, 배곧은근)</span></div></div></li>
+            </ul>
+          </li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">T12 갈비밑신경 (Subcostal N.)</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">복벽 아래부분 근육 + 샅굴부위 위부분 피부</span></div></div></li>
+            </ul>
+          </li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">모든 가슴신경 뒤가지 → 척주세움근, 등뼈 피부분절</span></div></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 요신경 -->
+    <div class="sn-region">
+      <div class="sn-region-header">
+        <span class="sn-region-code">L1–L5</span>
+        <div>
+          <div class="sn-region-title">허리신경 Lumbar Nerves</div>
+          <div class="sn-region-count">5쌍</div>
+        </div>
+      </div>
+      <div class="sn-region-body">
+        <div class="plexus-header">
+          <span class="plexus-code">허리신경얼기</span>
+          <span class="plexus-name">Lumbar Plexus</span>
+          <span class="plexus-seg">L1–L4 앞가지 (+ T12 일부)</span>
+        </div>
+        <ul class="branch-list">
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">엉덩아랫배신경 (Iliohypogastric N.)</span><span class="branch-en">L1 — 복벽 아래부분·샅고랑인대 위 피부</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">엉덩샅고랑신경 (Ilioinguinal N.)</span><span class="branch-en">L1 — 음부·넙다리 위안쪽 피부</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">생식넙다리신경 (Genitofemoral N.)</span><span class="branch-en">L1, L2</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">생식가지 → 음낭/대음순 피부, 고환올림근반사</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">넙다리가지 → 넙다리 상앞쪽 피부</span></div></div></li>
+            </ul>
+          </li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">가쪽넙다리피부신경 (Lateral femoral cutaneous N.)</span><span class="branch-en">L2, L3 — 넙다리 가쪽 피부 (순수 감각)</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">넙다리신경 (Femoral N.)</span><span class="branch-en">L2–L4</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">앞가지 → 엉덩허리근, 두덩근 (샅고랑인대 위쪽)</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">뒤가지 → 넙다리네갈래근 (넙다리곧은근·안쪽·가쪽·중간넓은근), 넙다리빗근, 무릎관절</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">전피부가지 → 넙다리 전면 피부</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">두렁신경 (Saphenous N.) → 종아리 안쪽·발 안쪽·엄지두덩 피부</span></div></div></li>
+            </ul>
+          </li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">폐쇄신경 (Obturator N.)</span><span class="branch-en">L2–L4</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">앞가지 → 긴모음근, 짧은모음근, 두덩정강근, 두덩근</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">뒤가지 → 큰모음근 (모음근부분), 바깥폐쇄근</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">피부가지 → 넙다리 안쪽 피부</span></div></div></li>
+            </ul>
+          </li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">L4, L5 → 허리엉치신경줄기 (엉치신경얼기 참여)</span></div></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 천골신경 -->
+    <div class="sn-region">
+      <div class="sn-region-header">
+        <span class="sn-region-code">S1–S5</span>
+        <div>
+          <div class="sn-region-title">엉치신경 Sacral Nerves</div>
+          <div class="sn-region-count">5쌍 (+ 꼬리신경 Co1)</div>
+        </div>
+      </div>
+      <div class="sn-region-body">
+        <div class="plexus-header">
+          <span class="plexus-code">엉치신경얼기</span>
+          <span class="plexus-name">Sacral Plexus</span>
+          <span class="plexus-seg">L4–S3 앞가지</span>
+        </div>
+        <ul class="branch-list">
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">위볼기신경 (Superior gluteal N.)</span><span class="branch-en">L4–S1 — 중간볼기근, 작은볼기근, 넙다리근막긴장근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">아래볼기신경 (Inferior gluteal N.)</span><span class="branch-en">L5–S2 — 큰볼기근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">넙다리네모근신경 (L4–S1) → 넙다리네모근, 아래쌍둥이근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">속폐쇄근신경 (L5–S2) → 속폐쇄근, 위쌍둥이근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">궁둥구멍근신경 (S1, S2) → 궁둥구멍근</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">관통피부신경 (Perforating cutaneous N.)</span><span class="branch-en">S2, S3 — 볼기 안쪽·아래부분 피부</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">뒤넙다리피부신경 (Posterior femoral cutaneous N.)</span><span class="branch-en">S1–S3 — 볼기하, 회음, 넙다리 후면 피부</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">궁둥신경 (Sciatic N., L4–S3)</span><span class="branch-note">인체 최대 신경 — 온종아리신경+정강신경의 공통 외피</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">넙다리 근지 → 큰모음근 (오금부위), 넙다리두갈래근 (긴갈래·짧은갈래), 반힘줄근, 반막근</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">온종아리신경 (Common peroneal N., L4–S2)</span></div></div>
+                <ul class="branch-list l3">
+                  <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">가쪽장딴지피부신경 → 종아리뼈머리 가쪽 피부</span></div></div></li>
+                  <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">깊은종아리신경 (Deep peroneal N.)</span></div></div>
+                    <ul class="branch-list l4">
+                      <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-cn"></div><div class="branch-text"><span class="branch-kr">근지 → 앞정강근, 긴엄지폄근, 긴발가락폄근, 셋째종아리근</span></div></div></li>
+                      <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-cn"></div><div class="branch-text"><span class="branch-kr">발등 근육가지 → 짧은엄지폄근, 짧은발가락폄근</span></div></div></li>
+                      <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-cn"></div><div class="branch-text"><span class="branch-kr">첫째발가락사이 등쪽 감각</span></div></div></li>
+                    </ul>
+                  </li>
+                  <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">얕은종아리신경 (Superficial peroneal N.)</span></div></div>
+                    <ul class="branch-list l4">
+                      <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-cn"></div><div class="branch-text"><span class="branch-kr">근지 → 긴종아리근, 짧은종아리근</span></div></div></li>
+                      <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-cn"></div><div class="branch-text"><span class="branch-kr">안쪽등쪽피부신경, 중간등쪽피부신경 → 발등 피부</span></div></div></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">정강신경 (Tibial N., L4–S3)</span></div></div>
+                <ul class="branch-list l3">
+                  <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">안쪽장딴지피부신경 → 안쪽장딴지신경 (장딴지신경 합류)</span></div></div></li>
+                  <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">종아리 근지 → 장딴지근, 가자미근, 장딴지빗근, 오금근, 뒤정강근, 긴발가락굽힘근, 긴엄지굽힘근</span></div></div></li>
+                  <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">안쪽발바닥신경 (Medial plantar N.)</span></div></div>
+                    <ul class="branch-list l4">
+                      <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-cn"></div><div class="branch-text"><span class="branch-kr">근지 → 짧은엄지굽힘근, 엄지벌림근, 제1벌레근</span></div></div></li>
+                      <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-cn"></div><div class="branch-text"><span class="branch-kr">고유발바닥쪽발가락신경 → 엄지·둘째·셋째·넷째발가락 안쪽 피부</span></div></div></li>
+                    </ul>
+                  </li>
+                  <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">가쪽발바닥신경 (Lateral plantar N.)</span></div></div>
+                    <ul class="branch-list l4">
+                      <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-cn"></div><div class="branch-text"><span class="branch-kr">천지 → 새끼벌림근, 짧은새끼굽힘근, 4·5지 감각</span></div></div></li>
+                      <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-cn"></div><div class="branch-text"><span class="branch-kr">심지 → 발바닥네모근, 2·3·4벌레근, 뼈사이근, 엄지모음근</span></div></div></li>
+                    </ul>
+                  </li>
+                  <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">장딴지신경 (Sural N.) → 종아리 뒤가쪽·발 가쪽 피부</span></div></div></li>
+                  <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l3"></div><div class="branch-text"><span class="branch-kr">안쪽발꿈치피부신경 → 발꿈치 안쪽</span></div></div></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="plexus-header" style="margin-top:14px;">
+          <span class="plexus-code">음부신경얼기</span>
+          <span class="plexus-name">Pudendal Plexus</span>
+          <span class="plexus-seg">S2–S4</span>
+        </div>
+        <ul class="branch-list">
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">음부신경 (Pudendal N.)</span></div></div>
+            <ul class="branch-list l2">
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">하곧창자신경 → 바깥항문조임근, 항문·항문관 피부</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">회음신경 → 회음부 피부, 바깥요도조임근, 망울해면체근, 궁둥해면체근</span></div></div></li>
+              <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l2"></div><div class="branch-text"><span class="branch-kr">음경/음핵 배측신경 → 귀두·음핵 피부 감각</span></div></div></li>
+            </ul>
+          </li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">골반내장신경 (S2–S4) — 부교감</span><span class="branch-note">→ 아래아랫배신경얼기 → 방광·곧창자·자궁·음경 발기</span></div></div></li>
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">항문꼬리신경 → 꼬리뼈 주위 피부</span></div></div></li>
+        </ul>
+
+        <div class="plexus-header" style="margin-top:14px;">
+          <span class="plexus-code">꼬리신경얼기</span>
+          <span class="plexus-name">Coccygeal Plexus</span>
+          <span class="plexus-seg">S4, S5, Co1</span>
+        </div>
+        <ul class="branch-list">
+          <li class="branch-item"><div class="branch-row"><div class="branch-dot dot-l1"></div><div class="branch-text"><span class="branch-kr">항문꼬리신경 (Anococcygeal N.) → 꼬리뼈 뒤쪽·항문 주위 피부</span></div></div></li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /sn-col -->
+
+</div><!-- /main-grid -->
+
+<div style="text-align:center;padding:24px 0 0;font-size:10px;color:var(--text-dim);font-family:'IBM Plex Mono',monospace;letter-spacing:.08em;">
+  PNS CLASSIFICATION · CN I–XII · C1–Co1 · 31 PAIRS
+</div>
