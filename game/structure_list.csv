@@ -1,0 +1,363 @@
+﻿번호,층,부위,그룹,신용어,영문,그릴 면,난이도등급
+1,근육,머리,표정근,이마근(전두근),"Frontalis (Occipitofrontalis, frontal belly)",앞·옆,C
+2,근육,머리,표정근,뒤통수근,"Occipitalis (Occipitofrontalis, occipital belly)",앞·옆,C
+3,근육,머리,표정근,눈둘레근,Orbicularis oculi,앞·옆,C
+4,근육,머리,표정근,입둘레근,Orbicularis oris,앞·옆,C
+5,근육,머리,표정근,볼근,Buccinator,앞·옆,C
+6,근육,머리,표정근,큰광대근,Zygomaticus major,앞·옆,C
+7,근육,머리,표정근,작은광대근,Zygomaticus minor,앞·옆,C
+8,근육,머리,표정근,입꼬리내림근,Depressor anguli oris,앞·옆,C
+9,근육,머리,표정근,턱끝근,Mentalis,앞·옆,C
+10,근육,머리,표정근,넓은목근,Platysma,앞·옆,C
+11,근육,머리,씹기근,관자근,Temporalis,앞·옆,C
+12,근육,머리,씹기근,깨물근,Masseter,앞·옆,C
+13,근육,머리,씹기근,가쪽날개근,Lateral pterygoid,앞·옆,C
+14,근육,머리,씹기근,안쪽날개근,Medial pterygoid,앞·옆,C
+15,근육,목,얕은목근,목빗근,Sternocleidomastoid,앞,B
+16,근육,목,목갈비근,앞목갈비근,Scalenus anterior,앞,B
+17,근육,목,목갈비근,중간목갈비근,Scalenus medius,앞,B
+18,근육,목,목갈비근,뒤목갈비근,Scalenus posterior,앞,B
+19,근육,목,목뿔위근,턱목뿔근,Mylohyoid,앞,B
+20,근육,목,목뿔위근,턱끝목뿔근,Geniohyoid,앞,B
+21,근육,목,목뿔위근,두힘살근,Digastric,앞,B
+22,근육,목,목뿔위근,붓목뿔근,Stylohyoid,앞,B
+23,근육,목,목뿔아래근,어깨목뿔근,Omohyoid,앞,B
+24,근육,목,목뿔아래근,복장목뿔근,Sternohyoid,앞,B
+25,근육,목,목뿔아래근,복장갑상근,Sternothyroid,앞,B
+26,근육,목,목뿔아래근,갑상목뿔근,Thyrohyoid,앞,B
+27,근육,목,척추앞근,긴목근,Longus colli,앞,B
+28,근육,목,척추앞근,긴머리근,Longus capitis,앞,B
+29,근육,목,등쪽목근,머리널판근,Splenius capitis,앞,B
+30,근육,목,등쪽목근,목널판근,Splenius cervicis,앞,B
+31,근육,등,표층(사지연결근),등세모근,Trapezius,뒤,A
+32,근육,등,표층(사지연결근),넓은등근,Latissimus dorsi,뒤,A
+33,근육,등,표층(사지연결근),어깨올림근,Levator scapulae,뒤,A
+34,근육,등,표층(사지연결근),큰마름근,Rhomboid major,뒤,A
+35,근육,등,표층(사지연결근),작은마름근,Rhomboid minor,뒤,A
+36,근육,등,중간층(호흡보조),위뒤톱니근,Serratus posterior superior,뒤,A
+37,근육,등,중간층(호흡보조),아래뒤톱니근,Serratus posterior inferior,뒤,A
+38,근육,등,심층(척추세움근),엉덩갈비근,Iliocostalis,뒤,A
+39,근육,등,심층(척추세움근),가장긴근,Longissimus,뒤,A
+40,근육,등,심층(척추세움근),가시근,Spinalis,뒤,A
+41,근육,등,심층(가로돌기가시근),반가시근,Semispinalis,뒤,A
+42,근육,등,심층(가로돌기가시근),뭇갈래근,Multifidus,뒤,A
+43,근육,등,심층(가로돌기가시근),돌림근,Rotatores,뒤,A
+44,근육,등,후두하근군,"뒤통수밑근(4개: 큰·작은뒤머리곧은근, 위·아래머리빗근)",Suboccipital muscles,뒤,A
+45,근육,가슴,얕은가슴근,큰가슴근,Pectoralis major,앞,A
+46,근육,가슴,얕은가슴근,작은가슴근,Pectoralis minor,앞,A
+47,근육,가슴,얕은가슴근,앞톱니근,Serratus anterior,앞,A
+48,근육,가슴,얕은가슴근,빗장밑근,Subclavius,앞,A
+49,근육,가슴,고유가슴근,바깥갈비사이근,External intercostal,앞,A
+50,근육,가슴,고유가슴근,속갈비사이근,Internal intercostal,앞,A
+51,근육,가슴,고유가슴근,최내갈비사이근,Innermost intercostal,앞,A
+52,근육,가슴,호흡의 주근,가로막(횡격막),Diaphragm,앞,A
+53,근육,배,앞배근,배곧은근,Rectus abdominis,앞,A
+54,근육,배,가쪽배근(층),배바깥빗근,External oblique,앞,A
+55,근육,배,가쪽배근(층),배속빗근,Internal oblique,앞,A
+56,근육,배,가쪽배근(층),배가로근,Transversus abdominis,앞,A
+57,근육,배,뒤배근,허리네모근,Quadratus lumborum,앞,A
+58,근육,어깨,어깨관절 주변,어깨세모근,Deltoid,앞·뒤,A
+59,근육,어깨,돌림근띠(회전근개),가시위근,Supraspinatus,앞·뒤,A
+60,근육,어깨,돌림근띠(회전근개),가시아래근,Infraspinatus,앞·뒤,A
+61,근육,어깨,돌림근띠(회전근개),작은원근,Teres minor,앞·뒤,A
+62,근육,어깨,돌림근띠(회전근개),어깨밑근,Subscapularis,앞·뒤,A
+63,근육,어깨,사지연결근,큰원근,Teres major,앞·뒤,A
+64,근육,어깨,위팔연결근,부리위팔근,Coracobrachialis,앞·뒤,A
+65,근육,위팔,앞칸(굽힘근),위팔두갈래근,Biceps brachii,앞·뒤,A
+66,근육,위팔,앞칸(굽힘근),위팔근,Brachialis,앞·뒤,A
+67,근육,위팔,뒤칸(폄근),위팔세갈래근,Triceps brachii,앞·뒤,A
+68,근육,위팔,뒤칸(폄근),팔꿈치근,Anconeus,앞·뒤,A
+69,근육,아래팔,앞칸 얕은층,원엎침근,Pronator teres,앞·뒤,B
+70,근육,아래팔,앞칸 얕은층,노쪽손목굽힘근,Flexor carpi radialis,앞·뒤,B
+71,근육,아래팔,앞칸 얕은층,긴손바닥근,Palmaris longus,앞·뒤,B
+72,근육,아래팔,앞칸 얕은층,자쪽손목굽힘근,Flexor carpi ulnaris,앞·뒤,B
+73,근육,아래팔,앞칸 중간층,얕은손가락굽힘근,Flexor digitorum superficialis,앞·뒤,B
+74,근육,아래팔,앞칸 깊은층,깊은손가락굽힘근,Flexor digitorum profundus,앞·뒤,B
+75,근육,아래팔,앞칸 깊은층,긴엄지굽힘근,Flexor pollicis longus,앞·뒤,B
+76,근육,아래팔,앞칸 깊은층,네모엎침근,Pronator quadratus,앞·뒤,B
+77,근육,아래팔,뒤칸 얕은층,위팔노근,Brachioradialis,앞·뒤,B
+78,근육,아래팔,뒤칸 얕은층,긴노쪽손목폄근,Extensor carpi radialis longus,앞·뒤,B
+79,근육,아래팔,뒤칸 얕은층,짧은노쪽손목폄근,Extensor carpi radialis brevis,앞·뒤,B
+80,근육,아래팔,뒤칸 얕은층,손가락폄근,Extensor digitorum,앞·뒤,B
+81,근육,아래팔,뒤칸 얕은층,새끼폄근,Extensor digiti minimi,앞·뒤,B
+82,근육,아래팔,뒤칸 얕은층,자쪽손목폄근,Extensor carpi ulnaris,앞·뒤,B
+83,근육,아래팔,뒤칸 깊은층,손뒤침근,Supinator,앞·뒤,B
+84,근육,아래팔,뒤칸 깊은층,긴엄지벌림근,Abductor pollicis longus,앞·뒤,B
+85,근육,아래팔,뒤칸 깊은층,짧은엄지폄근,Extensor pollicis brevis,앞·뒤,B
+86,근육,아래팔,뒤칸 깊은층,긴엄지폄근,Extensor pollicis longus,앞·뒤,B
+87,근육,아래팔,뒤칸 깊은층,집게폄근,Extensor indicis,앞·뒤,B
+88,근육,손,엄지두덩근,짧은엄지벌림근,Abductor pollicis brevis,앞,C
+89,근육,손,엄지두덩근,짧은엄지굽힘근,Flexor pollicis brevis,앞,C
+90,근육,손,엄지두덩근,엄지맞섬근,Opponens pollicis,앞,C
+91,근육,손,엄지두덩근,엄지모음근,Adductor pollicis,앞,C
+92,근육,손,새끼두덩근,짧은손바닥근,Palmaris brevis,앞,C
+93,근육,손,새끼두덩근,새끼벌림근,Abductor digiti minimi,앞,C
+94,근육,손,새끼두덩근,짧은새끼굽힘근,Flexor digiti minimi brevis,앞,C
+95,근육,손,새끼두덩근,새끼맞섬근,Opponens digiti minimi,앞,C
+96,근육,손,중간근(내재근),벌레근(4개),Lumbricals,앞,C
+97,근육,손,중간근(내재근),바닥쪽뼈사이근(3개),Palmar interossei,앞,C
+98,근육,손,중간근(내재근),등쪽뼈사이근(4개),Dorsal interossei,앞,C
+99,근육,골반·볼기,볼기근,큰볼기근,Gluteus maximus,뒤,A
+100,근육,골반·볼기,볼기근,중간볼기근,Gluteus medius,뒤,A
+101,근육,골반·볼기,볼기근,작은볼기근,Gluteus minimus,뒤,A
+102,근육,골반·볼기,볼기근,넙다리근막긴장근,Tensor fasciae latae,뒤,A
+103,근육,골반·볼기,깊은가쪽돌림근,궁둥구멍근,Piriformis,뒤,A
+104,근육,골반·볼기,깊은가쪽돌림근,위쌍둥이근,Gemellus superior,뒤,A
+105,근육,골반·볼기,깊은가쪽돌림근,아래쌍둥이근,Gemellus inferior,뒤,A
+106,근육,골반·볼기,깊은가쪽돌림근,속폐쇄근,Obturator internus,뒤,A
+107,근육,골반·볼기,깊은가쪽돌림근,바깥폐쇄근,Obturator externus,뒤,A
+108,근육,골반·볼기,깊은가쪽돌림근,넙다리네모근,Quadratus femoris,뒤,A
+109,근육,골반·볼기,엉덩허리근,엉덩허리근(큰허리근+엉덩근),Iliopsoas (Psoas major + Iliacus),뒤,A
+110,근육,골반·볼기,골반바닥근,항문올림근(3부: 두덩곧창자근·두덩꼬리근·엉덩꼬리근),Levator ani,뒤,A
+111,근육,골반·볼기,골반바닥근,꼬리근(꼬리뼈근),Coccygeus (Ischiococcygeus),뒤,A
+112,근육,넙다리,앞칸,넙다리빗근,Sartorius,앞·뒤,A
+113,근육,넙다리,앞칸,넙다리곧은근,Rectus femoris,앞·뒤,A
+114,근육,넙다리,앞칸,안쪽넓은근,Vastus medialis,앞·뒤,A
+115,근육,넙다리,앞칸,가쪽넓은근,Vastus lateralis,앞·뒤,A
+116,근육,넙다리,앞칸,중간넓은근,Vastus intermedius,앞·뒤,A
+117,근육,넙다리,안쪽칸(모음근군),두덩정강근,Gracilis,앞·뒤,A
+118,근육,넙다리,안쪽칸(모음근군),두덩근,Pectineus,앞·뒤,A
+119,근육,넙다리,안쪽칸(모음근군),긴모음근,Adductor longus,앞·뒤,A
+120,근육,넙다리,안쪽칸(모음근군),짧은모음근,Adductor brevis,앞·뒤,A
+121,근육,넙다리,안쪽칸(모음근군),큰모음근,Adductor magnus,앞·뒤,A
+122,근육,넙다리,뒤칸(햄스트링),넙다리두갈래근,Biceps femoris,앞·뒤,A
+123,근육,넙다리,뒤칸(햄스트링),반힘줄근,Semitendinosus,앞·뒤,A
+124,근육,넙다리,뒤칸(햄스트링),반막모양근,Semimembranosus,앞·뒤,A
+125,근육,종아리,앞칸(발등굽힘),앞정강근,Tibialis anterior,앞·뒤,B
+126,근육,종아리,앞칸(발등굽힘),긴발가락폄근,Extensor digitorum longus,앞·뒤,B
+127,근육,종아리,앞칸(발등굽힘),긴엄지폄근,Extensor hallucis longus,앞·뒤,B
+128,근육,종아리,앞칸(발등굽힘),셋째종아리근,Fibularis tertius (Peroneus tertius),앞·뒤,B
+129,근육,종아리,가쪽칸(외번),긴종아리근,Fibularis longus (Peroneus longus),앞·뒤,B
+130,근육,종아리,가쪽칸(외번),짧은종아리근,Fibularis brevis (Peroneus brevis),앞·뒤,B
+131,근육,종아리,뒤칸 얕은층,장딴지근,Gastrocnemius,앞·뒤,B
+132,근육,종아리,뒤칸 얕은층,가자미근,Soleus,앞·뒤,B
+133,근육,종아리,뒤칸 얕은층,장딴지빗근,Plantaris,앞·뒤,B
+134,근육,종아리,뒤칸 깊은층,오금근,Popliteus,앞·뒤,B
+135,근육,종아리,뒤칸 깊은층,긴발가락굽힘근,Flexor digitorum longus,앞·뒤,B
+136,근육,종아리,뒤칸 깊은층,긴엄지굽힘근,Flexor hallucis longus,앞·뒤,B
+137,근육,종아리,뒤칸 깊은층,뒤정강근,Tibialis posterior,앞·뒤,B
+138,근육,발,발등,짧은발가락폄근,Extensor digitorum brevis,앞,C
+139,근육,발,발등,짧은엄지폄근,Extensor hallucis brevis,앞,C
+140,근육,발,발바닥 1층,엄지벌림근,Abductor hallucis,앞,C
+141,근육,발,발바닥 1층,짧은발가락굽힘근,Flexor digitorum brevis,앞,C
+142,근육,발,발바닥 1층,새끼벌림근,Abductor digiti minimi,앞,C
+143,근육,발,발바닥 2층,발바닥네모근,Quadratus plantae,앞,C
+144,근육,발,발바닥 2층,벌레근(4개),Lumbricals,앞,C
+145,근육,발,발바닥 3층,짧은엄지굽힘근,Flexor hallucis brevis,앞,C
+146,근육,발,발바닥 3층,엄지모음근,Adductor hallucis,앞,C
+147,근육,발,발바닥 3층,짧은새끼굽힘근,Flexor digiti minimi brevis,앞,C
+148,근육,발,발바닥 4층,발등쪽뼈사이근(4개),Dorsal interossei,앞,C
+149,근육,발,발바닥 4층,발바닥쪽뼈사이근(3개),Plantar interossei,앞,C
+150,신경,뇌신경,뇌신경(감각),CN I 후각신경,Olfactory nerve,아래(뇌바닥),C
+151,신경,뇌신경,뇌신경(감각),CN II 시각신경,Optic nerve,아래(뇌바닥),C
+152,신경,뇌신경,뇌신경(운동),CN III 눈돌림신경,Oculomotor nerve,아래(뇌바닥),C
+153,신경,뇌신경,뇌신경(운동),CN IV 도르래신경,Trochlear nerve,아래(뇌바닥),C
+154,신경,뇌신경,뇌신경(감각),CN V-1 삼차신경(눈신경),Trigeminal - Ophthalmic division,아래(뇌바닥),C
+155,신경,뇌신경,뇌신경(감각),CN V-2 삼차신경(위턱신경),Trigeminal - Maxillary division,아래(뇌바닥),C
+156,신경,뇌신경,뇌신경(혼합),CN V-3 삼차신경(아래턱신경),Trigeminal - Mandibular division,아래(뇌바닥),C
+157,신경,뇌신경,뇌신경(운동),CN VI 갓돌림신경,Abducens nerve,아래(뇌바닥),C
+158,신경,뇌신경,뇌신경(혼합),CN VII 얼굴신경,Facial nerve,아래(뇌바닥),C
+159,신경,뇌신경,뇌신경(감각),CN VIII 속귀신경,Vestibulocochlear nerve,아래(뇌바닥),C
+160,신경,뇌신경,뇌신경(혼합),CN IX 혀인두신경,Glossopharyngeal nerve,아래(뇌바닥),C
+161,신경,뇌신경,뇌신경(혼합),CN X 미주신경,Vagus nerve,아래(뇌바닥),C
+162,신경,뇌신경,뇌신경(운동),CN XI 더부신경(부신경),Accessory nerve,아래(뇌바닥),C
+163,신경,뇌신경,뇌신경(운동),CN XII 혀밑신경,Hypoglossal nerve,아래(뇌바닥),C
+164,신경,목신경얼기,목신경얼기,가로막신경,Phrenic nerve,앞,B
+165,신경,목신경얼기,목신경얼기,목신경고리(경신경고리),Ansa cervicalis,앞,B
+166,신경,목신경얼기,목신경얼기(피부가지),큰귓바퀴신경,Great auricular nerve,앞,B
+167,신경,목신경얼기,목신경얼기(피부가지),목가로신경,Transverse cervical nerve,앞,B
+168,신경,목신경얼기,목신경얼기(피부가지),빗장위신경,Supraclavicular nerves,앞,B
+169,신경,목신경얼기,목신경얼기(피부가지),작은뒤통수신경,Lesser occipital nerve,앞,B
+170,신경,팔신경얼기,팔신경얼기(신경뿌리),긴가슴신경,Long thoracic nerve,앞,B
+171,신경,팔신경얼기,팔신경얼기(신경뿌리),어깨등신경(등쪽어깨신경),Dorsal scapular nerve,앞,B
+172,신경,팔신경얼기,팔신경얼기(위줄기),어깨위신경,Suprascapular nerve,앞,B
+173,신경,팔신경얼기,팔신경얼기(위줄기),빗장밑근신경,Nerve to subclavius,앞,B
+174,신경,팔신경얼기,팔신경얼기(가쪽·안쪽신경다발),가쪽·안쪽가슴근신경,Lateral & medial pectoral nerves,앞,B
+175,신경,팔신경얼기,팔신경얼기(뒤신경다발),가슴등신경,Thoracodorsal nerve,앞,B
+176,신경,팔신경얼기,팔신경얼기(뒤신경다발),위·아래어깨밑신경,Upper & Lower subscapular nerves,앞,B
+177,신경,팔신경얼기,팔신경얼기(안쪽신경다발),안쪽위팔·안쪽아래팔피부신경,Medial brachial & antebrachial cutaneous nerves,앞,B
+178,신경,팔신경얼기,팔신경얼기(뒤신경다발 끝가지),겨드랑신경,Axillary nerve,앞,B
+179,신경,팔신경얼기,팔신경얼기(가쪽신경다발 끝가지),근육피부신경,Musculocutaneous nerve,앞,B
+180,신경,팔신경얼기,팔신경얼기(안쪽+가쪽신경다발 끝가지),정중신경,Median nerve,앞,B
+181,신경,팔신경얼기,팔신경얼기(안쪽신경다발 끝가지),자신경,Ulnar nerve,앞,B
+182,신경,팔신경얼기,팔신경얼기(뒤신경다발 끝가지),노신경,Radial nerve,앞,B
+183,신경,가슴신경,가슴신경,갈비사이신경,Intercostal nerves (T1-T11),앞,B
+184,신경,가슴신경,가슴신경,갈비밑신경,Subcostal nerve (T12),앞,B
+185,신경,허리신경얼기,허리신경얼기,엉덩아랫배신경,Iliohypogastric nerve,앞,B
+186,신경,허리신경얼기,허리신경얼기,엉덩샅고랑신경,Ilioinguinal nerve,앞,B
+187,신경,허리신경얼기,허리신경얼기,생식넙다리신경,Genitofemoral nerve,앞,B
+188,신경,허리신경얼기,허리신경얼기,가쪽넙다리피부신경,Lateral femoral cutaneous nerve,앞,B
+189,신경,허리신경얼기,허리신경얼기(최대 가지),넙다리신경,Femoral nerve,앞,B
+190,신경,허리신경얼기,허리신경얼기(넙다리신경 가지),두렁신경(복재신경),Saphenous nerve,앞,B
+191,신경,허리신경얼기,허리신경얼기,폐쇄신경,Obturator nerve,앞,B
+192,신경,엉치신경얼기,엉치신경얼기,위볼기신경,Superior gluteal nerve,앞,B
+193,신경,엉치신경얼기,엉치신경얼기,아래볼기신경,Inferior gluteal nerve,앞,B
+194,신경,엉치신경얼기,엉치신경얼기(깊은가지),궁둥구멍근신경,Nerve to piriformis,앞,B
+195,신경,엉치신경얼기,엉치신경얼기(깊은가지),속폐쇄근신경,Nerve to obturator internus,앞,B
+196,신경,엉치신경얼기,엉치신경얼기(깊은가지),넙다리네모근신경,Nerve to quadratus femoris,앞,B
+197,신경,엉치신경얼기,엉치신경얼기(인체 최대 신경),궁둥신경(좌골신경),Sciatic nerve,앞,B
+198,신경,엉치신경얼기,엉치신경얼기(궁둥신경 가지),정강신경,Tibial nerve,앞,B
+199,신경,엉치신경얼기,엉치신경얼기(궁둥신경 가지),온종아리신경(총비골신경),Common fibular (peroneal) nerve,앞,B
+200,신경,엉치신경얼기,엉치신경얼기(온종아리신경 가지),깊은종아리신경,Deep fibular (peroneal) nerve,앞,B
+201,신경,엉치신경얼기,엉치신경얼기(온종아리신경 가지),얕은종아리신경,Superficial fibular (peroneal) nerve,앞,B
+202,신경,엉치신경얼기,엉치신경얼기(피부가지),장딴지신경(비복신경),Sural nerve,앞,B
+203,신경,엉치신경얼기,엉치신경얼기,뒤넙다리피부신경,Posterior femoral cutaneous nerve,앞,B
+204,신경,엉치신경얼기,엉치신경얼기,음부신경,Pudendal nerve,앞,B
+205,동맥,심장동맥,심장동맥,오른심장동맥,Right coronary artery (RCA),앞,B
+206,동맥,심장동맥,심장동맥,왼심장동맥(왼주간부),Left coronary artery (Left main),앞,B
+207,동맥,심장동맥,심장동맥,앞심실사이가지,Anterior interventricular a. (LAD),앞,B
+208,동맥,심장동맥,심장동맥,휘돌이가지,Circumflex branch,앞,B
+209,동맥,심장동맥,폐순환,허파동맥줄기(폐동맥간),Pulmonary trunk,앞,B
+210,동맥,심장동맥,폐순환,오른허파동맥,Right pulmonary artery,앞,B
+211,동맥,심장동맥,폐순환,왼허파동맥,Left pulmonary artery,앞,B
+212,동맥,대동맥·목·머리동맥계,대동맥 본줄기,오름대동맥,Ascending aorta,앞,B
+213,동맥,대동맥·목·머리동맥계,대동맥 본줄기,대동맥활,Aortic arch,앞,B
+214,동맥,대동맥·목·머리동맥계,목 동맥계,팔머리동맥(무명동맥),Brachiocephalic trunk,앞,B
+215,동맥,대동맥·목·머리동맥계,목 동맥계,온목동맥(총경동맥),Common carotid artery,앞,B
+216,동맥,대동맥·목·머리동맥계,목 동맥계,속목동맥(내경동맥),Internal carotid artery,앞,B
+217,동맥,대동맥·목·머리동맥계,머리 동맥계,눈동맥(안동맥),Ophthalmic artery,앞,B
+218,동맥,대동맥·목·머리동맥계,목 동맥계,바깥목동맥(외경동맥),External carotid artery,앞,B
+219,동맥,대동맥·목·머리동맥계,목 동맥계,얼굴동맥(안면동맥),Facial artery,앞,B
+220,동맥,대동맥·목·머리동맥계,목 동맥계,얕은관자동맥(천측두동맥),Superficial temporal artery,앞,B
+221,동맥,대동맥·목·머리동맥계,목 동맥계,위턱동맥(악동맥),Maxillary artery,앞,B
+222,동맥,대동맥·목·머리동맥계,목 동맥계,척추동맥(추골동맥),Vertebral artery,앞,B
+223,동맥,대동맥·목·머리동맥계,대뇌동맥고리,뇌바닥동맥(기저동맥),Basilar artery,앞,B
+224,동맥,대동맥·목·머리동맥계,대뇌동맥고리,대뇌동맥고리 구성동맥,Circle of Willis (ACA/MCA/PCA/AComm/PComm),앞,B
+225,동맥,상지동맥계,팔이음구조,빗장밑동맥(쇄골하동맥),Subclavian artery,앞,B
+226,동맥,상지동맥계,팔이음구조,겨드랑동맥(액와동맥),Axillary artery,앞,B
+227,동맥,상지동맥계,팔 동맥계,위팔동맥(상완동맥),Brachial artery,앞,B
+228,동맥,상지동맥계,팔 동맥계,위팔깊은동맥(상완심동맥),Deep brachial (profunda brachii) artery,앞,B
+229,동맥,상지동맥계,팔 동맥계,노동맥(요골동맥),Radial artery,앞,B
+230,동맥,상지동맥계,팔 동맥계,자동맥(척골동맥),Ulnar artery,앞,B
+231,동맥,상지동맥계,팔 동맥계,온뼈사이동맥(총골간동맥),Common interosseous artery,앞,B
+232,동맥,상지동맥계,손 동맥계,얕은손바닥동맥활,Superficial palmar arch,앞,B
+233,동맥,상지동맥계,손 동맥계,깊은손바닥동맥활,Deep palmar arch,앞,B
+234,동맥,가슴동맥계,가슴 본줄기,가슴대동맥(흉대동맥),Thoracic aorta (descending),앞,B
+235,동맥,가슴동맥계,가슴벽 동맥계,뒤갈비사이동맥(후늑간동맥),Posterior intercostal arteries,앞,B
+236,동맥,가슴동맥계,가슴벽 동맥계,속가슴동맥(내흉동맥),Internal thoracic artery,앞,B
+237,동맥,가슴동맥계,가슴안 내장동맥,기관지동맥,Bronchial arteries,앞,B
+238,동맥,가슴동맥계,가슴안 내장동맥,식도동맥,Esophageal arteries,앞,B
+239,동맥,배동맥계,배 본줄기,배대동맥(복대동맥),Abdominal aorta,앞,B
+240,동맥,배동맥계,내장동맥(짝없음),복강동맥,Celiac trunk,앞,B
+241,동맥,배동맥계,내장동맥(짝없음),온간동맥(총간동맥),Common hepatic artery,앞,B
+242,동맥,배동맥계,내장동맥(짝없음),지라동맥(비장동맥),Splenic artery,앞,B
+243,동맥,배동맥계,내장동맥(짝없음),왼위동맥(좌위동맥),Left gastric artery,앞,B
+244,동맥,배동맥계,내장동맥(짝없음),위창자간막동맥(상장간막동맥),Superior mesenteric artery (SMA),앞,B
+245,동맥,배동맥계,내장동맥(짝없음),아래창자간막동맥(하장간막동맥),Inferior mesenteric artery (IMA),앞,B
+246,동맥,배동맥계,내장동맥(짝있음),콩팥동맥(신동맥),Renal artery,앞,B
+247,동맥,배동맥계,내장동맥(짝있음),생식샘동맥(고환/난소동맥),Testicular / Ovarian artery,앞,B
+248,동맥,배동맥계,벽쪽동맥,아래가로막동맥(하횡격막동맥),Inferior phrenic artery,앞,B
+249,동맥,배동맥계,벽쪽동맥,허리동맥(요동맥),Lumbar arteries,앞,B
+250,동맥,골반·샅동맥계,골반 본줄기,온엉덩동맥(총장골동맥),Common iliac artery,앞,B
+251,동맥,골반·샅동맥계,골반 동맥계,속엉덩동맥(내장골동맥),Internal iliac artery,앞,B
+252,동맥,골반·샅동맥계,골반 동맥계,위볼기동맥(상둔동맥),Superior gluteal artery,앞,B
+253,동맥,골반·샅동맥계,골반 동맥계,아래볼기동맥(하둔동맥),Inferior gluteal artery,앞,B
+254,동맥,골반·샅동맥계,샅 동맥계,속음부동맥(내음부동맥),Internal pudendal artery,앞,B
+255,동맥,골반·샅동맥계,골반 동맥계,자궁동맥,Uterine artery,앞,B
+256,동맥,골반·샅동맥계,골반 동맥계,중간곧창자동맥,Middle rectal artery,앞,B
+257,동맥,골반·샅동맥계,골반 동맥계,폐쇄동맥(폐쇄공동맥),Obturator artery,앞,B
+258,동맥,골반·샅동맥계,골반 본줄기,바깥엉덩동맥(외장골동맥),External iliac artery,앞,B
+259,동맥,하지동맥계,넙다리 동맥계,넙다리동맥(대퇴동맥),Femoral artery,앞,B
+260,동맥,하지동맥계,넙다리 동맥계,깊넙다리동맥(대퇴심동맥),Deep (profunda) femoris artery,앞,B
+261,동맥,하지동맥계,무릎·종아리 동맥계,오금동맥(슬와동맥),Popliteal artery,앞,B
+262,동맥,하지동맥계,종아리 동맥계,앞정강동맥(전경골동맥),Anterior tibial artery,앞,B
+263,동맥,하지동맥계,종아리 동맥계,뒤정강동맥(후경골동맥),Posterior tibial artery,앞,B
+264,동맥,하지동맥계,종아리 동맥계,종아리동맥(비골동맥),Fibular (peroneal) artery,앞,B
+265,동맥,하지동맥계,발 동맥계,발등동맥(족배동맥),Dorsalis pedis artery,앞,B
+266,동맥,하지동맥계,발 동맥계,안쪽·가쪽발바닥동맥,Medial & lateral plantar arteries,앞,B
+267,뼈,머리뼈,,이마뼈,,앞·뒤,A
+268,뼈,머리뼈,,마루뼈(2),,앞·뒤,C
+269,뼈,머리뼈,,뒤통수뼈,,앞·뒤,A
+270,뼈,머리뼈,,관자뼈(2),,앞·뒤,C
+271,뼈,머리뼈,,나비뼈,,앞·뒤,A
+272,뼈,머리뼈,,벌집뼈,,앞·뒤,A
+273,뼈,머리뼈,,코뼈(2),,앞·뒤,C
+274,뼈,머리뼈,,눈물뼈(2),,앞·뒤,C
+275,뼈,머리뼈,,광대뼈(2),,앞·뒤,C
+276,뼈,머리뼈,,위턱뼈(2),,앞·뒤,C
+277,뼈,머리뼈,,입천장뼈(2),,앞·뒤,C
+278,뼈,머리뼈,,아래코선반(2),,앞·뒤,C
+279,뼈,머리뼈,,보습뼈,,앞·뒤,A
+280,뼈,머리뼈,,아래턱뼈,,앞·뒤,A
+281,뼈,머리뼈,,목뿔뼈,,앞·뒤,A
+282,뼈,척주,,목뼈(7),,앞·뒤,C
+283,뼈,척주,,고리뼈,,앞·뒤,A
+284,뼈,척주,,중쇠뼈,,앞·뒤,A
+285,뼈,척주,,등뼈(12),,앞·뒤,C
+286,뼈,척주,,허리뼈(5),,앞·뒤,C
+287,뼈,척주,,엉치뼈,,앞·뒤,A
+288,뼈,척주,,꼬리뼈,,앞·뒤,A
+289,뼈,가슴우리,,복장뼈자루,,앞·뒤,A
+290,뼈,가슴우리,,복장뼈몸통,,앞·뒤,A
+291,뼈,가슴우리,,칼돌기,,앞·뒤,A
+292,뼈,가슴우리,,참갈비뼈(7쌍),,앞·뒤,C
+293,뼈,가슴우리,,거짓갈비뼈(3쌍),,앞·뒤,C
+294,뼈,가슴우리,,뜬갈비뼈(2쌍),,앞·뒤,C
+295,뼈,팔이음뼈,,빗장뼈,,앞·뒤,A
+296,뼈,팔이음뼈,,어깨뼈,,앞·뒤,A
+297,뼈,위팔·아래팔,,위팔뼈,,앞·뒤,A
+298,뼈,위팔·아래팔,,노뼈,,앞·뒤,A
+299,뼈,위팔·아래팔,,자뼈,,앞·뒤,A
+300,뼈,손,,손배뼈,,앞·뒤,C
+301,뼈,손,,반달뼈,,앞·뒤,C
+302,뼈,손,,세모뼈,,앞·뒤,C
+303,뼈,손,,콩알뼈,,앞·뒤,C
+304,뼈,손,,큰마름뼈,,앞·뒤,C
+305,뼈,손,,작은마름뼈,,앞·뒤,C
+306,뼈,손,,알머리뼈,,앞·뒤,C
+307,뼈,손,,갈고리뼈,,앞·뒤,C
+308,뼈,손,,손허리뼈(5),,앞·뒤,C
+309,뼈,손,,손가락뼈(14),,앞·뒤,C
+310,뼈,볼기·넙다리,,볼기뼈,,앞·뒤,A
+311,뼈,볼기·넙다리,,엉덩뼈,,앞·뒤,A
+312,뼈,볼기·넙다리,,궁둥뼈,,앞·뒤,A
+313,뼈,볼기·넙다리,,두덩뼈,,앞·뒤,A
+314,뼈,볼기·넙다리,,넙다리뼈,,앞·뒤,A
+315,뼈,볼기·넙다리,,무릎뼈,,앞·뒤,A
+316,뼈,종아리·발,,정강뼈,,앞·뒤,C
+317,뼈,종아리·발,,종아리뼈,,앞·뒤,C
+318,뼈,종아리·발,,목말뼈,,앞·뒤,C
+319,뼈,종아리·발,,발꿈치뼈,,앞·뒤,C
+320,뼈,종아리·발,,발배뼈,,앞·뒤,C
+321,뼈,종아리·발,,입방뼈,,앞·뒤,C
+322,뼈,종아리·발,,쐐기뼈(3),,앞·뒤,C
+323,뼈,종아리·발,,발허리뼈(5),,앞·뒤,C
+324,뼈,종아리·발,,발가락뼈(14),,앞·뒤,C
+325,장기,머리·목,,뇌,,앞·안쪽,A
+326,장기,머리·목,,소뇌,,앞·안쪽,B
+327,장기,머리·목,,눈,,앞·안쪽,B
+328,장기,머리·목,,귀,,앞·안쪽,B
+329,장기,머리·목,,혀,,앞·안쪽,B
+330,장기,머리·목,,갑상샘,,앞·안쪽,A
+331,장기,머리·목,,후두,,앞·안쪽,B
+332,장기,머리·목,,귀밑샘,,앞·안쪽,B
+333,장기,머리·목,,턱밑샘,,앞·안쪽,B
+334,장기,머리·목,,혀밑샘,,앞·안쪽,B
+335,장기,가슴,,기관,,앞·안쪽,A
+336,장기,가슴,,허파,,앞·안쪽,A
+337,장기,가슴,,심장,,앞·안쪽,A
+338,장기,가슴,,식도,,앞·안쪽,B
+339,장기,가슴,,가슴샘,,앞·안쪽,B
+340,장기,가슴,,가로막,,앞·안쪽,A
+341,장기,배,,위,,앞·안쪽,A
+342,장기,배,,샘창자,,앞·안쪽,B
+343,장기,배,,빈창자,,앞·안쪽,B
+344,장기,배,,돌창자,,앞·안쪽,B
+345,장기,배,,막창자,,앞·안쪽,B
+346,장기,배,,잘록창자,,앞·안쪽,B
+347,장기,배,,곧창자,,앞·안쪽,B
+348,장기,배,,간,,앞·안쪽,A
+349,장기,배,,쓸개,,앞·안쪽,B
+350,장기,배,,이자,,앞·안쪽,A
+351,장기,배,,지라,,앞·안쪽,A
+352,장기,배,,콩팥,,앞·안쪽,A
+353,장기,배,,콩팥위샘,,앞·안쪽,B
+354,장기,배,,요관,,앞·안쪽,B
+355,장기,골반,,방광,,앞·안쪽,A
+356,장기,골반,,요도,,앞·안쪽,B
+357,장기,골반,,전립샘,,앞·안쪽,B
+358,장기,골반,,자궁,,앞·안쪽,B
+359,장기,골반,,난소,,앞·안쪽,B
+360,장기,골반,,난관,,앞·안쪽,B
+361,장기,골반,,질,,앞·안쪽,B
+362,장기,골반,,고환,,앞·안쪽,B

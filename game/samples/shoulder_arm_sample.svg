@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 700" font-family="'Noto Sans KR',sans-serif">
+<title>예시: 어깨·위팔 앞면 근육 (고품질 SVG 샘플)</title>
+<defs>
+<linearGradient id="mus" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E88F82"/><stop offset=".55" stop-color="#C95C53"/><stop offset="1" stop-color="#93312E"/></linearGradient>
+<linearGradient id="mus2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0A094"/><stop offset=".6" stop-color="#D86B60"/><stop offset="1" stop-color="#9F3733"/></linearGradient>
+<linearGradient id="mus3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D9776C"/><stop offset=".6" stop-color="#B34842"/><stop offset="1" stop-color="#7E2926"/></linearGradient>
+<linearGradient id="bone" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F6EFD9"/><stop offset=".6" stop-color="#E6DAB8"/><stop offset="1" stop-color="#B9A97C"/></linearGradient>
+<linearGradient id="tend" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F4EEDF"/><stop offset="1" stop-color="#CFC4A6"/></linearGradient>
+<filter id="sh" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="1.5" dy="2.5" stdDeviation="2.5" flood-color="#3a1210" flood-opacity=".45"/></filter>
+<clipPath id="cPec"><path id="pPec" d="M322 76 C290 62 240 70 192 98 C166 112 150 130 148 148 C190 176 255 214 322 296 L330 296 L328 76 Z"/></clipPath>
+<clipPath id="cDel"><path id="pDel" d="M206 90 C160 76 110 94 98 140 C90 176 100 202 112 238 C130 206 152 176 166 150 C176 124 196 106 206 90 Z"/></clipPath>
+<clipPath id="cBic"><path id="pBic" d="M140 200 C168 250 162 340 128 410 L104 414 C90 340 90 262 108 210 C116 198 128 194 140 200 Z"/></clipPath>
+</defs>
+<rect width="680" height="700" fill="#F7F3EE"/>
+<g transform="translate(170 0)">
+<!-- 뼈 -->
+<g filter="url(#sh)">
+ <path d="M122 118 L110 428" stroke="#9C8C60" stroke-width="29" stroke-linecap="round" fill="none"/>
+ <path d="M122 118 L110 428" stroke="url(#bone)" stroke-width="26" stroke-linecap="round" fill="none"/>
+ <circle cx="124" cy="122" r="17" fill="url(#bone)" stroke="#9C8C60"/>
+ <path d="M326 72 Q232 44 150 96" stroke="#9C8C60" stroke-width="17" stroke-linecap="round" fill="none"/>
+ <path d="M326 72 Q232 44 150 96" stroke="url(#bone)" stroke-width="14" stroke-linecap="round" fill="none"/>
+ <path d="M326 70 L350 70 L352 330 L338 350 L326 330 Z" fill="url(#bone)" stroke="#9C8C60" stroke-width="1.5"/>
+ <path d="M326 250 C290 268 250 284 214 294" fill="none" stroke="url(#bone)" stroke-width="9" stroke-linecap="round"/><path d="M326 282 C290 300 250 316 214 326" fill="none" stroke="url(#bone)" stroke-width="9" stroke-linecap="round"/><path d="M326 314 C290 332 250 348 214 358" fill="none" stroke="url(#bone)" stroke-width="9" stroke-linecap="round"/>
+</g>
+<!-- 위팔근 (깊은층) -->
+<path d="M96 250 C82 300 86 360 102 410 L114 406 C104 350 100 290 108 240 Z" fill="url(#mus3)" stroke="#6E1E1C" stroke-width="1.2" filter="url(#sh)"/>
+<!-- 아래팔 -->
+<path d="M104 420 C122 440 128 520 110 642 L86 642 C72 540 80 470 94 424 Z" fill="url(#mus3)" stroke="#6E1E1C" stroke-width="1.3" filter="url(#sh)"/>
+<path d="M90 424 C62 470 60 560 70 642 L84 642 C82 560 84 486 100 428 Z" fill="url(#mus2)" stroke="#6E1E1C" stroke-width="1.3" filter="url(#sh)"/>
+<path d="M120 426 C108 450 96 480 86 510" stroke="#6E1E1C" stroke-width="13" stroke-linecap="round" fill="none"/><path d="M120 426 C108 450 96 480 86 510" stroke="url(#mus)" stroke-width="10.5" stroke-linecap="round" fill="none"/>
+<!-- 큰가슴근 -->
+<use href="#pPec" fill="url(#mus)" stroke="#6E1E1C" stroke-width="1.4" filter="url(#sh)"/><g clip-path="url(#cPec)" fill="none" stroke="#6E1E1C" stroke-opacity="0.4" stroke-width="1.1" stroke-linecap="round"><path d="M152 150 Q237.0 106.0 322.0 74.0"/><path d="M152 150 Q231.05555555555554 107.0 310.1111111111111 76.0"/><path d="M152 150 Q225.11111111111111 108.0 298.22222222222223 78.0"/><path d="M152 150 Q219.16666666666666 109.0 286.3333333333333 80.0"/><path d="M152 150 Q213.22222222222223 110.0 274.44444444444446 82.0"/><path d="M152 150 Q207.27777777777777 111.0 262.55555555555554 84.0"/><path d="M152 150 Q201.33333333333334 112.0 250.66666666666669 86.0"/><path d="M152 150 Q195.38888888888889 113.0 238.77777777777777 88.0"/><path d="M152 150 Q189.44444444444446 114.0 226.8888888888889 90.0"/><path d="M152 150 Q183.5 115.0 215.0 92.0"/><path d="M152 150 Q235.0 124.0 326 90.0"/><path d="M152 150 Q235.0 132.75 326 107.5"/><path d="M152 150 Q235.0 141.5 326 125.0"/><path d="M152 150 Q235.0 150.25 326 142.5"/><path d="M152 150 Q235.0 159.0 326 160.0"/><path d="M152 150 Q235.0 167.75 326 177.5"/><path d="M152 150 Q235.0 176.5 326 195.0"/><path d="M152 150 Q235.0 185.25 326 212.5"/><path d="M152 150 Q235.0 194.0 326 230.0"/><path d="M152 150 Q235.0 202.75 326 247.5"/><path d="M152 150 Q235.0 211.5 326 265.0"/><path d="M152 150 Q235.0 220.25 326 282.5"/><path d="M152 150 Q235.0 229.0 326 300.0"/></g>
+<!-- 위팔두갈래근 + 힘줄 -->
+<path d="M116 410 C112 424 108 436 104 450" stroke="#B8AB88" stroke-width="9" stroke-linecap="round" fill="none"/><path d="M116 410 C112 424 108 436 104 450" stroke="url(#tend)" stroke-width="7" stroke-linecap="round" fill="none"/>
+<use href="#pBic" fill="url(#mus2)" stroke="#6E1E1C" stroke-width="1.4" filter="url(#sh)"/><g clip-path="url(#cBic)" fill="none" stroke="#6E1E1C" stroke-opacity=".38" stroke-width="1.1"><path d="M112.0 206.0 C94.0 270 94.0 340 104.0 410"/><path d="M115.8 206.0 C103.0 270 102.2 340 107.0 410"/><path d="M119.5 206.0 C112.0 270 110.5 340 110.0 410"/><path d="M123.2 206.0 C121.0 270 118.8 340 113.0 410"/><path d="M127.0 206.0 C130.0 270 127.0 340 116.0 410"/><path d="M130.8 206.0 C139.0 270 135.2 340 119.0 410"/><path d="M134.5 206.0 C148.0 270 143.5 340 122.0 410"/><path d="M138.2 206.0 C157.0 270 151.8 340 125.0 410"/><path d="M142.0 206.0 C166.0 270 160.0 340 128.0 410"/></g>
+<path d="M120 214 C132 250 136 300 126 350" stroke="#fff" stroke-opacity=".28" stroke-width="5" stroke-linecap="round" fill="none"/>
+<!-- 삼각근 -->
+<use href="#pDel" fill="url(#mus2)" stroke="#6E1E1C" stroke-width="1.4" filter="url(#sh)"/><g clip-path="url(#cDel)" fill="none" stroke="#6E1E1C" stroke-opacity="0.45" stroke-width="1.1" stroke-linecap="round"><path d="M113 236 Q165.0 164.0 205.0 92.0"/><path d="M113 236 Q159.75 165.8 194.5 95.6"/><path d="M113 236 Q154.5 167.6 184.0 99.2"/><path d="M113 236 Q149.25 169.4 173.5 102.8"/><path d="M113 236 Q144.0 171.2 163.0 106.4"/><path d="M113 236 Q138.75 173.0 152.5 110.0"/><path d="M113 236 Q133.5 174.8 142.0 113.6"/><path d="M113 236 Q128.25 176.6 131.5 117.2"/><path d="M113 236 Q123.0 178.4 121.0 120.8"/><path d="M113 236 Q117.75 180.2 110.5 124.4"/><path d="M113 236 Q112.5 182.0 100.0 128.0"/></g>
+<path d="M178 104 C150 100 120 118 110 150" stroke="#fff" stroke-opacity=".3" stroke-width="5" stroke-linecap="round" fill="none"/>
+<!-- 표시선 -->
+<path d="M170 130 L-26 128" stroke="#555" stroke-width="1"/><circle cx="170" cy="130" r="2.5" fill="#555"/><text x="-30" y="126" text-anchor="end" font-size="14" font-weight="700" fill="#222">삼각근</text><text x="-30" y="141" text-anchor="end" font-size="10.5" fill="#666" font-style="italic">Deltoid</text>
+<path d="M122 300 L-26 290" stroke="#555" stroke-width="1"/><circle cx="122" cy="300" r="2.5" fill="#555"/><text x="-30" y="288" text-anchor="end" font-size="14" font-weight="700" fill="#222">위팔두갈래근</text><text x="-30" y="303" text-anchor="end" font-size="10.5" fill="#666" font-style="italic">Biceps brachii</text>
+<path d="M94 330 L-26 380" stroke="#555" stroke-width="1"/><circle cx="94" cy="330" r="2.5" fill="#555"/><text x="-30" y="378" text-anchor="end" font-size="14" font-weight="700" fill="#222">위팔근</text><text x="-30" y="393" text-anchor="end" font-size="10.5" fill="#666" font-style="italic">Brachialis</text>
+<path d="M76 520 L-26 520" stroke="#555" stroke-width="1"/><circle cx="76" cy="520" r="2.5" fill="#555"/><text x="-30" y="518" text-anchor="end" font-size="14" font-weight="700" fill="#222">위팔노근</text><text x="-30" y="533" text-anchor="end" font-size="10.5" fill="#666" font-style="italic">Brachioradialis</text>
+<path d="M104 500 L-26 590" stroke="#555" stroke-width="1"/><circle cx="104" cy="500" r="2.5" fill="#555"/><text x="-30" y="588" text-anchor="end" font-size="14" font-weight="700" fill="#222">아래팔 굽힘근</text><text x="-30" y="603" text-anchor="end" font-size="10.5" fill="#666" font-style="italic">Forearm flexors</text>
+<path d="M262 170 L396 150" stroke="#555" stroke-width="1"/><circle cx="262" cy="170" r="2.5" fill="#555"/><text x="400" y="148" font-size="14" font-weight="700" fill="#222">큰가슴근</text><text x="400" y="163" font-size="10.5" fill="#666" font-style="italic">Pectoralis major</text><path d="M340 210 L396 215" stroke="#555" stroke-width="1"/><circle cx="340" cy="210" r="2.5" fill="#555"/><text x="400" y="213" font-size="14" font-weight="700" fill="#222">복장뼈</text><text x="400" y="228" font-size="10.5" fill="#666" font-style="italic">Sternum</text><path d="M250 56 L396 60" stroke="#555" stroke-width="1"/><circle cx="250" cy="56" r="2.5" fill="#555"/><text x="400" y="58" font-size="14" font-weight="700" fill="#222">빗장뼈</text><text x="400" y="73" font-size="10.5" fill="#666" font-style="italic">Clavicle</text>
+</g>
+</svg>
