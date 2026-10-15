@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>해부 구조물 맞추기</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#F4F4F6; --surface:#FFFFFF; --sunk:#EAEAEF; --line:#D8D8E0;
+  --text:#191922; --text-2:#5A5A68; --accent:#2F5D8C; --ok:#2E7D4F; --bad:#B03A48;
+  --sans:'Noto Sans KR',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#131319; --surface:#1A1A22; --sunk:#22222B; --line:#2E2E3A;
+  --text:#E5E5EC; --text-2:#9E9EAE; --accent:#7FAEDC; --ok:#6FCB94; --bad:#E5808E;
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:15px/1.5 var(--sans);min-height:100vh}
+.app{max-width:980px;margin:0 auto;padding:16px}
+h1{font-size:20px;font-weight:700;margin-bottom:12px}
+.bar{display:flex;flex-wrap:wrap;gap:8px 16px;margin-bottom:12px}
+.grp{display:flex;gap:4px;background:var(--sunk);padding:3px;border-radius:10px}
+.grp button{border:0;background:none;color:var(--text-2);font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;cursor:pointer}
+.grp button[aria-pressed="true"]{background:var(--surface);color:var(--text);font-weight:700;box-shadow:0 1px 2px #0003}
+.main{display:grid;grid-template-columns:minmax(0,360px) 1fr;gap:16px;align-items:start}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px}
+.stage svg{display:block;width:100%;height:auto;max-height:78vh}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-height:300px}
+.stat{display:flex;gap:16px;font-size:13px;color:var(--text-2);margin-bottom:12px}
+.q{font-size:18px;font-weight:700;margin-bottom:12px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.choices button,.btn{border:1px solid var(--line);background:var(--sunk);color:var(--text);font:inherit;padding:12px;border-radius:10px;cursor:pointer;text-align:center}
+.choices button:hover:not(:disabled),.btn:hover{border-color:var(--accent)}
+.choices button.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.choices button.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:700}
+.card{margin-top:14px;padding:12px;border-radius:10px;background:var(--sunk);font-size:14px}
+.card b{font-size:16px}.card .en{color:var(--text-2);font-style:italic}
+.fb{margin-top:12px;font-weight:700}.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}
+.actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.miss li{margin-left:20px}
+.hint{color:var(--text-2);font-size:14px}
+/* svg states */
+.st{cursor:pointer;transition:opacity .15s}
+svg.quiz .st{opacity:.16}
+svg.quiz .st.hl{opacity:1;filter:drop-shadow(0 0 3px #f5c542) drop-shadow(0 0 7px #f5c542)}
+svg.study .st:hover{filter:drop-shadow(0 0 4px #f5c542)}
+.st.good{filter:drop-shadow(0 0 5px #3cc47c)!important;opacity:1!important}
+.st.wrong{filter:drop-shadow(0 0 5px #e5484d)!important;opacity:1!important}
+@media (max-width:720px){.main{grid-template-columns:1fr}.stage svg{max-height:56vh}}
+</style>
+</head>
+<body>
+<div class="app">
+  <h1>해부 구조물 맞추기</h1>
+  <div class="bar">
+    <div class="grp" id="modes" role="group" aria-label="모드"></div>
+    <div class="grp" id="layers" role="group" aria-label="층"></div>
+  </div>
+  <div class="main">
+    <div class="stage"><div id="stage"></div></div>
+    <div class="panel" id="panel"></div>
+  </div>
+</div>
+
+<script>
+/* ───────── 데이터 ─────────
+   svg 조각의 {c}=채움색, {s}=테두리색. mirror:true면 좌우 대칭 복제.
+   좌표계: viewBox 0 0 400 900, 몸 중심선 x=200 (앞모습). */
+const bar=(d,w)=>`<path d="${d}" fill="none" stroke="{s}" stroke-width="${w+3}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="{c}" stroke-width="${w}" stroke-linecap="round"/>`;
+const blob=(d)=>`<path d="${d}" fill="{c}" stroke="{s}" stroke-width="1.5" stroke-linejoin="round"/>`;
+const oval=(cx,cy,rx,ry,rot=0)=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" transform="rotate(${rot} ${cx} ${cy})" fill="{c}" stroke="{s}" stroke-width="1.5"/>`;
+
+const BONE='#EDE4CC',BONE_S='#8A7D5A',MUS='#C8574F',MUS_S='#7A2A2A';
+const S=[
+/* ── 뼈 ── */
+{id:'skull',ko:'머리뼈',en:'Skull (Cranium)',layer:'bone',c:BONE,s:BONE_S,
+ note:'뇌를 감싸는 뇌머리뼈와 얼굴을 이루는 얼굴뼈로 구성됩니다.',
+ svg:oval(200,52,29,32)+'<ellipse cx="189" cy="60" rx="6" ry="5" fill="#5B5340"/><ellipse cx="211" cy="60" rx="6" ry="5" fill="#5B5340"/><path d="M200 66 L196 76 L204 76 Z" fill="#5B5340"/>'},
+{id:'mandible',ko:'아래턱뼈',en:'Mandible',layer:'bone',c:BONE,s:BONE_S,
+ note:'머리뼈에서 유일하게 움직이는 뼈입니다(턱관절).',
+ svg:blob('M176 76 Q178 106 200 110 Q222 106 224 76 Q214 92 200 92 Q186 92 176 76 Z')},
+{id:'spine',ko:'척주',en:'Vertebral column',layer:'bone',c:BONE,s:BONE_S,
+ note:'목뼈 7 · 등뼈 12 · 허리뼈 5 · 엉치뼈 · 꼬리뼈로 이루어집니다.',
+ svg:Array.from({length:24},(_,i)=>`<rect x="${i<7?196:i<19?194:192}" y="${112+i*10.2}" width="${i<7?8:i<19?12:16}" height="8" rx="3" fill="{c}" stroke="{s}" stroke-width="1.2"/>`).join('')+blob('M190 360 L210 360 L205 394 L195 394 Z')},
+{id:'sternum',ko:'복장뼈',en:'Sternum',layer:'bone',c:BONE,s:BONE_S,
+ note:'복장뼈자루 · 복장뼈몸통 · 칼돌기로 구성됩니다.',
+ svg:blob('M193 150 L207 150 L209 196 L203 236 L200 244 L197 236 L191 196 Z')},
+{id:'ribs',ko:'갈비뼈',en:'Ribs',layer:'bone',c:BONE,s:BONE_S,mirror:true,
+ note:'12쌍: 참갈비뼈 7 · 거짓갈비뼈 3 · 뜬갈비뼈 2.',
+ svg:Array.from({length:10},(_,i)=>{const y=160+i*13,o=150-Math.min(i,5)*2+(i>5?(i-5)*3:0);return bar(`M194 ${y} C176 ${y-12} ${o} ${y-4} ${o} ${y+22}`,5);}).join('')},
+{id:'clavicle',ko:'빗장뼈',en:'Clavicle',layer:'bone',c:BONE,s:BONE_S,mirror:true,
+ note:'팔이음뼈를 몸통에 연결하는 유일한 뼈. 가운데 1/3에서 골절이 잦습니다.',
+ svg:bar('M198 140 Q160 130 118 144',7)},
+{id:'humerus',ko:'위팔뼈',en:'Humerus',layer:'bone',c:BONE,s:BONE_S,mirror:true,
+ note:'외과목 골절은 겨드랑신경, 몸통 골절은 노신경 손상을 주의합니다.',
+ svg:bar('M118 152 L98 285',11)+'<circle cx="120" cy="152" r="9" fill="{c}" stroke="{s}" stroke-width="1.5"/>'},
+{id:'radius',ko:'노뼈',en:'Radius',layer:'bone',c:BONE,s:BONE_S,mirror:true,
+ note:'엄지쪽 아래팔뼈. 먼쪽 끝 골절은 콜레스 골절입니다.',
+ svg:bar('M90 296 L70 414',6)},
+{id:'ulna',ko:'자뼈',en:'Ulna',layer:'bone',c:BONE,s:BONE_S,mirror:true,
+ note:'새끼쪽 아래팔뼈. 팔꿈치머리가 팔꿈치 뒤로 튀어나옵니다.',
+ svg:bar('M101 294 L86 416',6)},
+{id:'hand',ko:'손뼈',en:'Bones of the hand',layer:'bone',c:BONE,s:BONE_S,mirror:true,
+ note:'손목뼈 8 · 손허리뼈 5 · 손가락뼈 14.',
+ svg:oval(76,432,12,13)+bar('M66 440 L58 474',4)+bar('M72 444 L67 480',4)+bar('M78 444 L77 482',4)+bar('M84 440 L86 472',4)},
+{id:'hip',ko:'볼기뼈',en:'Hip bone',layer:'bone',c:BONE,s:BONE_S,mirror:true,
+ note:'엉덩뼈 · 궁둥뼈 · 두덩뼈가 합쳐져 이룹니다.',
+ svg:blob('M197 368 Q172 350 144 358 Q130 380 146 410 Q158 426 172 446 L195 448 Q199 430 199 416 Q190 395 197 368 Z')+'<ellipse cx="174" cy="426" rx="7" ry="10" fill="#5B5340" fill-opacity=".55"/>'},
+{id:'femur',ko:'넙다리뼈',en:'Femur',layer:'bone',c:BONE,s:BONE_S,mirror:true,
+ note:'몸에서 가장 길고 단단한 뼈입니다.',
+ svg:bar('M170 440 L158 462 L162 628',13)+'<circle cx="170" cy="438" r="10" fill="{c}" stroke="{s}" stroke-width="1.5"/>'},
+{id:'patella',ko:'무릎뼈',en:'Patella',layer:'bone',c:BONE,s:BONE_S,mirror:true,
+ note:'몸에서 가장 큰 씨앗뼈(종자뼈)입니다.',
+ svg:oval(162,642,9,11)},
+{id:'tibia',ko:'정강뼈',en:'Tibia',layer:'bone',c:BONE,s:BONE_S,mirror:true,
+ note:'아래다리에서 체중을 받는 굵은 뼈. 앞면(정강이)이 피부 바로 밑에 닿습니다.',
+ svg:bar('M167 660 L164 822',10)},
+{id:'fibula',ko:'종아리뼈',en:'Fibula',layer:'bone',c:BONE,s:BONE_S,mirror:true,
+ note:'체중은 거의 받지 않고, 근육 부착과 발목 가쪽 안정에 관여합니다.',
+ svg:bar('M155 664 L155 818',5)},
+{id:'foot',ko:'발뼈',en:'Bones of the foot',layer:'bone',c:BONE,s:BONE_S,mirror:true,
+ note:'발목뼈 7 · 발허리뼈 5 · 발가락뼈 14.',
+ svg:oval(160,848,13,20)+bar('M152 862 L148 882',4)+bar('M158 866 L157 886',4)+bar('M164 866 L165 884',4)+bar('M170 860 L173 878',4)},
+/* ── 근육 ── */
+{id:'scm',ko:'목빗근',en:'Sternocleidomastoid',layer:'muscle',c:MUS,s:MUS_S,mirror:true,
+ note:'더부신경 · 목신경얼기 지배. 한쪽 수축 시 얼굴이 반대쪽으로 돌아갑니다.',
+ svg:bar('M178 108 Q184 128 197 146',9)},
+{id:'pecmajor',ko:'큰가슴근',en:'Pectoralis major',layer:'muscle',c:MUS,s:MUS_S,mirror:true,
+ note:'안쪽·가쪽 가슴근신경 지배. 팔의 굽힘 · 모음 · 안쪽돌림.',
+ svg:blob('M197 150 Q165 146 128 158 Q132 190 150 214 Q178 214 197 204 Z')},
+{id:'deltoid',ko:'삼각근',en:'Deltoid',layer:'muscle',c:'#D9685E',s:MUS_S,mirror:true,
+ note:'겨드랑신경 지배. 팔 가쪽 벌림의 주동근입니다.',
+ svg:blob('M132 146 Q104 138 99 172 Q101 198 116 202 Q124 178 135 160 Z')},
+{id:'biceps',ko:'위팔두갈래근',en:'Biceps brachii',layer:'muscle',c:MUS,s:MUS_S,mirror:true,
+ note:'근육피부신경 지배. 아래팔 뒤침과 팔꿈치 굽힘.',
+ svg:oval(108,226,10,44,8.5)},
+{id:'flexors',ko:'아래팔 굽힘근',en:'Forearm flexors',layer:'muscle',c:'#B24A47',s:MUS_S,mirror:true,
+ note:'대부분 정중신경, 자쪽 손목굽힘근과 깊은손가락굽힘근 안쪽 절반은 자신경 지배.',
+ svg:oval(90,346,11,50,8)},
+{id:'rectus',ko:'배곧은근',en:'Rectus abdominis',layer:'muscle',c:MUS,s:MUS_S,mirror:true,
+ note:'가슴신경(T7–T12) 지배. 몸통 굽힘. 힘줄 교차로 여러 마디로 나뉩니다.',
+ svg:blob('M198 246 L184 246 L183 350 L198 350 Z')+'<path d="M184 272 H198 M184 298 H198 M184 324 H198" stroke="{s}" stroke-width="1.5"/>'},
+{id:'oblique',ko:'배바깥빗근',en:'External oblique',layer:'muscle',c:'#D9685E',s:MUS_S,mirror:true,
+ note:'아래 가슴신경 지배. 몸통 굽힘과 반대쪽 돌림.',
+ svg:blob('M181 250 Q165 252 148 238 Q138 280 146 330 Q164 346 182 348 Z')},
+{id:'diaphragm',ko:'가로막',en:'Diaphragm',layer:'muscle',c:'#E08B7F',s:MUS_S,
+ note:'가로막신경(C3–5) 지배. 가장 중요한 호흡근입니다.',
+ svg:blob('M146 272 Q200 212 254 272 Q250 278 200 264 Q150 278 146 272 Z')},
+{id:'quadriceps',ko:'넙다리네갈래근',en:'Quadriceps femoris',layer:'muscle',c:MUS,s:MUS_S,mirror:true,
+ note:'넙다리신경 지배. 무릎 폄. 곧은근 · 가쪽/안쪽/중간넓은근.',
+ svg:blob('M185 452 Q194 530 176 612 L148 614 Q136 540 146 458 Q165 440 185 452 Z')},
+{id:'sartorius',ko:'넙다리빗근',en:'Sartorius',layer:'muscle',c:'#E8998F',s:MUS_S,mirror:true,
+ note:'넙다리신경 지배. 몸에서 가장 긴 근육입니다.',
+ svg:bar('M146 442 Q168 500 184 618',7)},
+{id:'tibialis',ko:'앞정강근',en:'Tibialis anterior',layer:'muscle',c:MUS,s:MUS_S,mirror:true,
+ note:'깊은종아리신경 지배. 발등굽힘과 발의 안쪽번짐.',
+ svg:blob('M154 662 Q148 700 154 770 L162 826 L168 770 Q172 700 170 662 Z')},
+/* ── 장기 ── */
+{id:'kidney',ko:'콩팥',en:'Kidney',layer:'organ',c:'#8E3B3B',s:'#4D1D1D',mirror:true,
+ note:'복막뒤 장기. 오른쪽이 간 때문에 약간 더 낮습니다.',
+ svg:oval(172,318,9,17,8)},
+{id:'spleen',ko:'지라',en:'Spleen',layer:'organ',c:'#7A3B5A',s:'#3E1A2D',
+ note:'왼쪽 윗배, 9–11번 갈비뼈 높이. 면역과 낡은 적혈구 제거.',
+ svg:oval(258,284,7,17,-8)},
+{id:'colon',ko:'큰창자',en:'Large intestine',layer:'organ',c:'#C98B5A',s:'#7A4E2C',
+ note:'막창자 · 잘록창자(오름·가로·내림·구불) · 곧창자.',
+ svg:bar('M166 412 L166 352 Q200 338 234 352 L234 410 Q220 428 204 424',12)},
+{id:'small',ko:'작은창자',en:'Small intestine',layer:'organ',c:'#E7A39B',s:'#9A5A52',
+ note:'샘창자 · 빈창자 · 돌창자로 이루어집니다.',
+ svg:'<path d="M182 362 L218 364 L182 374 L218 378 L182 388 L218 392 L184 402 L216 404" fill="none" stroke="{s}" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/><path d="M182 362 L218 364 L182 374 L218 378 L182 388 L218 392 L184 402 L216 404" fill="none" stroke="{c}" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>'},
+{id:'pancreas',ko:'이자',en:'Pancreas',layer:'organ',c:'#E3C16F',s:'#8A7230',
+ note:'복막뒤 장기. 소화효소(외분비)와 인슐린(내분비)을 만듭니다.',
+ svg:bar('M178 336 Q214 324 252 338',9)},
+{id:'liver',ko:'간',en:'Liver',layer:'organ',c:'#9B5A3C',s:'#5A301D',
+ note:'몸에서 가장 큰 샘. 오른쪽 윗배에 있습니다.',
+ svg:blob('M146 264 Q196 252 236 276 Q232 316 196 322 Q158 318 146 284 Z')},
+{id:'stomach',ko:'위',en:'Stomach',layer:'organ',c:'#D9917F',s:'#8A4C3E',
+ note:'왼쪽 윗배. 들문 · 위바닥 · 위몸통 · 날문부.',
+ svg:blob('M222 268 Q252 264 254 298 Q250 332 228 328 Q212 318 218 296 Q212 280 222 268 Z')},
+{id:'lung',ko:'허파',en:'Lung',layer:'organ',c:'#E3B1B5',s:'#8D5F64',
+ note:'오른쪽 3엽, 왼쪽 2엽(왼쪽에 심장패임).',
+ svg:blob('M192 164 Q154 160 146 204 Q142 248 168 254 Q192 254 194 236 Z')+blob('M208 164 Q246 160 254 206 Q258 250 234 254 Q212 254 210 240 L222 212 Q212 196 208 164 Z')},
+{id:'heart',ko:'심장',en:'Heart',layer:'organ',c:'#C94B4B',s:'#6E1F1F',
+ note:'심방 2 · 심실 2의 네 방. 가슴 안에서 약간 왼쪽에 놓입니다.',
+ svg:blob('M206 190 Q214 182 224 188 Q236 190 238 206 Q238 228 214 252 Q198 232 198 212 Q198 196 206 190 Z')+bar('M212 190 Q214 172 226 172 Q240 174 238 196',7)},
+{id:'trachea',ko:'기관',en:'Trachea',layer:'organ',c:'#A8CBE0',s:'#4E7A94',
+ note:'목뼈 6번 높이에서 시작해 등뼈 4–5번 높이에서 두 기관지로 갈라집니다.',
+ svg:bar('M200 112 L200 160',8)+bar('M200 160 L184 178',6)+bar('M200 160 L216 178',6)},
+{id:'thyroid',ko:'갑상샘',en:'Thyroid gland',layer:'organ',c:'#B5654A',s:'#6B3523',
+ note:'목 앞쪽의 나비 모양 샘. 갑상샘호르몬을 분비합니다.',
+ svg:oval(191,122,7,10,10)+oval(209,122,7,10,-10)+'<rect x="193" y="120" width="14" height="5" fill="{c}"/>'},
+{id:'brain',ko:'뇌',en:'Brain',layer:'organ',c:'#E9A8B8',s:'#94586A',
+ note:'대뇌 · 소뇌 · 뇌줄기로 구성되며 뇌신경 12쌍이 출입합니다.',
+ svg:oval(200,46,26,25)+'<path d="M200 22 V70 M184 34 Q192 42 184 52 M216 34 Q208 42 216 52" fill="none" stroke="{s}" stroke-width="1.5"/>'},
+{id:'bladder',ko:'방광',en:'Urinary bladder',layer:'organ',c:'#E8D58F',s:'#8A7A36',
+ note:'오줌을 저장. 골반강 앞쪽, 두덩뼈 뒤에 있습니다.',
+ svg:oval(200,432,15,12)},
+];
+const LAYERS={bone:'뼈',muscle:'근육',organ:'장기'};
+const ORDER=['muscle','bone','organ'];            // 아래 → 위
+const BYID=Object.fromEntries(S.map(o=>[o.id,o]));
+
+/* ───────── SVG 생성 (다운로드와 화면이 같은 문자열 사용) ───────── */
+function bodyMarkup(){
+  const sil='fill="#9aa0b4" fill-opacity=".16" stroke="#9aa0b4" stroke-opacity=".5" stroke-width="1.5"';
+  const lim=d=>`<path d="${d}" fill="none" stroke="#9aa0b4" stroke-opacity=".16" stroke-width="CW" stroke-linecap="round"/>`;
+  const both=(x)=>x+`<g transform="translate(400 0) scale(-1 1)">${x}</g>`;
+  let out='<g id="silhouette" pointer-events="none">'
+   +`<ellipse cx="200" cy="58" rx="36" ry="44" ${sil}/><rect x="186" y="96" width="28" height="44" ${sil}/>`
+   +`<path d="M144 140 Q200 125 256 140 L268 250 Q266 330 252 440 L148 440 Q134 330 132 250 Z" ${sil}/>`
+   +both(lim('M126 152 L98 290 L74 420').replace('CW','32')+lim('M172 442 L162 640 L160 850').replace('CW','54'))
+   +'</g>';
+  for(const L of ORDER){
+    out+=`<g class="ly" data-layer="${L}">`;
+    for(const o of S.filter(o=>o.layer===L)){
+      const one=o.svg.replaceAll('{c}',o.c).replaceAll('{s}',o.s);
+      out+=`<g class="st" data-id="${o.id}">${one}`+(o.mirror?`<g transform="translate(400 0) scale(-1 1)">${one}</g>`:'')+'</g>';
+    }
+    out+='</g>';
+  }
+  return out;
+}
+const svgOpen='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 900" role="img" aria-label="인체 앞모습">';
+function downloadSvg(){
+  const blob=new Blob([svgOpen+bodyMarkup()+'</svg>'],{type:'image/svg+xml'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='body_front.svg';a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+/* ───────── 상태 ───────── */
+const $=s=>document.querySelector(s);
+const st={mode:'study',layer:'bone',q:[],i:0,score:0,streak:0,best:0,miss:[],locked:false,cur:null};
+const MODES={study:'공부',name:'이름 맞추기',find:'위치 찾기'};
+const LAYER_BTNS={bone:'뼈',muscle:'근육',organ:'장기',all:'전체'};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;};
+const pool=()=>S.filter(o=>st.layer==='all'||o.layer===st.layer);
+const save=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+
+function buildStage(){
+  $('#stage').innerHTML=svgOpen+bodyMarkup()+'</svg>';
+  $('#stage').firstChild.addEventListener('click',e=>{const g=e.target.closest('.st');if(g&&g.closest('.ly').style.display!=='none')onTap(g.dataset.id,g);});
+}
+function applyLayer(){
+  document.querySelectorAll('.ly').forEach(l=>{
+    l.style.display=(st.layer==='all'||l.dataset.layer===st.layer)?'':'none';
+    l.style.opacity=(st.layer==='all'&&l.dataset.layer==='muscle')?'.55':'';
+  });
+}
+function clearMarks(){document.querySelectorAll('.st').forEach(g=>g.classList.remove('hl','good','wrong'));}
+const gs=id=>document.querySelectorAll(`.st[data-id="${id}"]`);
+
+function renderBar(){
+  const mk=(el,map,key)=>{el.innerHTML=Object.entries(map).map(([k,v])=>`<button aria-pressed="${st[key]===k}" data-k="${k}">${v}</button>`).join('');};
+  mk($('#modes'),MODES,'mode');mk($('#layers'),LAYER_BTNS,'layer');
+}
+$('#modes').onclick=e=>{const k=e.target.dataset.k;if(k){st.mode=k;start();}};
+$('#layers').onclick=e=>{const k=e.target.dataset.k;if(k){st.layer=k;start();}};
+
+function start(){
+  renderBar();applyLayer();clearMarks();
+  const svg=$('#stage').firstChild;
+  svg.classList.toggle('quiz',st.mode==='name');
+  svg.classList.toggle('study',st.mode!=='name');
+  st.best=+load('anatomyBest:'+st.mode+':'+st.layer)||0;
+  if(st.mode==='study'){renderStudy(null);return;}
+  newRound(shuffle(pool()).slice(0,10));
+}
+function newRound(items){
+  Object.assign(st,{q:items,i:0,score:0,streak:0,miss:[],locked:false});
+  ask();
+}
+
+/* ───────── 공부 ───────── */
+function renderStudy(o){
+  clearMarks();
+  if(o)gs(o.id).forEach(g=>g.classList.add('hl'));
+  $('#panel').innerHTML=o
+   ?`<div class="card"><b>${o.ko}</b> <span class="en">${o.en}</span><br><span class="hint">${LAYERS[o.layer]}</span><p style="margin-top:6px">${o.note}</p></div>`
+   :'<p class="hint">그림에서 구조물을 눌러 이름과 설명을 확인하세요.<br>위의 <b>층</b> 버튼으로 뼈 · 근육 · 장기를 바꿀 수 있고, 외운 뒤에는 <b>이름 맞추기</b>와 <b>위치 찾기</b>로 시험해 보세요.</p><div class="actions"><button class="btn" id="dl">SVG 저장 (Figma · Inkscape용)</button></div>';
+  const dl=$('#dl');if(dl)dl.onclick=downloadSvg;
+}
+
+/* ───────── 퀴즈 공통 ───────── */
+function head(){
+  return `<div class="stat"><span>${st.i+1} / ${st.q.length}</span><span>점수 ${st.score}</span><span>연속 ${st.streak}</span><span>최고 ${st.best}</span></div>`;
+}
+function ask(){
+  if(st.i>=st.q.length)return finish();
+  st.locked=false;clearMarks();
+  const o=st.cur=st.q[st.i];
+  if(st.mode==='name'){
+    gs(o.id).forEach(g=>g.classList.add('hl'));
+    const opts=shuffle([o,...shuffle(pool().filter(x=>x.id!==o.id)).slice(0,3)]);
+    $('#panel').innerHTML=head()+'<div class="q">노란색으로 표시된 구조물은?</div><div class="choices">'
+      +opts.map(x=>`<button data-id="${x.id}">${x.ko}</button>`).join('')+'</div><div id="fb"></div>';
+    $('#panel').querySelector('.choices').onclick=e=>{const id=e.target.dataset.id;if(id)answer(id,e.target);};
+  }else{
+    $('#panel').innerHTML=head()+`<div class="q">‘${o.ko}’을(를) 찾아 누르세요</div><div id="fb"></div>`;
+  }
+}
+function onTap(id,g){
+  if(st.mode==='study'){renderStudy(BYID[id]);return;}
+  if(st.mode==='find'&&!st.locked)answer(id,g);
+}
+function answer(id,el){
+  if(st.locked)return;st.locked=true;
+  const o=st.cur,ok=id===o.id;
+  if(ok){st.score++;st.streak++;if(st.score>st.best){st.best=st.score;save('anatomyBest:'+st.mode+':'+st.layer,st.best);}}
+  else{st.streak=0;st.miss.push(o);}
+  if(st.mode==='name'){
+    document.querySelectorAll('.choices button').forEach(b=>{b.disabled=true;if(b.dataset.id===o.id)b.classList.add('ok');});
+    if(!ok)el.classList.add('bad');
+  }else{
+    clearMarks();
+    if(!ok)gs(id).forEach(g=>g.classList.add('wrong'));
+    gs(o.id).forEach(g=>g.classList.add('good'));
+  }
+  const picked=BYID[id];
+  $('#fb').innerHTML=`<div class="fb ${ok?'ok':'bad'}">${ok?'정답!':`오답 — ${st.mode==='find'?`그곳은 ${picked.ko}입니다. `:''}정답은 ${o.ko}`}</div>
+   <div class="card"><b>${o.ko}</b> <span class="en">${o.en}</span><p style="margin-top:6px">${o.note}</p></div>
+   <div class="actions"><button class="btn primary" id="next">${st.i+1>=st.q.length?'결과 보기':'다음'}</button></div>`;
+  $('#next').onclick=()=>{st.i++;ask();};
+  $('#next').focus();
+}
+function finish(){
+  clearMarks();
+  $('#panel').innerHTML=`<div class="q">결과: ${st.score} / ${st.q.length}</div>`
+   +(st.miss.length?`<p class="hint">틀린 구조물</p><ul class="miss">${st.miss.map(o=>`<li>${o.ko} <span class="hint">${o.en}</span></li>`).join('')}</ul>`:'<p class="fb ok">모두 맞혔어요!</p>')
+   +'<div class="actions">'+(st.miss.length?'<button class="btn primary" id="retry">틀린 것만 다시</button>':'')+'<button class="btn" id="again">새 라운드</button></div>';
+  const r=$('#retry');if(r)r.onclick=()=>newRound(shuffle(st.miss));
+  $('#again').onclick=start;
+}
+
+buildStage();start();
+</script>
+</body>
+</html>
