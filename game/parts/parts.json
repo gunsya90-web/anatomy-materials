@@ -1,0 +1,100 @@
+[
+ {
+  "id": "scapula",
+  "ko": "어깨뼈",
+  "en": "Scapula (acromion · coracoid)",
+  "layer": "bone",
+  "note": "봉우리(어깨봉우리)는 빗장뼈와 어깨봉우리빗장관절을, 부리돌기는 작은가슴근 · 위팔두갈래근 짧은갈래가 붙습니다."
+ },
+ {
+  "id": "ribs",
+  "ko": "갈비뼈",
+  "en": "Ribs (1–7, true ribs)",
+  "layer": "bone",
+  "note": "참갈비뼈는 갈비연골을 통해 복장뼈에 직접 붙는 1–7번 갈비뼈입니다(밝은 청회색이 갈비연골)."
+ },
+ {
+  "id": "sternum",
+  "ko": "복장뼈",
+  "en": "Sternum",
+  "layer": "bone",
+  "note": "복장뼈자루 · 복장뼈몸통 · 칼돌기로 구성되며, 자루와 몸통 사이가 복장뼈각입니다."
+ },
+ {
+  "id": "radius",
+  "ko": "노뼈",
+  "en": "Radius",
+  "layer": "bone",
+  "note": "엄지쪽 아래팔뼈. 먼쪽 끝 골절은 콜레스 골절입니다."
+ },
+ {
+  "id": "ulna",
+  "ko": "자뼈",
+  "en": "Ulna",
+  "layer": "bone",
+  "note": "새끼쪽 아래팔뼈. 팔꿈치머리가 팔꿈치 뒤로 튀어나옵니다."
+ },
+ {
+  "id": "humerus",
+  "ko": "위팔뼈",
+  "en": "Humerus",
+  "layer": "bone",
+  "note": "큰결절 · 작은결절 사이가 결절사이고랑. 외과목 골절은 겨드랑신경, 몸통 골절은 노신경 손상을 주의합니다."
+ },
+ {
+  "id": "clavicle",
+  "ko": "빗장뼈",
+  "en": "Clavicle",
+  "layer": "bone",
+  "note": "팔이음뼈를 몸통에 연결하는 유일한 뼈. 가운데 1/3에서 골절이 잦습니다."
+ },
+ {
+  "id": "brachialis",
+  "ko": "위팔근",
+  "en": "Brachialis",
+  "layer": "muscle",
+  "note": "근육피부신경(일부 노신경) 지배. 팔꿈치 굽힘의 주동근이며 위팔두갈래근 아래에 놓입니다."
+ },
+ {
+  "id": "flexors",
+  "ko": "아래팔 굽힘근",
+  "en": "Forearm flexors",
+  "layer": "muscle",
+  "note": "대부분 정중신경, 자쪽손목굽힘근과 깊은손가락굽힘근 안쪽 절반은 자신경 지배."
+ },
+ {
+  "id": "brachioradialis",
+  "ko": "위팔노근",
+  "en": "Brachioradialis",
+  "layer": "muscle",
+  "note": "노신경 지배. 팔꿈치 굽힘(중립 위치에서). 노신경이 지배하는 굽힘근입니다."
+ },
+ {
+  "id": "pronator",
+  "ko": "원엎침근",
+  "en": "Pronator teres",
+  "layer": "muscle",
+  "note": "정중신경 지배. 아래팔 엎침(안쪽돌림)과 팔꿈치 굽힘."
+ },
+ {
+  "id": "pec",
+  "ko": "큰가슴근",
+  "en": "Pectoralis major",
+  "layer": "muscle",
+  "note": "안쪽·가쪽 가슴근신경 지배. 팔의 굽힘 · 모음 · 안쪽돌림."
+ },
+ {
+  "id": "biceps",
+  "ko": "위팔두갈래근",
+  "en": "Biceps brachii",
+  "layer": "muscle",
+  "note": "근육피부신경 지배. 아래팔 뒤침과 팔꿈치 굽힘. 힘줄은 노뼈거친면에 붙습니다."
+ },
+ {
+  "id": "deltoid",
+  "ko": "삼각근",
+  "en": "Deltoid",
+  "layer": "muscle",
+  "note": "겨드랑신경 지배. 팔 가쪽 벌림의 주동근입니다."
+ }
+]

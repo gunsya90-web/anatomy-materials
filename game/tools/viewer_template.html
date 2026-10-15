@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>구조물 조립 뷰어</title>
+<style>
+:root{--bg:#F4F4F6;--surface:#fff;--sunk:#EAEAEF;--line:#D8D8E0;--text:#191922;--text-2:#5A5A68;--accent:#2F6FD0;--stage:#F7F3EE}
+@media (prefers-color-scheme:dark){:root{--bg:#131319;--surface:#1A1A22;--sunk:#22222B;--line:#2E2E3A;--text:#E5E5EC;--text-2:#9E9EAE;--accent:#7FAEDC;--stage:#262330}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:15px/1.5 'Noto Sans KR',system-ui,sans-serif}
+.app{max-width:1040px;margin:0 auto;padding:16px}
+h1{font-size:19px;margin-bottom:10px}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:14px;align-items:start}
+.stage{background:var(--stage);border:1px solid var(--line);border-radius:14px;padding:6px}
+svg{display:block;width:100%;height:auto;max-height:82vh}
+.side{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;font-size:14px}
+.side h2{font-size:12px;color:var(--text-2);font-weight:500;margin:10px 0 4px}
+.side h2:first-child{margin-top:0}
+.item{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:7px;cursor:pointer}
+.item:hover{background:var(--sunk)}.item.on{background:var(--accent);color:#fff}
+.item input{accent-color:var(--accent)}
+.card{margin-top:12px;padding:10px;border-radius:10px;background:var(--sunk)}
+.card b{font-size:16px}.card i{color:var(--text-2)}
+label.opt{display:flex;gap:6px;align-items:center;margin-top:10px;color:var(--text-2)}
+/* 선택 상태: 부품 단위로 색을 바꾼다 */
+.part{cursor:pointer}
+.part.on .f{fill:url(#hl)!important}
+.part.on .ps{stroke:#4E9CEE!important}
+.part.on{filter:drop-shadow(0 0 5px #3D93EA)}
+.dimmer .part:not(.on){opacity:.25}
+.part:hover:not(.on){filter:brightness(1.08)}
+.part.hide{display:none}
+@media(max-width:760px){.main{grid-template-columns:1fr}}
+</style></head><body><div class="app">
+<h1>구조물 조립 뷰어 — 부품별 선택 · 색 변경</h1>
+<div class="main"><div class="stage"><!--SVG--></div><div class="side" id="side"></div></div></div>
+<script>
+const META=/*META*/;
+const LN={bone:'뼈',muscle:'근육'};
+const svg=document.getElementById('svg'),side=document.getElementById('side');
+let sel=null,dim=true;const ORDER=[...svg.querySelectorAll('.part')];
+side.innerHTML=Object.keys(LN).map(L=>`<h2>${LN[L]} (표시)</h2>`+META.filter(m=>m.layer===L).map(m=>
+ `<div class="item" data-id="${m.id}"><input type="checkbox" checked data-v="${m.id}" title="표시"><span>${m.ko}</span></div>`).join('')).join('')
+ +'<label class="opt"><input type="checkbox" id="dim" checked>선택 외 흐리게</label><div class="card" id="card"><span style="color:var(--text-2)">그림이나 목록에서 구조물을 선택하세요.</span></div>';
+function select(id){
+  sel=sel===id?null:id;
+  document.querySelectorAll('.part').forEach(p=>p.classList.toggle('on',p.dataset.id===sel));
+  document.querySelectorAll('.item').forEach(i=>i.classList.toggle('on',i.dataset.id===sel));
+  svg.parentNode.classList.toggle('dimmer',dim&&!!sel);
+  ORDER.forEach(p=>svg.appendChild(p));                       // 원래 겹침 순서로 복원
+  if(sel)svg.appendChild(document.getElementById('p-'+sel)); // 선택한 부품은 맨 위로
+  const m=META.find(x=>x.id===sel);
+  document.getElementById('card').innerHTML=m?`<b>${m.ko}</b> <i>${m.en}</i><br><span style="color:var(--text-2)">${LN[m.layer]}</span><p style="margin-top:6px">${m.note}</p>`:'<span style="color:var(--text-2)">그림이나 목록에서 구조물을 선택하세요.</span>';
+}
+svg.addEventListener('click',e=>{const p=e.target.closest('.part');if(p)select(p.dataset.id);});
+side.addEventListener('click',e=>{
+  if(e.target.dataset.v){document.getElementById('p-'+e.target.dataset.v).classList.toggle('hide',!e.target.checked);return;}
+  const it=e.target.closest('.item');if(it&&e.target.tagName!=='INPUT')select(it.dataset.id);
+});
+document.getElementById('dim').onchange=e=>{dim=e.target.checked;svg.parentNode.classList.toggle('dimmer',dim&&!!sel);};
+</script></body></html>
