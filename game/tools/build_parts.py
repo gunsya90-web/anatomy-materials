@@ -122,6 +122,6 @@ for p in parts:
 
 meta = json.dumps([{k: p[k] for k in ('id', 'ko', 'en', 'layer', 'note')} for p in parts], ensure_ascii=False)
 svg_all = f'<svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="{VB}"><defs>{DEFS}</defs>' + ''.join(wrap(p) for p in parts) + '</svg>'
-html = (ROOT / 'tools' / 'viewer_template.html').read_text(encoding='utf-8').replace('/*META*/', meta).replace('<!--SVG-->', svg_all)
+html = (ROOT / 'tools' / 'viewer_template.html').read_text(encoding='utf-8').replace('/*META*/', meta).replace('/*OFF*/', '[]').replace('<!--SVG-->', svg_all)
 (ROOT / 'samples' / 'arm_assembly.html').write_text(html, encoding='utf-8')
 print(len(parts), 'parts')

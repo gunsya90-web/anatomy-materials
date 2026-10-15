@@ -59,6 +59,8 @@
 
 `game/tools/build_parts.py` — 구조물을 **부품 1개 = SVG 1개**(`game/parts/`)로 만들고, 같은 좌표계로 겹쳐 조립한 뷰어(`game/samples/arm_assembly.html`)를 생성합니다. 부품을 누르면 그 구조물만 색이 바뀌고 맨 위로 올라옵니다.
 
+`game/tools/build_torso.py` — 몸통 앞면(가슴·배·골반) 장면. 뼈 5 · 근육 9 · 장기 19개 부품(`game/parts/torso/`)과 조립 뷰어 `game/samples/torso_assembly.html`을 생성합니다. 뷰어에서 뼈 · 근육 · 장기 층을 따로 켜고 끌 수 있습니다.
+
 ## 용어 기준
 
 구용어는 쓰지 않았습니다. 주요 대응은 다음과 같습니다.

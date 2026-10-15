@@ -34,11 +34,11 @@ label.opt{display:flex;gap:6px;align-items:center;margin-top:10px;color:var(--te
 <div class="main"><div class="stage"><!--SVG--></div><div class="side" id="side"></div></div></div>
 <script>
 const META=/*META*/;
-const LN={bone:'뼈',muscle:'근육'};
+const LN={bone:'뼈',muscle:'근육',organ:'장기'};const OFF=/*OFF*/;
 const svg=document.getElementById('svg'),side=document.getElementById('side');
-let sel=null,dim=true;const ORDER=[...svg.querySelectorAll('.part')];
-side.innerHTML=Object.keys(LN).map(L=>`<h2>${LN[L]} (표시)</h2>`+META.filter(m=>m.layer===L).map(m=>
- `<div class="item" data-id="${m.id}"><input type="checkbox" checked data-v="${m.id}" title="표시"><span>${m.ko}</span></div>`).join('')).join('')
+let sel=null,dim=true;OFF.forEach(L=>META.filter(m=>m.layer===L).forEach(m=>document.getElementById('p-'+m.id).classList.add('hide')));const ORDER=[...svg.querySelectorAll('.part')];
+side.innerHTML=Object.keys(LN).map(L=>`<h2><label><input type="checkbox" ${OFF.includes(L)?'':'checked'} data-layer="${L}"> ${LN[L]} 전체 표시</label></h2>`+META.filter(m=>m.layer===L).map(m=>
+ `<div class="item" data-id="${m.id}"><input type="checkbox" ${OFF.includes(L)?'':'checked'} data-v="${m.id}" title="표시"><span>${m.ko}</span></div>`).join('')).join('')
  +'<label class="opt"><input type="checkbox" id="dim" checked>선택 외 흐리게</label><div class="card" id="card"><span style="color:var(--text-2)">그림이나 목록에서 구조물을 선택하세요.</span></div>';
 function select(id){
   sel=sel===id?null:id;
@@ -52,6 +52,9 @@ function select(id){
 }
 svg.addEventListener('click',e=>{const p=e.target.closest('.part');if(p)select(p.dataset.id);});
 side.addEventListener('click',e=>{
+  if(e.target.dataset.layer){const L=e.target.dataset.layer,on=e.target.checked;
+    META.filter(m=>m.layer===L).forEach(m=>document.getElementById('p-'+m.id).classList.toggle('hide',!on));
+    side.querySelectorAll(`.item input`).forEach(i=>{if(META.find(m=>m.id===i.dataset.v).layer===L)i.checked=on;});return;}
   if(e.target.dataset.v){document.getElementById('p-'+e.target.dataset.v).classList.toggle('hide',!e.target.checked);return;}
   const it=e.target.closest('.item');if(it&&e.target.tagName!=='INPUT')select(it.dataset.id);
 });

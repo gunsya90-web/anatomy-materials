@@ -1,0 +1,233 @@
+[
+ {
+  "id": "spine",
+  "ko": "척주",
+  "en": "Vertebral column",
+  "layer": "bone",
+  "note": "목뼈 7 · 등뼈 12 · 허리뼈 5 · 엉치뼈 · 꼬리뼈. 등뼈에는 갈비뼈가 붙습니다."
+ },
+ {
+  "id": "kidney",
+  "ko": "콩팥",
+  "en": "Kidney",
+  "layer": "organ",
+  "note": "복막뒤 장기. 오른쪽이 간 때문에 약간 더 낮습니다. 안쪽 오목한 곳이 콩팥문입니다."
+ },
+ {
+  "id": "adrenal",
+  "ko": "콩팥위샘",
+  "en": "Adrenal gland",
+  "layer": "organ",
+  "note": "콩팥 위쪽에 놓이는 내분비샘. 겉질과 속질로 나뉩니다."
+ },
+ {
+  "id": "ureter",
+  "ko": "요관",
+  "en": "Ureter",
+  "layer": "organ",
+  "note": "콩팥깔때기에서 방광으로 오줌을 내려보내는 근육관. 세 곳의 좁은 부위가 있습니다."
+ },
+ {
+  "id": "spleen",
+  "ko": "지라",
+  "en": "Spleen",
+  "layer": "organ",
+  "note": "왼쪽 윗배, 9–11번 갈비뼈 높이. 면역과 낡은 적혈구 제거를 담당합니다."
+ },
+ {
+  "id": "pancreas",
+  "ko": "이자",
+  "en": "Pancreas",
+  "layer": "organ",
+  "note": "복막뒤 장기. 소화효소(외분비)와 인슐린(내분비)을 만듭니다. 머리 · 몸통 · 꼬리로 나뉩니다."
+ },
+ {
+  "id": "duodenum",
+  "ko": "샘창자",
+  "en": "Duodenum",
+  "layer": "organ",
+  "note": "작은창자의 첫 부분(C자 모양). 이자머리를 감싸고 쓸개즙과 이자액이 합류합니다."
+ },
+ {
+  "id": "rectum",
+  "ko": "곧창자",
+  "en": "Rectum",
+  "layer": "organ",
+  "note": "큰창자의 끝부분. 엉치뼈 앞쪽을 따라 내려가 항문관으로 이어집니다."
+ },
+ {
+  "id": "colon",
+  "ko": "큰창자",
+  "en": "Large intestine",
+  "layer": "organ",
+  "note": "막창자(+막창자꼬리) · 잘록창자(오름·가로·내림·구불) · 곧창자. 겉면에 잘록창자주름이 보입니다."
+ },
+ {
+  "id": "small",
+  "ko": "작은창자",
+  "en": "Small intestine",
+  "layer": "organ",
+  "note": "샘창자 · 빈창자 · 돌창자로 이루어집니다(빈창자 2/5, 돌창자 3/5)."
+ },
+ {
+  "id": "diaphragm",
+  "ko": "가로막",
+  "en": "Diaphragm",
+  "layer": "muscle",
+  "note": "가로막신경(C3–5) 지배. 가장 중요한 호흡근. 대동맥열공(T12) · 식도열공(T10) · 대정맥공(T8)이 지납니다."
+ },
+ {
+  "id": "stomach",
+  "ko": "위",
+  "en": "Stomach",
+  "layer": "organ",
+  "note": "왼쪽 윗배. 들문 · 위바닥 · 위몸통 · 날문부로 나뉘며 큰굽이/작은굽이가 있습니다."
+ },
+ {
+  "id": "liver",
+  "ko": "간",
+  "en": "Liver",
+  "layer": "organ",
+  "note": "몸에서 가장 큰 샘. 오른엽 · 왼엽을 낫인대가 나눕니다. 오른쪽 윗배에 있습니다."
+ },
+ {
+  "id": "gallbladder",
+  "ko": "쓸개",
+  "en": "Gallbladder",
+  "layer": "organ",
+  "note": "간 아래면의 주머니. 쓸개즙을 저장하고 농축합니다."
+ },
+ {
+  "id": "lung_r",
+  "ko": "오른허파",
+  "en": "Right lung",
+  "layer": "organ",
+  "note": "오른쪽 3엽(위엽 · 중간엽 · 아래엽). 가로틈과 빗틈으로 나뉩니다."
+ },
+ {
+  "id": "lung_l",
+  "ko": "왼허파",
+  "en": "Left lung",
+  "layer": "organ",
+  "note": "왼쪽 2엽(위엽 · 아래엽). 앞모서리에 심장패임, 아래에 혀부분이 있습니다."
+ },
+ {
+  "id": "trachea",
+  "ko": "기관",
+  "en": "Trachea",
+  "layer": "organ",
+  "note": "목뼈 6번 높이에서 시작해 등뼈 4–5번 높이(복장뼈각)에서 두 기관지로 갈라집니다. C자 연골고리가 있습니다."
+ },
+ {
+  "id": "heart",
+  "ko": "심장",
+  "en": "Heart",
+  "layer": "organ",
+  "note": "심방 2 · 심실 2의 네 방. 가슴 안에서 약간 왼쪽에 놓이며 심장막에 싸여 있습니다."
+ },
+ {
+  "id": "larynx",
+  "ko": "후두",
+  "en": "Larynx",
+  "layer": "organ",
+  "note": "발성과 기도 보호를 맡는 기관. 갑상연골이 목의 후두융기를 이룹니다."
+ },
+ {
+  "id": "thyroid",
+  "ko": "갑상샘",
+  "en": "Thyroid gland",
+  "layer": "organ",
+  "note": "목 앞쪽의 나비 모양 샘. 두 엽이 갑상샘잘록으로 이어지며 갑상샘호르몬을 분비합니다."
+ },
+ {
+  "id": "bladder",
+  "ko": "방광",
+  "en": "Urinary bladder",
+  "layer": "organ",
+  "note": "오줌을 저장. 골반강 앞쪽, 두덩뼈 뒤에 있습니다."
+ },
+ {
+  "id": "pelvis",
+  "ko": "볼기뼈",
+  "en": "Hip bone (pelvis)",
+  "layer": "bone",
+  "note": "엉덩뼈 · 궁둥뼈 · 두덩뼈가 합쳐져 이루며, 좌우 두덩뼈가 두덩결합으로 만납니다."
+ },
+ {
+  "id": "ribs",
+  "ko": "갈비뼈",
+  "en": "Ribs (1–12)",
+  "layer": "bone",
+  "note": "12쌍: 참갈비뼈 7 · 거짓갈비뼈 3 · 뜬갈비뼈 2. 밝은 청회색 부분이 갈비연골입니다."
+ },
+ {
+  "id": "sternum",
+  "ko": "복장뼈",
+  "en": "Sternum",
+  "layer": "bone",
+  "note": "복장뼈자루 · 복장뼈몸통 · 칼돌기로 구성되며, 자루와 몸통 사이가 복장뼈각입니다."
+ },
+ {
+  "id": "clavicle",
+  "ko": "빗장뼈",
+  "en": "Clavicle",
+  "layer": "bone",
+  "note": "팔이음뼈를 몸통에 연결하는 유일한 뼈. 가운데 1/3에서 골절이 잦습니다."
+ },
+ {
+  "id": "transversus",
+  "ko": "배가로근",
+  "en": "Transversus abdominis",
+  "layer": "muscle",
+  "note": "아래 가슴신경 · 엉덩아랫배신경 지배. 배 속 압력을 높이는 가장 깊은 납작근. 섬유가 가로로 달립니다."
+ },
+ {
+  "id": "oblique_int",
+  "ko": "배속빗근",
+  "en": "Internal oblique",
+  "layer": "muscle",
+  "note": "아래 가슴신경 · 엉덩아랫배신경 지배. 몸통 굽힘과 같은쪽 돌림. 섬유는 배바깥빗근과 직각으로 달립니다."
+ },
+ {
+  "id": "rectus",
+  "ko": "배곧은근",
+  "en": "Rectus abdominis",
+  "layer": "muscle",
+  "note": "가슴신경(T7–T12) 지배. 몸통 굽힘. 힘줄 교차(보통 3개)가 있어 '식스팩'을 이룹니다. 배곧은근집에 싸입니다."
+ },
+ {
+  "id": "oblique_ext",
+  "ko": "배바깥빗근",
+  "en": "External oblique",
+  "layer": "muscle",
+  "note": "아래 가슴신경(T7–T12) 지배. 몸통 굽힘과 반대쪽 돌림. 섬유가 '주머니에 손 넣는' 방향(아래안쪽)으로 달립니다."
+ },
+ {
+  "id": "serratus",
+  "ko": "앞톱니근",
+  "en": "Serratus anterior",
+  "layer": "muscle",
+  "note": "긴가슴신경 지배. 어깨뼈를 앞으로 당기고 돌립니다. 손상 시 날개어깨뼈가 생깁니다."
+ },
+ {
+  "id": "pecminor",
+  "ko": "작은가슴근",
+  "en": "Pectoralis minor",
+  "layer": "muscle",
+  "note": "안쪽가슴근신경 지배. 어깨뼈를 앞아래로 당깁니다. 3–5번 갈비뼈에서 부리돌기로 이어집니다."
+ },
+ {
+  "id": "pec",
+  "ko": "큰가슴근",
+  "en": "Pectoralis major",
+  "layer": "muscle",
+  "note": "안쪽·가쪽 가슴근신경 지배. 팔의 굽힘 · 모음 · 안쪽돌림."
+ },
+ {
+  "id": "deltoid",
+  "ko": "삼각근",
+  "en": "Deltoid",
+  "layer": "muscle",
+  "note": "겨드랑신경 지배. 팔 가쪽 벌림의 주동근입니다."
+ }
+]
